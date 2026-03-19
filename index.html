@@ -251,7 +251,7 @@
           <div class="card-bottom">Servicios para el Hogar</div>
         </button>
 
-        <button class="card red" data-name="Comida" onclick="alert('Próximamente')">
+        <button class="card red" data-name="Comida" onclick="irCategoria('comida')">
           <div class="card-top">
             <svg class="icon-svg" viewBox="0 0 100 100" aria-hidden="true">
               <rect x="22" y="42" width="44" height="18" rx="8" fill="#6f3d1f" stroke="#3c2415" stroke-width="2"/>
@@ -269,7 +269,7 @@
           <div class="card-bottom">Comida</div>
         </button>
 
-        <button class="card green" data-name="Profesionales" onclick="alert('Próximamente')">
+        <button class="card green" data-name="Profesionales" onclick="irCategoria('profesionales')">
           <div class="card-top">
             <svg class="icon-svg" viewBox="0 0 100 100" aria-hidden="true">
               <rect x="15" y="42" width="42" height="30" rx="5" fill="#24456b" stroke="#13283f" stroke-width="2"/>
@@ -283,7 +283,7 @@
           <div class="card-bottom">Profesionales</div>
         </button>
 
-        <button class="card purple" data-name="Estética" onclick="alert('Próximamente')">
+        <button class="card purple" data-name="Estética" onclick="irCategoria('estetica')">
           <div class="card-top">
             <svg class="icon-svg" viewBox="0 0 100 100" aria-hidden="true">
               <path d="M32 28 q18-16 36 0 l-5 18 h-26z" fill="#ffffff"/>
@@ -296,7 +296,7 @@
           <div class="card-bottom">Estética</div>
         </button>
 
-        <button class="card cyan" data-name="Salud" onclick="alert('Próximamente')">
+        <button class="card cyan" data-name="Salud" onclick="irCategoria('salud')">
           <div class="card-top">
             <svg class="icon-svg" viewBox="0 0 100 100" aria-hidden="true">
               <circle cx="50" cy="50" r="26" fill="#ffffff" opacity=".95"/>
@@ -308,7 +308,7 @@
           <div class="card-bottom">Salud</div>
         </button>
 
-        <button class="card blue" data-name="Comercios" onclick="alert('Próximamente')">
+        <button class="card blue" data-name="Comercios" onclick="irCategoria('comercios')">
           <div class="card-top">
             <svg class="icon-svg" viewBox="0 0 100 100" aria-hidden="true">
               <path d="M24 28 h52 l-5 14 h-42z" fill="#263238"/>
@@ -322,7 +322,7 @@
           <div class="card-bottom">Comercios</div>
         </button>
 
-        <button class="card pink" data-name="Transporte" onclick="alert('Próximamente')">
+        <button class="card pink" data-name="Transporte" onclick="irCategoria('transporte')">
           <div class="card-top">
             <svg class="icon-svg" viewBox="0 0 100 100" aria-hidden="true">
               <path d="M24 52 q3-15 18-15 h16 q12 0 18 10 l4 5 v10 h-56z" fill="#f36c6c" stroke="#8e3e3e" stroke-width="2"/>
@@ -337,7 +337,7 @@
           <div class="card-bottom">Transporte</div>
         </button>
 
-        <button class="card brown" data-name="Eventos" onclick="alert('Próximamente')">
+        <button class="card brown" data-name="Eventos" onclick="irCategoria('eventos')">
           <div class="card-top">
             <svg class="icon-svg" viewBox="0 0 100 100" aria-hidden="true">
               <path d="M50 18 l6 16 h17 l-14 10 l5 17 l-14-10 l-14 10 l5-17 l-14-10 h17z" fill="#ffd54f" stroke="#b8860b" stroke-width="2"/>
@@ -370,8 +370,19 @@
     });
 
     function irCategoria(cat){
-      if(cat === "servicios"){
-        window.location.href = "servicios.html";
+      const rutas = {
+        servicios: "servicios.html",
+        comida: "comida.html",
+        profesionales: "profesionales.html",
+        estetica: "estetica.html",
+        salud: "salud.html",
+        comercios: "comercios.html",
+        transporte: "transporte.html",
+        eventos: "eventos.html"
+      };
+
+      if (rutas[cat]) {
+        window.location.href = rutas[cat];
       }
     }
   </script>
