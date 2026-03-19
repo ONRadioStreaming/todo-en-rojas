@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Servicios - Todo en Rojas</title>
+  <title>Servicios para el Hogar - Todo en Rojas</title>
   <style>
     :root{
       --blue:#1f5db3;
@@ -14,16 +14,19 @@
       --muted:#6b7280;
       --border:#dbe4f0;
       --green:#17a34a;
-      --red:#dc2626;
-      --chip:#eaf1fb;
       --shadow:0 10px 24px rgba(18,62,124,.10);
     }
 
-    *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-    body{
+    *{
+      box-sizing:border-box;
       margin:0;
+      padding:0;
       font-family:Arial, Helvetica, sans-serif;
-      background:linear-gradient(180deg,var(--blue),var(--bg) 180px);
+      -webkit-tap-highlight-color:transparent;
+    }
+
+    body{
+      background:linear-gradient(180deg,var(--blue),var(--bg) 220px);
       color:var(--text);
     }
 
@@ -33,163 +36,120 @@
       min-height:100vh;
     }
 
-    .topbar{
-      color:white;
-      padding:18px 16px 12px;
+    .header{
+      padding:16px;
+      color:#fff;
       display:flex;
       align-items:center;
       gap:12px;
     }
 
-    .back-btn{
+    .back{
       width:42px;
       height:42px;
-      border-radius:12px;
       border:none;
+      border-radius:12px;
       background:rgba(255,255,255,.18);
-      color:white;
-      font-size:1.4rem;
+      color:#fff;
+      font-size:22px;
       cursor:pointer;
+      flex-shrink:0;
     }
 
-    .topbar h1{
-      margin:0;
-      font-size:1.6rem;
+    .header h1{
+      font-size:1.15rem;
       font-weight:800;
+      line-height:1.2;
     }
 
     .content{
       background:var(--bg);
       border-radius:28px 28px 0 0;
-      min-height:calc(100vh - 76px);
-      padding:18px 16px 30px;
+      min-height:calc(100vh - 74px);
+      padding:16px;
     }
 
     .search{
-      background:#fff;
-      border:1px solid var(--border);
-      border-radius:18px;
-      padding:14px 16px;
-      display:flex;
-      align-items:center;
-      gap:10px;
-      box-shadow:0 6px 18px rgba(18,62,124,.06);
-      margin-bottom:16px;
+      margin-bottom:14px;
     }
 
     .search input{
+      width:100%;
       border:none;
       outline:none;
-      width:100%;
-      font-size:1rem;
-      background:transparent;
-      color:var(--text);
-    }
-
-    .search input::placeholder{color:var(--muted)}
-
-    .subcats{
-      display:flex;
-      gap:8px;
-      overflow-x:auto;
-      padding-bottom:8px;
-      margin-bottom:16px;
-    }
-
-    .subcats::-webkit-scrollbar{height:6px}
-    .subcats::-webkit-scrollbar-thumb{
-      background:#c8d6ea;
-      border-radius:20px;
-    }
-
-    .chip{
-      border:none;
-      border-radius:999px;
-      padding:10px 14px;
-      font-weight:700;
-      background:#eaf1fb;
-      color:var(--blue-dark);
-      white-space:nowrap;
-      cursor:pointer;
-    }
-
-    .chip.active{
-      background:var(--blue-dark);
-      color:white;
-    }
-
-    .list{
-      display:flex;
-      flex-direction:column;
-      gap:12px;
+      border-radius:16px;
+      padding:14px 16px;
+      font-size:.98rem;
+      box-shadow:var(--shadow);
     }
 
     .card{
       background:var(--card);
       border:1px solid var(--border);
-      border-radius:20px;
+      border-radius:22px;
+      box-shadow:var(--shadow);
       padding:14px;
-      box-shadow:0 8px 18px rgba(18,62,124,.08);
+      margin-bottom:14px;
     }
 
-    .card-top{
+    .top{
       display:flex;
       gap:12px;
-      align-items:center;
+      align-items:flex-start;
       margin-bottom:12px;
     }
 
     .avatar{
-      width:78px;
-      height:78px;
+      width:72px;
+      height:72px;
       border-radius:18px;
       object-fit:cover;
+      background:#e8eef7;
       flex-shrink:0;
-      border:2px solid #eef3fb;
-      background:#fff;
+      border:2px solid #dbe4f0;
     }
 
-    .info{flex:1;min-width:0}
+    .info{
+      flex:1;
+    }
 
     .name{
-      margin:0 0 4px;
-      font-size:1.22rem;
+      font-size:1.08rem;
       font-weight:800;
       color:var(--blue-dark);
+      margin-bottom:4px;
     }
 
     .rubro{
-      margin:0 0 8px;
+      font-size:.94rem;
       color:var(--muted);
-      font-size:.98rem;
       font-weight:700;
+      margin-bottom:8px;
     }
 
-    .state{
+    .status{
       display:inline-flex;
       align-items:center;
       gap:7px;
-      font-size:.92rem;
+      font-size:.88rem;
       font-weight:700;
+      color:#166534;
+      margin-bottom:8px;
     }
 
     .dot{
       width:10px;
       height:10px;
       border-radius:50%;
+      background:var(--green);
       display:inline-block;
     }
 
-    .green{background:var(--green)}
-    .red{background:var(--red)}
-
-    .section-label{
-      font-size:.83rem;
-      font-weight:800;
-      color:var(--blue-dark);
-      margin:0 0 8px;
-      text-transform:uppercase;
-      letter-spacing:.4px;
+    .desc{
+      font-size:.92rem;
+      line-height:1.4;
+      color:#374151;
+      margin-bottom:12px;
     }
 
     .badges{
@@ -203,39 +163,24 @@
       background:#eef4fb;
       color:var(--blue-dark);
       border-radius:999px;
-      padding:8px 10px;
-      font-size:.84rem;
+      padding:7px 10px;
+      font-size:.8rem;
       font-weight:700;
     }
 
-    .badge.factura-si{
-      background:#e4f7e8;
-      color:#176738;
-    }
-
-    .badge.factura-no{
-      background:#fde8e8;
-      color:#9f1d1d;
-    }
-
     .actions{
-      display:flex;
+      display:grid;
+      grid-template-columns:1fr 1fr;
       gap:10px;
     }
 
     .btn{
-      flex:1;
       border:none;
       border-radius:14px;
-      padding:13px 14px;
-      font-size:.96rem;
+      padding:13px 10px;
+      font-size:.9rem;
       font-weight:800;
       cursor:pointer;
-    }
-
-    .btn-profile{
-      background:#eaf1fb;
-      color:var(--blue-dark);
     }
 
     .btn-wa{
@@ -243,156 +188,110 @@
       color:#fff;
     }
 
-    .empty{
-      text-align:center;
-      color:var(--muted);
-      padding:24px 8px;
-      display:none;
+    .btn-profile{
+      background:#eaf1fb;
+      color:var(--blue-dark);
     }
   </style>
 </head>
 <body>
   <div class="app">
-    <header class="topbar">
-      <button class="back-btn" onclick="window.location.href='index.html'">←</button>
-      <h1>Servicios</h1>
-    </header>
+    <div class="header">
+      <button class="back" onclick="window.location.href='index.html'">←</button>
+      <h1>Servicios para el Hogar</h1>
+    </div>
 
-    <main class="content">
+    <div class="content">
       <div class="search">
-        <span>🔎</span>
-        <input type="text" id="searchInput" placeholder="Buscar por nombre o rubro..." />
+        <input type="text" placeholder="Buscar plomero, electricista, jardinero..." />
       </div>
 
-      <div class="subcats">
-        <button class="chip active" data-filter="todos">Todos</button>
-        <button class="chip" data-filter="plomero">Plomeros</button>
-        <button class="chip" data-filter="electricista">Electricistas</button>
-        <button class="chip" data-filter="gasista">Gasistas</button>
-        <button class="chip" data-filter="cerrajero">Cerrajeros</button>
-        <button class="chip" data-filter="cortepasto">Corte de pasto</button>
+      <div class="card">
+        <div class="top">
+          <img class="avatar" src="https://randomuser.me/api/portraits/men/41.jpg" alt="Martín Gómez">
+          <div class="info">
+            <div class="name">Martín Gómez</div>
+            <div class="rubro">Plomero</div>
+            <div class="status"><span class="dot"></span>Disponible ahora</div>
+          </div>
+        </div>
+        <div class="desc">Reparaciones de urgencia, pérdidas, instalación de grifería y sanitarios. Trabajo prolijo y rápido.</div>
+        <div class="badges">
+          <span class="badge">💵 Efectivo</span>
+          <span class="badge">📲 Transferencia</span>
+          <span class="badge">🧾 Sin factura</span>
+        </div>
+        <div class="actions">
+          <button class="btn btn-wa" onclick="window.open('https://wa.me/542474512345?text=Hola%20Mart%C3%ADn%2C%20te%20vi%20en%20Todo%20en%20Rojas.', '_blank')">WhatsApp</button>
+          <button class="btn btn-profile" onclick="window.location.href='perfil-martin-gomez.html'">Ver perfil</button>
+        </div>
       </div>
 
-      <div class="list" id="providersList">
-
-        <div class="card provider-card" data-category="plomero" data-name="Juan Pérez" data-rubro="Plomero">
-          <div class="card-top">
-            <img class="avatar" src="https://randomuser.me/api/portraits/men/32.jpg" alt="Juan Pérez" />
-            <div class="info">
-              <h3 class="name">Juan Pérez</h3>
-              <p class="rubro">Plomero</p>
-              <div class="state"><span class="dot green"></span>Disponible</div>
-            </div>
-          </div>
-
-          <p class="section-label">Medios de pago</p>
-          <div class="badges">
-            <span class="badge">💵 Efectivo</span>
-            <span class="badge">📲 Transferencia</span>
-            <span class="badge">💳 Tarjeta</span>
-            <span class="badge factura-si">🧾 Hace factura</span>
-          </div>
-
-          <div class="actions">
-            <button class="btn btn-profile" onclick="window.location.href='perfil-juan-perez.html'">Ver perfil</button>
-            <button class="btn btn-wa" onclick="window.open('https://wa.me/5492474000001?text=Hola%20Juan,%20te%20vi%20en%20Todo%20en%20Rojas%20y%20necesito%20un%20plomero.', '_blank')">WhatsApp</button>
+      <div class="card">
+        <div class="top">
+          <img class="avatar" src="https://randomuser.me/api/portraits/men/52.jpg" alt="Luis Fernández">
+          <div class="info">
+            <div class="name">Luis Fernández</div>
+            <div class="rubro">Electricista</div>
+            <div class="status"><span class="dot"></span>Disponible ahora</div>
           </div>
         </div>
-
-        <div class="card provider-card" data-category="electricista" data-name="Carlos Gómez" data-rubro="Electricista">
-          <div class="card-top">
-            <img class="avatar" src="https://randomuser.me/api/portraits/men/45.jpg" alt="Carlos Gómez" />
-            <div class="info">
-              <h3 class="name">Carlos Gómez</h3>
-              <p class="rubro">Electricista</p>
-              <div class="state"><span class="dot red"></span>No disponible</div>
-            </div>
-          </div>
-
-          <p class="section-label">Medios de pago</p>
-          <div class="badges">
-            <span class="badge">💵 Efectivo</span>
-            <span class="badge">📲 Transferencia</span>
-            <span class="badge factura-no">🧾 Sin factura</span>
-          </div>
-
-          <div class="actions">
-            <button class="btn btn-profile" onclick="alert('Próximamente')">Ver perfil</button>
-            <button class="btn btn-wa" onclick="window.open('https://wa.me/5492474000002?text=Hola%20Carlos,%20te%20vi%20en%20Todo%20en%20Rojas%20y%20necesito%20un%20electricista.', '_blank')">WhatsApp</button>
-          </div>
+        <div class="desc">Instalaciones eléctricas, cortocircuitos, tableros, iluminación LED y urgencias 24 hs.</div>
+        <div class="badges">
+          <span class="badge">💵 Efectivo</span>
+          <span class="badge">📲 Transferencia</span>
+          <span class="badge">💳 Tarjeta</span>
+          <span class="badge">🧾 Hace factura</span>
         </div>
-
-        <div class="card provider-card" data-category="gasista" data-name="Mariano López" data-rubro="Gasista matriculado">
-          <div class="card-top">
-            <img class="avatar" src="https://randomuser.me/api/portraits/men/67.jpg" alt="Mariano López" />
-            <div class="info">
-              <h3 class="name">Mariano López</h3>
-              <p class="rubro">Gasista matriculado</p>
-              <div class="state"><span class="dot green"></span>Disponible</div>
-            </div>
-          </div>
-
-          <p class="section-label">Medios de pago</p>
-          <div class="badges">
-            <span class="badge">💵 Efectivo</span>
-            <span class="badge">📲 Transferencia</span>
-            <span class="badge">💳 Tarjeta</span>
-            <span class="badge factura-si">🧾 Hace factura</span>
-          </div>
-
-          <div class="actions">
-            <button class="btn btn-profile" onclick="alert('Próximamente')">Ver perfil</button>
-            <button class="btn btn-wa" onclick="window.open('https://wa.me/5492474000003?text=Hola%20Mariano,%20te%20vi%20en%20Todo%20en%20Rojas%20y%20necesito%20un%20gasista.', '_blank')">WhatsApp</button>
-          </div>
+        <div class="actions">
+          <button class="btn btn-wa" onclick="window.open('https://wa.me/542474534567?text=Hola%20Luis%2C%20te%20vi%20en%20Todo%20en%20Rojas.', '_blank')">WhatsApp</button>
+          <button class="btn btn-profile" onclick="window.location.href='perfil-luis-fernandez.html'">Ver perfil</button>
         </div>
-
       </div>
 
-      <div class="empty" id="emptyState">No se encontraron prestadores con esa búsqueda.</div>
-    </main>
+      <div class="card">
+        <div class="top">
+          <img class="avatar" src="https://randomuser.me/api/portraits/men/60.jpg" alt="Verde Total Jardinería">
+          <div class="info">
+            <div class="name">Verde Total Jardinería</div>
+            <div class="rubro">Corte de césped</div>
+            <div class="status"><span class="dot"></span>Disponible ahora</div>
+          </div>
+        </div>
+        <div class="desc">Corte de pasto, mantenimiento de jardines, limpieza de terrenos y poda. Servicio semanal o mensual.</div>
+        <div class="badges">
+          <span class="badge">💵 Efectivo</span>
+          <span class="badge">📲 Transferencia</span>
+          <span class="badge">🧾 Sin factura</span>
+        </div>
+        <div class="actions">
+          <button class="btn btn-wa" onclick="window.open('https://wa.me/542474556789?text=Hola%2C%20te%20vi%20en%20Todo%20en%20Rojas.', '_blank')">WhatsApp</button>
+          <button class="btn btn-profile" onclick="window.location.href='perfil-verde-total.html'">Ver perfil</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="top">
+          <img class="avatar" src="https://randomuser.me/api/portraits/men/27.jpg" alt="Remis El Rápido">
+          <div class="info">
+            <div class="name">Remis El Rápido</div>
+            <div class="rubro">Remisería</div>
+            <div class="status"><span class="dot"></span>Disponible ahora</div>
+          </div>
+        </div>
+        <div class="desc">Traslados seguros, viajes programados, turnos médicos y viajes a ciudades cercanas. Atención inmediata.</div>
+        <div class="badges">
+          <span class="badge">💵 Efectivo</span>
+          <span class="badge">📲 Transferencia</span>
+          <span class="badge">🧾 Hace factura</span>
+        </div>
+        <div class="actions">
+          <button class="btn btn-wa" onclick="window.open('https://wa.me/542474578901?text=Hola%2C%20te%20vi%20en%20Todo%20en%20Rojas.', '_blank')">WhatsApp</button>
+          <button class="btn btn-profile" onclick="window.location.href='perfil-remis-el-rapido.html'">Ver perfil</button>
+        </div>
+      </div>
+
+    </div>
   </div>
-
-  <script>
-    const chips = document.querySelectorAll(".chip");
-    const cards = document.querySelectorAll(".provider-card");
-    const searchInput = document.getElementById("searchInput");
-    const emptyState = document.getElementById("emptyState");
-    let activeFilter = "todos";
-
-    function filterCards() {
-      const search = searchInput.value.toLowerCase().trim();
-      let visibleCount = 0;
-
-      cards.forEach(card => {
-        const category = card.dataset.category.toLowerCase();
-        const name = card.dataset.name.toLowerCase();
-        const rubro = card.dataset.rubro.toLowerCase();
-
-        const matchesFilter = activeFilter === "todos" || category === activeFilter;
-        const matchesSearch =
-          name.includes(search) ||
-          rubro.includes(search) ||
-          category.includes(search);
-
-        const show = matchesFilter && matchesSearch;
-        card.style.display = show ? "block" : "none";
-        if (show) visibleCount++;
-      });
-
-      emptyState.style.display = visibleCount === 0 ? "block" : "none";
-    }
-
-    chips.forEach(chip => {
-      chip.addEventListener("click", () => {
-        chips.forEach(c => c.classList.remove("active"));
-        chip.classList.add("active");
-        activeFilter = chip.dataset.filter;
-        filterCards();
-      });
-    });
-
-    searchInput.addEventListener("input", filterCards);
-    filterCards();
-  </script>
 </body>
 </html>
