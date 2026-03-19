@@ -198,8 +198,6 @@
       color:#fff;
     }
 
-    /* ===== VISTA PREVIA BUENA ===== */
-
     .preview-card{
       background:#fff;
       border:1px solid var(--border);
@@ -334,11 +332,12 @@
       gap:10px;
       margin-top:12px;
     }
-.preview-row{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-}
+
+    .preview-row{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+    }
 
     .preview-btn{
       width:100%;
@@ -490,7 +489,7 @@
 
         <div class="actions">
           <button class="btn btn-secondary" type="button" id="btnVista">Actualizar vista previa</button>
-          <button class="btn btn-primary" type="button" id="btnEnviar">Enviar solicitud</button>
+          <button class="btn btn-primary" type="button" onclick="enviarWhatsApp()">Enviar solicitud</button>
         </div>
 
         <div class="note">Esta pantalla sirve para mostrar el funcionamiento completo. Más adelante se puede conectar a una base de datos real.</div>
@@ -535,13 +534,12 @@
             </div>
 
             <div class="preview-buttons">
-  <button class="preview-btn preview-wa">WhatsApp</button>
-
-  <div class="preview-row">
-    <button class="preview-btn preview-call">📞 Llamar</button>
-    <button class="preview-btn preview-map">📍 Ver ubicación</button>
-  </div>
-</div>
+              <button class="preview-btn preview-wa" type="button" id="previewWa">WhatsApp</button>
+              <div class="preview-row">
+                <button class="preview-btn preview-call" type="button" id="previewCall">📞 Llamar</button>
+                <button class="preview-btn preview-map" type="button" id="previewMap">📍 Ver ubicación</button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -625,11 +623,7 @@
       };
     }
 
-    document.getElementById("btnVista").addEventListener("click", actualizarVista);
-
-    document.getElementById("btnEnviar").addEventListener("click", function() {
-      actualizarVista();
-
+    function enviarWhatsApp() {
       const nombreVal = nombre.value || "No especificado";
       const rubroVal = rubro.value || "No especificado";
       const zonaVal = zona.value || "No especificado";
@@ -647,8 +641,7 @@
 
       const facturaVal = factura.checked ? "Sí" : "No";
 
-      const mensaje = `
-Hola, quiero aparecer en Todo en Rojas.
+      const mensaje = `Hola, quiero aparecer en Todo en Rojas.
 
 📌 Nombre: ${nombreVal}
 🛠 Rubro: ${rubroVal}
@@ -665,13 +658,12 @@ ${descVal}
 📅 Desde: ${inicioVal}
 
 💳 Medios de pago: ${pagos.join(", ")}
-🧾 Factura: ${facturaVal}
-`;
+🧾 Factura: ${facturaVal}`;
 
-      const numeroAdmin = "5492474445664"; // CAMBIAR POR TU NÚMERO
+      const numeroAdmin = "5492474445664";
       const url = "https://wa.me/" + numeroAdmin + "?text=" + encodeURIComponent(mensaje);
       window.open(url, "_blank");
-    });
+    }
 
     foto.addEventListener("change", function(e) {
       const archivo = e.target.files[0];
