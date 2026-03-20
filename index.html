@@ -1,152 +1,985 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Conecta2</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Conecta2</title>
+  <meta name="theme-color" content="#07142b" />
 
-<style>
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(180deg, #0a1f44, #00c2b8);
-    color: white;
-}
+  <style>
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
 
-/* HEADER */
-.header {
-    padding: 20px;
-    display: flex;
-    align-items: center;
-}
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #07142b;
+      color: #ffffff;
+      scroll-behavior: smooth;
+    }
 
-.logo {
-    width: 70px;
-    border-radius: 15px;
-    margin-right: 10px;
-}
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top right, rgba(29, 211, 209, 0.18), transparent 28%),
+        linear-gradient(180deg, #07142b 0%, #0b2347 35%, #0f7c99 100%);
+    }
 
-.title {
-    font-size: 24px;
-    font-weight: bold;
-}
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
 
-.subtitle {
-    font-size: 14px;
-    opacity: 0.8;
-}
+    .app-shell {
+      width: 100%;
+      max-width: 480px;
+      margin: 0 auto;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
 
-/* BUSCADOR */
-.search {
-    background: white;
-    margin: 15px;
-    padding: 15px;
-    border-radius: 20px;
-    color: #555;
-}
+    /* INTRO */
+    #intro {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background:
+        radial-gradient(circle at center, rgba(25, 211, 209, 0.18), transparent 28%),
+        linear-gradient(180deg, #030815 0%, #07142b 45%, #0b2347 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      text-align: center;
+      flex-direction: column;
+    }
 
-/* BOTÓN */
-.btn-main {
-    background: #00c2b8;
-    margin: 15px;
-    padding: 15px;
-    border-radius: 20px;
-    text-align: center;
-    font-weight: bold;
-}
+    #welcomeText {
+      font-size: 1.35rem;
+      line-height: 1.5;
+      font-weight: 700;
+      color: #ffffff;
+      max-width: 360px;
+      opacity: 1;
+      transform: translateY(0);
+      animation: fadeOutUp 2.8s ease forwards;
+    }
 
-/* EMERGENCIAS */
-.emergency {
-    background: #ff3b3b;
-    margin: 15px;
-    padding: 15px;
-    border-radius: 20px;
-    text-align: center;
-    font-weight: bold;
-}
+    #logoStage {
+      position: absolute;
+      left: 24px;
+      right: 24px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      opacity: 0;
+      animation: fadeIn 1.1s ease forwards;
+      animation-delay: 2.7s;
+    }
 
-/* CATEGORÍAS */
-.section {
-    background: #f2f2f2;
-    color: #333;
-    margin-top: 20px;
-    border-radius: 30px 30px 0 0;
-    padding: 20px;
-}
+    #logoStage img {
+      width: 220px;
+      max-width: 72vw;
+      display: block;
+      filter: drop-shadow(0 8px 22px rgba(0, 0, 0, 0.35));
+      border-radius: 28px;
+      margin-bottom: 16px;
+    }
 
-.section h2 {
-    margin-bottom: 15px;
-}
+    #logoStage p {
+      margin: 0;
+      font-size: 0.98rem;
+      line-height: 1.5;
+      color: rgba(255,255,255,0.88);
+      font-weight: 600;
+    }
 
-.grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
-}
+    @keyframes fadeOutUp {
+      0% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      75% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-18px);
+      }
+    }
 
-.card {
-    padding: 25px;
-    border-radius: 20px;
-    color: white;
-    text-align: center;
-    font-weight: bold;
-}
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-50%) scale(0.96);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(-50%) scale(1);
+      }
+    }
 
-/* COLORES DE CATEGORÍAS */
-.c1 { background: #ff9f1c; }
-.c2 { background: #ff595e; }
-.c3 { background: #2ec4b6; }
-.c4 { background: #9b5de5; }
-.c5 { background: #4cc9f0; }
-.c6 { background: #4361ee; }
-.c7 { background: #06d6a0; }
-.c8 { background: #f72585; }
+    /* APP CONTENT */
+    #mainApp {
+      opacity: 0;
+      transform: translateY(12px);
+      transition: 0.5s ease;
+      padding-bottom: 28px;
+    }
 
-</style>
+    #mainApp.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .top-area {
+      padding: 18px 16px 12px;
+    }
+
+    .brand-card {
+      background: linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03));
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 26px;
+      padding: 16px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.14);
+      backdrop-filter: blur(4px);
+    }
+
+    .welcome-mini {
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.90);
+      line-height: 1.45;
+      margin: 0 0 14px 0;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .hero-logo {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 12px;
+    }
+
+    .hero-logo img {
+      width: 180px;
+      max-width: 62vw;
+      border-radius: 26px;
+      display: block;
+      box-shadow: 0 10px 22px rgba(0,0,0,0.18);
+    }
+
+    .hero-slogan {
+      text-align: center;
+      font-size: 0.96rem;
+      color: rgba(255,255,255,0.86);
+      line-height: 1.45;
+      margin: 0;
+      font-weight: 600;
+    }
+
+    .action-stack {
+      margin-top: 16px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .btn-primary,
+    .btn-secondary,
+    .btn-emergency,
+    .btn-back {
+      width: 100%;
+      border: 0;
+      border-radius: 18px;
+      padding: 15px 16px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.16);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #17d0cf, #0ca8c8);
+      color: #ffffff;
+    }
+
+    .btn-secondary {
+      background: linear-gradient(135deg, #1b78ff, #20b8d6);
+      color: #ffffff;
+    }
+
+    .btn-emergency {
+      background: linear-gradient(135deg, #ff4b4b, #d82424);
+      color: #ffffff;
+    }
+
+    .search-wrap {
+      margin-top: 14px;
+      background: rgba(255,255,255,0.95);
+      border-radius: 18px;
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.10);
+    }
+
+    .search-wrap span {
+      color: #0a5176;
+      font-size: 1.05rem;
+    }
+
+    .search-wrap input {
+      border: 0;
+      outline: none;
+      width: 100%;
+      font-size: 0.98rem;
+      color: #15345e;
+      background: transparent;
+      font-weight: 600;
+    }
+
+    .search-wrap input::placeholder {
+      color: #6a7f95;
+      font-weight: 500;
+    }
+
+    .content-area {
+      background: #eef4f7;
+      color: #16253e;
+      border-radius: 32px 32px 0 0;
+      margin-top: 18px;
+      padding: 20px 16px 28px;
+      min-height: 55vh;
+    }
+
+    .section-title {
+      margin: 0 0 14px 0;
+      font-size: 1.18rem;
+      font-weight: 800;
+      color: #10243d;
+    }
+
+    .section-subtitle {
+      margin: -6px 0 16px 0;
+      color: #54657b;
+      font-size: 0.92rem;
+      line-height: 1.45;
+    }
+
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .category-card {
+      border: 0;
+      border-radius: 20px;
+      min-height: 108px;
+      color: #fff;
+      padding: 14px 12px;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      cursor: pointer;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.08);
+      transition: transform 0.18s ease;
+    }
+
+    .category-card:active {
+      transform: scale(0.98);
+    }
+
+    .category-icon {
+      font-size: 1.45rem;
+      line-height: 1;
+    }
+
+    .category-name {
+      font-size: 0.98rem;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+
+    .cat-1 { background: linear-gradient(135deg, #ff9f1c, #ff6a3d); }
+    .cat-2 { background: linear-gradient(135deg, #ff5e7a, #ff3b5f); }
+    .cat-3 { background: linear-gradient(135deg, #10c8bb, #179dd3); }
+    .cat-4 { background: linear-gradient(135deg, #9464ff, #693bdb); }
+    .cat-5 { background: linear-gradient(135deg, #00b4d8, #0077b6); }
+    .cat-6 { background: linear-gradient(135deg, #06d6a0, #11a36f); }
+    .cat-7 { background: linear-gradient(135deg, #4f76ff, #3055d9); }
+    .cat-8 { background: linear-gradient(135deg, #f72585, #b5179e); }
+
+    .panel {
+      display: none;
+      background: #ffffff;
+      border-radius: 22px;
+      padding: 16px;
+      box-shadow: 0 10px 22px rgba(0,0,0,0.08);
+      margin-top: 10px;
+    }
+
+    .panel.active {
+      display: block;
+      animation: panelIn 0.25s ease;
+    }
+
+    @keyframes panelIn {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .panel-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    .panel-header h3 {
+      margin: 0;
+      font-size: 1.08rem;
+      color: #10243d;
+    }
+
+    .close-panel {
+      border: 0;
+      background: #e8f0f5;
+      color: #18314e;
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .panel p {
+      margin: 0 0 12px 0;
+      color: #5c6b7e;
+      line-height: 1.45;
+      font-size: 0.94rem;
+    }
+
+    .item-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .item-card {
+      background: #f5f8fb;
+      border-radius: 16px;
+      padding: 12px;
+      border: 1px solid #e0e8ef;
+    }
+
+    .item-card strong {
+      display: block;
+      color: #14304b;
+      margin-bottom: 4px;
+      font-size: 0.96rem;
+    }
+
+    .item-card span {
+      display: block;
+      color: #617183;
+      font-size: 0.9rem;
+      line-height: 1.4;
+    }
+
+    .item-card a {
+      display: inline-block;
+      margin-top: 8px;
+      color: #0f8fc2;
+      font-weight: 700;
+      font-size: 0.92rem;
+    }
+
+    .empty-search {
+      display: none;
+      background: #ffffff;
+      border-radius: 18px;
+      padding: 16px;
+      color: #42556b;
+      text-align: center;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.06);
+      margin-top: 14px;
+      font-weight: 600;
+    }
+
+    .empty-search.show {
+      display: block;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 24px 16px 34px;
+      color: rgba(255,255,255,0.76);
+      font-size: 0.82rem;
+      line-height: 1.45;
+    }
+
+    .footer strong {
+      color: #ffffff;
+      font-size: 0.96rem;
+    }
+
+    .footer a {
+      color: #19d3d1;
+      font-weight: 700;
+    }
+
+    /* MODAL EMERGENCIAS */
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(2, 8, 22, 0.72);
+      z-index: 5000;
+      display: none;
+      align-items: flex-end;
+      justify-content: center;
+      padding: 0;
+    }
+
+    .modal.show {
+      display: flex;
+    }
+
+    .modal-sheet {
+      width: 100%;
+      max-width: 480px;
+      background: #eef4f7;
+      border-radius: 28px 28px 0 0;
+      padding: 18px 16px 28px;
+      max-height: 86vh;
+      overflow-y: auto;
+      box-shadow: 0 -10px 28px rgba(0,0,0,0.26);
+      animation: sheetUp 0.22s ease;
+    }
+
+    @keyframes sheetUp {
+      from {
+        transform: translateY(28px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .modal-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 12px;
+    }
+
+    .modal-top h2 {
+      margin: 0;
+      color: #10243d;
+      font-size: 1.16rem;
+    }
+
+    .modal-top button {
+      border: 0;
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      background: #dde8ef;
+      color: #17314c;
+      font-size: 1rem;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .modal-note {
+      margin: 0 0 14px 0;
+      color: #53657b;
+      font-size: 0.93rem;
+      line-height: 1.45;
+    }
+
+    .emergency-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .emergency-card {
+      background: #ffffff;
+      border-radius: 18px;
+      padding: 14px;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.05);
+    }
+
+    .emergency-card strong {
+      display: block;
+      color: #12304d;
+      font-size: 1rem;
+      margin-bottom: 6px;
+    }
+
+    .emergency-card span {
+      display: block;
+      color: #647487;
+      font-size: 0.92rem;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+
+    .call-btn {
+      display: inline-flex;
+      width: 100%;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #ff4b4b, #d82424);
+      color: #ffffff;
+      border-radius: 14px;
+      padding: 13px 14px;
+      font-weight: 800;
+      font-size: 0.96rem;
+    }
+
+    @media (min-width: 420px) {
+      .hero-logo img {
+        width: 195px;
+      }
+
+      #logoStage img {
+        width: 235px;
+      }
+    }
+  </style>
 </head>
-
 <body>
 
-<!-- HEADER -->
-<div class="header">
-    <img src="logo.png" class="logo">
-    <div>
-        <div class="title">Conecta2</div>
-        <div class="subtitle">A tan solo un clic de encontrar lo que buscás</div>
-    </div>
-</div>
-
-<!-- BUSCADOR -->
-<div class="search">
-    🔍 Buscar servicio o comercio...
-</div>
-
-<!-- BOTÓN -->
-<div class="btn-main">
-    Quiero aparecer en la app
-</div>
-
-<!-- EMERGENCIAS -->
-<div class="emergency">
-    🚨 Emergencias
-</div>
-
-<!-- CATEGORÍAS -->
-<div class="section">
-    <h2>Categorías</h2>
-
-    <div class="grid">
-        <div class="card c1">Servicios Hogar</div>
-        <div class="card c2">Comida</div>
-        <div class="card c3">Profesionales</div>
-        <div class="card c4">Estética</div>
-        <div class="card c5">Salud</div>
-        <div class="card c6">Tecnología</div>
-        <div class="card c7">Educación</div>
-        <div class="card c8">Otros</div>
+  <!-- INTRO -->
+  <div id="intro">
+    <div id="welcomeText">
+      Bienvenido a la nueva app que te conecta con personas que quieren comprar
     </div>
 
-</div>
+    <div id="logoStage">
+      <img src="logo.png" alt="Logo Conecta2">
+      <p>A tan solo un clic de encontrar lo que buscás</p>
+    </div>
+  </div>
+
+  <!-- APP -->
+  <div class="app-shell">
+    <main id="mainApp">
+
+      <div class="top-area">
+        <div class="brand-card">
+          <p class="welcome-mini">
+            Bienvenido a la nueva app que te conecta con personas que quieren comprar
+          </p>
+
+          <div class="hero-logo">
+            <img src="logo.png" alt="Conecta2">
+          </div>
+
+          <p class="hero-slogan">
+            A tan solo un clic de encontrar lo que buscás
+          </p>
+
+          <div class="action-stack">
+            <a class="btn-primary" href="https://wa.me/542474445664?text=Hola%2C%20quiero%20registrar%20mi%20comercio%20en%20Conecta2" target="_blank">
+              🏪 Registrá tu comercio
+            </a>
+
+            <a class="btn-secondary" href="https://wa.me/542474445664?text=Hola%2C%20quiero%20ofrecer%20mis%20servicios%20en%20Conecta2" target="_blank">
+              🛠 Ofrecé tus servicios
+            </a>
+
+            <button class="btn-emergency" id="openEmergency">
+              🚨 Emergencias
+            </button>
+          </div>
+
+          <div class="search-wrap">
+            <span>🔎</span>
+            <input
+              type="text"
+              id="searchInput"
+              placeholder="Buscar rubro, servicio o categoría..."
+            />
+          </div>
+        </div>
+      </div>
+
+      <section class="content-area">
+        <h2 class="section-title">Categorías</h2>
+        <p class="section-subtitle">
+          Elegí una categoría para encontrar opciones rápidas dentro de Conecta2.
+        </p>
+
+        <div class="category-grid" id="categoryGrid">
+          <button class="category-card cat-1" data-category="hogar">
+            <span class="category-icon">🏠</span>
+            <span class="category-name">Servicios para el hogar</span>
+          </button>
+
+          <button class="category-card cat-2" data-category="gastronomia">
+            <span class="category-icon">🍔</span>
+            <span class="category-name">Gastronomía</span>
+          </button>
+
+          <button class="category-card cat-3" data-category="profesionales">
+            <span class="category-icon">🩺</span>
+            <span class="category-name">Profesionales y oficios</span>
+          </button>
+
+          <button class="category-card cat-4" data-category="estetica">
+            <span class="category-icon">💇</span>
+            <span class="category-name">Estética y bienestar</span>
+          </button>
+
+          <button class="category-card cat-5" data-category="salud">
+            <span class="category-icon">🏥</span>
+            <span class="category-name">Salud</span>
+          </button>
+
+          <button class="category-card cat-6" data-category="tecnologia">
+            <span class="category-icon">💻</span>
+            <span class="category-name">Tecnología</span>
+          </button>
+
+          <button class="category-card cat-7" data-category="educacion">
+            <span class="category-icon">📚</span>
+            <span class="category-name">Educación</span>
+          </button>
+
+          <button class="category-card cat-8" data-category="otros">
+            <span class="category-icon">📦</span>
+            <span class="category-name">Otros rubros</span>
+          </button>
+        </div>
+
+        <div id="emptySearch" class="empty-search">
+          No encontré resultados con esa búsqueda.
+        </div>
+
+        <!-- PANEL HOGAR -->
+        <div class="panel" id="panel-hogar">
+          <div class="panel-header">
+            <h3>Servicios para el hogar</h3>
+            <button class="close-panel" data-close="panel-hogar">✕</button>
+          </div>
+          <p>Electricidad, plomería, herrería, jardinería, pintura y soluciones prácticas para la casa.</p>
+          <div class="item-list">
+            <div class="item-card">
+              <strong>Electricista</strong>
+              <span>Instalaciones, arreglos y mantenimiento domiciliario.</span>
+              <a href="https://wa.me/542474445664?text=Hola%2C%20quiero%20consultar%20por%20un%20electricista" target="_blank">Consultar por WhatsApp</a>
+            </div>
+            <div class="item-card">
+              <strong>Corte de pasto</strong>
+              <span>Mantenimiento de patios, jardines y espacios verdes.</span>
+              <a href="https://wa.me/542474445664?text=Hola%2C%20quiero%20consultar%20por%20servicio%20de%20corte%20de%20pasto" target="_blank">Consultar por WhatsApp</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- PANEL GASTRONOMIA -->
+        <div class="panel" id="panel-gastronomia">
+          <div class="panel-header">
+            <h3>Gastronomía</h3>
+            <button class="close-panel" data-close="panel-gastronomia">✕</button>
+          </div>
+          <p>Comidas, delivery, rotiserías, panificados, bares y opciones para resolver rápido.</p>
+          <div class="item-list">
+            <div class="item-card">
+              <strong>Rotiserías y delivery</strong>
+              <span>Opciones para almuerzo, cena y envíos a domicilio.</span>
+              <a href="https://wa.me/542474445664?text=Hola%2C%20quiero%20consultar%20por%20gastronom%C3%ADa%20y%20delivery" target="_blank">Consultar por WhatsApp</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- PANEL PROFESIONALES -->
+        <div class="panel" id="panel-profesionales">
+          <div class="panel-header">
+            <h3>Profesionales y oficios</h3>
+            <button class="close-panel" data-close="panel-profesionales">✕</button>
+          </div>
+          <p>Médicos, abogados, contadores, técnicos, albañiles, gasistas y más.</p>
+          <div class="item-list">
+            <div class="item-card">
+              <strong>Profesionales matriculados</strong>
+              <span>Atención médica, legal, contable y técnica.</span>
+              <a href="https://wa.me/542474445664?text=Hola%2C%20quiero%20consultar%20por%20profesionales%20en%20Conecta2" target="_blank">Consultar por WhatsApp</a>
+            </div>
+            <div class="item-card">
+              <strong>Oficios independientes</strong>
+              <span>Trabajo práctico y rápido para resolver necesidades concretas.</span>
+              <a href="https://wa.me/542474445664?text=Hola%2C%20quiero%20consultar%20por%20oficios%20independientes" target="_blank">Consultar por WhatsApp</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- PANEL ESTETICA -->
+        <div class="panel" id="panel-estetica">
+          <div class="panel-header">
+            <h3>Estética y bienestar</h3>
+            <button class="close-panel" data-close="panel-estetica">✕</button>
+          </div>
+          <p>Peluquerías, barberías, uñas, masajes, maquillaje y cuidado personal.</p>
+          <div class="item-list">
+            <div class="item-card">
+              <strong>Servicios de belleza</strong>
+              <span>Turnos, atención profesional y opciones cerca tuyo.</span>
+              <a href="https://wa.me/542474445664?text=Hola%2C%20quiero%20consultar%20por%20servicios%20de%20est%C3%A9tica" target="_blank">Consultar por WhatsApp</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- PANEL SALUD -->
+        <div class="panel" id="panel-salud">
+          <div class="panel-header">
+            <h3>Salud</h3>
+            <button class="close-panel" data-close="panel-salud">✕</button>
+          </div>
+          <p>Centros médicos, farmacias, especialistas y servicios vinculados al cuidado de la salud.</p>
+          <div class="item-list">
+            <div class="item-card">
+              <strong>Farmacias y consultas</strong>
+              <span>Información útil y contactos del rubro salud.</span>
+              <a href="https://wa.me/542474445664?text=Hola%2C%20quiero%20consultar%20por%20servicios%20de%20salud" target="_blank">Consultar por WhatsApp</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- PANEL TECNOLOGIA -->
+        <div class="panel" id="panel-tecnologia">
+          <div class="panel-header">
+            <h3>Tecnología</h3>
+            <button class="close-panel" data-close="panel-tecnologia">✕</button>
+          </div>
+          <p>Reparación de celulares, PC, accesorios, internet, cámaras y soporte técnico.</p>
+          <div class="item-list">
+            <div class="item-card">
+              <strong>Soporte técnico</strong>
+              <span>Celulares, computación, redes y servicios tecnológicos.</span>
+              <a href="https://wa.me/542474445664?text=Hola%2C%20quiero%20consultar%20por%20tecnolog%C3%ADa%20y%20soporte%20t%C3%A9cnico" target="_blank">Consultar por WhatsApp</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- PANEL EDUCACION -->
+        <div class="panel" id="panel-educacion">
+          <div class="panel-header">
+            <h3>Educación</h3>
+            <button class="close-panel" data-close="panel-educacion">✕</button>
+          </div>
+          <p>Clases particulares, apoyo escolar, idiomas, cursos y formación práctica.</p>
+          <div class="item-list">
+            <div class="item-card">
+              <strong>Clases y capacitaciones</strong>
+              <span>Opciones para aprender, reforzar y crecer.</span>
+              <a href="https://wa.me/542474445664?text=Hola%2C%20quiero%20consultar%20por%20educaci%C3%B3n%20y%20clases%20particulares" target="_blank">Consultar por WhatsApp</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- PANEL OTROS -->
+        <div class="panel" id="panel-otros">
+          <div class="panel-header">
+            <h3>Otros rubros</h3>
+            <button class="close-panel" data-close="panel-otros">✕</button>
+          </div>
+          <p>Servicios y actividades que no entran en las categorías anteriores pero también suman valor.</p>
+          <div class="item-list">
+            <div class="item-card">
+              <strong>Consultas generales</strong>
+              <span>Si no encontraste el rubro, acá puede estar tu respuesta.</span>
+              <a href="https://wa.me/542474445664?text=Hola%2C%20quiero%20consultar%20por%20otros%20rubros%20en%20Conecta2" target="_blank">Consultar por WhatsApp</a>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <div class="footer">
+        <p><strong>Cabapp’s</strong></p>
+        <p>Diseño y desarrollo de aplicaciones</p>
+        <p>📞 <a href="tel:2474445664">2474-445664</a></p>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- MODAL EMERGENCIAS -->
+  <div class="modal" id="emergencyModal">
+    <div class="modal-sheet">
+      <div class="modal-top">
+        <h2>🚨 Emergencias</h2>
+        <button id="closeEmergency">✕</button>
+      </div>
+      <p class="modal-note">
+        Números útiles para resolver rápido cuando más importa.
+      </p>
+
+      <div class="emergency-list">
+        <div class="emergency-card">
+          <strong>Policía</strong>
+          <span>Atención inmediata ante situaciones de emergencia.</span>
+          <a class="call-btn" href="tel:911">📞 Llamar 911</a>
+        </div>
+
+        <div class="emergency-card">
+          <strong>Bomberos</strong>
+          <span>Asistencia ante incendios y siniestros.</span>
+          <a class="call-btn" href="tel:100">📞 Llamar 100</a>
+        </div>
+
+        <div class="emergency-card">
+          <strong>Ambulancia / SAME</strong>
+          <span>Atención médica urgente.</span>
+          <a class="call-btn" href="tel:107">📞 Llamar 107</a>
+        </div>
+
+        <div class="emergency-card">
+          <strong>Defensa Civil</strong>
+          <span>Emergencias generales y contingencias.</span>
+          <a class="call-btn" href="tel:103">📞 Llamar 103</a>
+        </div>
+
+        <div class="emergency-card">
+          <strong>Línea de la Mujer</strong>
+          <span>Asistencia y orientación.</span>
+          <a class="call-btn" href="tel:144">📞 Llamar 144</a>
+        </div>
+
+        <div class="emergency-card">
+          <strong>Niñez y Adolescencia</strong>
+          <span>Protección de derechos y asistencia.</span>
+          <a class="call-btn" href="tel:102">📞 Llamar 102</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // INTRO AUTOMATICA
+    window.addEventListener('load', function () {
+      setTimeout(function () {
+        document.getElementById('intro').style.opacity = '0';
+        document.getElementById('intro').style.transition = '0.45s ease';
+        document.getElementById('mainApp').classList.add('visible');
+      }, 5200);
+
+      setTimeout(function () {
+        document.getElementById('intro').style.display = 'none';
+      }, 5700);
+    });
+
+    // MODAL EMERGENCIAS
+    const openEmergency = document.getElementById('openEmergency');
+    const closeEmergency = document.getElementById('closeEmergency');
+    const emergencyModal = document.getElementById('emergencyModal');
+
+    openEmergency.addEventListener('click', function () {
+      emergencyModal.classList.add('show');
+      document.body.style.overflow = 'hidden';
+    });
+
+    closeEmergency.addEventListener('click', function () {
+      emergencyModal.classList.remove('show');
+      document.body.style.overflow = '';
+    });
+
+    emergencyModal.addEventListener('click', function (e) {
+      if (e.target === emergencyModal) {
+        emergencyModal.classList.remove('show');
+        document.body.style.overflow = '';
+      }
+    });
+
+    // CATEGORIAS
+    const categoryButtons = document.querySelectorAll('.category-card');
+    const panels = document.querySelectorAll('.panel');
+    const closeButtons = document.querySelectorAll('.close-panel');
+
+    function closeAllPanels() {
+      panels.forEach(panel => panel.classList.remove('active'));
+    }
+
+    categoryButtons.forEach(button => {
+      button.addEventListener('click', function () {
+        const category = this.getAttribute('data-category');
+        const targetPanel = document.getElementById('panel-' + category);
+
+        if (targetPanel.classList.contains('active')) {
+          targetPanel.classList.remove('active');
+        } else {
+          closeAllPanels();
+          targetPanel.classList.add('active');
+          targetPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    closeButtons.forEach(button => {
+      button.addEventListener('click', function () {
+        const panelId = this.getAttribute('data-close');
+        document.getElementById(panelId).classList.remove('active');
+      });
+    });
+
+    // BUSCADOR
+    const searchInput = document.getElementById('searchInput');
+    const categoryGrid = document.getElementById('categoryGrid');
+    const categoryCards = document.querySelectorAll('.category-card');
+    const emptySearch = document.getElementById('emptySearch');
+
+    searchInput.addEventListener('input', function () {
+      const term = this.value.trim().toLowerCase();
+      let visibleCount = 0;
+
+      closeAllPanels();
+
+      categoryCards.forEach(card => {
+        const text = card.innerText.toLowerCase();
+
+        if (text.includes(term)) {
+          card.style.display = 'flex';
+          visibleCount++;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      if (visibleCount === 0 && term !== '') {
+        emptySearch.classList.add('show');
+      } else {
+        emptySearch.classList.remove('show');
+      }
+    });
+  </script>
 
 </body>
 </html>
