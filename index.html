@@ -58,11 +58,12 @@
       flex-direction: column;
       text-align: center;
       padding: 24px;
+      transition: opacity .45s ease;
     }
 
     #welcomeText {
       max-width: 360px;
-      font-size: 1.3rem;
+      font-size: 1.28rem;
       line-height: 1.55;
       font-weight: 800;
       letter-spacing: -0.02em;
@@ -159,12 +160,12 @@
       margin-bottom: 12px;
     }
 
-    .btn-main, .btn-secondary, .btn-search, .btn-emergency {
+    .btn-main, .btn-secondary, .btn-emergency {
       width: 100%;
       border: 0;
       border-radius: 18px;
       padding: 16px 18px;
-      font-size: 1.05rem;
+      font-size: 1.02rem;
       font-weight: 800;
       letter-spacing: -0.02em;
       display: flex;
@@ -223,18 +224,11 @@
     }
 
     .section-title {
-      margin: 0 0 8px 0;
-      font-size: 1.2rem;
+      margin: 0 0 16px 0;
+      font-size: 1.16rem;
       font-weight: 800;
       letter-spacing: -0.02em;
-    }
-
-    .section-text {
-      margin: 0 0 18px 0;
-      color: #5c6e82;
-      font-size: .95rem;
-      line-height: 1.55;
-      font-weight: 600;
+      text-align: left;
     }
 
     .grid {
@@ -245,28 +239,43 @@
 
     .category-card {
       border-radius: 22px;
-      min-height: 112px;
-      padding: 16px;
+      min-height: 108px;
+      padding: 14px 12px;
       color: #fff;
       display: flex;
-      align-items: flex-end;
+      align-items: center;
       justify-content: center;
       text-align: center;
-      box-shadow: 0 8px 16px rgba(0,0,0,0.08);
-      font-size: 1.02rem;
-      font-weight: 800;
-      line-height: 1.25;
-      letter-spacing: -0.02em;
+      box-shadow:
+        0 10px 18px rgba(0,0,0,0.18),
+        inset 0 2px 4px rgba(255,255,255,0.22),
+        inset 0 -4px 7px rgba(0,0,0,0.14);
+      transition: all .14s ease;
+      font-size: 0.96rem;
+      font-weight: 700;
+      line-height: 1.16;
+      letter-spacing: -0.01em;
     }
 
-    .cat-1 { background: linear-gradient(135deg, #ff9f1c, #ff6f3d); }
-    .cat-2 { background: linear-gradient(135deg, #ff5f7b, #ff3b68); }
-    .cat-3 { background: linear-gradient(135deg, #1dc9bf, #1799d2); }
-    .cat-4 { background: linear-gradient(135deg, #9b67ff, #6b3de1); }
-    .cat-5 { background: linear-gradient(135deg, #16b7de, #0d80c6); }
-    .cat-6 { background: linear-gradient(135deg, #18cf9a, #11a56e); }
-    .cat-7 { background: linear-gradient(135deg, #5373ff, #3552d9); }
-    .cat-8 { background: linear-gradient(135deg, #f6288c, #b7189d); }
+    .category-card:active {
+      transform: translateY(3px);
+      box-shadow:
+        0 4px 10px rgba(0,0,0,0.18),
+        inset 0 3px 6px rgba(0,0,0,0.18);
+    }
+
+    .cat-1 { background: linear-gradient(145deg, #ff9f1c, #ff6f3d); }
+    .cat-2 { background: linear-gradient(145deg, #ff5f7b, #ff3b68); }
+    .cat-3 { background: linear-gradient(145deg, #1dc9bf, #1799d2); }
+    .cat-4 { background: linear-gradient(145deg, #9b67ff, #6b3de1); }
+    .cat-5 { background: linear-gradient(145deg, #16b7de, #0d80c6); }
+    .cat-6 { background: linear-gradient(145deg, #18cf9a, #11a56e); }
+    .cat-7 { background: linear-gradient(145deg, #5373ff, #3552d9); }
+    .cat-8 { background: linear-gradient(145deg, #f6288c, #b7189d); }
+
+    .hidden {
+      display: none !important;
+    }
 
     .emergency-bottom {
       margin-top: 16px;
@@ -275,33 +284,150 @@
     .btn-emergency {
       background: linear-gradient(135deg, #ff4e4e, #d92424);
       color: #fff;
+    }
+
+    /* FARMACIA */
+    .farmacia-banner {
+      margin-top: 16px;
+      background: #f8fbfd;
+      border-radius: 26px;
+      padding: 18px;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.12);
+      border: 1px solid rgba(255,255,255,0.5);
+    }
+
+    .farmacia-top {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+
+    .farmacia-icon {
+      width: 68px;
+      height: 68px;
+      border-radius: 22px;
+      background: #eaf8ee;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: inset 0 0 0 2px #d3edd8;
+    }
+
+    .cross {
+      font-size: 2.3rem;
+      font-weight: 800;
+      color: #12b23f;
+      line-height: 1;
+    }
+
+    .farmacia-text {
+      flex: 1;
+    }
+
+    .farmacia-label {
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: #1d5d83;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+      letter-spacing: .5px;
+    }
+
+    .farmacia-name {
+      font-size: 1.32rem;
+      font-weight: 800;
+      color: #14304c;
+      line-height: 1.1;
+      margin-bottom: 4px;
+    }
+
+    .farmacia-horario {
+      font-size: 0.94rem;
+      color: #4f6a80;
+      font-weight: 700;
+    }
+
+    .farmacia-info {
+      background: #ffffff;
+      border-radius: 18px;
+      padding: 14px;
+      margin-bottom: 14px;
+      border: 1px solid #e2ecf3;
+    }
+
+    .info-line {
+      font-size: 0.98rem;
+      color: #31475c;
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+
+    .info-line:last-child {
+      margin-bottom: 0;
+    }
+
+    .farmacia-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .btn-wa {
+      border: 0;
+      border-radius: 18px;
+      padding: 15px 12px;
+      font-size: 1rem;
+      font-weight: 800;
+      background: #19ad4a;
+      color: #fff;
       text-align: center;
     }
 
+    .btn-call {
+      border: 0;
+      border-radius: 18px;
+      padding: 15px 12px;
+      font-size: 1rem;
+      font-weight: 800;
+      background: #e7edf4;
+      color: #24497a;
+      text-align: center;
+    }
+
+    /* FOOTER */
     .footer {
       text-align: center;
       padding: 24px 16px 34px;
-      color: rgba(255,255,255,0.78);
+      color: rgba(255,255,255,0.82);
       font-size: .84rem;
       line-height: 1.5;
       background: linear-gradient(180deg, #0f7c99, #117592);
+    }
+
+    .footer-logo {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 8px;
+    }
+
+    .footer-logo img {
+      max-width: 130px;
+      height: auto;
+      display: block;
     }
 
     .footer p {
       margin: 6px 0;
     }
 
-    .footer strong {
-      color: #fff;
-      font-size: 1rem;
-    }
-
     .footer a {
-      color: #19d3d1;
+      color: #ffffff;
       font-weight: 800;
     }
 
-    /* MODAL */
+    /* MODAL EMERGENCIAS */
     .modal {
       position: fixed;
       inset: 0;
@@ -393,7 +519,6 @@
       font-size: .92rem;
       margin-bottom: 10px;
       line-height: 1.4;
-      font-weight: 600;
     }
 
     .call-btn {
@@ -407,10 +532,6 @@
       padding: 13px 14px;
       font-weight: 800;
       font-size: .96rem;
-    }
-
-    .hidden {
-      display: none !important;
     }
   </style>
 </head>
@@ -435,27 +556,24 @@
           </div>
 
           <div class="action-stack">
-            <a class="btn-main" href="registro-comercio">
+            <a class="btn-main" href="registro-comercio.html">
               Registrá tu comercio
             </a>
 
-            <a class="btn-secondary" href="registro-servicio">
+            <a class="btn-secondary" href="registro-servicio.html">
               Ofrecé tus servicios
             </a>
           </div>
 
           <div class="search-box">
             <span>🔎</span>
-            <input type="text" id="searchInput" placeholder="Buscar rubro, servicio o categoría...">
+            <input type="text" id="searchInput" placeholder="Buscar comercios o servicios...">
           </div>
         </div>
       </div>
 
       <section class="content">
         <h2 class="section-title">Categorías</h2>
-        <p class="section-text">
-          Elegí una categoría para encontrar opciones rápidas dentro de Conecta2.
-        </p>
 
         <div class="grid" id="categoryGrid">
           <a class="category-card cat-1" href="hogar2.html" data-name="servicios para el hogar">Servicios para el hogar</a>
@@ -471,12 +589,42 @@
         <div class="emergency-bottom">
           <button class="btn-emergency" id="openEmergency">Emergencias</button>
         </div>
+
+        <div class="farmacia-banner">
+          <div class="farmacia-top">
+            <div class="farmacia-icon">
+              <div class="cross">+</div>
+            </div>
+
+            <div class="farmacia-text">
+              <div class="farmacia-label">Farmacia de turno</div>
+              <div class="farmacia-name">ABALO</div>
+              <div class="farmacia-horario">Hasta las 08:00 hs</div>
+            </div>
+          </div>
+
+          <div class="farmacia-info">
+            <div class="info-line">📍 H. Yrigoyen 26</div>
+            <div class="info-line">📞 (02475) 41-4116</div>
+          </div>
+
+          <div class="farmacia-actions">
+            <a class="btn-wa" href="https://wa.me/542475414116" target="_blank">WhatsApp</a>
+            <a class="btn-call" href="tel:02475414116">Llamar</a>
+          </div>
+        </div>
       </section>
 
       <div class="footer">
-        <p><strong>Cabapp’s</strong></p>
+        <div class="footer-logo">
+          <img src="cabapps-logo.png" alt="Cabapp’s">
+        </div>
         <p>Diseño y desarrollo de aplicaciones</p>
-        <p>📞 <a href="tel:2474445664">2474-445664</a></p>
+        <p>
+          <a href="https://wa.me/542474445664?text=Hola%2C%20vi%20la%20app%20Conecta2%20y%20me%20interesa%20consultar%20por%20el%20dise%C3%B1o%20y%20desarrollo%20de%20una%20aplicaci%C3%B3n." target="_blank">
+            2474-445664
+          </a>
+        </p>
       </div>
     </main>
   </div>
@@ -533,17 +681,29 @@
   </div>
 
   <script>
-    window.addEventListener('load', function () {
-      setTimeout(function () {
-        document.getElementById('intro').style.opacity = '0';
-        document.getElementById('intro').style.transition = '.45s ease';
-        document.getElementById('mainApp').classList.add('visible');
-      }, 5200);
+    const intro = document.getElementById('intro');
+    const mainApp = document.getElementById('mainApp');
 
-      setTimeout(function () {
-        document.getElementById('intro').style.display = 'none';
-      }, 5700);
-    });
+    function mostrarAppSinIntro() {
+      intro.style.display = 'none';
+      mainApp.classList.add('visible');
+    }
+
+    if (sessionStorage.getItem('conecta2_intro_seen') === 'true') {
+      mostrarAppSinIntro();
+    } else {
+      window.addEventListener('load', function () {
+        setTimeout(function () {
+          intro.style.opacity = '0';
+          mainApp.classList.add('visible');
+        }, 5200);
+
+        setTimeout(function () {
+          intro.style.display = 'none';
+          sessionStorage.setItem('conecta2_intro_seen', 'true');
+        }, 5700);
+      });
+    }
 
     const openEmergency = document.getElementById('openEmergency');
     const closeEmergency = document.getElementById('closeEmergency');
