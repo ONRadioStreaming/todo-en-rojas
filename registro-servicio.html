@@ -945,17 +945,170 @@
       previewCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
 
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
+    <script>
+  const form = document.getElementById('servicioForm');
+  const foto = document.getElementById('foto');
+  const previewImg = document.getElementById('previewImg');
+  const previewPlaceholder = document.getElementById('previewPlaceholder');
+  const errorBox = document.getElementById('errorBox');
+  const successBox = document.getElementById('successBox');
+  const btnPreview = document.getElementById('btnPreview');
+  const previewCard = document.getElementById('previewCard');
+  const cardBtnWhatsapp = document.getElementById('cardBtnWhatsapp');
+  const cardBtnCall = document.getElementById('cardBtnCall');
+  const horarioCorrido = document.getElementById('horarioCorrido');
+  const bloqueCorrido = document.getElementById('bloqueCorrido');
+  const bloqueCortado = document.getElementById('bloqueCortado');
 
-      if (!validarFormulario()) return;
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzaEZ47CNDLhtlJCA70lOMBesQOWqFwGbfO14N3Gmi9zRZynR608cub3YMgglQ2Wo5P/exec";
 
-      mostrarExito(
-        'Tu solicitud fue enviada correctamente.<br><br>' +
-        'Ahora quedó pendiente de aprobación.<br>' +
-        'En el siguiente paso podrás continuar con la activación de tu perfil en Conecta2.'
-      );
+  function valor(id) {
+    return document.getElementById(id).value.trim();
+  }
+
+  function capitalizar(texto) {
+    if (!texto) return "";
+    return texto
+      .toLowerCase()
+      .split(" ")
+      .map(p => p.charAt(0).toUpperCase() + p.slice(1))
+      .join(" ");
+  }
+
+  function limpiarMensajes() {
+    errorBox.classList.remove('show');
+    errorBox.innerHTML = '';
+    successBox.classList.remove('show');
+    successBox.innerHTML = '';
+  }
+
+  function mostrarError(html) {
+    errorBox.innerHTML = html;
+    errorBox.classList.add('show');
+    successBox.classList.remove('show');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function mostrarExito(html) {
+    successBox.innerHTML = html;
+    successBox.classList.add('show');
+    errorBox.classList.remove('show');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function obtenerMediosPagoSeleccionados() {
+    const checks = document.querySelectorAll('input[name="mediosPago"]:checked');
+    return Array.from(checks).map(c => c.value);
+  }
+
+  function actualizarModoHorario() {
+    if (horarioCorrido.checked) {
+      bloqueCorrido.classList.remove('hidden');
+      bloqueCortado.classList.add('hidden');
+    } else {
+      bloqueCorrido.classList.add('hidden');
+      bloqueCortado.classList.remove('hidden');
+    }
+  }
+
+  function obtenerHorarioFinal() {
+    if (horarioCorrido.checked) {
+      const desde = valor('horarioDesde');
+      const hasta = valor('horarioHasta');
+      if (!desde || !hasta) return '';
+      return desde + '-' + hasta;
+    } else {
+      const mananaDesde = valor('mananaDesde');
+      const mananaHasta = valor('mananaHasta');
+      const tardeDesde = valor('tardeDesde');
+      const tardeHasta = valor('tardeHasta');
+
+      if (!mananaDesde || !mananaHasta || !tardeDesde || !tardeHasta) return '';
+      return mananaDesde + '-' + mananaHasta + ' / ' + tardeDesde + '-' + tardeHasta;
+    }
+  }
+
+  function validarFormulario() {
+    limpiarMensajes();
+
+    const faltantes = [];
+
+    if (!foto.files || !foto.files.length) faltantes.push("Foto personal");
+    if (!valor('nombre')) faltantes.push("Nombre");
+    if (!valor('apellido')) faltantes.push("Apellido");
+    if (!valor('oficio')) faltantes.push("Profesión u oficio");
+    if (!valor('zona')) faltantes.push("Zona de trabajo");
+    if (!valor('descripcion')) faltantes.push("Descripción");
+    if (!valor('factura')) faltantes.push("Factura");
+
+    const whatsapp = valor('whatsapp');
+    const telefonoAlternativo = valor('telefonoAlternativo');
+
+    if (!whatsapp && !telefonoAlternativo) {
+      faltantes.push("Al menos una vía de contacto: WhatsApp o teléfono alternativo");
+    }
+
+    const mediosPago = obtenerMediosPagoSeleccionados();
+    if (mediosPago.length === 0) {
+      faltantes.push("Al menos un medio de pago");
+    }
+
+    if (!obtenerHorarioFinal()) {
+      if (horarioCorrido.checked) {
+        faltantes.push("Horario corrido completo");
+      } else {
+        faltantes.push("Horario matutino y vespertino completos");
+      }
+    }
+
+    if (faltantes.length > 0) {
+      mostrarError('Faltan completar estos campos obligatorios:<br><br>• ' + faltantes.join('<br>• '));
+      return false;
+    }
+
+    return true;
+  }
+
+  function convertirImagenABase64(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = error => reject(error);
+      reader.readAsDataURL(file);
     });
-  </script>
-</body>
-</html>
+  }
+
+  foto.addEventListener('change', function () {
+    const file = this.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      previewImg.src = e.target.result;
+      previewImg.style.display = 'block';
+      previewPlaceholder.style.display = 'none';
+    };
+    reader.readAsDataURL(file);
+  });
+
+  horarioCorrido.addEventListener('change', actualizarModoHorario);
+  actualizarModoHorario();
+
+  btnPreview.addEventListener('click', function () {
+    if (!validarFormulario()) return;
+
+    const nombreCompleto = capitalizar(valor('nombre') + ' ' + valor('apellido'));
+    const oficio = capitalizar(valor('oficio'));
+    const descripcion = valor('descripcion');
+    const factura = valor('factura');
+    const whatsapp = valor('whatsapp');
+    const telefonoAlternativo = valor('telefonoAlternativo');
+    const horario = obtenerHorarioFinal();
+    const mediosPago = obtenerMediosPagoSeleccionados();
+
+    document.getElementById('cardName').textContent = nombreCompleto;
+    document.getElementById('cardJob').textContent = oficio + ' · ' + horario;
+    document.getElementById('cardDesc').textContent = descripcion;
+    document.getElementById('cardAvatar').src = previewImg.src;
+
+    const tagsContainer = document.getElementById
