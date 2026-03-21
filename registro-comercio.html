@@ -286,7 +286,16 @@
       transform: scale(1.15);
     }
 
-    .schedule-mode {
+    .section-divider {
+      margin: 18px 0 12px;
+      padding-top: 12px;
+      border-top: 1px solid #e5edf4;
+      color: #173a68;
+      font-size: 0.98rem;
+      font-weight: 800;
+    }
+
+    .toggle-box {
       display: flex;
       align-items: center;
       gap: 10px;
@@ -300,10 +309,29 @@
       margin-bottom: 12px;
     }
 
-    .schedule-mode input[type="checkbox"] {
+    .toggle-box input[type="checkbox"] {
       width: auto;
       margin: 0;
       transform: scale(1.15);
+    }
+
+    .day-card {
+      background: #f8fbfd;
+      border: 1px solid #dbe7ef;
+      border-radius: 18px;
+      padding: 14px;
+      margin-bottom: 12px;
+    }
+
+    .day-card-title {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: #173a68;
+      margin-bottom: 10px;
+    }
+
+    .hidden {
+      display: none !important;
     }
 
     .actions {
@@ -398,10 +426,18 @@
     .card-status {
       font-size: .92rem;
       font-weight: 800;
-      color: #17763f;
       display: flex;
       align-items: center;
       gap: 8px;
+      margin-bottom: 6px;
+    }
+
+    .card-status.available {
+      color: #17763f;
+    }
+
+    .card-status.unavailable {
+      color: #a32020;
     }
 
     .card-status::before {
@@ -409,8 +445,16 @@
       width: 14px;
       height: 14px;
       border-radius: 50%;
-      background: #1cab4b;
       display: inline-block;
+      flex-shrink: 0;
+    }
+
+    .card-status.available::before {
+      background: #1cab4b;
+    }
+
+    .card-status.unavailable::before {
+      background: #d43a3a;
     }
 
     .card-desc {
@@ -419,6 +463,27 @@
       font-size: .98rem;
       line-height: 1.55;
       font-weight: 600;
+    }
+
+    .card-location {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #eef4f8;
+      border: 1px solid #dbe7ef;
+      border-radius: 16px;
+      padding: 12px 14px;
+      margin-bottom: 14px;
+      color: #24497a;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .pin-icon {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      fill: #e03131;
     }
 
     .card-meta {
@@ -459,21 +524,25 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 12px;
+      margin-bottom: 12px;
     }
 
     .card-btn-wa,
-    .card-btn-call {
+    .card-btn-call,
+    .card-btn-alt {
       border: 0;
       border-radius: 18px;
       padding: 15px 12px;
       text-align: center;
-      font-size: .98rem;
+      font-size: .95rem;
       font-weight: 800;
       font-family: inherit;
       cursor: pointer;
+      width: 100%;
     }
 
-    .card-btn-wa {
+    .card-btn-wa,
+    .card-btn-alt {
       background: #19ad4a;
       color: #fff;
     }
@@ -483,8 +552,9 @@
       color: #24497a;
     }
 
-    .hidden {
-      display: none !important;
+    .alt-buttons {
+      display: grid;
+      gap: 10px;
     }
   </style>
 </head>
@@ -504,7 +574,7 @@
       </p>
 
       <div class="notice">
-        Importante: elegí primero la categoría principal. Después seleccioná el rubro. Si no aparece en la lista, usá la opción "Otro" y especificá cuál.
+        Importante: elegí primero la categoría principal. Después seleccioná el rubro. Si no aparece en la lista, usá la opción "Otro" y especificá cuál. La disponibilidad se calcula según los días y horarios reales que cargues.
       </div>
 
       <div id="errorBox" class="error-box"></div>
@@ -585,148 +655,211 @@
             <textarea id="descripcion" placeholder="Contanos qué ofrecés, qué te diferencia y qué debería saber el cliente." required></textarea>
           </div>
 
-          <div class="field-group">
-            <div class="contact-note">
-              Debés completar al menos una vía de contacto: WhatsApp o teléfono alternativo.
+          <div class="section-divider">Contacto</div>
+
+          <div class="contact-note">
+            Debés completar al menos una vía principal de contacto. Lo ideal es cargar el WhatsApp general del negocio y el teléfono para llamadas.
+          </div>
+
+          <div class="grid-2">
+            <div class="field-group">
+              <label for="whatsapp">WhatsApp *</label>
+              <input type="tel" id="whatsapp" placeholder="WhatsApp general del comercio">
+            </div>
+
+            <div class="field-group">
+              <label for="telefonoAlternativo">Teléfono *</label>
+              <input type="tel" id="telefonoAlternativo" placeholder="Teléfono para llamadas">
+            </div>
+          </div>
+
+          <div class="toggle-box">
+            <input type="checkbox" id="toggleAlternativos">
+            <label for="toggleAlternativos" style="margin:0;">WhatsApp alternativos</label>
+          </div>
+
+          <div id="bloqueAlternativos" class="hidden">
+            <div class="grid-2">
+              <div class="field-group">
+                <label for="whatsappAlt1">WhatsApp alternativo 1</label>
+                <input type="tel" id="whatsappAlt1" placeholder="Ej: número de Pablo">
+              </div>
+
+              <div class="field-group">
+                <label for="nombreWhatsappAlt1">Nombre / referencia 1</label>
+                <input type="text" id="nombreWhatsappAlt1" placeholder="Ej: Pablo - Ventas">
+              </div>
             </div>
 
             <div class="grid-2">
-              <div>
-                <label for="whatsapp">WhatsApp</label>
-                <input type="tel" id="whatsapp" placeholder="Opcional si cargás teléfono alternativo">
+              <div class="field-group">
+                <label for="whatsappAlt2">WhatsApp alternativo 2</label>
+                <input type="tel" id="whatsappAlt2" placeholder="Ej: número de Mariano">
               </div>
 
-              <div>
-                <label for="telefonoAlternativo">Teléfono alternativo</label>
-                <input type="tel" id="telefonoAlternativo" placeholder="Opcional si cargás WhatsApp">
+              <div class="field-group">
+                <label for="nombreWhatsappAlt2">Nombre / referencia 2</label>
+                <input type="text" id="nombreWhatsappAlt2" placeholder="Ej: Mariano - Caja / Facturación">
               </div>
             </div>
           </div>
 
-          <div class="field-group">
-            <label>Horario de atención *</label>
+          <div class="section-divider">Días y horarios</div>
 
-            <div class="schedule-mode">
-              <input type="checkbox" id="horarioCorrido" checked>
-              <label for="horarioCorrido" style="margin:0;">Horario corrido</label>
+          <div class="day-card">
+            <div class="toggle-box" style="margin-bottom:10px;">
+              <input type="checkbox" id="trabajaLunesViernes">
+              <label for="trabajaLunesViernes" style="margin:0;">Trabaja de lunes a viernes *</label>
             </div>
 
-            <div id="bloqueCorrido">
-              <div class="grid-2">
-                <div class="field-group">
-                  <label for="horarioDesde">Horario desde *</label>
-                  <select id="horarioDesde">
-                    <option value="">Seleccionar</option>
-                    <option>06:00</option><option>06:30</option>
-                    <option>07:00</option><option>07:30</option>
-                    <option>08:00</option><option>08:30</option>
-                    <option>09:00</option><option>09:30</option>
-                    <option>10:00</option><option>10:30</option>
-                    <option>11:00</option><option>11:30</option>
-                    <option>12:00</option><option>12:30</option>
-                    <option>13:00</option><option>13:30</option>
-                    <option>14:00</option><option>14:30</option>
-                    <option>15:00</option><option>15:30</option>
-                    <option>16:00</option><option>16:30</option>
-                    <option>17:00</option><option>17:30</option>
-                    <option>18:00</option><option>18:30</option>
-                    <option>19:00</option><option>19:30</option>
-                    <option>20:00</option><option>20:30</option>
-                    <option>21:00</option><option>21:30</option>
-                    <option>22:00</option>
-                  </select>
-                </div>
+            <div id="bloqueLunesViernes" class="hidden">
+              <div class="day-card-title">Horario de lunes a viernes</div>
 
-                <div class="field-group">
-                  <label for="horarioHasta">Horario hasta *</label>
-                  <select id="horarioHasta">
-                    <option value="">Seleccionar</option>
-                    <option>06:00</option><option>06:30</option>
-                    <option>07:00</option><option>07:30</option>
-                    <option>08:00</option><option>08:30</option>
-                    <option>09:00</option><option>09:30</option>
-                    <option>10:00</option><option>10:30</option>
-                    <option>11:00</option><option>11:30</option>
-                    <option>12:00</option><option>12:30</option>
-                    <option>13:00</option><option>13:30</option>
-                    <option>14:00</option><option>14:30</option>
-                    <option>15:00</option><option>15:30</option>
-                    <option>16:00</option><option>16:30</option>
-                    <option>17:00</option><option>17:30</option>
-                    <option>18:00</option><option>18:30</option>
-                    <option>19:00</option><option>19:30</option>
-                    <option>20:00</option><option>20:30</option>
-                    <option>21:00</option><option>21:30</option>
-                    <option>22:00</option>
-                  </select>
-                </div>
+              <div class="toggle-box">
+                <input type="checkbox" id="lvHorarioCorrido" checked>
+                <label for="lvHorarioCorrido" style="margin:0;">Horario corrido</label>
               </div>
-            </div>
 
-            <div id="bloqueCortado" class="hidden">
-              <div class="grid-2">
-                <div class="field-group">
-                  <label for="mananaDesde">Horario matutino desde *</label>
-                  <select id="mananaDesde">
-                    <option value="">Seleccionar</option>
-                    <option>06:00</option><option>06:30</option>
-                    <option>07:00</option><option>07:30</option>
-                    <option>08:00</option><option>08:30</option>
-                    <option>09:00</option><option>09:30</option>
-                    <option>10:00</option><option>10:30</option>
-                    <option>11:00</option><option>11:30</option>
-                    <option>12:00</option><option>12:30</option>
-                  </select>
-                </div>
-
-                <div class="field-group">
-                  <label for="mananaHasta">Horario matutino hasta *</label>
-                  <select id="mananaHasta">
-                    <option value="">Seleccionar</option>
-                    <option>06:00</option><option>06:30</option>
-                    <option>07:00</option><option>07:30</option>
-                    <option>08:00</option><option>08:30</option>
-                    <option>09:00</option><option>09:30</option>
-                    <option>10:00</option><option>10:30</option>
-                    <option>11:00</option><option>11:30</option>
-                    <option>12:00</option><option>12:30</option>
-                  </select>
+              <div id="lvCorrido">
+                <div class="grid-2">
+                  <div class="field-group">
+                    <label for="lvDesde">Horario desde</label>
+                    <select id="lvDesde"></select>
+                  </div>
+                  <div class="field-group">
+                    <label for="lvHasta">Horario hasta</label>
+                    <select id="lvHasta"></select>
+                  </div>
                 </div>
               </div>
 
-              <div class="grid-2">
-                <div class="field-group">
-                  <label for="tardeDesde">Horario vespertino desde *</label>
-                  <select id="tardeDesde">
-                    <option value="">Seleccionar</option>
-                    <option>13:00</option><option>13:30</option>
-                    <option>14:00</option><option>14:30</option>
-                    <option>15:00</option><option>15:30</option>
-                    <option>16:00</option><option>16:30</option>
-                    <option>17:00</option><option>17:30</option>
-                    <option>18:00</option><option>18:30</option>
-                    <option>19:00</option><option>19:30</option>
-                    <option>20:00</option><option>20:30</option>
-                    <option>21:00</option><option>21:30</option>
-                    <option>22:00</option>
-                  </select>
+              <div id="lvDoble" class="hidden">
+                <div class="grid-2">
+                  <div class="field-group">
+                    <label for="lvMananaDesde">Mañana desde</label>
+                    <select id="lvMananaDesde"></select>
+                  </div>
+                  <div class="field-group">
+                    <label for="lvMananaHasta">Mañana hasta</label>
+                    <select id="lvMananaHasta"></select>
+                  </div>
                 </div>
 
-                <div class="field-group">
-                  <label for="tardeHasta">Horario vespertino hasta *</label>
-                  <select id="tardeHasta">
-                    <option value="">Seleccionar</option>
-                    <option>13:00</option><option>13:30</option>
-                    <option>14:00</option><option>14:30</option>
-                    <option>15:00</option><option>15:30</option>
-                    <option>16:00</option><option>16:30</option>
-                    <option>17:00</option><option>17:30</option>
-                    <option>18:00</option><option>18:30</option>
-                    <option>19:00</option><option>19:30</option>
-                    <option>20:00</option><option>20:30</option>
-                    <option>21:00</option><option>21:30</option>
-                    <option>22:00</option>
-                  </select>
+                <div class="grid-2">
+                  <div class="field-group">
+                    <label for="lvTardeDesde">Tarde desde</label>
+                    <select id="lvTardeDesde"></select>
+                  </div>
+                  <div class="field-group">
+                    <label for="lvTardeHasta">Tarde hasta</label>
+                    <select id="lvTardeHasta"></select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="day-card">
+            <div class="toggle-box" style="margin-bottom:10px;">
+              <input type="checkbox" id="trabajaSabado">
+              <label for="trabajaSabado" style="margin:0;">Trabaja los sábados</label>
+            </div>
+
+            <div id="bloqueSabado" class="hidden">
+              <div class="day-card-title">Horario del sábado</div>
+
+              <div class="toggle-box">
+                <input type="checkbox" id="sabadoHorarioCorrido" checked>
+                <label for="sabadoHorarioCorrido" style="margin:0;">Horario corrido</label>
+              </div>
+
+              <div id="sabadoCorrido">
+                <div class="grid-2">
+                  <div class="field-group">
+                    <label for="sabadoDesde">Horario desde</label>
+                    <select id="sabadoDesde"></select>
+                  </div>
+                  <div class="field-group">
+                    <label for="sabadoHasta">Horario hasta</label>
+                    <select id="sabadoHasta"></select>
+                  </div>
+                </div>
+              </div>
+
+              <div id="sabadoDoble" class="hidden">
+                <div class="grid-2">
+                  <div class="field-group">
+                    <label for="sabadoMananaDesde">Mañana desde</label>
+                    <select id="sabadoMananaDesde"></select>
+                  </div>
+                  <div class="field-group">
+                    <label for="sabadoMananaHasta">Mañana hasta</label>
+                    <select id="sabadoMananaHasta"></select>
+                  </div>
+                </div>
+
+                <div class="grid-2">
+                  <div class="field-group">
+                    <label for="sabadoTardeDesde">Tarde desde</label>
+                    <select id="sabadoTardeDesde"></select>
+                  </div>
+                  <div class="field-group">
+                    <label for="sabadoTardeHasta">Tarde hasta</label>
+                    <select id="sabadoTardeHasta"></select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="day-card">
+            <div class="toggle-box" style="margin-bottom:10px;">
+              <input type="checkbox" id="trabajaDomingo">
+              <label for="trabajaDomingo" style="margin:0;">Trabaja los domingos</label>
+            </div>
+
+            <div id="bloqueDomingo" class="hidden">
+              <div class="day-card-title">Horario del domingo</div>
+
+              <div class="toggle-box">
+                <input type="checkbox" id="domingoHorarioCorrido" checked>
+                <label for="domingoHorarioCorrido" style="margin:0;">Horario corrido</label>
+              </div>
+
+              <div id="domingoCorrido">
+                <div class="grid-2">
+                  <div class="field-group">
+                    <label for="domingoDesde">Horario desde</label>
+                    <select id="domingoDesde"></select>
+                  </div>
+                  <div class="field-group">
+                    <label for="domingoHasta">Horario hasta</label>
+                    <select id="domingoHasta"></select>
+                  </div>
+                </div>
+              </div>
+
+              <div id="domingoDoble" class="hidden">
+                <div class="grid-2">
+                  <div class="field-group">
+                    <label for="domingoMananaDesde">Mañana desde</label>
+                    <select id="domingoMananaDesde"></select>
+                  </div>
+                  <div class="field-group">
+                    <label for="domingoMananaHasta">Mañana hasta</label>
+                    <select id="domingoMananaHasta"></select>
+                  </div>
+                </div>
+
+                <div class="grid-2">
+                  <div class="field-group">
+                    <label for="domingoTardeDesde">Tarde desde</label>
+                    <select id="domingoTardeDesde"></select>
+                  </div>
+                  <div class="field-group">
+                    <label for="domingoTardeHasta">Tarde hasta</label>
+                    <select id="domingoTardeHasta"></select>
+                  </div>
                 </div>
               </div>
             </div>
@@ -744,7 +877,7 @@
           </div>
 
           <div class="field-group">
-            <label for="factura">¿Hace factura? *</label>
+            <label for="factura">¿Trabajan con factura? *</label>
             <select id="factura" required>
               <option value="">Seleccionar</option>
               <option value="si">Sí</option>
@@ -767,11 +900,18 @@
           <div class="card-info">
             <div id="cardName" class="card-name">Nombre del comercio</div>
             <div id="cardJob" class="card-job">Rubro</div>
-            <div class="card-status">Abierto ahora</div>
+            <div id="cardStatus" class="card-status available">Disponible ahora</div>
           </div>
         </div>
 
         <div id="cardDesc" class="card-desc">Descripción del comercio</div>
+
+        <div id="cardLocation" class="card-location">
+          <svg class="pin-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 22s7-6.2 7-13a7 7 0 1 0-14 0c0 6.8 7 13 7 13Zm0-9.5A3.5 3.5 0 1 1 12 5a3.5 3.5 0 0 1 0 7.5Z"/>
+          </svg>
+          <span id="cardDireccionTexto">Dirección</span>
+        </div>
 
         <div id="cardMeta" class="card-meta"></div>
         <div id="cardTags" class="card-tags"></div>
@@ -780,11 +920,15 @@
           <button type="button" id="cardBtnWhatsapp" class="card-btn-wa">WhatsApp</button>
           <button type="button" id="cardBtnCall" class="card-btn-call">Llamar</button>
         </div>
+
+        <div id="altButtons" class="alt-buttons"></div>
       </div>
     </div>
   </div>
 
   <script>
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxvsnMf0qjPLEXTj9NULmzdu5lNXW-d9TYzsGzbB5spSgT_vM4ez_XegUeaBOZfmXVR/exec";
+
     const form = document.getElementById('comercioForm');
     const fotoCamara = document.getElementById('fotoCamara');
     const fotoGaleria = document.getElementById('fotoGaleria');
@@ -796,17 +940,32 @@
     const previewCard = document.getElementById('previewCard');
     const cardBtnWhatsapp = document.getElementById('cardBtnWhatsapp');
     const cardBtnCall = document.getElementById('cardBtnCall');
-    const horarioCorrido = document.getElementById('horarioCorrido');
-    const bloqueCorrido = document.getElementById('bloqueCorrido');
-    const bloqueCortado = document.getElementById('bloqueCortado');
     const categoriaPrincipal = document.getElementById('categoriaPrincipal');
     const rubroComercial = document.getElementById('rubroComercial');
     const otroRubroGroup = document.getElementById('otroRubroGroup');
     const otroRubro = document.getElementById('otroRubro');
+    const toggleAlternativos = document.getElementById('toggleAlternativos');
+    const bloqueAlternativos = document.getElementById('bloqueAlternativos');
+
+    const trabajaLunesViernes = document.getElementById('trabajaLunesViernes');
+    const bloqueLunesViernes = document.getElementById('bloqueLunesViernes');
+    const lvHorarioCorrido = document.getElementById('lvHorarioCorrido');
+    const lvCorrido = document.getElementById('lvCorrido');
+    const lvDoble = document.getElementById('lvDoble');
+
+    const trabajaSabado = document.getElementById('trabajaSabado');
+    const bloqueSabado = document.getElementById('bloqueSabado');
+    const sabadoHorarioCorrido = document.getElementById('sabadoHorarioCorrido');
+    const sabadoCorrido = document.getElementById('sabadoCorrido');
+    const sabadoDoble = document.getElementById('sabadoDoble');
+
+    const trabajaDomingo = document.getElementById('trabajaDomingo');
+    const bloqueDomingo = document.getElementById('bloqueDomingo');
+    const domingoHorarioCorrido = document.getElementById('domingoHorarioCorrido');
+    const domingoCorrido = document.getElementById('domingoCorrido');
+    const domingoDoble = document.getElementById('domingoDoble');
 
     let archivoFoto = null;
-
-    const SCRIPT_URL = https://script.google.com/macros/s/AKfycbxvsnMf0qjPLEXTj9NULmzdu5lNXW-d9TYzsGzbB5spSgT_vM4ez_XegUeaBOZfmXVR/exec
 
     const rubrosPorCategoria = {
       "Servicios para el hogar": ["Ferretería","Mueblería","Decoración","Pinturería","Materiales para el hogar","Tapicería","Otro"],
@@ -857,31 +1016,52 @@
       return Array.from(checks).map(c => c.value);
     }
 
-    function actualizarModoHorario() {
-      if (horarioCorrido.checked) {
-        bloqueCorrido.classList.remove('hidden');
-        bloqueCortado.classList.add('hidden');
-      } else {
-        bloqueCorrido.classList.add('hidden');
-        bloqueCortado.classList.remove('hidden');
-      }
+    function crearOpcionesHorarios(selectId) {
+      const select = document.getElementById(selectId);
+      if (!select) return;
+      select.innerHTML = '<option value="">Seleccionar</option>';
+
+      const horas = [
+        "06:00","06:30","07:00","07:30","08:00","08:30","09:00","09:30",
+        "10:00","10:30","11:00","11:30","12:00","12:30","13:00","13:30",
+        "14:00","14:30","15:00","15:30","16:00","16:30","17:00","17:30",
+        "18:00","18:30","19:00","19:30","20:00","20:30","21:00","21:30","22:00"
+      ];
+
+      horas.forEach(hora => {
+        const option = document.createElement('option');
+        option.value = hora;
+        option.textContent = hora;
+        select.appendChild(option);
+      });
     }
 
-    function obtenerHorarioFinal() {
-      if (horarioCorrido.checked) {
-        const desde = valor('horarioDesde');
-        const hasta = valor('horarioHasta');
-        if (!desde || !hasta) return '';
-        return desde + '-' + hasta;
-      } else {
-        const mananaDesde = valor('mananaDesde');
-        const mananaHasta = valor('mananaHasta');
-        const tardeDesde = valor('tardeDesde');
-        const tardeHasta = valor('tardeHasta');
-        if (!mananaDesde || !mananaHasta || !tardeDesde || !tardeHasta) return '';
-        return mananaDesde + '-' + mananaHasta + ' / ' + tardeDesde + '-' + tardeHasta;
-      }
+    [
+      'lvDesde','lvHasta','lvMananaDesde','lvMananaHasta','lvTardeDesde','lvTardeHasta',
+      'sabadoDesde','sabadoHasta','sabadoMananaDesde','sabadoMananaHasta','sabadoTardeDesde','sabadoTardeHasta',
+      'domingoDesde','domingoHasta','domingoMananaDesde','domingoMananaHasta','domingoTardeDesde','domingoTardeHasta'
+    ].forEach(crearOpcionesHorarios);
+
+    function procesarFoto(file) {
+      if (!file) return;
+      archivoFoto = file;
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        previewImg.src = e.target.result;
+        previewImg.style.display = 'block';
+        previewPlaceholder.style.display = 'none';
+      };
+      reader.readAsDataURL(file);
     }
+
+    fotoCamara.addEventListener('change', function () {
+      procesarFoto(this.files[0]);
+    });
+
+    fotoGaleria.addEventListener('change', function () {
+      procesarFoto(this.files[0]);
+    });
 
     function actualizarRubros() {
       const categoria = categoriaPrincipal.value;
@@ -923,6 +1103,144 @@
       return valor('rubroComercial');
     }
 
+    function toggleBloque(check, bloque) {
+      bloque.classList.toggle('hidden', !check.checked);
+    }
+
+    function actualizarModoHorario(check, bloqueCorridoRef, bloqueDobleRef) {
+      if (check.checked) {
+        bloqueCorridoRef.classList.remove('hidden');
+        bloqueDobleRef.classList.add('hidden');
+      } else {
+        bloqueCorridoRef.classList.add('hidden');
+        bloqueDobleRef.classList.remove('hidden');
+      }
+    }
+
+    toggleAlternativos.addEventListener('change', function() {
+      toggleBloque(toggleAlternativos, bloqueAlternativos);
+    });
+
+    trabajaLunesViernes.addEventListener('change', function() {
+      toggleBloque(trabajaLunesViernes, bloqueLunesViernes);
+    });
+
+    trabajaSabado.addEventListener('change', function() {
+      toggleBloque(trabajaSabado, bloqueSabado);
+    });
+
+    trabajaDomingo.addEventListener('change', function() {
+      toggleBloque(trabajaDomingo, bloqueDomingo);
+    });
+
+    lvHorarioCorrido.addEventListener('change', function() {
+      actualizarModoHorario(lvHorarioCorrido, lvCorrido, lvDoble);
+    });
+
+    sabadoHorarioCorrido.addEventListener('change', function() {
+      actualizarModoHorario(sabadoHorarioCorrido, sabadoCorrido, sabadoDoble);
+    });
+
+    domingoHorarioCorrido.addEventListener('change', function() {
+      actualizarModoHorario(domingoHorarioCorrido, domingoCorrido, domingoDoble);
+    });
+
+    categoriaPrincipal.addEventListener('change', actualizarRubros);
+    rubroComercial.addEventListener('change', actualizarOtroRubro);
+
+    actualizarRubros();
+    actualizarModoHorario(lvHorarioCorrido, lvCorrido, lvDoble);
+    actualizarModoHorario(sabadoHorarioCorrido, sabadoCorrido, sabadoDoble);
+    actualizarModoHorario(domingoHorarioCorrido, domingoCorrido, domingoDoble);
+
+    function validarHorarioGrupo(prefix, corridoCheckboxId) {
+      const corrido = document.getElementById(corridoCheckboxId).checked;
+
+      if (corrido) {
+        return !!(valor(prefix + 'Desde') && valor(prefix + 'Hasta'));
+      }
+
+      return !!(
+        valor(prefix + 'MananaDesde') &&
+        valor(prefix + 'MananaHasta') &&
+        valor(prefix + 'TardeDesde') &&
+        valor(prefix + 'TardeHasta')
+      );
+    }
+
+    function obtenerTextoHorarioGrupo(prefix, corridoCheckboxId) {
+      const corrido = document.getElementById(corridoCheckboxId).checked;
+
+      if (corrido) {
+        const desde = valor(prefix + 'Desde');
+        const hasta = valor(prefix + 'Hasta');
+        if (!desde || !hasta) return '';
+        return desde + '-' + hasta;
+      }
+
+      const mananaDesde = valor(prefix + 'MananaDesde');
+      const mananaHasta = valor(prefix + 'MananaHasta');
+      const tardeDesde = valor(prefix + 'TardeDesde');
+      const tardeHasta = valor(prefix + 'TardeHasta');
+
+      if (!mananaDesde || !mananaHasta || !tardeDesde || !tardeHasta) return '';
+      return mananaDesde + '-' + mananaHasta + ' / ' + tardeDesde + '-' + tardeHasta;
+    }
+
+    function obtenerDiasResumen() {
+      const partes = [];
+      if (trabajaLunesViernes.checked) partes.push('Lun a Vie: ' + obtenerTextoHorarioGrupo('lv', 'lvHorarioCorrido'));
+      if (trabajaSabado.checked) partes.push('Sáb: ' + obtenerTextoHorarioGrupo('sabado', 'sabadoHorarioCorrido'));
+      if (trabajaDomingo.checked) partes.push('Dom: ' + obtenerTextoHorarioGrupo('domingo', 'domingoHorarioCorrido'));
+      return partes;
+    }
+
+    function ahoraDentroDeHorario(prefijo, corridoCheckboxId, horaActual) {
+      const corrido = document.getElementById(corridoCheckboxId).checked;
+
+      if (corrido) {
+        const desde = valor(prefijo + 'Desde');
+        const hasta = valor(prefijo + 'Hasta');
+        if (!desde || !hasta) return false;
+        return horaActual >= desde && horaActual <= hasta;
+      }
+
+      const mananaDesde = valor(prefijo + 'MananaDesde');
+      const mananaHasta = valor(prefijo + 'MananaHasta');
+      const tardeDesde = valor(prefijo + 'TardeDesde');
+      const tardeHasta = valor(prefijo + 'TardeHasta');
+
+      const enManana = mananaDesde && mananaHasta && horaActual >= mananaDesde && horaActual <= mananaHasta;
+      const enTarde = tardeDesde && tardeHasta && horaActual >= tardeDesde && horaActual <= tardeHasta;
+
+      return !!(enManana || enTarde);
+    }
+
+    function estaDisponibleAhora() {
+      const ahora = new Date();
+      const dia = ahora.getDay(); // 0 domingo, 6 sábado
+      const hh = String(ahora.getHours()).padStart(2, '0');
+      const mm = String(ahora.getMinutes()).padStart(2, '0');
+      const horaActual = hh + ':' + mm;
+
+      if (dia >= 1 && dia <= 5) {
+        if (!trabajaLunesViernes.checked) return false;
+        return ahoraDentroDeHorario('lv', 'lvHorarioCorrido', horaActual);
+      }
+
+      if (dia === 6) {
+        if (!trabajaSabado.checked) return false;
+        return ahoraDentroDeHorario('sabado', 'sabadoHorarioCorrido', horaActual);
+      }
+
+      if (dia === 0) {
+        if (!trabajaDomingo.checked) return false;
+        return ahoraDentroDeHorario('domingo', 'domingoHorarioCorrido', horaActual);
+      }
+
+      return false;
+    }
+
     function validarFormulario() {
       limpiarMensajes();
       const faltantes = [];
@@ -934,21 +1252,39 @@
       if (valor('rubroComercial') === 'Otro' && !valor('otroRubro')) faltantes.push("Especificá cuál");
       if (!valor('descripcion')) faltantes.push("Descripción");
       if (!valor('direccion')) faltantes.push("Dirección");
-      if (!valor('factura')) faltantes.push("Factura");
+      if (!valor('whatsapp')) faltantes.push("WhatsApp");
+      if (!valor('telefonoAlternativo')) faltantes.push("Teléfono");
+      if (!valor('factura')) faltantes.push("¿Trabajan con factura?");
+      if (obtenerMediosPagoSeleccionados().length === 0) faltantes.push("Al menos un medio de pago");
 
-      const whatsapp = valor('whatsapp');
-      const telefonoAlternativo = valor('telefonoAlternativo');
-
-      if (!whatsapp && !telefonoAlternativo) {
-        faltantes.push("Al menos una vía de contacto: WhatsApp o teléfono alternativo");
+      if (!trabajaLunesViernes.checked && !trabajaSabado.checked && !trabajaDomingo.checked) {
+        faltantes.push("Al menos un bloque de días de trabajo");
       }
 
-      if (obtenerMediosPagoSeleccionados().length === 0) {
-        faltantes.push("Al menos un medio de pago");
+      if (trabajaLunesViernes.checked && !validarHorarioGrupo('lv', 'lvHorarioCorrido')) {
+        faltantes.push("Horario completo de lunes a viernes");
       }
 
-      if (!obtenerHorarioFinal()) {
-        faltantes.push(horarioCorrido.checked ? "Horario corrido completo" : "Horario matutino y vespertino completos");
+      if (trabajaSabado.checked && !validarHorarioGrupo('sabado', 'sabadoHorarioCorrido')) {
+        faltantes.push("Horario completo de sábado");
+      }
+
+      if (trabajaDomingo.checked && !validarHorarioGrupo('domingo', 'domingoHorarioCorrido')) {
+        faltantes.push("Horario completo de domingo");
+      }
+
+      if (toggleAlternativos.checked) {
+        const alt1 = valor('whatsappAlt1');
+        const alt2 = valor('whatsappAlt2');
+        const nom1 = valor('nombreWhatsappAlt1');
+        const nom2 = valor('nombreWhatsappAlt2');
+
+        if (!alt1 && !alt2) {
+          faltantes.push("Al menos un WhatsApp alternativo si marcás la opción");
+        }
+
+        if (alt1 && !nom1) faltantes.push("Nombre / referencia del WhatsApp alternativo 1");
+        if (alt2 && !nom2) faltantes.push("Nombre / referencia del WhatsApp alternativo 2");
       }
 
       if (faltantes.length > 0) {
@@ -968,33 +1304,15 @@
       });
     }
 
-    function procesarFoto(file) {
-      if (!file) return;
-      archivoFoto = file;
-
-      const reader = new FileReader();
-      reader.onload = function(e) {
-        previewImg.src = e.target.result;
-        previewImg.style.display = 'block';
-        previewPlaceholder.style.display = 'none';
-      };
-      reader.readAsDataURL(file);
+    function abrirWhatsapp(numero) {
+      const limpio = numero.replace(/\D/g, '');
+      window.open('https://wa.me/54' + limpio, '_blank');
     }
 
-    fotoCamara.addEventListener('change', function () {
-      procesarFoto(this.files[0]);
-    });
-
-    fotoGaleria.addEventListener('change', function () {
-      procesarFoto(this.files[0]);
-    });
-
-    categoriaPrincipal.addEventListener('change', actualizarRubros);
-    rubroComercial.addEventListener('change', actualizarOtroRubro);
-    horarioCorrido.addEventListener('change', actualizarModoHorario);
-
-    actualizarModoHorario();
-    actualizarRubros();
+    function abrirMaps(direccion) {
+      const url = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(direccion);
+      window.open(url, '_blank');
+    }
 
     btnPreview.addEventListener('click', function () {
       if (!validarFormulario()) return;
@@ -1005,23 +1323,30 @@
       const direccion = valor('direccion');
       const factura = valor('factura');
       const whatsapp = valor('whatsapp');
-      const telefonoAlternativo = valor('telefonoAlternativo');
-      const horario = obtenerHorarioFinal();
+      const telefono = valor('telefonoAlternativo');
       const mediosPago = obtenerMediosPagoSeleccionados();
       const categoria = valor('categoriaPrincipal');
+      const disponible = estaDisponibleAhora();
 
       document.getElementById('cardName').textContent = nombreComercio;
-      document.getElementById('cardJob').textContent = rubroFinal + ' · ' + horario;
+      document.getElementById('cardJob').textContent = rubroFinal;
       document.getElementById('cardDesc').textContent = descripcion;
-      document.getElementById('cardAvatar').src = previewImg.src;
+      document.getElementById('cardAvatar').src = previewImg.src || '';
+      document.getElementById('cardDireccionTexto').textContent = direccion;
+
+      const cardStatus = document.getElementById('cardStatus');
+      cardStatus.textContent = disponible ? 'Disponible ahora' : 'No disponible';
+      cardStatus.className = 'card-status ' + (disponible ? 'available' : 'unavailable');
 
       const metaContainer = document.getElementById('cardMeta');
       metaContainer.innerHTML = '';
 
-      const chipDireccion = document.createElement('div');
-      chipDireccion.className = 'card-chip';
-      chipDireccion.textContent = direccion;
-      metaContainer.appendChild(chipDireccion);
+      obtenerDiasResumen().forEach(item => {
+        const chip = document.createElement('div');
+        chip.className = 'card-chip';
+        chip.textContent = item;
+        metaContainer.appendChild(chip);
+      });
 
       const tagsContainer = document.getElementById('cardTags');
       tagsContainer.innerHTML = '';
@@ -1040,24 +1365,48 @@
 
       const facturaTag = document.createElement('div');
       facturaTag.className = 'card-tag';
-      facturaTag.textContent = factura === 'si' ? 'Hace factura' : 'Sin factura';
+      facturaTag.textContent = factura === 'si' ? 'Trabajan con factura' : 'No trabajan con factura';
       tagsContainer.appendChild(facturaTag);
 
       cardBtnWhatsapp.onclick = function () {
-        if (whatsapp) {
-          window.open('https://wa.me/54' + whatsapp.replace(/\D/g, ''), '_blank');
-        } else {
-          alert('No dispone de WhatsApp');
-        }
+        abrirWhatsapp(whatsapp);
       };
 
       cardBtnCall.onclick = function () {
-        if (telefonoAlternativo) {
-          window.location.href = 'tel:' + telefonoAlternativo.replace(/\D/g, '');
-        } else {
-          alert('No dispone de teléfono alternativo');
-        }
+        window.location.href = 'tel:' + telefono.replace(/\D/g, '');
       };
+
+      document.getElementById('cardLocation').onclick = function () {
+        abrirMaps(direccion);
+      };
+
+      const altButtons = document.getElementById('altButtons');
+      altButtons.innerHTML = '';
+
+      if (toggleAlternativos.checked) {
+        const alt1 = valor('whatsappAlt1');
+        const alt2 = valor('whatsappAlt2');
+        const nom1 = valor('nombreWhatsappAlt1');
+        const nom2 = valor('nombreWhatsappAlt2');
+
+        if (alt1 && nom1) {
+          const btn1 = document.createElement('button');
+          btn1.type = 'button';
+          btn1.className = 'card-btn-alt';
+          btn1.textContent = 'WhatsApp ' + nom1;
+          btn1.onclick = function() { abrirWhatsapp(alt1); };
+          altButtons.appendChild(btn1);
+        }
+
+        if (alt2 && nom2) {
+          const btn2 = document.createElement('button');
+          btn2.type = 'button';
+          btn2.className = 'card-btn-alt';
+          btn2.textContent = 'WhatsApp ' + nom2;
+          btn2.onclick = function() { abrirWhatsapp(alt2); };
+          altButtons.appendChild(btn2);
+        }
+      }
 
       previewCard.classList.add('show');
       previewCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -1086,7 +1435,20 @@
           direccion: valor('direccion'),
           whatsapp: valor('whatsapp'),
           telefonoAlternativo: valor('telefonoAlternativo'),
-          horario: obtenerHorarioFinal(),
+          whatsappAlt1: valor('whatsappAlt1'),
+          nombreWhatsappAlt1: valor('nombreWhatsappAlt1'),
+          whatsappAlt2: valor('whatsappAlt2'),
+          nombreWhatsappAlt2: valor('nombreWhatsappAlt2'),
+          diasTrabajo: {
+            lunesViernes: trabajaLunesViernes.checked,
+            sabado: trabajaSabado.checked,
+            domingo: trabajaDomingo.checked
+          },
+          horarios: {
+            lunesViernes: obtenerTextoHorarioGrupo('lv', 'lvHorarioCorrido'),
+            sabado: obtenerTextoHorarioGrupo('sabado', 'sabadoHorarioCorrido'),
+            domingo: obtenerTextoHorarioGrupo('domingo', 'domingoHorarioCorrido')
+          },
           mediosPago: obtenerMediosPagoSeleccionados().join(', '),
           factura: valor('factura'),
           fotoBase64: fotoBase64
@@ -1094,7 +1456,9 @@
 
         const response = await fetch(SCRIPT_URL, {
           method: 'POST',
-          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          headers: {
+            'Content-Type': 'text/plain;charset=utf-8'
+          },
           body: JSON.stringify(payload)
         });
 
@@ -1113,8 +1477,19 @@
           previewImg.style.display = 'none';
           previewPlaceholder.style.display = 'block';
           previewCard.classList.remove('show');
-          horarioCorrido.checked = true;
-          actualizarModoHorario();
+
+          toggleBloque(toggleAlternativos, bloqueAlternativos);
+          toggleBloque(trabajaLunesViernes, bloqueLunesViernes);
+          toggleBloque(trabajaSabado, bloqueSabado);
+          toggleBloque(trabajaDomingo, bloqueDomingo);
+
+          lvHorarioCorrido.checked = true;
+          sabadoHorarioCorrido.checked = true;
+          domingoHorarioCorrido.checked = true;
+
+          actualizarModoHorario(lvHorarioCorrido, lvCorrido, lvDoble);
+          actualizarModoHorario(sabadoHorarioCorrido, sabadoCorrido, sabadoDoble);
+          actualizarModoHorario(domingoHorarioCorrido, domingoCorrido, domingoDoble);
           actualizarRubros();
         } else {
           mostrarError('No se pudo guardar la solicitud.<br><br>Detalle: ' + (result.error || 'Error desconocido'));
@@ -1129,4 +1504,4 @@
     });
   </script>
 </body>
-</html>
+</html
