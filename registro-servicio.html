@@ -698,10 +698,9 @@
               <label class="checkbox-item"><input type="checkbox" name="mediosPago" value="Efectivo"> Efectivo</label>
               <label class="checkbox-item"><input type="checkbox" name="mediosPago" value="Transferencia"> Transferencia</label>
               <label class="checkbox-item"><input type="checkbox" name="mediosPago" value="Débito"> Débito</label>
-              <label class="checkbox-item"><input type="checkbox" name="mediosPago" value="Crédito"> Tarjetas de Crédito</label>
-             </div>
+              <label class="checkbox-item"><input type="checkbox" name="mediosPago" value="Tarjeta de crédito"> Tarjeta de crédito</label>
+            </div>
           </div>
-            
 
           <div class="grid-2">
             <div class="field-group">
@@ -772,126 +771,22 @@
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzaEZ47CNDLhtlJCA70lOMBesQOWqFwGbfO14N3Gmi9zRZynR608cub3YMgglQ2Wo5P/exec";
 
     const rubrosPorCategoria = {
-      "Servicios para el hogar": [
-        "Electricidad",
-        "Plomería",
-        "Cerrajería",
-        "Jardinería",
-        "Limpieza",
-        "Mantenimiento general",
-        "Climatización",
-        "Otro"
-      ],
-      "Construcción": [
-        "Albañilería",
-        "Carpintería",
-        "Herrería",
-        "Pintura",
-        "Construcción en seco / Durlock",
-        "Soldadura",
-        "Techos y zinguería",
-        "Otro"
-      ],
-      "Gastronomía": [
-        "Cocina por encargo",
-        "Pastelería",
-        "Panificados",
-        "Catering",
-        "Comidas rápidas",
-        "Otro"
-      ],
-      "Salud": [
-        "Medicina",
-        "Enfermería",
-        "Kinesiología",
-        "Psicología",
-        "Asistencia terapéutica",
-        "Cuidados personales",
-        "Veterinaria",
-        "Otro"
-      ],
-      "Estética y bienestar": [
-        "Peluquería",
-        "Manicuría",
-        "Maquillaje",
-        "Masajes",
-        "Entrenamiento personalizado",
-        "Otro"
-      ],
-      "Educación": [
-        "Clases particulares",
-        "Apoyo escolar",
-        "Idiomas",
-        "Capacitación técnica",
-        "Profesorado",
-        "Otro"
-      ],
-      "Tecnología": [
-        "Reparación de PC",
-        "Reparación de celulares",
-        "Servicio técnico",
-        "Redes y conectividad",
-        "Diseño gráfico",
-        "Otro"
-      ],
-      "Profesionales": [
-        "Abogacía",
-        "Arquitectura",
-        "Contabilidad",
-        "Diseño y comunicación",
-        "Asesoramiento profesional",
-        "Otro"
-      ],
-      "Oficios": [
-        "Chofer particular",
-        "Fletes y mudanzas",
-        "Seguridad privada",
-        "Mecánica",
-        "Oficios varios",
-        "Otro"
-      ],
-      "Automotor": [
-        "Mecánica automotor",
-        "Gomería",
-        "Lavado vehicular",
-        "Repuestos",
-        "Accesorios",
-        "Otro"
-      ],
-      "Comercios": [
-        "Atención comercial",
-        "Ventas",
-        "Reposición",
-        "Otro"
-      ],
-      "Mascotas": [
-        "Paseo",
-        "Cuidado",
-        "Adiestramiento",
-        "Otro"
-      ],
-      "Transporte y logística": [
-        "Traslados",
-        "Mudanzas",
-        "Cadetería",
-        "Logística",
-        "Otro"
-      ],
-      "Deportes y gimnasios": [
-        "Entrenamiento físico",
-        "Preparación física",
-        "Clases deportivas",
-        "Otro"
-      ],
-      "Empresas y servicios": [
-        "Servicios empresariales",
-        "Administración",
-        "Limpieza empresarial",
-        "Otro"
-      ],
-      "Otros rubros": [
-        "Otro"
-      ]
+      "Servicios para el hogar": ["Electricidad","Plomería","Cerrajería","Jardinería","Limpieza","Mantenimiento general","Climatización","Tapicería","Otro"],
+      "Construcción": ["Albañilería","Carpintería","Herrería","Pintura","Construcción en seco / Durlock","Soldadura","Techos y zinguería","Otro"],
+      "Gastronomía": ["Cocina por encargo","Pastelería","Panificados","Catering","Comidas rápidas","Otro"],
+      "Salud": ["Medicina","Enfermería","Kinesiología","Psicología","Asistencia terapéutica","Cuidados personales","Veterinaria","Otro"],
+      "Estética y bienestar": ["Peluquería","Manicuría","Maquillaje","Masajes","Entrenamiento personalizado","Otro"],
+      "Educación": ["Clases particulares","Apoyo escolar","Idiomas","Capacitación técnica","Profesorado","Otro"],
+      "Tecnología": ["Reparación de PC","Reparación de celulares","Servicio técnico","Redes y conectividad","Diseño gráfico","Sublimación","Otro"],
+      "Profesionales": ["Abogacía","Arquitectura","Contabilidad","Diseño y comunicación","Asesoramiento profesional","Otro"],
+      "Oficios": ["Chofer particular","Fletes y mudanzas","Seguridad privada","Mecánica","Oficios varios","Otro"],
+      "Automotor": ["Mecánica automotor","Gomería","Lavado vehicular","Repuestos","Accesorios","Polarizado","Otro"],
+      "Comercios": ["Atención comercial","Ventas","Reposición","Otro"],
+      "Mascotas": ["Paseo","Cuidado","Adiestramiento","Otro"],
+      "Transporte y logística": ["Traslados","Mudanzas","Cadetería","Logística","Otro"],
+      "Deportes y gimnasios": ["Entrenamiento físico","Preparación física","Clases deportivas","Otro"],
+      "Empresas y servicios": ["Servicios empresariales","Administración","Limpieza empresarial","Otro"],
+      "Otros rubros": ["Otro"]
     };
 
     function valor(id) {
@@ -900,11 +795,7 @@
 
     function capitalizar(texto) {
       if (!texto) return "";
-      return texto
-        .toLowerCase()
-        .split(" ")
-        .map(p => p.charAt(0).toUpperCase() + p.slice(1))
-        .join(" ");
+      return texto.toLowerCase().split(" ").map(p => p.charAt(0).toUpperCase() + p.slice(1)).join(" ");
     }
 
     function limpiarMensajes() {
@@ -954,7 +845,6 @@
         const mananaHasta = valor('mananaHasta');
         const tardeDesde = valor('tardeDesde');
         const tardeHasta = valor('tardeHasta');
-
         if (!mananaDesde || !mananaHasta || !tardeDesde || !tardeHasta) return '';
         return mananaDesde + '-' + mananaHasta + ' / ' + tardeDesde + '-' + tardeHasta;
       }
@@ -996,15 +886,12 @@
     }
 
     function obtenerRubroFinal() {
-      if (rubroEspecialidad.value === 'Otro') {
-        return valor('otroRubro');
-      }
+      if (rubroEspecialidad.value === 'Otro') return valor('otroRubro');
       return valor('rubroEspecialidad');
     }
 
     function validarFormulario() {
       limpiarMensajes();
-
       const faltantes = [];
 
       if (!foto.files || !foto.files.length) faltantes.push("Foto personal");
@@ -1024,17 +911,12 @@
         faltantes.push("Al menos una vía de contacto: WhatsApp o teléfono alternativo");
       }
 
-      const mediosPago = obtenerMediosPagoSeleccionados();
-      if (mediosPago.length === 0) {
+      if (obtenerMediosPagoSeleccionados().length === 0) {
         faltantes.push("Al menos un medio de pago");
       }
 
       if (!obtenerHorarioFinal()) {
-        if (horarioCorrido.checked) {
-          faltantes.push("Horario corrido completo");
-        } else {
-          faltantes.push("Horario matutino y vespertino completos");
-        }
+        faltantes.push(horarioCorrido.checked ? "Horario corrido completo" : "Horario matutino y vespertino completos");
       }
 
       if (faltantes.length > 0) {
@@ -1057,7 +939,6 @@
     foto.addEventListener('change', function () {
       const file = this.files[0];
       if (!file) return;
-
       const reader = new FileReader();
       reader.onload = function(e) {
         previewImg.src = e.target.result;
@@ -1069,8 +950,8 @@
 
     categoriaPrincipal.addEventListener('change', actualizarRubros);
     rubroEspecialidad.addEventListener('change', actualizarOtroRubro);
-
     horarioCorrido.addEventListener('change', actualizarModoHorario);
+
     actualizarModoHorario();
     actualizarRubros();
 
@@ -1134,7 +1015,6 @@
 
     form.addEventListener('submit', async function (e) {
       e.preventDefault();
-
       if (!validarFormulario()) return;
 
       const submitBtn = form.querySelector('.btn-submit');
@@ -1147,6 +1027,7 @@
         const fotoBase64 = file ? await convertirImagenABase64(file) : '';
 
         const payload = {
+          tipo: "servicio",
           nombre: valor('nombre'),
           apellido: valor('apellido'),
           categoriaPrincipal: valor('categoriaPrincipal'),
@@ -1165,9 +1046,7 @@
 
         const response = await fetch(SCRIPT_URL, {
           method: 'POST',
-          headers: {
-            'Content-Type': 'text/plain;charset=utf-8'
-          },
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
           body: JSON.stringify(payload)
         });
 
