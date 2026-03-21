@@ -309,6 +309,11 @@
       color: #fff;
     }
 
+    .btn-submit:disabled {
+      opacity: 0.75;
+      cursor: not-allowed;
+    }
+
     .btn-preview {
       background: #e8eef5;
       color: #24497a;
@@ -476,7 +481,7 @@
       </p>
 
       <div class="notice">
-        Importante: el sistema valida que la ficha esté bien cargada. Si todo está correcto, la solicitud queda lista para continuar con la activación del perfil comercial.
+        Importante: elegí primero la categoría principal. Después seleccioná el rubro. Si no aparece en la lista, usá la opción "Otro" y especificá cuál.
       </div>
 
       <div id="errorBox" class="error-box"></div>
@@ -502,79 +507,51 @@
             <input type="text" id="nombreComercio" required>
           </div>
 
+          <div class="grid-2">
+            <div class="field-group">
+              <label for="categoriaPrincipal">Categoría principal *</label>
+              <select id="categoriaPrincipal" required>
+                <option value="">Seleccionar</option>
+                <option>Servicios para el hogar</option>
+                <option>Construcción</option>
+                <option>Gastronomía</option>
+                <option>Salud</option>
+                <option>Estética y bienestar</option>
+                <option>Educación</option>
+                <option>Tecnología</option>
+                <option>Profesionales</option>
+                <option>Oficios</option>
+                <option>Automotor</option>
+                <option>Comercios</option>
+                <option>Mascotas</option>
+                <option>Transporte y logística</option>
+                <option>Deportes y gimnasios</option>
+                <option>Empresas y servicios</option>
+                <option>Otros rubros</option>
+              </select>
+            </div>
+
+            <div class="field-group">
+              <label for="direccion">Dirección *</label>
+              <input type="text" id="direccion" placeholder="Ej: Av. San Martín 450, Rojas" required>
+            </div>
+          </div>
+
           <div class="field-group">
-            <label for="rubro">Rubro *</label>
-            <select id="rubro" required>
-              <option value="">Seleccionar</option>
-              <option>Accesorios</option>
-              <option>Almacén</option>
-              <option>Artículos para el hogar</option>
-              <option>Autoservicio</option>
-              <option>Bazar</option>
-              <option>Bebidas</option>
-              <option>Bicicletería</option>
-              <option>Calzado</option>
-              <option>Carnicería</option>
-              <option>Casa de comida</option>
-              <option>Cerrajería</option>
-              <option>Construcción</option>
-              <option>Corralón</option>
-              <option>Cotillón</option>
-              <option>Decoración</option>
-              <option>Distribuidora</option>
-              <option>Electrodomésticos</option>
-              <option>Empresa de servicios</option>
-              <option>Farmacia</option>
-              <option>Ferretería</option>
-              <option>Fiambres y quesos</option>
-              <option>Floristería</option>
-              <option>Forrajería</option>
-              <option>Fotografía</option>
-              <option>Gastronomía</option>
-              <option>Gimnasio</option>
-              <option>Gráfica / imprenta</option>
-              <option>Heladería</option>
-              <option>Herramientas</option>
-              <option>Indumentaria</option>
-              <option>Industria</option>
-              <option>Informática</option>
-              <option>Inmobiliaria</option>
-              <option>Joyería</option>
-              <option>Kiosco</option>
-              <option>Librería</option>
-              <option>Logística / transporte</option>
-              <option>Maderera</option>
-              <option>Mascotas</option>
-              <option>Mueblería</option>
-              <option>Óptica</option>
-              <option>Panadería</option>
-              <option>Peluquería</option>
-              <option>Pinturería</option>
-              <option>Pizzería</option>
-              <option>Regalería</option>
-              <option>Repuestos</option>
-              <option>Restaurant</option>
-              <option>Rotisería</option>
-              <option>Salud</option>
-              <option>Seguros</option>
-              <option>Servicios empresariales</option>
-              <option>Supermercado</option>
-              <option>Tecnología</option>
-              <option>Veterinaria</option>
-              <option>Vidriería</option>
-              <option>Otro</option>
+            <label for="rubroComercial">Rubro *</label>
+            <select id="rubroComercial" required disabled>
+              <option value="">Primero elegí una categoría</option>
             </select>
+          </div>
+
+          <div class="field-group hidden" id="otroRubroGroup">
+            <label for="otroRubro">Especificá cuál *</label>
+            <input type="text" id="otroRubro" placeholder="Ej: Polarizado">
           </div>
 
           <div class="field-group">
             <label for="descripcion">Descripción *</label>
             <textarea id="descripcion" placeholder="Contanos qué ofrecés, qué te diferencia y qué debería saber el cliente." required></textarea>
-          </div>
-
-          <div class="field-group">
-            <label for="direccion">Dirección *</label>
-            <input type="text" id="direccion" placeholder="Ej: Av. San Martín 450, Rojas" required>
-            <div class="help">Esta dirección después se puede usar para abrir Google Maps.</div>
           </div>
 
           <div class="field-group">
@@ -731,8 +708,7 @@
               <label class="checkbox-item"><input type="checkbox" name="mediosPago" value="Efectivo"> Efectivo</label>
               <label class="checkbox-item"><input type="checkbox" name="mediosPago" value="Transferencia"> Transferencia</label>
               <label class="checkbox-item"><input type="checkbox" name="mediosPago" value="Débito"> Débito</label>
-              <label class="checkbox-item"><input type="checkbox" name="mediosPago" value="Crédito"> Crédito</label>
-              <label class="checkbox-item"><input type="checkbox" name="mediosPago" value="Mercado Pago"> Mercado Pago</label>
+              <label class="checkbox-item"><input type="checkbox" name="mediosPago" value="Tarjeta de crédito"> Tarjetas de crédito</label>
             </div>
           </div>
 
@@ -791,6 +767,136 @@
     const horarioCorrido = document.getElementById('horarioCorrido');
     const bloqueCorrido = document.getElementById('bloqueCorrido');
     const bloqueCortado = document.getElementById('bloqueCortado');
+    const categoriaPrincipal = document.getElementById('categoriaPrincipal');
+    const rubroComercial = document.getElementById('rubroComercial');
+    const otroRubroGroup = document.getElementById('otroRubroGroup');
+    const otroRubro = document.getElementById('otroRubro');
+
+    const rubrosPorCategoria = {
+      "Servicios para el hogar": [
+        "Ferretería",
+        "Mueblería",
+        "Decoración",
+        "Pinturería",
+        "Materiales para el hogar",
+        "Tapicería",
+        "Otro"
+      ],
+      "Construcción": [
+        "Corralón",
+        "Sanitarios",
+        "Aberturas",
+        "Construcción en seco / Durlock",
+        "Materiales de obra",
+        "Otro"
+      ],
+      "Gastronomía": [
+        "Restaurant",
+        "Rotisería",
+        "Panadería",
+        "Pastelería",
+        "Heladería",
+        "Casa de comidas",
+        "Catering",
+        "Otro"
+      ],
+      "Salud": [
+        "Farmacia",
+        "Óptica",
+        "Ortopedia",
+        "Insumos médicos",
+        "Veterinaria",
+        "Otro"
+      ],
+      "Estética y bienestar": [
+        "Peluquería",
+        "Centro de estética",
+        "Manicuría",
+        "Perfumería",
+        "Gimnasio",
+        "Masajes y bienestar",
+        "Otro"
+      ],
+      "Educación": [
+        "Librería",
+        "Instituto",
+        "Academia",
+        "Capacitación",
+        "Otro"
+      ],
+      "Tecnología": [
+        "Informática",
+        "Reparación técnica",
+        "Accesorios tecnológicos",
+        "Diseño e impresión",
+        "Sublimación",
+        "Otro"
+      ],
+      "Profesionales": [
+        "Estudio jurídico",
+        "Estudio contable",
+        "Arquitectura",
+        "Consultoría",
+        "Otro"
+      ],
+      "Oficios": [
+        "Taller",
+        "Herrería",
+        "Carpintería",
+        "Cerrajería",
+        "Otro"
+      ],
+      "Automotor": [
+        "Taller mecánico",
+        "Gomería",
+        "Repuestos",
+        "Accesorios",
+        "Lavadero",
+        "Polarizado",
+        "Otro"
+      ],
+      "Comercios": [
+        "Kiosco",
+        "Almacén",
+        "Supermercado",
+        "Autoservicio",
+        "Bazar",
+        "Indumentaria",
+        "Calzado",
+        "Regalería",
+        "Otro"
+      ],
+      "Mascotas": [
+        "Pet shop",
+        "Veterinaria",
+        "Peluquería canina",
+        "Otro"
+      ],
+      "Transporte y logística": [
+        "Fletes",
+        "Mudanzas",
+        "Cadetería",
+        "Logística",
+        "Otro"
+      ],
+      "Deportes y gimnasios": [
+        "Gimnasio",
+        "Venta de artículos deportivos",
+        "Escuela deportiva",
+        "Otro"
+      ],
+      "Empresas y servicios": [
+        "Distribuidora",
+        "Servicios empresariales",
+        "Seguros",
+        "Inmobiliaria",
+        "Logística empresarial",
+        "Otro"
+      ],
+      "Otros rubros": [
+        "Otro"
+      ]
+    };
 
     function valor(id) {
       return document.getElementById(id).value.trim();
@@ -849,14 +955,58 @@
       }
     }
 
+    function actualizarRubros() {
+      const categoria = categoriaPrincipal.value;
+      rubroComercial.innerHTML = '';
+
+      if (!categoria || !rubrosPorCategoria[categoria]) {
+        rubroComercial.innerHTML = '<option value="">Primero elegí una categoría</option>';
+        rubroComercial.disabled = true;
+        otroRubroGroup.classList.add('hidden');
+        otroRubro.value = '';
+        return;
+      }
+
+      rubroComercial.disabled = false;
+      rubroComercial.innerHTML = '<option value="">Seleccionar</option>';
+
+      rubrosPorCategoria[categoria].forEach(function(rubro) {
+        const option = document.createElement('option');
+        option.value = rubro;
+        option.textContent = rubro;
+        rubroComercial.appendChild(option);
+      });
+
+      otroRubroGroup.classList.add('hidden');
+      otroRubro.value = '';
+    }
+
+    function actualizarOtroRubro() {
+      if (rubroComercial.value === 'Otro') {
+        otroRubroGroup.classList.remove('hidden');
+      } else {
+        otroRubroGroup.classList.add('hidden');
+        otroRubro.value = '';
+      }
+    }
+
+    function obtenerRubroFinal() {
+      if (rubroComercial.value === 'Otro') {
+        return valor('otroRubro');
+      }
+      return valor('rubroComercial');
+    }
+
     function validarFormulario() {
       limpiarMensajes();
 
       const faltantes = [];
 
-      if (!foto.files || !foto.files.length) faltantes.push("Foto o logo del comercio / negocio / empresa");
+      if (!foto.files || !foto.files.length) faltantes.push("Foto o logo del comercio");
       if (!valor('nombreComercio')) faltantes.push("Nombre del comercio / negocio / empresa");
-      if (!valor('rubro')) faltantes.push("Rubro");
+      if (!valor('categoriaPrincipal')) faltantes.push("Categoría principal");
+      if (!valor('rubroComercial')) faltantes.push("Rubro");
+      if (valor('rubroComercial') === 'Otro' && !valor('otroRubro')) faltantes.push("Especificá cuál");
       if (!valor('descripcion')) faltantes.push("Descripción");
       if (!valor('direccion')) faltantes.push("Dirección");
       if (!valor('factura')) faltantes.push("Factura");
@@ -902,14 +1052,18 @@
       reader.readAsDataURL(file);
     });
 
+    categoriaPrincipal.addEventListener('change', actualizarRubros);
+    rubroComercial.addEventListener('change', actualizarOtroRubro);
+
     horarioCorrido.addEventListener('change', actualizarModoHorario);
     actualizarModoHorario();
+    actualizarRubros();
 
     btnPreview.addEventListener('click', function () {
       if (!validarFormulario()) return;
 
       const nombreComercio = valor('nombreComercio');
-      const rubro = valor('rubro');
+      const rubroFinal = obtenerRubroFinal();
       const descripcion = valor('descripcion');
       const direccion = valor('direccion');
       const factura = valor('factura');
@@ -917,14 +1071,16 @@
       const telefonoAlternativo = valor('telefonoAlternativo');
       const horario = obtenerHorarioFinal();
       const mediosPago = obtenerMediosPagoSeleccionados();
+      const categoria = valor('categoriaPrincipal');
 
       document.getElementById('cardName').textContent = nombreComercio;
-      document.getElementById('cardJob').textContent = rubro + ' · ' + horario;
+      document.getElementById('cardJob').textContent = rubroFinal + ' · ' + horario;
       document.getElementById('cardDesc').textContent = descripcion;
       document.getElementById('cardAvatar').src = previewImg.src;
 
       const metaContainer = document.getElementById('cardMeta');
       metaContainer.innerHTML = '';
+
       const chipDireccion = document.createElement('div');
       chipDireccion.className = 'card-chip';
       chipDireccion.textContent = direccion;
@@ -932,6 +1088,11 @@
 
       const tagsContainer = document.getElementById('cardTags');
       tagsContainer.innerHTML = '';
+
+      const categoriaTag = document.createElement('div');
+      categoriaTag.className = 'card-tag';
+      categoriaTag.textContent = categoria;
+      tagsContainer.appendChild(categoriaTag);
 
       mediosPago.forEach(function(item) {
         const tag = document.createElement('div');
