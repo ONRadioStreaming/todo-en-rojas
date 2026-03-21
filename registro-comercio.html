@@ -154,8 +154,14 @@
       display: block;
       margin-bottom: 7px;
       color: #16304d;
-      font-size: 0.93rem;
+      font-size: 0.92rem;
       font-weight: 800;
+      line-height: 1.25;
+    }
+
+    .no-wrap-label {
+      white-space: nowrap;
+      font-size: 0.88rem;
     }
 
     input, textarea, select {
@@ -377,6 +383,7 @@
       border-radius: 24px;
       padding: 16px;
       box-shadow: 0 8px 18px rgba(0,0,0,0.06);
+      border: 1px solid #e4edf4;
     }
 
     .preview-card.show {
@@ -426,10 +433,13 @@
     .card-status {
       font-size: .92rem;
       font-weight: 800;
-      display: flex;
+      display: inline-flex;
       align-items: center;
       gap: 8px;
       margin-bottom: 6px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: #f4f8fb;
     }
 
     .card-status.available {
@@ -442,8 +452,8 @@
 
     .card-status::before {
       content: "";
-      width: 14px;
-      height: 14px;
+      width: 12px;
+      height: 12px;
       border-radius: 50%;
       display: inline-block;
       flex-shrink: 0;
@@ -486,44 +496,53 @@
       fill: #e03131;
     }
 
-    .card-meta {
+    .card-block {
+      background: #f8fbfd;
+      border: 1px solid #e0e9f0;
+      border-radius: 16px;
+      padding: 12px 14px;
+      margin-bottom: 12px;
+    }
+
+    .card-block-title {
+      font-size: 0.84rem;
+      font-weight: 800;
+      color: #6d8092;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      margin-bottom: 8px;
+    }
+
+    .card-list {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 16px;
+      gap: 8px;
     }
 
     .card-chip {
-      background: #eef4f8;
-      color: #32506f;
-      border-radius: 999px;
-      padding: 9px 13px;
-      font-size: .84rem;
-      font-weight: 800;
-      line-height: 1;
-    }
-
-    .card-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 16px;
-    }
-
-    .card-tag {
       background: #eaf0f6;
       color: #204979;
       border-radius: 999px;
-      padding: 10px 14px;
-      font-size: .9rem;
+      padding: 9px 12px;
+      font-size: .87rem;
       font-weight: 800;
       line-height: 1;
+    }
+
+    .card-lines {
+      display: grid;
+      gap: 6px;
+      color: #32506f;
+      font-size: 0.92rem;
+      font-weight: 700;
+      line-height: 1.4;
     }
 
     .card-buttons {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 12px;
+      margin-top: 14px;
       margin-bottom: 12px;
     }
 
@@ -658,7 +677,7 @@
           <div class="section-divider">Contacto</div>
 
           <div class="contact-note">
-            Debés completar al menos una vía principal de contacto. Lo ideal es cargar el WhatsApp general del negocio y el teléfono para llamadas.
+            Debés completar el WhatsApp general del negocio y el teléfono para llamadas.
           </div>
 
           <div class="grid-2">
@@ -681,25 +700,25 @@
           <div id="bloqueAlternativos" class="hidden">
             <div class="grid-2">
               <div class="field-group">
-                <label for="whatsappAlt1">WhatsApp alternativo 1</label>
-                <input type="tel" id="whatsappAlt1" placeholder="Ej: número de Pablo">
+                <label for="whatsappAlt1" class="no-wrap-label">WhatsApp alternativo 1</label>
+                <input type="tel" id="whatsappAlt1" placeholder="Ej: número de Guillermo">
               </div>
 
               <div class="field-group">
                 <label for="nombreWhatsappAlt1">Nombre / referencia 1</label>
-                <input type="text" id="nombreWhatsappAlt1" placeholder="Ej: Pablo - Ventas">
+                <input type="text" id="nombreWhatsappAlt1" placeholder="Ej: Guillermo - Ventas">
               </div>
             </div>
 
             <div class="grid-2">
               <div class="field-group">
-                <label for="whatsappAlt2">WhatsApp alternativo 2</label>
-                <input type="tel" id="whatsappAlt2" placeholder="Ej: número de Mariano">
+                <label for="whatsappAlt2" class="no-wrap-label">WhatsApp alternativo 2</label>
+                <input type="tel" id="whatsappAlt2" placeholder="Ej: número de Carlos">
               </div>
 
               <div class="field-group">
                 <label for="nombreWhatsappAlt2">Nombre / referencia 2</label>
-                <input type="text" id="nombreWhatsappAlt2" placeholder="Ej: Mariano - Caja / Facturación">
+                <input type="text" id="nombreWhatsappAlt2" placeholder="Ej: Carlos - Administración">
               </div>
             </div>
           </div>
@@ -913,8 +932,25 @@
           <span id="cardDireccionTexto">Dirección</span>
         </div>
 
-        <div id="cardMeta" class="card-meta"></div>
-        <div id="cardTags" class="card-tags"></div>
+        <div class="card-block">
+          <div class="card-block-title">Categoría</div>
+          <div class="card-list" id="cardCategoriaBlock"></div>
+        </div>
+
+        <div class="card-block">
+          <div class="card-block-title">Horarios</div>
+          <div class="card-lines" id="cardHorariosBlock"></div>
+        </div>
+
+        <div class="card-block">
+          <div class="card-block-title">Medios de pago</div>
+          <div class="card-list" id="cardPagosBlock"></div>
+        </div>
+
+        <div class="card-block">
+          <div class="card-block-title">Facturación</div>
+          <div class="card-lines" id="cardFacturaBlock"></div>
+        </div>
 
         <div class="card-buttons">
           <button type="button" id="cardBtnWhatsapp" class="card-btn-wa">WhatsApp</button>
@@ -927,7 +963,7 @@
   </div>
 
   <script>
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzQOeXC_puXFEl7EhqLj0mgl25nY5J_WJoGgyFMh9Rs9TQH0GTtLv-51hn_n0lpiBhp/exec";
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzaEZ47CNDLhtlJCA70lOMBesQOWqFwGbfO14N3Gmi9zRZynR608cub3YMgglQ2Wo5P/exec";
 
     const form = document.getElementById('comercioForm');
     const fotoCamara = document.getElementById('fotoCamara');
@@ -1218,7 +1254,7 @@
 
     function estaDisponibleAhora() {
       const ahora = new Date();
-      const dia = ahora.getDay(); // 0 domingo, 6 sábado
+      const dia = ahora.getDay();
       const hh = String(ahora.getHours()).padStart(2, '0');
       const mm = String(ahora.getMinutes()).padStart(2, '0');
       const horaActual = hh + ':' + mm;
@@ -1279,10 +1315,7 @@
         const nom1 = valor('nombreWhatsappAlt1');
         const nom2 = valor('nombreWhatsappAlt2');
 
-        if (!alt1 && !alt2) {
-          faltantes.push("Al menos un WhatsApp alternativo si marcás la opción");
-        }
-
+        if (!alt1 && !alt2) faltantes.push("Al menos un WhatsApp alternativo si marcás la opción");
         if (alt1 && !nom1) faltantes.push("Nombre / referencia del WhatsApp alternativo 1");
         if (alt2 && !nom2) faltantes.push("Nombre / referencia del WhatsApp alternativo 2");
       }
@@ -1338,35 +1371,35 @@
       cardStatus.textContent = disponible ? 'Disponible ahora' : 'No disponible';
       cardStatus.className = 'card-status ' + (disponible ? 'available' : 'unavailable');
 
-      const metaContainer = document.getElementById('cardMeta');
-      metaContainer.innerHTML = '';
+      const categoriaBlock = document.getElementById('cardCategoriaBlock');
+      categoriaBlock.innerHTML = '';
+      const categoriaChip = document.createElement('div');
+      categoriaChip.className = 'card-chip';
+      categoriaChip.textContent = categoria;
+      categoriaBlock.appendChild(categoriaChip);
 
+      const horariosBlock = document.getElementById('cardHorariosBlock');
+      horariosBlock.innerHTML = '';
       obtenerDiasResumen().forEach(item => {
+        const linea = document.createElement('div');
+        linea.textContent = item;
+        horariosBlock.appendChild(linea);
+      });
+
+      const pagosBlock = document.getElementById('cardPagosBlock');
+      pagosBlock.innerHTML = '';
+      mediosPago.forEach(item => {
         const chip = document.createElement('div');
         chip.className = 'card-chip';
         chip.textContent = item;
-        metaContainer.appendChild(chip);
+        pagosBlock.appendChild(chip);
       });
 
-      const tagsContainer = document.getElementById('cardTags');
-      tagsContainer.innerHTML = '';
-
-      const categoriaTag = document.createElement('div');
-      categoriaTag.className = 'card-tag';
-      categoriaTag.textContent = categoria;
-      tagsContainer.appendChild(categoriaTag);
-
-      mediosPago.forEach(function(item) {
-        const tag = document.createElement('div');
-        tag.className = 'card-tag';
-        tag.textContent = item;
-        tagsContainer.appendChild(tag);
-      });
-
-      const facturaTag = document.createElement('div');
-      facturaTag.className = 'card-tag';
-      facturaTag.textContent = factura === 'si' ? 'Trabajan con factura' : 'No trabajan con factura';
-      tagsContainer.appendChild(facturaTag);
+      const facturaBlock = document.getElementById('cardFacturaBlock');
+      facturaBlock.innerHTML = '';
+      const facturaLinea = document.createElement('div');
+      facturaLinea.textContent = factura === 'si' ? 'Trabajan con factura' : 'No trabajan con factura';
+      facturaBlock.appendChild(facturaLinea);
 
       cardBtnWhatsapp.onclick = function () {
         abrirWhatsapp(whatsapp);
@@ -1504,4 +1537,4 @@
     });
   </script>
 </body>
-</html
+</html>
