@@ -1497,12 +1497,20 @@
 
         const result = await response.json();
 
-        if (result.ok) {
-          mostrarExito(
-            'Tu solicitud fue enviada correctamente.<br><br>' +
-            'Ya quedó guardada en el sistema con estado pendiente de pago.<br>' +
-            'El siguiente paso será activar tu comercio en Conecta2.'
-          );
+       if (result.ok) {
+  mostrarExito(
+    'Tu solicitud fue enviada correctamente.<br><br>' +
+    'Ahora te vamos a llevar a la pantalla de activación para completar el pago.'
+  );
+
+  setTimeout(() => {
+    window.location.href = 'activar-membresia.html';
+  }, 1200);
+
+  return;
+} else {
+  mostrarError('No se pudo guardar la solicitud.<br><br>Detalle: ' + (result.error || 'Error desconocido'));
+}
 
           form.reset();
           archivoFoto = null;
