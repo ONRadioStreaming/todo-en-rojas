@@ -1330,21 +1330,8 @@
       if (!valor('factura')) faltantes.push("¿Trabajan con factura?");
       if (obtenerMediosPagoSeleccionados().length === 0) faltantes.push("Al menos un medio de pago");
 
-      if (!trabajaLunesViernes.checked && !trabajaSabado.checked && !trabajaDomingo.checked) {
-        faltantes.push("Al menos un bloque de días de trabajo");
-      }
-
-      if (trabajaLunesViernes.checked && !validarHorarioGrupo('lv', 'lvHorarioCorrido')) {
-        faltantes.push("Horario completo de lunes a viernes");
-      }
-
-      if (trabajaSabado.checked && !validarHorarioGrupo('sabado', 'sabadoHorarioCorrido')) {
-        faltantes.push("Horario completo de sábado");
-      }
-
-      if (trabajaDomingo.checked && !validarHorarioGrupo('domingo', 'domingoHorarioCorrido')) {
-        faltantes.push("Horario completo de domingo");
-      }
+      const errorHorarios = validarHorarios();
+      if (errorHorarios) faltantes.push(errorHorarios);
 
       if (toggleAlternativos.checked) {
         const alt1 = valor('whatsappAlt1');
