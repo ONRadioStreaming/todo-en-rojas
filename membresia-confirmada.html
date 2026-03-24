@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Membresía activada | Conecta2</title>
+  <style>
+    :root {
+      --bg1: #0f172a;
+      --bg2: #1e293b;
+      --card: rgba(255,255,255,0.96);
+      --text: #0f172a;
+      --muted: #475569;
+      --accent: #2563eb;
+      --accent-2: #06b6d4;
+      --ok: #16a34a;
+      --shadow: 0 20px 45px rgba(0,0,0,.28);
+      --radius: 22px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(37,99,235,.25), transparent 30%),
+        radial-gradient(circle at top right, rgba(6,182,212,.18), transparent 28%),
+        linear-gradient(145deg, var(--bg1), var(--bg2));
+      overflow-x: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      position: relative;
+    }
+
+    .confetti-wrap {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .confetti {
+      position: absolute;
+      top: -12vh;
+      width: 10px;
+      height: 18px;
+      opacity: .9;
+      border-radius: 3px;
+      animation: fall linear forwards;
+      will-change: transform, opacity;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translate3d(0, 0, 0) rotate(0deg);
+        opacity: 0;
+      }
+      10% { opacity: 1; }
+      100% {
+        transform: translate3d(var(--drift), 110vh, 0) rotate(var(--spin));
+        opacity: .95;
+      }
+    }
+
+    .shell {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 760px;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 34px 26px 26px;
+      text-align: center;
+      border: 1px solid rgba(255,255,255,.35);
+      backdrop-filter: blur(8px);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 82px;
+      height: 82px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+      color: #fff;
+      font-size: 42px;
+      box-shadow: 0 14px 30px rgba(22,163,74,.35);
+      margin-bottom: 16px;
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-size: clamp(2rem, 4vw, 2.7rem);
+      line-height: 1.05;
+    }
+
+    .lead {
+      margin: 0 auto 10px;
+      max-width: 620px;
+      font-size: 1.08rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .lead strong { color: var(--text); }
+
+    .status-pill {
+      display: inline-block;
+      margin: 14px 0 6px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: rgba(22,163,74,.12);
+      color: #166534;
+      font-weight: 700;
+      font-size: .95rem;
+    }
+
+    .summary {
+      margin: 24px auto 12px;
+      text-align: left;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 18px;
+      padding: 18px;
+      max-width: 640px;
+    }
+
+    .summary-title {
+      margin: 0 0 14px;
+      font-size: 1rem;
+      font-weight: 700;
+      color: #1e293b;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+    }
+
+    .item {
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 14px;
+      padding: 12px 14px;
+      min-height: 76px;
+    }
+
+    .item small {
+      display: block;
+      color: #64748b;
+      font-size: .76rem;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+
+    .item strong {
+      display: block;
+      font-size: .98rem;
+      line-height: 1.35;
+      color: #0f172a;
+      word-break: break-word;
+    }
+
+    .foot-note {
+      margin: 18px auto 0;
+      color: var(--muted);
+      font-size: .98rem;
+      line-height: 1.45;
+      max-width: 560px;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .btn {
+      appearance: none;
+      border: none;
+      border-radius: 14px;
+      padding: 14px 22px;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform .15s ease, box-shadow .15s ease, opacity .15s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn-primary {
+      color: #fff;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow: 0 12px 28px rgba(37,99,235,.28);
+    }
+
+    .btn-secondary {
+      color: #0f172a;
+      background: #e2e8f0;
+    }
+
+    @media (max-width: 600px) {
+      .card { padding: 28px 18px 22px; }
+      .summary { padding: 14px; }
+      .actions { flex-direction: column; }
+      .btn { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="confetti-wrap" id="confetti"></div>
+
+  <main class="shell">
+    <section class="card">
+      <div class="badge">✓</div>
+      <h1>¡Membresía activada!</h1>
+      <p class="lead"><strong>Gracias por sumarte a Conecta2.</strong> Esperamos que la aplicación cumpla con tus expectativas.</p>
+      <div class="status-pill" id="statusPill">Tu perfil se verá reflejado en la app en breve.</div>
+
+      <section class="summary" id="summaryBox">
+        <p class="summary-title">Resumen de tu activación</p>
+        <div class="grid">
+          <div class="item">
+            <small>Negocio / Perfil</small>
+            <strong id="nombreNegocio">-</strong>
+          </div>
+          <div class="item">
+            <small>Titular</small>
+            <strong id="titular">-</strong>
+          </div>
+          <div class="item">
+            <small>Plan</small>
+            <strong id="plan">-</strong>
+          </div>
+          <div class="item">
+            <small>Importe</small>
+            <strong id="importe">-</strong>
+          </div>
+          <div class="item">
+            <small>ID de membresía</small>
+            <strong id="idMembresia">-</strong>
+          </div>
+          <div class="item">
+            <small>ID de registro</small>
+            <strong id="idRegistro">-</strong>
+          </div>
+        </div>
+      </section>
+
+      <p class="foot-note">Si el pago fue aprobado, la actualización suele impactar enseguida o dentro de unos minutos.</p>
+
+      <div class="actions">
+        <a class="btn btn-primary" href="https://onradiostreaming.github.io/todo-en-rojas/">Volver a la aplicación</a>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    (function () {
+      const params = new URLSearchParams(window.location.search);
+
+      function text(id, value) {
+        const el = document.getElementById(id);
+        if (el) el.textContent = value && String(value).trim() ? String(value).trim() : '-';
+      }
+
+      function normalizarPlan(plan) {
+        if (!plan) return '-';
+        if (plan === '4_meses') return 'Plan cuatrimestral';
+        if (plan === 'anual_promo') return 'Plan anual promo';
+        return plan.replaceAll('_', ' ');
+      }
+
+      function normalizarImporte(valor) {
+        const n = Number(valor || 0);
+        if (!n) return '-';
+        return '$' + n.toLocaleString('es-AR');
+      }
+
+      const nombreNegocio = params.get('nombre_negocio') || params.get('nombre') || '';
+      const titular = params.get('titular') || '';
+      const plan = params.get('plan') || '';
+      const importe = params.get('importe') || '';
+      const idMembresia = params.get('id_membresia') || '';
+      const idRegistro = params.get('id_registro') || '';
+      const resultado = (params.get('resultado') || params.get('mp_result') || 'approved').toLowerCase();
+
+      text('nombreNegocio', nombreNegocio);
+      text('titular', titular);
+      text('plan', normalizarPlan(plan));
+      text('importe', normalizarImporte(importe));
+      text('idMembresia', idMembresia || 'Se generó automáticamente');
+      text('idRegistro', idRegistro || 'Se generó automáticamente');
+
+      const statusPill = document.getElementById('statusPill');
+      if (resultado === 'pending') {
+        statusPill.textContent = 'Tu pago quedó pendiente. Vamos a reflejarlo cuando se confirme.';
+        statusPill.style.background = 'rgba(234,179,8,.14)';
+        statusPill.style.color = '#854d0e';
+      } else if (resultado === 'failure') {
+        statusPill.textContent = 'No pudimos confirmar el pago. Revisalo e intentá nuevamente.';
+        statusPill.style.background = 'rgba(239,68,68,.14)';
+        statusPill.style.color = '#991b1b';
+      }
+
+      const colors = ['#22c55e', '#38bdf8', '#f59e0b', '#f43f5e', '#a855f7', '#06b6d4'];
+      const wrap = document.getElementById('confetti');
+      const total = 52;
+
+      for (let i = 0; i < total; i++) {
+        const piece = document.createElement('span');
+        piece.className = 'confetti';
+        piece.style.left = Math.random() * 100 + 'vw';
+        piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+        piece.style.animationDuration = (4 + Math.random() * 4) + 's';
+        piece.style.animationDelay = (Math.random() * 1.6) + 's';
+        piece.style.setProperty('--drift', ((Math.random() * 220) - 110) + 'px');
+        piece.style.setProperty('--spin', ((Math.random() * 1080) - 540) + 'deg');
+        if (Math.random() > 0.55) {
+          piece.style.width = '8px';
+          piece.style.height = '14px';
+        }
+        wrap.appendChild(piece);
+      }
+    })();
+  </script>
+</body>
+</html>
