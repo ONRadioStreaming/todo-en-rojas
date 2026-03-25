@@ -171,8 +171,8 @@
   </div>
 
   <script>
-    // PEGAR ACÁ TU URL DEL WEB APP DE APPS SCRIPT
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxUCqWb6pYziwFrHWwXgSNwDfs4dt2KmdEZS18qFxcqlrSF4ywXdrDSrRM_Efka8Iij/exec";
+    const PANEL_URL = "https://onradiostreaming.github.io/conecta2/admin/panel.html";
 
     const loginForm = document.getElementById("loginForm");
     const btnLogin = document.getElementById("btnLogin");
@@ -181,14 +181,16 @@
     const passwordInput = document.getElementById("password");
     const recordarmeInput = document.getElementById("recordarme");
 
-    // Si ya hay sesión guardada, redirige
     (function revisarSesionExistente() {
-      const sessionData = localStorage.getItem("conecta2_admin_session") || sessionStorage.getItem("conecta2_admin_session");
+      const sessionData =
+        localStorage.getItem("conecta2_admin_session") ||
+        sessionStorage.getItem("conecta2_admin_session");
+
       if (sessionData) {
         try {
           const parsed = JSON.parse(sessionData);
           if (parsed && parsed.token) {
-            window.location.href = "panel.html";
+            window.location.href = PANEL_URL;
           }
         } catch (e) {
           localStorage.removeItem("conecta2_admin_session");
@@ -243,7 +245,7 @@
           mostrarMensaje("Acceso correcto. Redirigiendo...", "ok");
 
           setTimeout(() => {
-            window.location.href = "/admin/panel.html";
+            window.location.href = PANEL_URL;
           }, 700);
         } else {
           mostrarMensaje(data.message || "Usuario o contraseña incorrectos.", "error");
