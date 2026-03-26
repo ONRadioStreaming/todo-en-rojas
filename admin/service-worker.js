@@ -1,4 +1,4 @@
-const CACHE_NAME = "conecta2-admin-v2";
+const CACHE_NAME = "conecta2-admin-v3";
 const URLS_TO_CACHE = [
   "/conecta2/admin/",
   "/conecta2/admin/index.html",
