@@ -399,7 +399,7 @@ body {
 
   <div class="hero">
     <p>Elegí el plan que mejor te sirva y activá tu presencia en Conecta2.</p>
-    <small>La promo anual a $40.000 es una promoción de lanzamiento. Si pagás por transferencia o efectivo, tu solicitud queda pendiente de validación.</small>
+    <small>La promo anual a $54.000 surge del valor anual de $64.000 con una bonificación de $10.000. Si pagás por transferencia o efectivo, tu solicitud queda pendiente de validación.</small>
   </div>
 
   <h2 class="section-title">Elegí tu plan</h2>
@@ -450,10 +450,10 @@ body {
           label: "Plan anual",
           badge: "Promo lanzamiento disponible ahora",
           name: "Activación por 12 meses",
-          oldAmountText: "$48.000",
-          discountText: "Bonificación -$8.000",
-          amount: 40000,
-          amountText: "$40.000",
+          oldAmountText: "$64.000",
+          discountText: "Bonificación -$10.000",
+          amount: 54000,
+          amountText: "$54.000",
           validityText: "Vigencia por 12 meses",
           description: "Te conviene más si querés olvidarte de renovar por un año completo y aprovechar el valor promocional."
         }
@@ -553,11 +553,11 @@ body {
         card.className = "card";
         card.dataset.plan = key;
         card.innerHTML = `
-          ${plan.badge ? <div class="badge">${plan.badge}</div> : <div class="badge">${plan.label}</div>}
+          ${plan.badge ? `<div class="badge">${plan.badge}</div>` : `<div class="badge">${plan.label}</div>`}
           <h3>${plan.label}</h3>
           <p class="sub">${plan.name}</p>
-          ${plan.oldAmountText ? <p class="old-price">Antes ${plan.oldAmountText}</p> : ""}
-          ${plan.discountText ? <p class="discount">${plan.discountText}</p> : ""}
+          ${plan.oldAmountText ? `<p class="old-price">Antes ${plan.oldAmountText}</p>` : ""}
+          ${plan.discountText ? `<p class="discount">${plan.discountText}</p>` : ""}
           <p class="price">${plan.amountText}</p>
           <p class="validity">${plan.validityText}</p>
           <p class="desc">${plan.description}</p>
@@ -625,7 +625,7 @@ body {
       const method = CONFIG.methods[selectedMethod];
       confirmState = "confirm";
       els.modalTitle.textContent = "Confirmar activación";
-      els.modalText.textContent = Vas a activar ${plan.label} por ${plan.amountText} usando ${method.label}.;
+      els.modalText.textContent = `Vas a activar ${plan.label} por ${plan.amountText} usando ${method.label}.`;
       els.modalMini.textContent = selectedMethod === "online"
         ? "Al confirmar, se registra la solicitud y después te redirige al link de pago."
         : "Al confirmar, la solicitud queda registrada y pendiente de validación.";
@@ -706,7 +706,7 @@ body {
 
         membershipSaved = true;
         sessionStorage.setItem("membresiaPendiente", JSON.stringify(payload));
-        showNotice("success", Solicitud registrada correctamente para ${payload.nombre || "tu cuenta"}.);
+        showNotice("success", `Solicitud registrada correctamente para ${payload.nombre || "tu cuenta"}.`);
 
         if (selectedMethod === "online") {
           const paymentLink = CONFIG.paymentLinks[selectedPlan];
@@ -717,7 +717,7 @@ body {
           els.btnModalConfirm.dataset.paymentLink = paymentLink || "";
         } else {
           setModalFinal(
-            Elegiste ${CONFIG.methods[selectedMethod].label}. Tu solicitud quedó pendiente de validación.,
+            `Elegiste ${CONFIG.methods[selectedMethod].label}. Tu solicitud quedó pendiente de validación.`,
             "Ahora podés volver al inicio de la aplicación."
           );
           els.btnModalConfirm.dataset.paymentLink = "";
