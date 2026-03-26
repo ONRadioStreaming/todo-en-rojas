@@ -1,8 +1,11 @@
-const CACHE_NAME = "conecta2-admin-v1";
+const CACHE_NAME = "conecta2-admin-v2";
 const URLS_TO_CACHE = [
+  "/conecta2/admin/",
   "/conecta2/admin/index.html",
   "/conecta2/admin/panel.html",
-  "/conecta2/admin/manifest.json"
+  "/conecta2/admin/manifest.json",
+  "/conecta2/admin/icon-192.png",
+  "/conecta2/admin/icon-512.png"
 ];
 
 self.addEventListener("install", event => {
