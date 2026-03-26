@@ -1,7 +1,7 @@
 {
   "name": "Conecta2 Admin",
   "short_name": "C2 Admin",
-  "start_url": "/conecta2/admin/index.html",
+  "start_url": "/conecta2/admin/",
   "scope": "/conecta2/admin/",
   "display": "standalone",
   "background_color": "#0b0f14",
