@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Panel Admin - Conecta2</title>
+
+  <link rel="manifest" href="/conecta2/admin/manifest.json">
+  <meta name="theme-color" content="#00d26a">
+  <link rel="apple-touch-icon" href="/conecta2/admin/icon-192.png">
+
+  <style>
+    :root {
+      --bg: #0b0f14;
+      --bg-soft: #111821;
+      --card: #151f2b;
+      --card-2: #1b2735;
+      --line: rgba(255,255,255,0.08);
+      --text: #f4f7fb;
+      --muted: #a8b3c2;
+      --green: #00d26a;
+      --green-dark: #00b85d;
+      --red: #ff5d5d;
+      --yellow: #ffca3a;
+      --blue: #4ea8ff;
+      --shadow: 0 18px 40px rgba(0,0,0,0.28);
+      --radius: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(180deg, #0a0e13 0%, #0d131b 100%);
+      color: var(--text);
+      font-family: Arial, sans-serif;
+      min-height: 100%;
+    }
+
+    body {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      width: 280px;
+      background: rgba(10, 15, 21, 0.96);
+      border-right: 1px solid var(--line);
+      padding: 24px 18px;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      backdrop-filter: blur(8px);
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 26px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .brand h1 {
+      margin: 0;
+      font-size: 28px;
+      line-height: 1;
+      color: #fff;
+    }
+
+    .brand p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .admin-box {
+      background: linear-gradient(180deg, rgba(0,210,106,0.16), rgba(0,210,106,0.06));
+      border: 1px solid rgba(0,210,106,0.22);
+      border-radius: 16px;
+      padding: 16px;
+      margin-bottom: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .admin-box .eyebrow {
+      font-size: 12px;
+      color: rgba(255,255,255,0.78);
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: .8px;
+    }
+
+    .admin-box .name {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 4px;
+    }
+
+    .admin-box .user {
+      font-size: 14px;
+      color: rgba(255,255,255,0.75);
+      margin-bottom: 12px;
+      word-break: break-word;
+    }
+
+    .session-chip {
+      display: inline-block;
+      padding: 8px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      font-size: 12px;
+      color: #e9fef2;
+    }
+
+    .nav {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .nav a {
+      display: block;
+      text-decoration: none;
+      color: #fff;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 14px 14px;
+      font-size: 14px;
+      transition: .2s ease;
+    }
+
+    .nav a:hover {
+      background: rgba(255,255,255,0.08);
+      transform: translateX(3px);
+    }
+
+    .logout-btn {
+      width: 100%;
+      margin-top: 24px;
+      background: var(--red);
+      color: #fff;
+      border: none;
+      border-radius: 14px;
+      padding: 14px;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: .2s ease;
+    }
+
+    .logout-btn:hover {
+      filter: brightness(1.05);
+      transform: translateY(-1px);
+    }
+
+    .main {
+      flex: 1;
+      padding: 28px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+
+    .topbar h2 {
+      margin: 0;
+      font-size: 32px;
+      line-height: 1.1;
+    }
+
+    .topbar p {
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .status-box {
+      background: linear-gradient(180deg, rgba(78,168,255,0.14), rgba(78,168,255,0.05));
+      border: 1px solid rgba(78,168,255,0.2);
+      border-radius: 16px;
+      padding: 14px 16px;
+      min-width: 280px;
+    }
+
+    .status-box .label {
+      font-size: 12px;
+      text-transform: uppercase;
+      color: #c8defa;
+      letter-spacing: .8px;
+      margin-bottom: 6px;
+    }
+
+    .status-box .value {
+      font-size: 15px;
+      color: #fff;
+      font-weight: bold;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+      margin-bottom: 24px;
+    }
+
+    .stat-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.035), rgba(255,255,255,0.02));
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: var(--shadow);
+    }
+
+    .stat-card .stat-title {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: .7px;
+    }
+
+    .stat-card .stat-value {
+      font-size: 32px;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    .stat-card .stat-desc {
+      font-size: 13px;
+      color: rgba(255,255,255,0.74);
+      line-height: 1.4;
+    }
+
+    .sections-grid {
+      display: grid;
+      grid-template-columns: 1.35fr 1fr;
+      gap: 18px;
+      margin-bottom: 24px;
+    }
+
+    .panel-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.035), rgba(255,255,255,0.02));
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .panel-card h3 {
+      margin: 0 0 8px;
+      font-size: 20px;
+    }
+
+    .panel-card .desc {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.45;
+      margin-bottom: 16px;
+    }
+
+    .action-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .action-btn {
+      background: var(--card-2);
+      border: 1px solid var(--line);
+      color: #fff;
+      border-radius: 14px;
+      padding: 14px;
+      text-align: left;
+      cursor: pointer;
+      transition: .2s ease;
+      font-size: 14px;
+      line-height: 1.4;
+    }
+
+    .action-btn strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 15px;
+    }
+
+    .action-btn:hover {
+      background: #223142;
+      transform: translateY(-2px);
+    }
+
+    .notice-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .notice {
+      border-radius: 14px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.03);
+    }
+
+    .notice.green { border-color: rgba(0,210,106,0.22); }
+    .notice.yellow { border-color: rgba(255,202,58,0.22); }
+    .notice.blue { border-color: rgba(78,168,255,0.22); }
+
+    .notice .title {
+      font-weight: bold;
+      margin-bottom: 6px;
+      font-size: 15px;
+    }
+
+    .notice .text {
+      font-size: 14px;
+      color: rgba(255,255,255,0.82);
+      line-height: 1.45;
+    }
+
+    .bottom-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 560px;
+      background: rgba(255,255,255,0.02);
+    }
+
+    th, td {
+      padding: 14px 12px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      font-size: 14px;
+    }
+
+    th {
+      background: rgba(255,255,255,0.04);
+      color: #fff;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: .6px;
+    }
+
+    td {
+      color: rgba(255,255,255,0.88);
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .tag.ok {
+      background: rgba(0,210,106,0.18);
+      color: #b9ffd7;
+    }
+
+    .tag.warn {
+      background: rgba(255,202,58,0.18);
+      color: #ffe5a2;
+    }
+
+    .tag.info {
+      background: rgba(78,168,255,0.18);
+      color: #cae6ff;
+    }
+
+    .mini-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .mini-btn {
+      border: none;
+      border-radius: 12px;
+      padding: 11px 14px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: bold;
+      transition: .2s ease;
+    }
+
+    .mini-btn.primary {
+      background: var(--green);
+      color: #fff;
+    }
+
+    .mini-btn.primary:hover {
+      background: var(--green-dark);
+    }
+
+    .mini-btn.secondary {
+      background: rgba(255,255,255,0.08);
+      color: #fff;
+      border: 1px solid var(--line);
+    }
+
+    .mini-btn.secondary:hover {
+      background: rgba(255,255,255,0.12);
+    }
+
+    .footer-note {
+      margin-top: 26px;
+      color: var(--muted);
+      font-size: 13px;
+      text-align: center;
+    }
+
+    @media (max-width: 1180px) {
+      .stats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .sections-grid,
+      .bottom-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 920px) {
+      body {
+        display: block;
+      }
+
+      .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        border-right: none;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .main {
+        padding: 20px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .stats-grid,
+      .action-list {
+        grid-template-columns: 1fr;
+      }
+
+      .topbar h2 {
+        font-size: 26px;
+      }
+
+      .main {
+        padding: 16px;
+      }
+
+      .panel-card,
+      .stat-card,
+      .admin-box,
+      .status-box {
+        border-radius: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <aside class="sidebar">
+    <div class="brand">
+      <h1>Conecta2</h1>
+      <p>Panel privado de administración</p>
+    </div>
+
+    <div class="admin-box">
+      <div class="eyebrow">Administrador conectado</div>
+      <div class="name" id="adminNombre">Cargando...</div>
+      <div class="user" id="adminUsuario">---</div>
+      <div class="session-chip" id="sessionInfo">Sesión activa</div>
+    </div>
+
+    <nav class="nav">
+      <a href="#resumen">📊 Resumen general</a>
+      <a href="#membresias">💳 Membresías</a>
+      <a href="#manuales">💵 Activaciones manuales</a>
+      <a href="#vencimientos">⏳ Por vencer</a>
+      <a href="#renovaciones">🔁 Renovaciones</a>
+      <a href="#farmacias">💊 Farmacias y turnos</a>
+    </nav>
+
+    <button class="logout-btn" id="logoutBtn">Cerrar sesión</button>
+  </aside>
+
+  <main class="main">
+    <div class="topbar" id="resumen">
+      <div>
+        <h2>Panel Admin</h2>
+        <p>Centro de control de Conecta2. Desde acá vas a manejar membresías, activaciones, vencimientos y turnos.</p>
+      </div>
+
+      <div class="status-box">
+        <div class="label">Estado del panel</div>
+        <div class="value">Online · Sesión validada · Estructura lista para datos reales</div>
+      </div>
+    </div>
+
+    <section class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-title">Membresías activas</div>
+        <div class="stat-value" id="statActivas">--</div>
+        <div class="stat-desc">Total de perfiles premium activos entre comercios y servicios.</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-title">Por vencer</div>
+        <div class="stat-value" id="statVencer">--</div>
+        <div class="stat-desc">Perfiles próximos a vencer y listos para gestión de renovación.</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-title">Pendientes manuales</div>
+        <div class="stat-value" id="statManuales">--</div>
+        <div class="stat-desc">Pagos por efectivo o transferencia a validar desde el panel.</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-title">Farmacias cargadas</div>
+        <div class="stat-value" id="statFarmacias">--</div>
+        <div class="stat-desc">Base de farmacias operativas, excluyendo Farmacia Sindical.</div>
+      </div>
+    </section>
+
+    <section class="sections-grid">
+      <div class="panel-card" id="membresias">
+        <h3>Gestión principal</h3>
+        <div class="desc">
+          Este bloque es el corazón del panel. Desde acá después vamos a enchufar datos reales y acciones concretas sobre membresías, renovaciones y validaciones.
+        </div>
+
+        <div class="action-list">
+          <button class="action-btn">
+            <strong>Ver membresías</strong>
+            Listar todas las membresías premium activas, vencidas y pendientes.
+          </button>
+
+          <button class="action-btn" id="manuales">
+            <strong>Activar pago manual</strong>
+            Validar pagos en efectivo o transferencia sin depender del pago online.
+          </button>
+
+          <button class="action-btn" id="vencimientos">
+            <strong>Ver por vencer</strong>
+            Detectar perfiles próximos a expirar para anticipar la renovación.
+          </button>
+
+          <button class="action-btn" id="renovaciones">
+            <strong>Enviar renovación</strong>
+            Preparar recordatorios y futuras acciones automáticas de aviso.
+          </button>
+
+          <button class="action-btn">
+            <strong>Buscar comercio o servicio</strong>
+            Acceso rápido para ubicar un perfil por ID, nombre o tipo.
+          </button>
+
+          <button class="action-btn" id="farmacias">
+            <strong>Farmacias y turnos</strong>
+            Administrar base de farmacias, días del mes y vigencias visibles en index.
+          </button>
+        </div>
+
+        <div class="mini-actions">
+          <button class="mini-btn primary">Cargar datos reales</button>
+          <button class="mini-btn secondary">Refrescar panel</button>
+        </div>
+      </div>
+
+      <div class="panel-card">
+        <h3>Estado operativo</h3>
+        <div class="desc">
+          Alertas rápidas para que no se te escape nada importante mientras administrás Conecta2.
+        </div>
+
+        <div class="notice-list">
+          <div class="notice green">
+            <div class="title">Login administrativo funcionando</div>
+            <div class="text">La sesión se validó correctamente y el panel ya tiene control de acceso.</div>
+          </div>
+
+          <div class="notice yellow">
+            <div class="title">Siguiente paso fuerte</div>
+            <div class="text">Conectar el panel con datos reales de la hoja Membresias y los pagos manuales.</div>
+          </div>
+
+          <div class="notice blue">
+            <div class="title">Farmacias de turno</div>
+            <div class="text">La administración de turnos va a salir desde este panel, con base mensual por farmacia y por día.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bottom-grid">
+      <div class="panel-card">
+        <h3>Próximos vencimientos</h3>
+        <div class="desc">Vista rápida de perfiles cercanos a renovar. Por ahora está maquetado para dejar lista la estructura visual.</div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Tipo</th>
+                <th>Nombre</th>
+                <th>Vence</th>
+                <th>Estado</th>
+              </tr>
+            </thead>
+            <tbody id="tablaVencimientos">
+              <tr>
+                <td>COM-0004</td>
+                <td>Comercio</td>
+                <td>Ejemplo Comercial</td>
+                <td>12/04/2026</td>
+                <td><span class="tag warn">Por vencer</span></td>
+              </tr>
+              <tr>
+                <td>SER-0007</td>
+                <td>Servicio</td>
+                <td>Servicio Demo</td>
+                <td>15/04/2026</td>
+                <td><span class="tag warn">Por vencer</span></td>
+              </tr>
+              <tr>
+                <td>COM-0010</td>
+                <td>Comercio</td>
+                <td>Local Prueba</td>
+                <td>18/04/2026</td>
+                <td><span class="tag info">Seguimiento</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="panel-card">
+        <h3>Farmacias de turno</h3>
+        <div class="desc">Espacio listo para manejar la parte visual y operativa de turnos mensuales.</div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Farmacia</th>
+                <th>Teléfono</th>
+                <th>WhatsApp</th>
+                <th>Estado</th>
+              </tr>
+            </thead>
+            <tbody id="tablaFarmacias">
+              <tr>
+                <td>Farmacia Ávalo</td>
+                <td>--</td>
+                <td>--</td>
+                <td><span class="tag ok">Activa</span></td>
+              </tr>
+              <tr>
+                <td>Farmacia Demo 1</td>
+                <td>--</td>
+                <td>--</td>
+                <td><span class="tag ok">Activa</span></td>
+              </tr>
+              <tr>
+                <td>Farmacia Demo 2</td>
+                <td>--</td>
+                <td>--</td>
+                <td><span class="tag info">Disponible</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="mini-actions">
+          <button class="mini-btn primary">Administrar turnos</button>
+          <button class="mini-btn secondary">Editar farmacias</button>
+        </div>
+      </div>
+    </section>
+
+    <div class="footer-note">
+      Panel base listo. El próximo salto es enchufar métricas y acciones reales desde Apps Script y Google Sheets.
+    </div>
+  </main>
+
+  <script>
+    const LOGIN_URL = "index.html";
+
+    function obtenerSesion() {
+      const local = localStorage.getItem("conecta2_admin_session");
+      const session = sessionStorage.getItem("conecta2_admin_session");
+      const data = local || session;
+
+      if (!data) return null;
+
+      try {
+        return JSON.parse(data);
+      } catch (error) {
+        localStorage.removeItem("conecta2_admin_session");
+        sessionStorage.removeItem("conecta2_admin_session");
+        return null;
+      }
+    }
+
+    function cerrarSesion() {
+      localStorage.removeItem("conecta2_admin_session");
+      sessionStorage.removeItem("conecta2_admin_session");
+      window.location.href = LOGIN_URL;
+    }
+
+    function protegerPanel() {
+      const sesion = obtenerSesion();
+
+      if (!sesion || !sesion.token) {
+        window.location.href = LOGIN_URL;
+        return null;
+      }
+
+      return sesion;
+    }
+
+    function cargarDatosAdmin(sesion) {
+      document.getElementById("adminNombre").textContent = sesion.nombre || "Administrador";
+      document.getElementById("adminUsuario").textContent = sesion.usuario ? "Usuario: " + sesion.usuario : "Usuario no disponible";
+
+      const textoSesion = sesion.vencimiento
+        ? "Sesión iniciada · Vence: " + new Date(sesion.vencimiento).toLocaleString("es-AR")
+        : "Sesión activa";
+
+      document.getElementById("sessionInfo").textContent = textoSesion;
+    }
+
+    function cargarDemoDashboard() {
+      document.getElementById("statActivas").textContent = "18";
+      document.getElementById("statVencer").textContent = "3";
+      document.getElementById("statManuales").textContent = "2";
+      document.getElementById("statFarmacias").textContent = "6";
+    }
+
+    document.getElementById("logoutBtn").addEventListener("click", cerrarSesion);
+
+    const sesion = protegerPanel();
+    if (sesion) {
+      cargarDatosAdmin(sesion);
+      cargarDemoDashboard();
+    }
+  </script>
+
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("/conecta2/admin/service-worker.js", {
+          scope: "/conecta2/admin/"
+        }).catch(error => console.error("Error registrando service worker:", error));
+      });
+    }
+  </script>
+</body>
+</html>
