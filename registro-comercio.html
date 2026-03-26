@@ -1580,6 +1580,7 @@ function actualizarOtroRubro() {
         const fotoBase64 = file ? await convertirImagenABase64(file) : '';
 
         const payload = {
+  action: "crearSolicitudMembresia",
           tipo: "comercio",
           nombreComercio: valor('nombreComercio'),
           categoriaPrincipal: valor('categoriaPrincipal'),
@@ -1643,7 +1644,7 @@ function actualizarOtroRubro() {
 
           return;
         } else {
-          mostrarError('No se pudo guardar la solicitud.<br><br>Detalle: ' + (result.error || 'Error desconocido'));
+          mostrarError('No se pudo guardar la solicitud.<br><br>Detalle: ' + (result.error || result.message || 'Error desconocido')
         }
 
       } catch (error) {
