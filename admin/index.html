@@ -223,108 +223,151 @@
   </div>
 
   <script>
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxUCqWb6pYziwFrHWwXgSNwDfs4dt2KmdEZS18qFxcqlrSF4ywXdrDSrRM_Efka8Iij/exec";
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxUCqWb6pYziwFrHWwXgSNwDfs4dt2KmdEZS18qFxcqlrSF4ywXdrDSrRM_Efka8Iij/exec";
 
-    const loginForm = document.getElementById("loginForm");
-    const btnLogin = document.getElementById("btnLogin");
-    const mensaje = document.getElementById("mensaje");
-    const usuarioInput = document.getElementById("usuario");
-    const passwordInput = document.getElementById("password");
-    const recordarmeInput = document.getElementById("recordarme");
-    const togglePasswordBtn = document.getElementById("togglePassword");
+  const loginForm = document.getElementById("loginForm");
+  const btnLogin = document.getElementById("btnLogin");
+  const mensaje = document.getElementById("mensaje");
+  const usuarioInput = document.getElementById("usuario");
+  const passwordInput = document.getElementById("password");
+  const recordarmeInput = document.getElementById("recordarme");
+  const togglePasswordBtn = document.getElementById("togglePassword");
 
-    function irAlPanel() {
-      window.location.href = "panel.html";
+  const CLAVE_RECORDAR = "conecta2_admin_recordar";
+  const CLAVE_USUARIO = "conecta2_admin_usuario";
+  const CLAVE_PASSWORD = "conecta2_admin_password";
+
+  function irAlPanel() {
+    window.location.href = "panel.html";
+  }
+
+  function cargarCredencialesRecordadas() {
+    const recordar = localStorage.getItem(CLAVE_RECORDAR) === "true";
+    const usuarioGuardado = localStorage.getItem(CLAVE_USUARIO) || "";
+    const passwordGuardada = localStorage.getItem(CLAVE_PASSWORD) || "";
+
+    recordarmeInput.checked = recordar;
+
+    if (recordar) {
+      usuarioInput.value = usuarioGuardado;
+      passwordInput.value = passwordGuardada;
+    }
+  }
+
+  function guardarCredencialesRecordadas() {
+    if (recordarmeInput.checked) {
+      localStorage.setItem(CLAVE_RECORDAR, "true");
+      localStorage.setItem(CLAVE_USUARIO, usuarioInput.value.trim());
+      localStorage.setItem(CLAVE_PASSWORD, passwordInput.value);
+    } else {
+      localStorage.removeItem(CLAVE_RECORDAR);
+      localStorage.removeItem(CLAVE_USUARIO);
+      localStorage.removeItem(CLAVE_PASSWORD);
+    }
+  }
+
+  function mostrarMensaje(texto, tipo) {
+    mensaje.textContent = texto;
+    mensaje.className = "msg " + tipo;
+  }
+
+  // Cargar lo recordado al abrir
+  cargarCredencialesRecordadas();
+
+  // Si el usuario cambia el check, actualizar al toque
+  recordarmeInput.addEventListener("change", function () {
+    guardarCredencialesRecordadas();
+  });
+
+  // Si cambia usuario o contraseña y está tildado, guardar al toque
+  usuarioInput.addEventListener("input", function () {
+    if (recordarmeInput.checked) guardarCredencialesRecordadas();
+  });
+
+  passwordInput.addEventListener("input", function () {
+    if (recordarmeInput.checked) guardarCredencialesRecordadas();
+  });
+
+  togglePasswordBtn.addEventListener("click", function () {
+    const mostrando = passwordInput.type === "text";
+
+    if (mostrando) {
+      passwordInput.type = "password";
+      togglePasswordBtn.textContent = "👁️";
+      togglePasswordBtn.setAttribute("aria-label", "Mostrar contraseña");
+      togglePasswordBtn.setAttribute("title", "Mostrar contraseña");
+    } else {
+      passwordInput.type = "text";
+      togglePasswordBtn.textContent = "🙈";
+      togglePasswordBtn.setAttribute("aria-label", "Ocultar contraseña");
+      togglePasswordBtn.setAttribute("title", "Ocultar contraseña");
+    }
+  });
+
+  loginForm.addEventListener("submit", async function(e) {
+    e.preventDefault();
+
+    const usuario = usuarioInput.value.trim();
+    const password = passwordInput.value.trim();
+
+    if (!usuario || !password) {
+      mostrarMensaje("Completá usuario y contraseña.", "error");
+      return;
     }
 
-    // Solo valida que la sesión guardada no esté corrupta.
-    // Ya NO redirige automáticamente al panel.
-   
+    btnLogin.disabled = true;
+    btnLogin.textContent = "Ingresando...";
+    mostrarMensaje("Validando acceso...", "ok");
 
-    togglePasswordBtn.addEventListener("click", function () {
-      const mostrando = passwordInput.type === "text";
+    try {
+      const formData = new FormData();
+      formData.append("action", "adminLogin");
+      formData.append("usuario", usuario);
+      formData.append("password", password);
 
-      if (mostrando) {
-        passwordInput.type = "password";
-        togglePasswordBtn.textContent = "👁️";
-        togglePasswordBtn.setAttribute("aria-label", "Mostrar contraseña");
-        togglePasswordBtn.setAttribute("title", "Mostrar contraseña");
-      } else {
-        passwordInput.type = "text";
-        togglePasswordBtn.textContent = "🙈";
-        togglePasswordBtn.setAttribute("aria-label", "Ocultar contraseña");
-        togglePasswordBtn.setAttribute("title", "Ocultar contraseña");
-      }
-    });
+      const response = await fetch(SCRIPT_URL, {
+        method: "POST",
+        body: formData
+      });
 
-    loginForm.addEventListener("submit", async function(e) {
-      e.preventDefault();
+      const data = await response.json();
 
-      const usuario = usuarioInput.value.trim();
-      const password = passwordInput.value.trim();
-      const recordarme = recordarmeInput.checked;
+      if (data.ok) {
+        const session = {
+          token: data.token,
+          nombre: data.nombre || "",
+          usuario: data.usuario || usuario,
+          vencimiento: data.vencimiento || ""
+        };
 
-      if (!usuario || !password) {
-        mostrarMensaje("Completá usuario y contraseña.", "error");
-        return;
-      }
+        localStorage.removeItem("conecta2_admin_session");
+        sessionStorage.removeItem("conecta2_admin_session");
 
-      btnLogin.disabled = true;
-      btnLogin.textContent = "Ingresando...";
-      mostrarMensaje("Validando acceso...", "ok");
-
-      try {
-        const formData = new FormData();
-        formData.append("action", "adminLogin");
-        formData.append("usuario", usuario);
-        formData.append("password", password);
-
-        const response = await fetch(SCRIPT_URL, {
-          method: "POST",
-          body: formData
-        });
-
-        const data = await response.json();
-
-        if (data.ok) {
-          const session = {
-            token: data.token,
-            nombre: data.nombre || "",
-            usuario: data.usuario || usuario,
-            vencimiento: data.vencimiento || ""
-          };
-
-          localStorage.removeItem("conecta2_admin_session");
-          sessionStorage.removeItem("conecta2_admin_session");
-
-          if (recordarme) {
-            localStorage.setItem("conecta2_admin_session", JSON.stringify(session));
-          } else {
-            sessionStorage.setItem("conecta2_admin_session", JSON.stringify(session));
-          }
-
-          mostrarMensaje("Acceso correcto. Redirigiendo...", "ok");
-
-          setTimeout(() => {
-            irAlPanel();
-          }, 700);
+        if (recordarmeInput.checked) {
+          localStorage.setItem("conecta2_admin_session", JSON.stringify(session));
         } else {
-          mostrarMensaje(data.message || "Usuario o contraseña incorrectos.", "error");
+          sessionStorage.setItem("conecta2_admin_session", JSON.stringify(session));
         }
 
-      } catch (error) {
-        console.error(error);
-        mostrarMensaje("No se pudo conectar con el servidor.", "error");
-      } finally {
-        btnLogin.disabled = false;
-        btnLogin.textContent = "Ingresar";
-      }
-    });
+        guardarCredencialesRecordadas();
 
-    function mostrarMensaje(texto, tipo) {
-      mensaje.textContent = texto;
-      mensaje.className = "msg " + tipo;
+        mostrarMensaje("Acceso correcto. Redirigiendo...", "ok");
+
+        setTimeout(() => {
+          irAlPanel();
+        }, 700);
+      } else {
+        mostrarMensaje(data.message || "Usuario o contraseña incorrectos.", "error");
+      }
+
+    } catch (error) {
+      console.error(error);
+      mostrarMensaje("No se pudo conectar con el servidor.", "error");
+    } finally {
+      btnLogin.disabled = false;
+      btnLogin.textContent = "Ingresar";
     }
-  </script>
+  });
+</script>
 </body>
 </html>
