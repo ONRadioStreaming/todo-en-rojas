@@ -1513,9 +1513,9 @@
         const fotoBase64 = file ? await convertirImagenABase64(file) : '';
 
         const payload = {
-          action: "crearSolicitudMembresia",
+          action: "registrarComercio",
           tipo: "comercio",
-          nombreComercio: valor('nombreComercio'),
+          nombreComercio: valor('titular'),
           categoriaPrincipal: valor('categoriaPrincipal'),
           rubroComercial: valor('rubroComercial'),
           rubroFinal: obtenerRubroFinal(),
