@@ -662,58 +662,62 @@
     }
 
     async function cargarTurnosFarmacias() {
-      const anio = Number(document.getElementById("farmAnio").value);
-      const mes = Number(document.getElementById("farmMes").value);
+  const anio = Number(document.getElementById("farmAnio").value);
+  const mes = Number(document.getElementById("farmMes").value);
 
-      try {
-        const r = await postJsonAction("obtenerTurnosFarmacias", { anio, mes });
+  try {
+    const r = await postFormAction("obtenerTurnosFarmacias", { anio, mes });
 
-        if (!r.ok) {
-          document.getElementById("tablaTurnosFarmacias").innerHTML =
-            '<tr><td colspan="2" class="empty">No se pudo cargar el calendario.</td></tr>';
-          return;
-        }
-
-        turnosFarmaciasActuales = r.turnos || [];
-        renderTablaTurnosFarmacias(anio, mes);
-      } catch (e) {
-        console.error(e);
-        document.getElementById("tablaTurnosFarmacias").innerHTML =
-          '<tr><td colspan="2" class="empty">Error cargando turnos.</td></tr>';
-      }
+    if (!r.ok) {
+      document.getElementById("tablaTurnosFarmacias").innerHTML =
+        '<tr><td colspan="2" class="empty">No se pudo cargar el calendario.</td></tr>';
+      return;
     }
+
+    turnosFarmaciasActuales = r.turnos || [];
+    renderTablaTurnosFarmacias(anio, mes);
+  } catch (e) {
+    console.error(e);
+    document.getElementById("tablaTurnosFarmacias").innerHTML =
+      '<tr><td colspan="2" class="empty">Error cargando turnos.</td></tr>';
+  }
+}
 
     async function guardarTurnosFarmacias() {
-      const anio = Number(document.getElementById("farmAnio").value);
-      const mes = Number(document.getElementById("farmMes").value);
-      const selects = document.querySelectorAll('#tablaTurnosFarmacias select');
+  const anio = Number(document.getElementById("farmAnio").value);
+  const mes = Number(document.getElementById("farmMes").value);
+  const selects = document.querySelectorAll('#tablaTurnosFarmacias select');
 
-      const turnos = [];
-      selects.forEach(sel => {
-        const dia = Number(sel.getAttribute("data-dia"));
-        const id_farmacia = String(sel.value || "").trim();
-        if (dia && id_farmacia) {
-          turnos.push({ dia, id_farmacia });
-        }
-      });
-
-      const confirmar = confirm("¿Querés guardar los turnos del mes seleccionado?");
-      if (!confirmar) return;
-
-      try {
-        const r = await postJsonAction("guardarTurnosFarmacias", { anio, mes, turnos });
-
-        if (r.ok) {
-          alert("Turnos guardados correctamente.");
-          cargarTurnosFarmacias();
-        } else {
-          alert(r.message || "No se pudieron guardar los turnos.");
-        }
-      } catch (e) {
-        console.error(e);
-        alert("Error de conexión al guardar turnos.");
-      }
+  const turnos = [];
+  selects.forEach(sel => {
+    const dia = Number(sel.getAttribute("data-dia"));
+    const id_farmacia = String(sel.value || "").trim();
+    if (dia && id_farmacia) {
+      turnos.push({ dia, id_farmacia });
     }
+  });
+
+  const confirmar = confirm("¿Querés guardar los turnos del mes seleccionado?");
+  if (!confirmar) return;
+
+  try {
+    const r = await postFormAction("guardarTurnosFarmacias", {
+      anio,
+      mes,
+      turnos: JSON.stringify(turnos)
+    });
+
+    if (r.ok) {
+      alert("Turnos guardados correctamente.");
+      cargarTurnosFarmacias();
+    } else {
+      alert(r.message || "No se pudieron guardar los turnos.");
+    }
+  } catch (e) {
+    console.error(e);
+    alert("Error de conexión al guardar turnos.");
+  }
+}
 
     function bindEventos() {
       document.getElementById("logoutBtn").addEventListener("click", logout);
