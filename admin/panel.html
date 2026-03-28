@@ -512,7 +512,7 @@
               <td>${item.plan || ""}</td>
               <td>${item.medio_pago || ""}</td>
               <td><input type="checkbox" id="check-${item.fila}"></td>
-              <td><button class="btn primary" onclick="activarManual(${item.fila})">Activar</button></td>
+              <td><button class="btn primary" onclick="activarManual(${item.fila}, '${item.id_membresia}')">Activar</button></td>
             </tr>
           `;
         });
@@ -524,12 +524,32 @@
       }
     }
 
-    async function activarManual(fila) {
-      const check = document.getElementById("check-" + fila);
-      if (!check || !check.checked) {
-        alert("Marcá primero que pagó.");
-        return;
-      }
+    async function activarManual(fila, idMembresia) {
+  const check = document.getElementById("check-" + fila);
+
+  if (!check || !check.checked) {
+    alert("Marcá primero que pagó.");
+    return;
+  }
+
+  const ok = confirm("¿Querés activar esta membresía manual?");
+  if (!ok) return;
+
+  try {
+    const r = await postFormAction("activarMembresiaManual", { id_membresia: idMembresia });
+
+    if (r.ok) {
+      alert("Membresía activada correctamente.");
+      cargarPendientes();
+      cargarResumen();
+    } else {
+      alert(r.message || r.error || "No se pudo activar.");
+    }
+  } catch (e) {
+    console.error(e);
+    alert("Error de conexión.");
+  }
+}
 
       const ok = confirm("¿Querés activar esta membresía manual?");
       if (!ok) return;
