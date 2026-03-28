@@ -143,6 +143,7 @@
       padding:12px 14px;
       color:#d7ebff;
       font-size:14px;
+      line-height:1.4;
     }
 
     .status.error{
@@ -432,21 +433,21 @@
     <section id="view-membresias" class="view">
       <div class="card">
         <h2>Membresías</h2>
-        <div class="module-placeholder">Este módulo lo armamos en la siguiente etapa, limpio y sin parches.</div>
+        <div class="module-placeholder">Este módulo lo armamos en la siguiente etapa.</div>
       </div>
     </section>
 
     <section id="view-comercios" class="view">
       <div class="card">
         <h2>Comercios</h2>
-        <div class="module-placeholder">Este módulo lo armamos en la siguiente etapa, limpio y sin parches.</div>
+        <div class="module-placeholder">Este módulo lo armamos en la siguiente etapa.</div>
       </div>
     </section>
 
     <section id="view-servicios" class="view">
       <div class="card">
         <h2>Servicios</h2>
-        <div class="module-placeholder">Este módulo lo armamos en la siguiente etapa, limpio y sin parches.</div>
+        <div class="module-placeholder">Este módulo lo armamos en la siguiente etapa.</div>
       </div>
     </section>
 
@@ -681,6 +682,10 @@
       }
     }
 
+    async function activarMembresia(fila, idMembresia) {
+      return activarManual(fila, idMembresia);
+    }
+
     async function cargarFarmacias() {
       try {
         setStatus("Cargando farmacias...");
@@ -752,7 +757,7 @@
           const id = String(f.id_farmacia || "");
           const nombre = String(f.nombre || "");
           const selected = id === seleccionado ? "selected" : "";
-          opciones += `<option value="${id}" ${selected}>${nombre}</option>`;
+          opciones += <option value="${id}" ${selected}>${nombre}</option>;
         });
 
         html += `
