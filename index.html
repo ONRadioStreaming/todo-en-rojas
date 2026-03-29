@@ -822,37 +822,45 @@
       });
     });
   function registrarInstalacionApp() {
-  let deviceId = localStorage.getItem("conecta2_device_id");
+  try {
+    let deviceId = localStorage.getItem("conecta2_device_id");
 
-  if (!deviceId) {
-    deviceId = "dev-" + Date.now() + "-" + Math.floor(Math.random() * 1000000);
-    localStorage.setItem("conecta2_device_id", deviceId);
-  }
+    if (!deviceId) {
+      deviceId = "dev-" + Date.now() + "-" + Math.floor(Math.random() * 1000000);
+      localStorage.setItem("conecta2_device_id", deviceId);
+    }
 
-  const formData = new FormData();
-  formData.append("action", "registrarInstalacion");
-  formData.append("device_id", deviceId);
-  formData.append("origen", "app");
-  formData.append(
-    "modo",
-    window.matchMedia("(display-mode: standalone)").matches ? "standalone" : "browser"
-  );
+    alert("registrarInstalacionApp corriendo\nDevice ID: " + deviceId);
 
-  alert("registrarInstalacionApp corriendo\nDevice ID: " + deviceId);
+    alert("SCRIPT_URL: " + SCRIPT_URL);
 
-  fetch(SCRIPT_URL, {
-    method: "POST",
-    body: formData
-  })
-    .then(r => r.json())
-    .then(data => {
-      alert("Respuesta backend: " + JSON.stringify(data));
-      console.log("Instalación registrada:", data);
+    const formData = new FormData();
+    formData.append("action", "registrarInstalacion");
+    formData.append("device_id", deviceId);
+    formData.append("origen", "app");
+    formData.append(
+      "modo",
+      window.matchMedia("(display-mode: standalone)").matches ? "standalone" : "browser"
+    );
+
+    fetch(SCRIPT_URL, {
+      method: "POST",
+      body: formData
     })
-    .catch(err => {
-      alert("Error registrando instalación: " + err);
-      console.error("Error registrando instalación:", err);
-    });
+      .then(r => r.json())
+      .then(data => {
+        alert("Respuesta backend: " + JSON.stringify(data));
+        console.log("Instalación registrada:", data);
+      })
+      .catch(err => {
+        alert("Error fetch: " + err);
+        console.error("Error registrando instalación:", err);
+      });
+
+  } catch (err) {
+    alert("Error antes del fetch: " + err);
+    console.error(err);
+  }
 }
 
 registrarInstalacionApp();
