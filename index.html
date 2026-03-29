@@ -821,6 +821,37 @@
         }
       });
     });
-  </script>
+  function registrarInstalacionApp() {
+  let deviceId = localStorage.getItem("conecta2_device_id");
+
+  if (!deviceId) {
+    deviceId = "dev-" + Date.now() + "-" + Math.floor(Math.random() * 1000000);
+    localStorage.setItem("conecta2_device_id", deviceId);
+  }
+
+  const formData = new FormData();
+  formData.append("action", "registrarInstalacion");
+  formData.append("device_id", deviceId);
+  formData.append("origen", "app");
+  formData.append(
+    "modo",
+    window.matchMedia("(display-mode: standalone)").matches ? "standalone" : "browser"
+  );
+
+  fetch(SCRIPT_URL, {
+    method: "POST",
+    body: formData
+  })
+    .then(r => r.json())
+    .then(data => {
+      console.log("Instalación registrada:", data);
+    })
+    .catch(err => {
+      console.error("Error registrando instalación:", err);
+    });
+}
+
+registrarInstalacionApp();
+</script>
 </body>
 </html>
