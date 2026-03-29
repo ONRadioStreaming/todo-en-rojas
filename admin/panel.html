@@ -7,134 +7,128 @@
   <style>
     :root{
       --bg:#07111b;
-      --bg2:#0b1624;
-      --card:#11243b;
-      --card2:#162d4a;
+      --bg2:#0c1725;
+      --card:#142338;
+      --card2:#1a2d46;
       --line:rgba(255,255,255,.08);
       --text:#f3f7fb;
-      --muted:#b3bfd0;
-      --ok:#18c37e;
-      --ok2:rgba(24,195,126,.14);
-      --err:#ff6767;
-      --err2:rgba(255,103,103,.14);
-      --btn:#2a3f5e;
-      --primary:#18c37e;
-      --primary2:#13a96d;
-      --danger:#ff6b6b;
-      --shadow:0 12px 28px rgba(0,0,0,.28);
-      --radius:22px;
+      --muted:#acb7c8;
+      --green:#16c784;
+      --green2:#10a86d;
+      --red:#ff5d5d;
+      --blue:#4ea8ff;
+      --radius:18px;
+      --shadow:0 12px 28px rgba(0,0,0,.25);
     }
 
     *{box-sizing:border-box}
+
     html,body{
       margin:0;
       padding:0;
+      min-height:100%;
+      font-family:Arial,sans-serif;
       background:linear-gradient(180deg,var(--bg) 0%,var(--bg2) 100%);
       color:var(--text);
-      font-family:Arial,sans-serif;
-      min-height:100%;
-      scroll-behavior:smooth;
     }
 
-    .wrap{
+    .app{
       max-width:1200px;
       margin:0 auto;
       padding:16px;
     }
 
-    .topbar{
+    .top{
       display:flex;
       justify-content:space-between;
-      align-items:flex-start;
+      align-items:center;
       gap:12px;
       margin-bottom:16px;
       flex-wrap:wrap;
     }
 
     .brand{
-      font-size:34px;
-      font-weight:800;
-      line-height:1;
-      margin-bottom:6px;
+      font-size:28px;
+      font-weight:700;
     }
 
-    .subbrand{
+    .sub{
       color:var(--muted);
-      font-size:17px;
+      font-size:14px;
+      margin-top:4px;
     }
 
     .logout-btn{
       border:none;
-      background:var(--danger);
+      background:var(--red);
       color:#fff;
-      border-radius:18px;
-      padding:18px 28px;
-      font-size:18px;
-      font-weight:800;
-      cursor:pointer;
-      box-shadow:var(--shadow);
-    }
-
-    .status{
-      margin-bottom:16px;
-      padding:14px 18px;
-      border-radius:18px;
-      border:1px solid rgba(255,255,255,.08);
-      background:rgba(255,255,255,.04);
-      color:#dfe8f4;
+      border-radius:14px;
+      padding:14px 16px;
       font-size:15px;
+      font-weight:700;
+      cursor:pointer;
     }
 
-    .status.ok{
-      background:var(--ok2);
-      border-color:rgba(24,195,126,.28);
-      color:#d7fff0;
-    }
-
-    .status.error{
-      background:var(--err2);
-      border-color:rgba(255,103,103,.28);
-      color:#ffdcdc;
-    }
-
-    .menu-grid{
+    .menu{
       display:grid;
       grid-template-columns:repeat(3,minmax(0,1fr));
-      gap:14px;
-      margin-bottom:18px;
+      gap:12px;
+      margin-bottom:16px;
     }
 
     .menu-btn{
-      appearance:none;
       border:none;
       background:var(--card);
       color:#fff;
-      border-radius:26px;
-      padding:26px 24px;
+      border-radius:18px;
+      padding:18px 16px;
       text-align:left;
       cursor:pointer;
       box-shadow:var(--shadow);
-      border:1px solid rgba(255,255,255,.06);
-      min-height:118px;
+      border:1px solid var(--line);
+      min-height:86px;
     }
 
     .menu-btn.active{
       background:var(--card2);
-      outline:2px solid rgba(78,168,255,.18);
+      outline:2px solid rgba(78,168,255,.25);
     }
 
     .menu-btn .title{
       display:block;
-      font-size:24px;
-      font-weight:800;
-      margin-bottom:10px;
+      font-size:18px;
+      font-weight:700;
+      margin-bottom:6px;
     }
 
     .menu-btn .desc{
       display:block;
-      font-size:15px;
+      font-size:13px;
       color:var(--muted);
       line-height:1.35;
+    }
+
+    .status{
+      margin-bottom:16px;
+      background:rgba(78,168,255,.10);
+      border:1px solid rgba(78,168,255,.22);
+      border-radius:16px;
+      padding:12px 14px;
+      color:#d7ebff;
+      font-size:14px;
+      line-height:1.4;
+    }
+
+    .status.ok{
+      background:rgba(22,199,132,.10);
+      border-color:rgba(22,199,132,.22);
+      color:#d6ffea;
+    }
+
+    .status.error{
+      background:rgba(255,93,93,.10);
+      border-color:rgba(255,93,93,.22);
+      color:#ffd6d6;
     }
 
     .view{
@@ -147,247 +141,240 @@
 
     .card{
       background:var(--card);
-      border:1px solid rgba(255,255,255,.06);
-      border-radius:28px;
-      padding:22px;
+      border:1px solid var(--line);
+      border-radius:20px;
+      padding:18px;
       box-shadow:var(--shadow);
       margin-bottom:16px;
     }
 
-    .card h2{
-      margin:0 0 10px;
-      font-size:28px;
+    .card h2,.card h3{
+      margin:0 0 12px;
     }
 
-    .card h3{
-      margin:22px 0 12px;
-      font-size:22px;
-    }
-
-    .toolbar{
-      display:flex;
-      gap:12px;
-      flex-wrap:wrap;
-      align-items:end;
-      margin-bottom:16px;
-    }
-
-    .btn{
-      border:none;
-      border-radius:18px;
-      padding:16px 20px;
-      font-size:16px;
-      font-weight:800;
-      cursor:pointer;
-    }
-
-    .btn.secondary{
-      background:var(--btn);
-      color:#fff;
-      border:1px solid rgba(255,255,255,.08);
-    }
-
-    .btn.primary{
-      background:var(--primary);
-      color:#fff;
-    }
-
-    .btn.primary:hover{
-      background:var(--primary2);
+    .note{
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.45;
     }
 
     .stats{
       display:grid;
       grid-template-columns:repeat(4,minmax(0,1fr));
-      gap:14px;
+      gap:12px;
     }
 
     .stat{
-      background:rgba(255,255,255,.04);
-      border:1px solid rgba(255,255,255,.06);
-      border-radius:22px;
-      padding:18px;
-      min-height:138px;
-      display:flex;
-      flex-direction:column;
-      justify-content:space-between;
+      background:rgba(255,255,255,.03);
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:16px;
     }
 
     .stat .label{
+      font-size:13px;
       color:var(--muted);
-      font-size:15px;
-      line-height:1.3;
+      margin-bottom:8px;
     }
 
     .stat .value{
-      font-size:58px;
-      font-weight:800;
-      line-height:1;
+      font-size:32px;
+      font-weight:700;
     }
 
-    .note{
-      color:var(--muted);
-      font-size:15px;
-      line-height:1.45;
+    .toolbar{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+      margin-bottom:14px;
     }
 
-    .table-wrap{
-      overflow-x:auto;
-      border-radius:18px;
-      border:1px solid rgba(255,255,255,.08);
-      background:rgba(255,255,255,.03);
-    }
-
-    table{
-      width:100%;
-      border-collapse:collapse;
-      min-width:850px;
-    }
-
-    th,td{
-      padding:14px;
-      border-bottom:1px solid rgba(255,255,255,.08);
-      text-align:left;
-      font-size:15px;
-      vertical-align:middle;
-    }
-
-    th{
-      font-size:12px;
-      color:#dce6f5;
-      text-transform:uppercase;
-      letter-spacing:.5px;
-      background:rgba(255,255,255,.05);
-    }
-
-    .empty{
-      text-align:center;
-      color:var(--muted);
-      padding:22px;
-    }
-
-    .chk{
-      width:20px;
-      height:20px;
-      accent-color:var(--primary);
+    .btn{
+      border:none;
+      border-radius:12px;
+      padding:12px 14px;
+      font-size:14px;
+      font-weight:700;
       cursor:pointer;
+    }
+
+    .btn.primary{
+      background:var(--green);
+      color:#fff;
+    }
+
+    .btn.primary:hover{
+      background:var(--green2);
+    }
+
+    .btn.secondary{
+      background:rgba(255,255,255,.08);
+      color:#fff;
+      border:1px solid var(--line);
     }
 
     .field{
       display:flex;
       flex-direction:column;
-      gap:8px;
-      min-width:180px;
+      gap:6px;
+      min-width:130px;
     }
 
     .field label{
+      font-size:13px;
       color:var(--muted);
-      font-size:14px;
     }
 
     .field select{
-      background:#0d1929;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background:#0f1b2b;
       color:#fff;
-      border:1px solid rgba(255,255,255,.08);
+      padding:12px;
+      font-size:14px;
+    }
+
+    .table-wrap{
+      overflow-x:auto;
       border-radius:16px;
-      padding:14px;
-      font-size:16px;
-      outline:none;
+      border:1px solid var(--line);
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+      min-width:740px;
+      background:rgba(255,255,255,.02);
+    }
+
+    th,td{
+      padding:12px;
+      border-bottom:1px solid var(--line);
+      text-align:left;
+      font-size:14px;
+      vertical-align:middle;
+    }
+
+    th{
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:.5px;
+      background:rgba(255,255,255,.04);
+    }
+
+    .empty{
+      text-align:center;
+      color:var(--muted);
+      padding:20px;
+    }
+
+    .pending-check{
+      width:18px;
+      height:18px;
+      accent-color:var(--green);
+      cursor:pointer;
     }
 
     .farm-list{
       display:grid;
       grid-template-columns:repeat(2,minmax(0,1fr));
-      gap:12px;
-      margin-bottom:10px;
+      gap:10px;
+      margin-bottom:14px;
     }
 
     .farm-item{
-      background:rgba(255,255,255,.04);
-      border:1px solid rgba(255,255,255,.06);
-      border-radius:18px;
-      padding:14px;
+      background:rgba(255,255,255,.03);
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:12px;
     }
 
     .farm-item strong{
       display:block;
-      font-size:20px;
-      margin-bottom:8px;
+      margin-bottom:6px;
     }
 
-    .farm-tag{
+    .tag{
       display:inline-block;
-      margin-top:10px;
-      padding:8px 12px;
+      padding:6px 10px;
       border-radius:999px;
-      background:rgba(78,168,255,.18);
-      color:#d9eeff;
-      font-size:13px;
-      font-weight:700;
+      background:rgba(78,168,255,.16);
+      color:#d8ecff;
+      font-size:12px;
+      margin-top:8px;
     }
 
-    .placeholder{
+    .module-placeholder{
+      font-size:15px;
       color:var(--muted);
-      font-size:16px;
-      padding:10px 0 2px;
+      padding:14px 0;
     }
 
-    @media (max-width: 980px){
-      .menu-grid{grid-template-columns:1fr}
-      .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
-      .farm-list{grid-template-columns:1fr}
+    @media (max-width: 900px){
+      .menu{
+        grid-template-columns:1fr;
+      }
+      .stats{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+      }
+      .farm-list{
+        grid-template-columns:1fr;
+      }
     }
 
     @media (max-width: 560px){
-      .brand{font-size:28px}
-      .subbrand{font-size:15px}
-      .logout-btn{width:100%}
-      .stats{grid-template-columns:1fr}
-      .stat .value{font-size:46px}
-      .wrap{padding:12px}
+      .stats{
+        grid-template-columns:1fr;
+      }
+      .brand{
+        font-size:24px;
+      }
+      .app{
+        padding:12px;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <div class="topbar">
+  <div class="app">
+    <div class="top">
       <div>
         <div class="brand">Conecta2</div>
-        <div class="subbrand">Panel administrador</div>
+        <div class="sub">Panel administrador</div>
       </div>
-
-      <button id="logoutBtn" class="logout-btn">Cerrar sesión</button>
+      <button class="logout-btn" onclick="logout()">Cerrar sesión</button>
     </div>
 
-    <div id="globalStatus" class="status">Conectado.</div>
+    <div id="globalStatus" class="status">Panel cargado.</div>
 
-    <div class="menu-grid">
-      <button class="menu-btn active" data-view="resumen" id="btn-menu-resumen">
+    <div class="menu">
+      <button id="btn-menu-resumen" class="menu-btn active" onclick="showView('resumen')">
         <span class="title">Resumen</span>
         <span class="desc">Estado general del sistema.</span>
       </button>
 
-      <button class="menu-btn" data-view="pendientes" id="btn-menu-pendientes">
+      <button id="btn-menu-pendientes" class="menu-btn" onclick="showView('pendientes')">
         <span class="title">Pendientes manuales</span>
         <span class="desc">Pagos en efectivo o transferencia.</span>
       </button>
 
-      <button class="menu-btn" data-view="membresias" id="btn-menu-membresias">
+      <button id="btn-menu-membresias" class="menu-btn" onclick="showView('membresias')">
         <span class="title">Membresías</span>
         <span class="desc">Módulo siguiente.</span>
       </button>
 
-      <button class="menu-btn" data-view="comercios" id="btn-menu-comercios">
+      <button id="btn-menu-comercios" class="menu-btn" onclick="showView('comercios')">
         <span class="title">Comercios</span>
         <span class="desc">Módulo siguiente.</span>
       </button>
 
-      <button class="menu-btn" data-view="servicios" id="btn-menu-servicios">
+      <button id="btn-menu-servicios" class="menu-btn" onclick="showView('servicios')">
         <span class="title">Servicios</span>
         <span class="desc">Módulo siguiente.</span>
       </button>
 
-      <button class="menu-btn" data-view="farmacias" id="btn-menu-farmacias">
+      <button id="btn-menu-farmacias" class="menu-btn" onclick="showView('farmacias')">
         <span class="title">Farmacias</span>
         <span class="desc">Turnos y listado de farmacias.</span>
       </button>
@@ -396,9 +383,8 @@
     <section id="view-resumen" class="view active">
       <div class="card">
         <h2>Resumen general</h2>
-
         <div class="toolbar">
-          <button id="btnActualizarResumen" class="btn secondary">Actualizar resumen</button>
+          <button class="btn secondary" onclick="loadResumen()">Actualizar resumen</button>
         </div>
 
         <div class="stats">
@@ -421,21 +407,6 @@
             <div class="label">Vencidas</div>
             <div class="value" id="statVencidas">0</div>
           </div>
-
-          <div class="stat">
-            <div class="label">Instalaciones app</div>
-            <div class="value" id="statInstalaciones">0</div>
-          </div>
-
-          <div class="stat">
-            <div class="label">Activos hoy</div>
-            <div class="value" id="statActivosHoy">0</div>
-          </div>
-
-          <div class="stat">
-            <div class="label">Últimos 30 días</div>
-            <div class="value" id="statActivos30Dias">0</div>
-          </div>
         </div>
       </div>
     </section>
@@ -443,9 +414,8 @@
     <section id="view-pendientes" class="view">
       <div class="card">
         <h2>Pendientes manuales</h2>
-
         <div class="toolbar">
-          <button id="btnActualizarPendientes" class="btn secondary">Actualizar pendientes</button>
+          <button class="btn secondary" onclick="loadPendientes()">Actualizar pendientes</button>
         </div>
 
         <div class="table-wrap">
@@ -463,9 +433,7 @@
               </tr>
             </thead>
             <tbody id="tablaPendientes">
-              <tr>
-                <td colspan="8" class="empty">Cargando...</td>
-              </tr>
+              <tr><td colspan="8" class="empty">Cargando...</td></tr>
             </tbody>
           </table>
         </div>
@@ -475,33 +443,32 @@
     <section id="view-membresias" class="view">
       <div class="card">
         <h2>Membresías</h2>
-        <div class="placeholder">Este módulo lo armamos en la siguiente etapa.</div>
+        <div class="module-placeholder">Este módulo lo armamos en la siguiente etapa.</div>
       </div>
     </section>
 
     <section id="view-comercios" class="view">
       <div class="card">
         <h2>Comercios</h2>
-        <div class="placeholder">Este módulo lo armamos en la siguiente etapa.</div>
+        <div class="module-placeholder">Este módulo lo armamos en la siguiente etapa.</div>
       </div>
     </section>
 
     <section id="view-servicios" class="view">
       <div class="card">
         <h2>Servicios</h2>
-        <div class="placeholder">Este módulo lo armamos en la siguiente etapa.</div>
+        <div class="module-placeholder">Este módulo lo armamos en la siguiente etapa.</div>
       </div>
     </section>
 
     <section id="view-farmacias" class="view">
       <div class="card">
         <h2>Farmacias</h2>
-
-        <div class="note">
+        <div class="note" style="margin-bottom:14px;">
           El turno que ve la app respeta la lógica nocturna: antes de las 08:00 toma el día anterior.
         </div>
 
-        <div class="toolbar" style="margin-top:16px;">
+        <div class="toolbar">
           <div class="field">
             <label for="farmMes">Mes</label>
             <select id="farmMes"></select>
@@ -512,8 +479,8 @@
             <select id="farmAnio"></select>
           </div>
 
-          <button id="btnCargarTurnos" class="btn secondary">Cargar calendario</button>
-          <button id="btnGuardarTurnos" class="btn primary">Guardar turnos</button>
+          <button class="btn secondary" onclick="loadTurnosFarmacias()">Cargar calendario</button>
+          <button class="btn primary" onclick="saveTurnosFarmacias()">Guardar turnos</button>
         </div>
 
         <h3>Farmacias activas</h3>
@@ -531,9 +498,7 @@
               </tr>
             </thead>
             <tbody id="tablaTurnosFarmacias">
-              <tr>
-                <td colspan="2" class="empty">Seleccioná mes y año para cargar el calendario.</td>
-              </tr>
+              <tr><td colspan="2" class="empty">Seleccioná mes y año para cargar el calendario.</td></tr>
             </tbody>
           </table>
         </div>
@@ -542,16 +507,18 @@
   </div>
 
   <script>
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxUCqWb6pYziwFrHWwXgSNwDfs4dt2KmdEZS18qFxcqlrSF4ywXdrDsrRM_Efka8Iij/exec";
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxUCqWb6pYziwFrHWwXgSNwDfs4dt2KmdEZS18qFxcqlrSF4ywXdrDSrRM_Efka8Iij/exec";
 
     let farmaciasCache = [];
     let turnosFarmaciasActuales = [];
 
-    function setStatus(texto, tipo = "") {
+    function setStatus(texto, tipo) {
       const box = document.getElementById("globalStatus");
       box.textContent = texto;
       box.className = "status";
-      if (tipo) box.classList.add(tipo);
+      if (tipo) {
+        box.classList.add(tipo);
+      }
     }
 
     function logout() {
@@ -561,33 +528,73 @@
     }
 
     function showView(view) {
-      document.querySelectorAll(".view").forEach(v => v.classList.remove("active"));
-      document.querySelectorAll(".menu-btn").forEach(b => b.classList.remove("active"));
+      const views = document.querySelectorAll(".view");
+      const buttons = document.querySelectorAll(".menu-btn");
+  const views = document.querySelectorAll(".view");
+  const buttons = document.querySelectorAll(".menu-btn");
+
+      for (let i = 0; i < views.length; i++) {
+        views[i].classList.remove("active");
+      }
+  for (let i = 0; i < views.length; i++) {
+    views[i].classList.remove("active");
+  }
+
+      for (let j = 0; j < buttons.length; j++) {
+        buttons[j].classList.remove("active");
+      }
+  for (let j = 0; j < buttons.length; j++) {
+    buttons[j].classList.remove("active");
+  }
+
+  const targetView = document.getElementById("view-" + view);
+  const targetBtn = document.getElementById("btn-menu-" + view);
+
+  if (targetView) {
+    targetView.classList.add("active");
+  }
 
       const targetView = document.getElementById("view-" + view);
       const targetBtn = document.getElementById("btn-menu-" + view);
+  if (targetBtn) {
+    targetBtn.classList.add("active");
+  }
 
       if (targetView) targetView.classList.add("active");
       if (targetBtn) targetBtn.classList.add("active");
+  if (view === "resumen") {
+    loadResumen();
+  }
 
       if (view === "resumen") loadResumen();
       if (view === "pendientes") loadPendientes();
       if (view === "farmacias") loadFarmacias();
+  if (view === "pendientes") {
+    loadPendientes();
+  }
 
-      setTimeout(() => {
-        if (targetView) {
-          targetView.scrollIntoView({ behavior: "smooth", block: "start" });
-        }
-      }, 120);
+  if (view === "farmacias") {
+    loadFarmacias();
+  }
+
+  setTimeout(function () {
+    if (targetView) {
+      targetView.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
     }
+  }, 120);
+}
 
-    async function postFormAction(action, extra = {}) {
+    async function postFormAction(action, extra) {
       const formData = new FormData();
       formData.append("action", action);
 
-      Object.keys(extra).forEach(k => {
-        formData.append(k, extra[k]);
-      });
+      const payload = extra || {};
+      for (const key in payload) {
+        formData.append(key, payload[key]);
+      }
 
       const response = await fetch(SCRIPT_URL, {
         method: "POST",
@@ -597,24 +604,24 @@
       return await response.json();
     }
 
-    function inicializarMesesAnios() {
+    function initMesesAnios() {
       const meses = [
         "Enero","Febrero","Marzo","Abril","Mayo","Junio",
         "Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"
       ];
 
-      const selMes = document.getElementById("farmMes");
-      const selAnio = document.getElementById("farmAnio");
+      const mes = document.getElementById("farmMes");
+      const anio = document.getElementById("farmAnio");
 
-      selMes.innerHTML = "";
-      selAnio.innerHTML = "";
+      mes.innerHTML = "";
+      anio.innerHTML = "";
 
-      meses.forEach((m, i) => {
+      for (let i = 0; i < meses.length; i++) {
         const op = document.createElement("option");
         op.value = i + 1;
-        op.textContent = m;
-        selMes.appendChild(op);
-      });
+        op.textContent = meses[i];
+        mes.appendChild(op);
+      }
 
       const hoy = new Date();
       const anioActual = hoy.getFullYear();
@@ -623,20 +630,20 @@
         const op = document.createElement("option");
         op.value = y;
         op.textContent = y;
-        selAnio.appendChild(op);
+        anio.appendChild(op);
       }
 
-      selMes.value = hoy.getMonth() + 1;
-      selAnio.value = hoy.getFullYear();
+      mes.value = hoy.getMonth() + 1;
+      anio.value = anioActual;
     }
 
     async function loadResumen() {
       try {
         setStatus("Cargando resumen...");
-        const r = await postFormAction("resumenAdmin");
+        const r = await postFormAction("resumenAdmin", {});
 
         if (!r.ok) {
-          setStatus(r.message || "No se pudo cargar el resumen.", "error");
+          setStatus(r.message || r.error || "No se pudo cargar el resumen.", "error");
           return;
         }
 
@@ -644,9 +651,6 @@
         document.getElementById("statVencer").textContent = r.porVencer || 0;
         document.getElementById("statPendientes").textContent = r.pendientes || 0;
         document.getElementById("statVencidas").textContent = r.vencidas || 0;
-        document.getElementById("statInstalaciones").textContent = r.instalaciones || 0;
-        document.getElementById("statActivosHoy").textContent = r.activosHoy || 0;
-        document.getElementById("statActivos30Dias").textContent = r.activos30Dias || 0;
 
         setStatus("Resumen cargado correctamente.", "ok");
       } catch (e) {
@@ -660,8 +664,8 @@
       tbody.innerHTML = '<tr><td colspan="8" class="empty">Cargando...</td></tr>';
 
       try {
-        setStatus("Cargando pendientes...");
-        const r = await postFormAction("listarPendientesManuales");
+        setStatus("Cargando pendientes manuales...");
+        const r = await postFormAction("listarPendientesManuales", {});
 
         if (!r.ok) {
           tbody.innerHTML = '<tr><td colspan="8" class="empty">No se pudieron cargar los pendientes.</td></tr>';
@@ -678,7 +682,9 @@
         }
 
         let html = "";
-        pendientes.forEach(item => {
+
+        for (let i = 0; i < pendientes.length; i++) {
+          const item = pendientes[i];
           const fila = String(item.fila || "");
           const id = String(item.id_membresia || "");
           const nombre = String(item.nombre_negocio || "");
@@ -687,19 +693,18 @@
           const plan = String(item.plan || "");
           const medio = String(item.medio_pago || "");
 
-          html += `
-            <tr>
-              <td>${id}</td>
-              <td>${nombre}</td>
-              <td>${tipo}</td>
-              <td>${telefono}</td>
-              <td>${plan}</td>
-              <td>${medio}</td>
-              <td><input type="checkbox" class="chk" id="check-${fila}"></td>
-              <td><button class="btn primary btn-activar" data-fila="${fila}" data-id="${id}">Activar</button></td>
-            </tr>
-          `;
-        });
+          html += ''
+            + '<tr>'
+            +   '<td>' + id + '</td>'
+            +   '<td>' + nombre + '</td>'
+            +   '<td>' + tipo + '</td>'
+            +   '<td>' + telefono + '</td>'
+            +   '<td>' + plan + '</td>'
+            +   '<td>' + medio + '</td>'
+            +   '<td><input class="pending-check" type="checkbox" id="check-' + fila + '"></td>'
+            +   '<td><button class="btn primary" onclick="activarMembresia(\'' + fila + '\', \'' + id + '\')">Activar</button></td>'
+            + '</tr>';
+        }
 
         tbody.innerHTML = html;
         setStatus("Pendientes cargados correctamente.", "ok");
@@ -722,21 +727,27 @@
       if (!ok) return;
 
       try {
-        setStatus("Activando membresía manual...");
-        const r = await postFormAction("activarMembresiaManual", {
+        setStatus("Intentando activar membresía manual...");
+
+        let r = await postFormAction("activarMembresiaManual", {
           id_membresia: idMembresia
         });
 
-        if (!r.ok) {
-          alert(r.message || r.error || "No se pudo activar.");
-          setStatus(r.message || r.error || "No se pudo activar la membresía.", "error");
-          return;
+        if (!r.ok && (r.message === "Acción no válida." || r.error === "Acción no válida.")) {
+          r = await postFormAction("validarPagoManual", {
+            id_membresia: idMembresia
+          });
         }
 
-        alert("Membresía activada correctamente.");
-        await loadPendientes();
-        await loadResumen();
-        setStatus("Membresía activada correctamente.", "ok");
+        if (r.ok) {
+          alert("Membresía activada correctamente.");
+          await loadPendientes();
+          await loadResumen();
+          setStatus("Membresía activada correctamente.", "ok");
+        } else {
+          alert(r.message || r.error || "No se pudo activar.");
+          setStatus(r.message || r.error || "No se pudo activar la membresía.", "error");
+        }
       } catch (e) {
         console.error(e);
         alert("Error de conexión.");
@@ -744,28 +755,60 @@
       }
     }
 
+    async function activarMembresia(fila, idMembresia) {
+      return activarManual(fila, idMembresia);
+    }
+
+    async function loadFarmacias() {
+      try {
+        setStatus("Cargando farmacias...");
+        const r = await postFormAction("listarFarmacias", {});
+
+        if (!r.ok) {
+          document.getElementById("farmaciasListado").innerHTML = '<div class="empty">No se pudieron cargar las farmacias.</div>';
+          document.getElementById("tablaTurnosFarmacias").innerHTML = '<tr><td colspan="2" class="empty">No se pudo cargar el calendario.</td></tr>';
+          setStatus(r.message || r.error || "No se pudieron cargar las farmacias.", "error");
+          return;
+        }
+
+        farmaciasCache = Array.isArray(r.farmacias) ? r.farmacias : [];
+        renderFarmacias();
+        await loadTurnosFarmacias();
+      } catch (e) {
+        console.error(e);
+        setStatus("Error de conexión cargando farmacias.", "error");
+      }
+    }
+
     function renderFarmacias() {
-      const box = document.getElementById("farmaciasListado");
+      const cont = document.getElementById("farmaciasListado");
 
       if (!farmaciasCache.length) {
-        box.innerHTML = '<div class="empty">No hay farmacias activas.</div>';
+        cont.innerHTML = '<div class="empty">No hay farmacias activas.</div>';
         return;
       }
 
       let html = "";
-      farmaciasCache.forEach(f => {
-        html += `
-          <div class="farm-item">
-            <strong>${String(f.nombre || "")}</strong>
-            <div>${String(f.direccion || "")}</div>
-            <div style="margin-top:6px;">Tel: ${String(f.telefono || "-")}</div>
-            <div>WhatsApp: ${String(f.whatsapp || "-")}</div>
-            <span class="farm-tag">${String(f.id_farmacia || "")}</span>
-          </div>
-        `;
-      });
 
-      box.innerHTML = html;
+      for (let i = 0; i < farmaciasCache.length; i++) {
+        const f = farmaciasCache[i];
+        const nombre = String(f.nombre || "");
+        const direccion = String(f.direccion || "");
+        const telefono = String(f.telefono || "-");
+        const whatsapp = String(f.whatsapp || "-");
+        const id = String(f.id_farmacia || "");
+
+        html += ''
+          + '<div class="farm-item">'
+          +   '<strong>' + nombre + '</strong>'
+          +   '<div>' + direccion + '</div>'
+          +   '<div style="margin-top:6px;">Tel: ' + telefono + '</div>'
+          +   '<div>WhatsApp: ' + whatsapp + '</div>'
+          +   '<div class="tag">' + id + '</div>'
+          + '</div>';
+      }
+
+      cont.innerHTML = html;
     }
 
     function diasDelMes(anio, mes) {
@@ -774,7 +817,7 @@
 
     function renderTurnos(anio, mes) {
       const tbody = document.getElementById("tablaTurnosFarmacias");
-      const total = diasDelMes(anio, mes);
+      const totalDias = diasDelMes(anio, mes);
 
       if (!farmaciasCache.length) {
         tbody.innerHTML = '<tr><td colspan="2" class="empty">No hay farmacias para asignar.</td></tr>';
@@ -782,31 +825,35 @@
       }
 
       let html = "";
-      for (let dia = 1; dia <= total; dia++) {
-        const encontrado = turnosFarmaciasActuales.find(t => Number(t.dia) === dia);
-        const selectedId = encontrado ? String(encontrado.id_farmacia || "") : "";
 
-        let options = '<option value="">Seleccionar farmacia</option>';
-        farmaciasCache.forEach(f => {
-          const id = String(f.id_farmacia || "");
-          const nombre = String(f.nombre || "");
-          const selected = id === selectedId ? "selected" : "";
-          options += <option value="${id}" ${selected}>${nombre}</option>;
-        });
+      for (let dia = 1; dia <= totalDias; dia++) {
+        let seleccionado = "";
 
-        html += `
-          <tr>
-            <td>${dia}</td>
-            <td>
-              <select data-dia="${dia}">
-                ${options}
-              </select>
-            </td>
-          </tr>
-        `;
+        for (let t = 0; t < turnosFarmaciasActuales.length; t++) {
+          if (Number(turnosFarmaciasActuales[t].dia) === dia) {
+            seleccionado = String(turnosFarmaciasActuales[t].id_farmacia || "");
+            break;
+          }
+        }
+
+        let opciones = '<option value="">Seleccionar farmacia</option>';
+
+        for (let f = 0; f < farmaciasCache.length; f++) {
+          const id = String(farmaciasCache[f].id_farmacia || "");
+          const nombre = String(farmaciasCache[f].nombre || "");
+          const selected = id === seleccionado ? ' selected' : '';
+          opciones += '<option value="' + id + '"' + selected + '>' + nombre + '</option>';
+        }
+
+        html += ''
+          + '<tr>'
+          +   '<td>' + dia + '</td>'
+          +   '<td><select data-dia="' + dia + '">' + opciones + '</select></td>'
+          + '</tr>';
       }
 
       tbody.innerHTML = html;
+      setStatus("Farmacias cargadas correctamente.", "ok");
     }
 
     async function loadTurnosFarmacias() {
@@ -814,7 +861,11 @@
       const mes = Number(document.getElementById("farmMes").value);
 
       try {
-        const r = await postFormAction("obtenerTurnosFarmacias", { anio, mes });
+        let r = await postFormAction("obtenerTurnosFarmacias", { anio: anio, mes: mes });
+
+        if (!r.ok) {
+          r = await postFormAction("listarTurnos", { anio: anio, mes: mes });
+        }
 
         if (!r.ok) {
           document.getElementById("tablaTurnosFarmacias").innerHTML =
@@ -833,102 +884,51 @@
       }
     }
 
-    async function loadFarmacias() {
-      try {
-        setStatus("Cargando farmacias...");
-
-        if (!farmaciasCache.length) {
-          const r = await postFormAction("listarFarmacias");
-
-          if (!r.ok) {
-            document.getElementById("farmaciasListado").innerHTML =
-              '<div class="empty">No se pudieron cargar las farmacias.</div>';
-            setStatus(r.message || r.error || "No se pudieron cargar las farmacias.", "error");
-            return;
-          }
-
-          farmaciasCache = Array.isArray(r.farmacias) ? r.farmacias : [];
-        }
-
-        renderFarmacias();
-        await loadTurnosFarmacias();
-        setStatus("Farmacias cargadas correctamente.", "ok");
-      } catch (e) {
-        console.error(e);
-        setStatus("Error de conexión cargando farmacias.", "error");
-      }
-    }
-
-    async function guardarTurnosFarmacias() {
+    async function saveTurnosFarmacias() {
       const anio = Number(document.getElementById("farmAnio").value);
       const mes = Number(document.getElementById("farmMes").value);
-
       const selects = document.querySelectorAll("#tablaTurnosFarmacias select");
+
       const turnos = [];
 
-      selects.forEach(sel => {
-        const dia = Number(sel.getAttribute("data-dia"));
-        const id_farmacia = String(sel.value || "").trim();
-        if (dia && id_farmacia) {
-          turnos.push({ dia, id_farmacia });
-        }
-      });
+      for (let i = 0; i < selects.length; i++) {
+        const dia = Number(selects[i].getAttribute("data-dia"));
+        const id_farmacia = String(selects[i].value || "").trim();
 
-      const ok = confirm("¿Querés guardar los turnos del mes seleccionado?");
-      if (!ok) return;
+        if (dia && id_farmacia) {
+          turnos.push({ dia: dia, id_farmacia: id_farmacia });
+        }
+      }
+
+      const confirmar = confirm("¿Querés guardar los turnos del mes seleccionado?");
+      if (!confirmar) return;
 
       try {
         const r = await postFormAction("guardarTurnosFarmacias", {
-          anio,
-          mes,
+          anio: anio,
+          mes: mes,
           turnos: JSON.stringify(turnos)
         });
 
-        if (!r.ok) {
+        if (r.ok) {
+          alert("Turnos guardados correctamente.");
+          await loadTurnosFarmacias();
+          setStatus("Turnos guardados correctamente.", "ok");
+        } else {
           alert(r.message || r.error || "No se pudieron guardar los turnos.");
           setStatus(r.message || r.error || "No se pudieron guardar los turnos.", "error");
-          return;
         }
-
-        alert("Turnos guardados correctamente.");
-        await loadTurnosFarmacias();
-        setStatus("Turnos guardados correctamente.", "ok");
       } catch (e) {
         console.error(e);
-        alert("Error de conexión guardando turnos.");
+        alert("Error de conexión al guardar turnos.");
         setStatus("Error de conexión guardando turnos.", "error");
       }
     }
 
-    function bindEventos() {
-      document.getElementById("logoutBtn").addEventListener("click", logout);
-      document.getElementById("btnActualizarResumen").addEventListener("click", loadResumen);
-      document.getElementById("btnActualizarPendientes").addEventListener("click", loadPendientes);
-      document.getElementById("btnCargarTurnos").addEventListener("click", loadTurnosFarmacias);
-      document.getElementById("btnGuardarTurnos").addEventListener("click", guardarTurnosFarmacias);
-
-      document.querySelectorAll(".menu-btn").forEach(btn => {
-        btn.addEventListener("click", () => showView(btn.dataset.view));
-      });
-
-      document.addEventListener("click", ev => {
-        const btn = ev.target.closest(".btn-activar");
-        if (!btn) return;
-
-        const fila = btn.getAttribute("data-fila");
-        const id = btn.getAttribute("data-id");
-        activarManual(fila, id);
-      });
-    }
-
-    function bootPanel() {
-      inicializarMesesAnios();
-      bindEventos();
+    window.onload = function() {
+      initMesesAnios();
       loadResumen();
-      setStatus("Panel conectado correctamente.", "ok");
-    }
-
-    document.addEventListener("DOMContentLoaded", bootPanel);
+    };
   </script>
 </body>
 </html>
