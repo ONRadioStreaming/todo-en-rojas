@@ -838,15 +838,19 @@
     window.matchMedia("(display-mode: standalone)").matches ? "standalone" : "browser"
   );
 
+  alert("registrarInstalacionApp corriendo\nDevice ID: " + deviceId);
+
   fetch(SCRIPT_URL, {
     method: "POST",
     body: formData
   })
     .then(r => r.json())
     .then(data => {
+      alert("Respuesta backend: " + JSON.stringify(data));
       console.log("Instalación registrada:", data);
     })
     .catch(err => {
+      alert("Error registrando instalación: " + err);
       console.error("Error registrando instalación:", err);
     });
 }
