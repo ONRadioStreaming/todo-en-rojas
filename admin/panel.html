@@ -528,27 +528,49 @@
     }
 
     function showView(view) {
-      const views = document.querySelectorAll(".view");
-      const buttons = document.querySelectorAll(".menu-btn");
+  const views = document.querySelectorAll(".view");
+  const buttons = document.querySelectorAll(".menu-btn");
 
-      for (let i = 0; i < views.length; i++) {
-        views[i].classList.remove("active");
-      }
+  for (let i = 0; i < views.length; i++) {
+    views[i].classList.remove("active");
+  }
 
-      for (let j = 0; j < buttons.length; j++) {
-        buttons[j].classList.remove("active");
-      }
+  for (let j = 0; j < buttons.length; j++) {
+    buttons[j].classList.remove("active");
+  }
 
-      const targetView = document.getElementById("view-" + view);
-      const targetBtn = document.getElementById("btn-menu-" + view);
+  const targetView = document.getElementById("view-" + view);
+  const targetBtn = document.getElementById("btn-menu-" + view);
 
-      if (targetView) targetView.classList.add("active");
-      if (targetBtn) targetBtn.classList.add("active");
+  if (targetView) {
+    targetView.classList.add("active");
+  }
 
-      if (view === "resumen") loadResumen();
-      if (view === "pendientes") loadPendientes();
-      if (view === "farmacias") loadFarmacias();
+  if (targetBtn) {
+    targetBtn.classList.add("active");
+  }
+
+  if (view === "resumen") {
+    loadResumen();
+  }
+
+  if (view === "pendientes") {
+    loadPendientes();
+  }
+
+  if (view === "farmacias") {
+    loadFarmacias();
+  }
+
+  setTimeout(function () {
+    if (targetView) {
+      targetView.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
     }
+  }, 120);
+}
 
     async function postFormAction(action, extra) {
       const formData = new FormData();
