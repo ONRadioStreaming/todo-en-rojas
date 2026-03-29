@@ -822,46 +822,30 @@
       });
     });
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxUCqWb6pYziwFrHWwXgSNwDfs4dt2KmdEZS18qFxcqlrSF4ywXdrDSrRM_Efka8Iij/exec";
+
 function registrarInstalacionApp() {
-  try {
-    let deviceId = localStorage.getItem("conecta2_device_id");
 
-    if (!deviceId) {
-      deviceId = "dev-" + Date.now() + "-" + Math.floor(Math.random() * 1000000);
-      localStorage.setItem("conecta2_device_id", deviceId);
-    }
+  let deviceId = localStorage.getItem("conecta2_device_id");
 
-    alert("registrarInstalacionApp corriendo\nDevice ID: " + deviceId);
-
-    alert("SCRIPT_URL: " + SCRIPT_URL);
-
-    const formData = new FormData();
-    formData.append("action", "registrarInstalacion");
-    formData.append("device_id", deviceId);
-    formData.append("origen", "app");
-    formData.append(
-      "modo",
-      window.matchMedia("(display-mode: standalone)").matches ? "standalone" : "browser"
-    );
-
-    fetch(SCRIPT_URL, {
-      method: "POST",
-      body: formData
-    })
-      .then(r => r.json())
-      .then(data => {
-        alert("Respuesta backend: " + JSON.stringify(data));
-        console.log("Instalación registrada:", data);
-      })
-      .catch(err => {
-        alert("Error fetch: " + err);
-        console.error("Error registrando instalación:", err);
-      });
-
-  } catch (err) {
-    alert("Error antes del fetch: " + err);
-    console.error(err);
+  if (!deviceId) {
+    deviceId = "dev-" + Date.now() + "-" + Math.floor(Math.random() * 1000000);
+    localStorage.setItem("conecta2_device_id", deviceId);
   }
+
+  const formData = new FormData();
+  formData.append("action", "registrarInstalacion");
+  formData.append("device_id", deviceId);
+  formData.append("origen", "app");
+  formData.append(
+    "modo",
+    window.matchMedia("(display-mode: standalone)").matches ? "standalone" : "browser"
+  );
+
+  fetch(SCRIPT_URL, {
+    method: "POST",
+    body: formData
+  }).catch(() => {});
+
 }
 
 registrarInstalacionApp();
