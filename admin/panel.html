@@ -702,19 +702,19 @@
       const email = String(c.email || "-");
       const estado = String(c.estado || "-");
 
-      html += ''
-        + '<tr>'
-        +   '<td>' + id + '</td>'
-        +   '<td>' + nombre + '</td>'
-        +   '<td>' + categoria + '</td>'
-        +   '<td>' + telefono + '</td>'
-        +   '<td>' + email + '</td>'
-        +   '<td>' + estado + '</td>'
-        +   '<td>'
-        +     '<button class="btn secondary" onclick="verComercio(\'' + id + '\')">Ver</button> '
-        +     '<button class="btn primary" onclick="toggleEstadoComercio(\'' + id + '\', \'' + estado + '\')">Estado</button>'
-        +   '</td>'
-        + '</tr>';
+      html += ""
+  + "<tr>"
+  + "<td>" + id + "</td>"
+  + "<td>" + nombre + "</td>"
+  + "<td>" + categoria + "</td>"
+  + "<td>" + telefono + "</td>"
+  + "<td>" + email + "</td>"
+  + "<td>" + estado + "</td>"
+  + "<td>"
+  +   "<button class=\"btn secondary\" onclick=\"verComercio('" + id + "')\">Ver</button> "
+  + "<button class=\"btn primary\" onclick=\"toggleEstadoComercio('" + id + "', '" + estado + "')\">Estado</button>"
+  + "</td>"
+  + "</tr>";
     }
 
     tbody.innerHTML = html;
