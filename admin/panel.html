@@ -1280,10 +1280,18 @@ const diasHtml =
             +   '<td>' + (item.email || '-') + '</td>'
             +   '<td>'
             +     '<div class="acciones">'
-            +       '<a class="btn secondary" href="' + wa + '" target="_blank" rel="noopener">WhatsApp</a>'
-            +       '<a class="btn secondary" href="' + mail + '">Email</a>'
-            +       '<button class="btn primary" onclick="renovarMembresia(\'' + item.id_membresia + '\')">Renovar</button>'
-            +       '<button class="btn warn" onclick="vencerMembresia(\'' + item.id_membresia + '\')">Vencer</button>'
+           + (dias <= 7 && dias >= 1
+    ? '<a class="btn secondary" href="' + wa + '" target="_blank" rel="noopener">WhatsApp</a>'
+    : '')
++ (dias <= 3
+    ? '<a class="btn secondary" href="' + mail + '">Email</a>'
+    : '')
++ (dias <= 3
+    ? '<button class="btn primary" onclick="renovarMembresia(\'' + item.id_membresia + '\')">Renovar</button>'
+    : '')
++ (dias <= 0
+    ? '<button class="btn warn" onclick="vencerMembresia(\'' + item.id_membresia + '\')">Vencer</button>'
+    : '')
             +       '<button class="btn secondary" onclick="editarObservacionMembresia(\'' + item.id_membresia + '\')">Nota</button>'
             +     '</div>'
             +   '</td>'
