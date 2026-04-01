@@ -901,29 +901,37 @@ function registrarInstalacionApp() {
 }
 function cargarFarmaciaHoy(){
 
-  const url = "https://script.google.com/macros/s/AKfycbxUCqWb6pYziwFrHWwXgSNwDfs4dt2KmdEZS18qFxcqlrSF4ywXdrDSrRM_Efka8lij/exec?action=farmaciaHoy";
+  const formData = new FormData();
+  formData.append("action", "farmaciaHoy");
 
-  fetch(url)
+  fetch(SCRIPT_URL, {
+    method: "POST",
+    body: formData
+  })
     .then(r => r.json())
     .then(data => {
 
-      if(!data.ok) return;
+      if (!data.ok) return;
 
       const f = data.farmacia;
+      const t = data.turno || {};
 
-      document.getElementById("farmaciaNombre").textContent = f.nombre;
-      document.getElementById("farmaciaDireccion").textContent = f.direccion;
+      document.getElementById("farmaciaNombre").textContent = f.nombre || "";
+      document.getElementById("farmaciaDireccion").textContent = f.direccion || "";
+      document.getElementById("farmaciaTelefono").textContent = f.telefono || "";
+      document.getElementById("farmaciaHorario").textContent =
+        "Hasta las " + (t.hasta || "08:00") + " hs";
 
-      if(f.telefono_llamada){
+      if (f.telefono_llamada) {
         document.getElementById("btnFarmaciaLlamar").href = "tel:" + f.telefono_llamada;
       }
 
-      if(f.whatsapp){
+      if (f.whatsapp) {
         document.getElementById("btnFarmaciaWhatsapp").href =
-          "https://wa.me/" + f.whatsapp.replace(/\D/g,'');
+          "https://wa.me/" + String(f.whatsapp).replace(/\D/g, "");
       }
 
-      if(f.maps){
+      if (f.maps) {
         document.getElementById("btnFarmaciaMapa").href = f.maps;
       }
 
