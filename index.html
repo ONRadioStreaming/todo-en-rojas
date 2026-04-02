@@ -940,27 +940,26 @@
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxUCqWb6pYziwFrHWwXgSNwDfs4dt2KmdEZS18qFxcqlrSF4ywXdrDSrRM_Efka8Iij/exec";
 
     function registrarInstalacionApp() {
-      let deviceId = localStorage.getItem("conecta2_device_id");
+  ...
+}
 
-      if (!deviceId) {
-        deviceId = "dev-" + Date.now() + "-" + Math.floor(Math.random() * 1000000);
-        localStorage.setItem("conecta2_device_id", deviceId);
-      }
+function obtenerTextoCorteFarmacia(hastaHora) {
+  const ahora = new Date();
 
-      const formData = new FormData();
-      formData.append("action", "registrarInstalacion");
-      formData.append("device_id", deviceId);
-      formData.append("origen", "app");
-      formData.append(
-        "modo",
-        window.matchMedia("(display-mode: standalone)").matches ? "standalone" : "browser"
-      );
+  const fechaBase = new Date(ahora);
+  if (ahora.getHours() < 8) {
+    fechaBase.setDate(fechaBase.getDate() - 1);
+  }
 
-      fetch(SCRIPT_URL, {
-        method: "POST",
-        body: formData
-      }).catch(() => {});
-    }
+  const fechaCorte = new Date(fechaBase);
+  fechaCorte.setDate(fechaCorte.getDate() + 1);
+
+  const dias = ["domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado"];
+  const nombreDia = dias[fechaCorte.getDay()];
+  const numeroDia = fechaCorte.getDate();
+
+  return "Hasta las " + (hastaHora || "08:00") + " hs del " + nombreDia + " " + numeroDia;
+}
 
     function cargarFarmaciaHoy() {
       const formData = new FormData();
@@ -981,7 +980,7 @@
           document.getElementById("farmaciaDireccion").textContent = f.direccion || "Dirección no disponible";
           document.getElementById("farmaciaTelefono").textContent = f.telefono || "Teléfono no disponible";
 
-          const horarioTexto = "Hasta las " + (t.hasta || "08:00") + " hs" + (t.texto_fecha ? " del " + t.texto_fecha : "");
+          const horarioTexto = obtenerTextoCorteFarmacia(t.hasta || "08:00");
           document.getElementById("farmaciaHorario").textContent = horarioTexto;
 
           const btnLlamar = document.getElementById("btnFarmaciaLlamar");
