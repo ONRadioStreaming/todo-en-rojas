@@ -407,11 +407,12 @@
         formData.append("usuario", usuario);
         formData.append("password", password);
 
-        const response = await fetch(SCRIPT_URL, {
-        method: "POST",
-        mode: "no-cors",
-        body: formData
-      });
+       const response = await fetch(SCRIPT_URL, {
+  method: "POST",
+  body: formData
+});
+
+const data = await response.json();
 
       mensaje.textContent = "Conectando...";
       mensaje.style.color = "#ffd166";
