@@ -296,7 +296,7 @@
   min-height: 320px;
   box-shadow: 0 18px 40px rgba(0,0,0,0.24);
   background:
-    linear-gradient(180deg, rgba(5,16,18,0.18), rgba(5,16,18,0.78)),
+    linear-gradient(180deg, rgba(5,16,18,0.16), rgba(5,16,18,0.76)),
     url('farmacia-bg.jpg') center/cover no-repeat;
   isolation: isolate;
   border: 1px solid rgba(255,255,255,0.08);
@@ -308,7 +308,7 @@
   inset: 0;
   backdrop-filter: blur(7px);
   -webkit-backdrop-filter: blur(7px);
-  background: rgba(8, 22, 24, 0.10);
+  background: rgba(8, 22, 24, 0.12);
   z-index: 0;
 }
 
@@ -318,7 +318,7 @@
   inset: 0;
   background:
     linear-gradient(to bottom, rgba(255,255,255,0.04), rgba(255,255,255,0)),
-    radial-gradient(circle at left center, rgba(77, 255, 130, 0.16), transparent 28%);
+    radial-gradient(circle at left center, rgba(77,255,130,0.16), transparent 28%);
   z-index: 1;
   pointer-events: none;
 }
@@ -333,7 +333,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(18, 45, 24, 0.28);
+  background: rgba(18,45,24,0.28);
   border: 1px solid rgba(108,255,138,0.24);
   box-shadow:
     0 0 0 1px rgba(255,255,255,0.04),
@@ -359,9 +359,9 @@
 }
 
 .farmacia-label {
-  font-size: 0.98rem;
+  font-size: 1rem;
   font-weight: 900;
-  color: rgba(255,255,255,0.94);
+  color: rgba(255,255,255,0.96);
   text-transform: uppercase;
   letter-spacing: 1px;
   margin-bottom: 10px;
@@ -372,28 +372,27 @@
   display: block;
   width: 100%;
   text-align: center;
-  color: rgba(255,255,255,0.92);
+  color: rgba(255,255,255,0.96);
   font-size: 1.02rem;
   font-weight: 500;
   padding-bottom: 16px;
   margin-bottom: 18px;
-  border-bottom: 1px solid rgba(255,255,255,0.10);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
+  border-bottom: 1px solid rgba(255,255,255,0.12);
+  text-shadow: 0 1px 2px rgba(0,0,0,0.25);
 }
 
 .farmacia-name {
-  font-size: 2.25rem;
+  font-size: 2.15rem;
   font-weight: 900;
   color: #ffffff;
   line-height: 1.08;
-  margin: 0 105px 10px 0;
+  margin: 0 105px 12px 0;
   text-transform: uppercase;
   letter-spacing: -0.02em;
 }
 
 .farmacia-info {
-  background: rgba(9, 18, 27, 0.48);
+  background: rgba(9,18,27,0.48);
   border: 1px solid rgba(255,255,255,0.08);
   border-radius: 22px;
   padding: 16px 18px;
@@ -405,7 +404,7 @@
 
 .info-line {
   font-size: 1.02rem;
-  color: rgba(255,255,255,0.96);
+  color: rgba(255,255,255,0.97);
   margin-bottom: 10px;
   font-weight: 700;
   line-height: 1.5;
@@ -432,10 +431,13 @@
 }
 
 .farmacia-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border: 0;
   border-radius: 16px;
   padding: 14px 12px;
-  font-size: 0.98rem;
+  font-size: 1rem;
   font-weight: 800;
   text-align: center;
   box-shadow: 0 10px 20px rgba(0,0,0,0.16);
@@ -461,6 +463,40 @@
 .btn-map {
   background: linear-gradient(135deg, #c7d2dc, #96a8b8);
   color: #ffffff;
+}
+
+@media (max-width: 640px) {
+  .farmacia-banner {
+    min-height: auto;
+  }
+
+  .pharmacy-cross-glow {
+    width: 78px;
+    height: 78px;
+    right: 16px;
+    top: 16px;
+  }
+
+  .pharmacy-cross-glow span {
+    font-size: 2.8rem;
+  }
+
+  .farmacia-overlay {
+    padding: 20px 18px 18px;
+  }
+
+  .farmacia-name {
+    font-size: 1.8rem;
+    margin-right: 95px;
+  }
+
+  .farmacia-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .farmacia-btn {
+    width: 100%;
+  }
 }
 
 .support-card {
@@ -714,42 +750,49 @@
 
   <div class="farmacia-overlay">
 
-    <div class="farmacia-header">
-      <div class="farmacia-title">FARMACIA DE TURNO</div>
-      <div class="farmacia-horario" id="farmaciaHorario">
-        Hasta las 08:00 hs del viernes 3
-      </div>
+  <div class="farmacia-header">
+    <div class="farmacia-label">
+      FARMACIA DE TURNO
     </div>
 
-    <div class="farmacia-body">
+    <div class="farmacia-horario" id="farmaciaHorario">
+      Hasta las 08:00 hs
+    </div>
+  </div>
 
-      <div class="farmacia-nombre" id="farmaciaNombre">
-        FARMACIA
-      </div>
 
-      <div class="farmacia-direccion" id="farmaciaDireccion">
+  <div class="farmacia-body">
+
+    <div class="farmacia-name" id="farmaciaNombre">
+      FARMACIA
+    </div>
+
+    <div class="farmacia-info">
+
+      <div class="info-line address" id="farmaciaDireccion">
         Dirección
       </div>
 
-      <div class="farmacia-telefono" id="farmaciaTelefono">
-        📞 Teléfono
+      <div class="info-line phone" id="farmaciaTelefono">
+        Teléfono
       </div>
 
-      <div class="farmacia-botones">
+    </div>
 
-        <a id="btnLlamarFarmacia" class="btn-farmacia llamar">
-          Llamar
-        </a>
 
-        <a id="btnWhatsappFarmacia" class="btn-farmacia whatsapp">
-          WhatsApp
-        </a>
+    <div class="farmacia-actions">
 
-        <a id="btnMapaFarmacia" class="btn-farmacia mapa">
-          Cómo llegar
-        </a>
+      <a class="farmacia-btn btn-call" id="btnLlamar" href="#">
+        Llamar
+      </a>
 
-      </div>
+      <a class="farmacia-btn btn-wa" id="btnWhatsapp" href="#">
+        WhatsApp
+      </a>
+
+      <a class="farmacia-btn btn-map" id="btnMapa" href="#">
+        Cómo llegar
+      </a>
 
     </div>
 
