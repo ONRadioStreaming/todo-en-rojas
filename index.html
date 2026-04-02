@@ -289,254 +289,207 @@
     }
 
     .farmacia-banner {
-  position: relative;
-  margin-top: 18px;
-  border-radius: 30px;
-  overflow: hidden;
-  min-height: 320px;
-  box-shadow: 0 18px 40px rgba(0,0,0,0.24);
-  background:
-    linear-gradient(180deg, rgba(5,16,18,0.16), rgba(5,16,18,0.76)),
-    url('farmacia-bg.jpg') center/cover no-repeat;
-  isolation: isolate;
-  border: 1px solid rgba(255,255,255,0.08);
-}
+      position: relative;
+      margin-top: 18px;
+      border-radius: 30px;
+      overflow: hidden;
+      min-height: 320px;
+      box-shadow: 0 18px 40px rgba(0,0,0,0.24);
+      background:
+        linear-gradient(180deg, rgba(5,16,18,0.16), rgba(5,16,18,0.76)),
+        url('farmacia-bg.jpg') center/cover no-repeat;
+      isolation: isolate;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
 
-.farmacia-banner::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  backdrop-filter: blur(7px);
-  -webkit-backdrop-filter: blur(7px);
-  background: rgba(8, 22, 24, 0.12);
-  z-index: 0;
-}
+    .farmacia-banner::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      backdrop-filter: blur(7px);
+      -webkit-backdrop-filter: blur(7px);
+      background: rgba(8, 22, 24, 0.12);
+      z-index: 0;
+    }
 
-.farmacia-banner::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(to bottom, rgba(255,255,255,0.04), rgba(255,255,255,0)),
-    radial-gradient(circle at left center, rgba(77,255,130,0.16), transparent 28%);
-  z-index: 1;
-  pointer-events: none;
-}
+    .farmacia-banner::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to bottom, rgba(255,255,255,0.04), rgba(255,255,255,0)),
+        radial-gradient(circle at left center, rgba(77,255,130,0.16), transparent 28%);
+      z-index: 1;
+      pointer-events: none;
+    }
 
-.pharmacy-cross-glow {
-  position: absolute;
-  right: 18px;
-  top: 18px;
-  width: 88px;
-  height: 88px;
-  border-radius: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(18,45,24,0.28);
-  border: 1px solid rgba(108,255,138,0.24);
-  box-shadow:
-    0 0 0 1px rgba(255,255,255,0.04),
-    0 0 24px rgba(52,255,117,0.22),
-    inset 0 0 20px rgba(255,255,255,0.03);
-  z-index: 3;
-}
+    .pharmacy-cross-glow {
+      position: absolute;
+      right: 18px;
+      top: 18px;
+      width: 88px;
+      height: 88px;
+      border-radius: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(18,45,24,0.28);
+      border: 1px solid rgba(108,255,138,0.24);
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.04),
+        0 0 24px rgba(52,255,117,0.22),
+        inset 0 0 20px rgba(255,255,255,0.03);
+      z-index: 3;
+    }
 
-.pharmacy-cross-glow span {
-  font-size: 3.2rem;
-  line-height: 1;
-  font-weight: 900;
-  color: #67ff8f;
-  text-shadow:
-    0 0 14px rgba(103,255,143,0.95),
-    0 0 30px rgba(103,255,143,0.55);
-}
+    .pharmacy-cross-glow span {
+      font-size: 3.2rem;
+      line-height: 1;
+      font-weight: 900;
+      color: #67ff8f;
+      text-shadow:
+        0 0 14px rgba(103,255,143,0.95),
+        0 0 30px rgba(103,255,143,0.55);
+    }
 
-.farmacia-overlay {
-  position: relative;
-  z-index: 2;
-  padding: 24px 24px 22px;
-}
+    .farmacia-overlay {
+      position: relative;
+      z-index: 2;
+      padding: 24px 24px 22px;
+    }
 
-.farmacia-label {
-  font-size: 1rem;
-  font-weight: 900;
-  color: rgba(255,255,255,0.96);
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-bottom: 10px;
-  text-align: center;
-}
+    .farmacia-label {
+      font-size: 1rem;
+      font-weight: 900;
+      color: rgba(255,255,255,0.96);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+      text-align: center;
+    }
 
-.farmacia-horario {
-  display: block;
-  width: 100%;
-  text-align: center;
-  color: rgba(255,255,255,0.96);
-  font-size: 1.02rem;
-  font-weight: 500;
-  padding-bottom: 16px;
-  margin-bottom: 18px;
-  border-bottom: 1px solid rgba(255,255,255,0.12);
-  text-shadow: 0 1px 2px rgba(0,0,0,0.25);
-}
+    .farmacia-horario {
+      display: block;
+      width: 100%;
+      text-align: center;
+      color: rgba(255,255,255,0.96);
+      font-size: 1.02rem;
+      font-weight: 500;
+      padding-bottom: 16px;
+      margin-bottom: 18px;
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+      text-shadow: 0 1px 2px rgba(0,0,0,0.25);
+    }
 
-.farmacia-name {
-  font-size: 2.15rem;
-  font-weight: 900;
-  color: #ffffff;
-  line-height: 1.08;
-  margin: 0 105px 12px 0;
-  text-transform: uppercase;
-  letter-spacing: -0.02em;
-}
+    .farmacia-name {
+      font-size: 2.15rem;
+      font-weight: 900;
+      color: #ffffff;
+      line-height: 1.08;
+      margin: 0 105px 12px 0;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+    }
 
-.farmacia-info {
-  background: rgba(9,18,27,0.48);
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 22px;
-  padding: 16px 18px;
-  margin-bottom: 18px;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
-}
+    .farmacia-info {
+      background: rgba(9,18,27,0.48);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 22px;
+      padding: 16px 18px;
+      margin-bottom: 18px;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+    }
 
-.info-line {
-  font-size: 1.02rem;
-  color: rgba(255,255,255,0.97);
-  margin-bottom: 10px;
-  font-weight: 700;
-  line-height: 1.5;
-}
+    .info-line {
+      font-size: 1.02rem;
+      color: rgba(255,255,255,0.97);
+      margin-bottom: 10px;
+      font-weight: 700;
+      line-height: 1.5;
+    }
 
-.info-line:last-child {
-  margin-bottom: 0;
-}
+    .info-line:last-child {
+      margin-bottom: 0;
+    }
 
-.info-line.address::before {
-  content: "📍 ";
-  opacity: 0.95;
-}
+    .info-line.address::before {
+      content: "📍 ";
+      opacity: 0.95;
+    }
 
-.info-line.phone::before {
-  content: "📞 ";
-  opacity: 0.95;
-}
+    .info-line.phone::before {
+      content: "📞 ";
+      opacity: 0.95;
+    }
 
-.farmacia-actions {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-}
+    .farmacia-actions {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
 
-.farmacia-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 0;
-  border-radius: 16px;
-  padding: 14px 12px;
-  font-size: 1rem;
-  font-weight: 800;
-  text-align: center;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.16);
-  text-decoration: none;
-  transition: transform .15s ease, filter .15s ease;
-}
+    .farmacia-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 0;
+      border-radius: 16px;
+      padding: 14px 12px;
+      font-size: 1rem;
+      font-weight: 800;
+      text-align: center;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.16);
+      text-decoration: none;
+      transition: transform .15s ease, filter .15s ease;
+    }
 
-.farmacia-btn:hover {
-  transform: translateY(-1px);
-  filter: brightness(1.03);
-}
+    .farmacia-btn:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.03);
+    }
 
-.btn-call {
-  background: linear-gradient(135deg, #2de36f, #16c95a);
-  color: #ffffff;
-}
+    .btn-call {
+      background: linear-gradient(135deg, #2de36f, #16c95a);
+      color: #ffffff;
+    }
 
-.btn-wa {
-  background: linear-gradient(135deg, #19c15d, #109847);
-  color: #ffffff;
-}
+    .btn-wa {
+      background: linear-gradient(135deg, #19c15d, #109847);
+      color: #ffffff;
+    }
 
-.btn-map {
-  background: linear-gradient(135deg, #c7d2dc, #96a8b8);
-  color: #ffffff;
-}
+    .btn-map {
+      background: linear-gradient(135deg, #c7d2dc, #96a8b8);
+      color: #ffffff;
+    }
 
-@media (max-width: 640px) {
-  .farmacia-banner {
-    min-height: auto;
-  }
+    .support-card {
+      margin-top: 16px;
+      background: linear-gradient(135deg, #ffffff, #f4f8fb);
+      border-radius: 26px;
+      padding: 18px;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.10);
+      border: 1px solid #e2ecf3;
+      color: #14304c;
+    }
 
-  .pharmacy-cross-glow {
-    width: 78px;
-    height: 78px;
-    right: 16px;
-    top: 16px;
-  }
+    .support-title {
+      margin: 0 0 8px 0;
+      font-size: 1.12rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
 
-  .pharmacy-cross-glow span {
-    font-size: 2.8rem;
-  }
+    .support-text {
+      margin: 0 0 14px 0;
+      font-size: 0.96rem;
+      color: #4b6276;
+      line-height: 1.5;
+      font-weight: 700;
+    }
 
-  .farmacia-overlay {
-    padding: 20px 18px 18px;
-  }
-
-  .farmacia-name {
-    font-size: 1.8rem;
-    margin-right: 95px;
-  }
-
-  .farmacia-actions {
-    grid-template-columns: 1fr;
-  }
-
-  .farmacia-btn {
-    width: 100%;
-  }
-}
-
-.support-card {
-  margin-top: 16px;
-  background: linear-gradient(135deg, #ffffff, #f4f8fb);
-  border-radius: 26px;
-  padding: 18px;
-  box-shadow: 0 10px 24px rgba(0,0,0,0.10);
-  border: 1px solid #e2ecf3;
-  color: #14304c;
-}
-
-.support-title {
-  margin: 0 0 8px 0;
-  font-size: 1.12rem;
-  font-weight: 800;
-  letter-spacing: -0.02em;
-}
-
-.support-text {
-  margin: 0 0 14px 0;
-  font-size: 0.96rem;
-  color: #4b6276;
-  line-height: 1.5;
-  font-weight: 700;
-}
-
-.support-btn {
-  display: flex;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-  background: linear-gradient(135deg, #0fb8d5, #0a8ecf);
-  color: #fff;
-  border-radius: 18px;
-  padding: 15px 14px;
-  font-weight: 800;
-  font-size: 1rem;
-  box-shadow: 0 8px 18px rgba(0,0,0,0.12);
-}
     .support-btn {
       display: flex;
       width: 100%;
@@ -683,8 +636,44 @@
       font-size: .96rem;
     }
 
+    @media (max-width: 640px) {
+      .farmacia-banner {
+        min-height: auto;
+      }
+
+      .pharmacy-cross-glow {
+        width: 78px;
+        height: 78px;
+        right: 16px;
+        top: 16px;
+      }
+
+      .pharmacy-cross-glow span {
+        font-size: 2.8rem;
+      }
+
+      .farmacia-overlay {
+        padding: 20px 18px 18px;
+      }
+
+      .farmacia-name {
+        font-size: 1.8rem;
+        margin-right: 95px;
+      }
+
+      .farmacia-actions {
+        grid-template-columns: 1fr;
+      }
+
+      .farmacia-btn {
+        width: 100%;
+      }
+    }
+
     @media (max-width: 420px) {
-      .farmacia-actions { grid-template-columns: 1fr; }
+      .farmacia-actions {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
@@ -724,82 +713,72 @@
         <h2 class="section-title">Categorías</h2>
 
         <div class="grid" id="categoryGrid">
-  <a class="category-card cat-1" href="categoria.html?cat=servicios-hogar" data-name="servicios para el hogar">Servicios para el hogar</a>
-  <a class="category-card cat-2" href="categoria.html?cat=construccion" data-name="construcción">Construcción</a>
-  <a class="category-card cat-3" href="categoria.html?cat=gastronomia" data-name="gastronomía">Gastronomía</a>
-  <a class="category-card cat-4" href="categoria.html?cat=salud" data-name="salud">Salud</a>
-  <a class="category-card cat-5" href="categoria.html?cat=estetica-bienestar" data-name="estética y bienestar">Estética y bienestar</a>
-  <a class="category-card cat-6" href="categoria.html?cat=educacion" data-name="educación">Educación</a>
-  <a class="category-card cat-7" href="categoria.html?cat=tecnologia" data-name="tecnología">Tecnología</a>
-  <a class="category-card cat-8" href="categoria.html?cat=profesionales" data-name="profesionales">Profesionales</a>
-  <a class="category-card cat-9" href="categoria.html?cat=oficios" data-name="oficios">Oficios</a>
-  <a class="category-card cat-10" href="categoria.html?cat=automotor" data-name="automotor">Automotor</a>
-  <a class="category-card cat-11" href="categoria.html?cat=comercios" data-name="comercios">Comercios</a>
-  <a class="category-card cat-12" href="categoria.html?cat=mascotas" data-name="mascotas">Mascotas</a>
-  <a class="category-card cat-13" href="categoria.html?cat=transporte-logistica" data-name="transporte y logística">Transporte y logística</a>
-  <a class="category-card cat-14" href="categoria.html?cat=deportes-gimnasios" data-name="deportes y gimnasios">Deportes y gimnasios</a>
-  <a class="category-card cat-15" href="categoria.html?cat=empresas-servicios" data-name="empresas y servicios">Empresas y servicios</a>
-  <a class="category-card cat-16" href="categoria.html?cat=otros-rubros" data-name="otros rubros">Otros rubros</a>
-</div>
+          <a class="category-card cat-1" href="categoria.html?cat=servicios-hogar" data-name="servicios para el hogar">Servicios para el hogar</a>
+          <a class="category-card cat-2" href="categoria.html?cat=construccion" data-name="construcción">Construcción</a>
+          <a class="category-card cat-3" href="categoria.html?cat=gastronomia" data-name="gastronomía">Gastronomía</a>
+          <a class="category-card cat-4" href="categoria.html?cat=salud" data-name="salud">Salud</a>
+          <a class="category-card cat-5" href="categoria.html?cat=estetica-bienestar" data-name="estética y bienestar">Estética y bienestar</a>
+          <a class="category-card cat-6" href="categoria.html?cat=educacion" data-name="educación">Educación</a>
+          <a class="category-card cat-7" href="categoria.html?cat=tecnologia" data-name="tecnología">Tecnología</a>
+          <a class="category-card cat-8" href="categoria.html?cat=profesionales" data-name="profesionales">Profesionales</a>
+          <a class="category-card cat-9" href="categoria.html?cat=oficios" data-name="oficios">Oficios</a>
+          <a class="category-card cat-10" href="categoria.html?cat=automotor" data-name="automotor">Automotor</a>
+          <a class="category-card cat-11" href="categoria.html?cat=comercios" data-name="comercios">Comercios</a>
+          <a class="category-card cat-12" href="categoria.html?cat=mascotas" data-name="mascotas">Mascotas</a>
+          <a class="category-card cat-13" href="categoria.html?cat=transporte-logistica" data-name="transporte y logística">Transporte y logística</a>
+          <a class="category-card cat-14" href="categoria.html?cat=deportes-gimnasios" data-name="deportes y gimnasios">Deportes y gimnasios</a>
+          <a class="category-card cat-15" href="categoria.html?cat=empresas-servicios" data-name="empresas y servicios">Empresas y servicios</a>
+          <a class="category-card cat-16" href="categoria.html?cat=otros-rubros" data-name="otros rubros">Otros rubros</a>
+        </div>
 
         <div class="emergency-bottom">
           <button class="btn-emergency" id="openEmergency">Emergencias</button>
         </div>
 
-<div class="farmacia-turno-card" id="farmaciaTurnoCard">
+        <div class="farmacia-banner" id="farmaciaTurnoCard">
+          <div class="pharmacy-cross-glow">
+            <span>+</span>
+          </div>
 
-  <div class="farmacia-overlay">
+          <div class="farmacia-overlay">
+            <div class="farmacia-label">
+              FARMACIA DE TURNO
+            </div>
 
-  <div class="farmacia-header">
-    <div class="farmacia-label">
-      FARMACIA DE TURNO
-    </div>
+            <div class="farmacia-horario" id="farmaciaHorario">
+              Hasta las 08:00 hs
+            </div>
 
-    <div class="farmacia-horario" id="farmaciaHorario">
-      Hasta las 08:00 hs
-    </div>
-  </div>
+            <div class="farmacia-name" id="farmaciaNombre">
+              FARMACIA
+            </div>
 
+            <div class="farmacia-info">
+              <div class="info-line address" id="farmaciaDireccion">
+                Dirección
+              </div>
 
-  <div class="farmacia-body">
+              <div class="info-line phone" id="farmaciaTelefono">
+                Teléfono
+              </div>
+            </div>
 
-    <div class="farmacia-name" id="farmaciaNombre">
-      FARMACIA
-    </div>
+            <div class="farmacia-actions">
+              <a class="farmacia-btn btn-call" id="btnFarmaciaLlamar" href="#" target="_blank" rel="noopener">
+                Llamar
+              </a>
 
-    <div class="farmacia-info">
+              <a class="farmacia-btn btn-wa" id="btnFarmaciaWhatsapp" href="#" target="_blank" rel="noopener">
+                WhatsApp
+              </a>
 
-      <div class="info-line address" id="farmaciaDireccion">
-        Dirección
-      </div>
+              <a class="farmacia-btn btn-map" id="btnFarmaciaMapa" href="#" target="_blank" rel="noopener">
+                Cómo llegar
+              </a>
+            </div>
+          </div>
+        </div>
 
-      <div class="info-line phone" id="farmaciaTelefono">
-        Teléfono
-      </div>
-
-    </div>
-
-
-    <div class="farmacia-actions">
-
-      <a class="farmacia-btn btn-call" id="btnLlamar" href="#">
-        Llamar
-      </a>
-
-      <a class="farmacia-btn btn-wa" id="btnWhatsapp" href="#">
-        WhatsApp
-      </a>
-
-      <a class="farmacia-btn btn-map" id="btnMapa" href="#">
-        Cómo llegar
-      </a>
-
-    </div>
-
-  </div>
-
-</div>
-        
         <div class="support-card section-block">
           <h3 class="support-title">Soporte Conecta2</h3>
           <p class="support-text">¿Tenés dudas o querés hacernos una sugerencia? Escribinos.</p>
@@ -896,8 +875,6 @@
     </div>
   </div>
 
-  
-  
   <script>
     const intro = document.getElementById('intro');
     const mainApp = document.getElementById('mainApp');
@@ -959,75 +936,94 @@
         }
       });
     });
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxUCqWb6pYziwFrHWwXgSNwDfs4dt2KmdEZS18qFxcqlrSF4ywXdrDSrRM_Efka8Iij/exec";
 
-function registrarInstalacionApp() {
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxUCqWb6pYziwFrHWwXgSNwDfs4dt2KmdEZS18qFxcqlrSF4ywXdrDSrRM_Efka8Iij/exec";
 
-  let deviceId = localStorage.getItem("conecta2_device_id");
+    function registrarInstalacionApp() {
+      let deviceId = localStorage.getItem("conecta2_device_id");
 
-  if (!deviceId) {
-    deviceId = "dev-" + Date.now() + "-" + Math.floor(Math.random() * 1000000);
-    localStorage.setItem("conecta2_device_id", deviceId);
-  }
-
-  const formData = new FormData();
-  formData.append("action", "registrarInstalacion");
-  formData.append("device_id", deviceId);
-  formData.append("origen", "app");
-  formData.append(
-    "modo",
-    window.matchMedia("(display-mode: standalone)").matches ? "standalone" : "browser"
-  );
-
-  fetch(SCRIPT_URL, {
-    method: "POST",
-    body: formData
-  }).catch(() => {});
-
-}
-function cargarFarmaciaHoy(){
-
-  const formData = new FormData();
-  formData.append("action", "farmaciaHoy");
-
-  fetch(SCRIPT_URL, {
-    method: "POST",
-    body: formData
-  })
-    .then(r => r.json())
-    .then(data => {
-
-      if (!data.ok) return;
-
-      const f = data.farmacia;
-      const t = data.turno || {};
-
-      document.getElementById("farmaciaNombre").textContent = f.nombre || "";
-      document.getElementById("farmaciaDireccion").textContent = f.direccion || "";
-      document.getElementById("farmaciaTelefono").textContent = f.telefono || "";
-      document.getElementById("farmaciaHorario").textContent =
-        "Hasta las " + (t.hasta || "08:00") + " hs";
-
-      if (f.telefono_llamada) {
-        document.getElementById("btnFarmaciaLlamar").href = "tel:" + f.telefono_llamada;
+      if (!deviceId) {
+        deviceId = "dev-" + Date.now() + "-" + Math.floor(Math.random() * 1000000);
+        localStorage.setItem("conecta2_device_id", deviceId);
       }
 
-      if (f.whatsapp) {
-        document.getElementById("btnFarmaciaWhatsapp").href =
-          "https://wa.me/" + String(f.whatsapp).replace(/\D/g, "");
-      }
+      const formData = new FormData();
+      formData.append("action", "registrarInstalacion");
+      formData.append("device_id", deviceId);
+      formData.append("origen", "app");
+      formData.append(
+        "modo",
+        window.matchMedia("(display-mode: standalone)").matches ? "standalone" : "browser"
+      );
 
-      if (f.maps) {
-        document.getElementById("btnFarmaciaMapa").href = f.maps;
-      }
+      fetch(SCRIPT_URL, {
+        method: "POST",
+        body: formData
+      }).catch(() => {});
+    }
 
-    })
-    .catch(err => console.log("Error farmacia", err));
-}
+    function cargarFarmaciaHoy() {
+      const formData = new FormData();
+      formData.append("action", "farmaciaHoy");
 
-window.addEventListener("load", cargarFarmaciaHoy);
-    
-registrarInstalacionApp();    
-</script>
+      fetch(SCRIPT_URL, {
+        method: "POST",
+        body: formData
+      })
+        .then(r => r.json())
+        .then(data => {
+          if (!data.ok) return;
+
+          const f = data.farmacia || {};
+          const t = data.turno || {};
+
+          document.getElementById("farmaciaNombre").textContent = f.nombre || "Farmacia";
+          document.getElementById("farmaciaDireccion").textContent = f.direccion || "Dirección no disponible";
+          document.getElementById("farmaciaTelefono").textContent = f.telefono || "Teléfono no disponible";
+
+          const horarioTexto = "Hasta las " + (t.hasta || "08:00") + " hs" + (t.texto_fecha ? " del " + t.texto_fecha : "");
+          document.getElementById("farmaciaHorario").textContent = horarioTexto;
+
+          const btnLlamar = document.getElementById("btnFarmaciaLlamar");
+          const btnWhatsapp = document.getElementById("btnFarmaciaWhatsapp");
+          const btnMapa = document.getElementById("btnFarmaciaMapa");
+
+          if (f.telefono_llamada) {
+            btnLlamar.href = "tel:" + f.telefono_llamada;
+            btnLlamar.style.pointerEvents = "auto";
+            btnLlamar.style.opacity = "1";
+          } else {
+            btnLlamar.href = "#";
+            btnLlamar.style.pointerEvents = "none";
+            btnLlamar.style.opacity = "0.7";
+          }
+
+          if (f.whatsapp) {
+            btnWhatsapp.href = "https://wa.me/" + String(f.whatsapp).replace(/\D/g, "");
+            btnWhatsapp.style.pointerEvents = "auto";
+            btnWhatsapp.style.opacity = "1";
+          } else {
+            btnWhatsapp.href = "#";
+            btnWhatsapp.style.pointerEvents = "none";
+            btnWhatsapp.style.opacity = "0.7";
+          }
+
+          if (f.maps) {
+            btnMapa.href = f.maps;
+            btnMapa.style.pointerEvents = "auto";
+            btnMapa.style.opacity = "1";
+          } else {
+            btnMapa.href = "#";
+            btnMapa.style.pointerEvents = "none";
+            btnMapa.style.opacity = "0.7";
+          }
+        })
+        .catch(err => console.log("Error farmacia", err));
+    }
+
+    window.addEventListener("load", cargarFarmaciaHoy);
+
+    registrarInstalacionApp();
+  </script>
 </body>
 </html>
