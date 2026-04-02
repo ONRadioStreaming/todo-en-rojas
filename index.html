@@ -289,151 +289,218 @@
     }
 
     .farmacia-banner {
-      position: relative;
-      margin-top: 18px;
-      border-radius: 28px;
-      overflow: hidden;
-      min-height: 250px;
-      box-shadow: 0 14px 30px rgba(0,0,0,0.18);
-      background:
-        linear-gradient(180deg, rgba(5, 19, 20, 0.20), rgba(5, 19, 20, 0.88)),
-        url('https://images.unsplash.com/photo-1587854692152-cbe660dbde88?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
-      isolation: isolate;
-    }
+  position: relative;
+  margin-top: 18px;
+  border-radius: 30px;
+  overflow: hidden;
+  min-height: 320px;
+  box-shadow: 0 18px 40px rgba(0,0,0,0.24);
+  background:
+    linear-gradient(180deg, rgba(5,16,18,0.18), rgba(5,16,18,0.78)),
+    url('farmacia-bg.jpg') center/cover no-repeat;
+  isolation: isolate;
+  border: 1px solid rgba(255,255,255,0.08);
+}
 
-    .farmacia-banner::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      backdrop-filter: blur(4px);
-      z-index: 0;
-    }
+.farmacia-banner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
+  background: rgba(8, 22, 24, 0.10);
+  z-index: 0;
+}
 
-    .pharmacy-cross-glow {
-      position: absolute;
-      right: 18px;
-      top: 18px;
-      width: 76px;
-      height: 76px;
-      border-radius: 22px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(11, 50, 20, 0.22);
-      border: 1px solid rgba(108, 255, 138, 0.28);
-      box-shadow: 0 0 0 1px rgba(255,255,255,0.05), 0 0 26px rgba(26, 255, 95, 0.30);
-      z-index: 2;
-    }
+.farmacia-banner::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to bottom, rgba(255,255,255,0.04), rgba(255,255,255,0)),
+    radial-gradient(circle at left center, rgba(77, 255, 130, 0.16), transparent 28%);
+  z-index: 1;
+  pointer-events: none;
+}
 
-    .pharmacy-cross-glow span {
-      font-size: 2.9rem;
-      line-height: 1;
-      font-weight: 800;
-      color: #6bff8a;
-      text-shadow: 0 0 14px rgba(107,255,138,0.95), 0 0 28px rgba(107,255,138,0.55);
-    }
+.pharmacy-cross-glow {
+  position: absolute;
+  right: 18px;
+  top: 18px;
+  width: 88px;
+  height: 88px;
+  border-radius: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(18, 45, 24, 0.28);
+  border: 1px solid rgba(108,255,138,0.24);
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.04),
+    0 0 24px rgba(52,255,117,0.22),
+    inset 0 0 20px rgba(255,255,255,0.03);
+  z-index: 3;
+}
 
-    .farmacia-overlay {
-      position: relative;
-      z-index: 2;
-      padding: 20px;
-    }
+.pharmacy-cross-glow span {
+  font-size: 3.2rem;
+  line-height: 1;
+  font-weight: 900;
+  color: #67ff8f;
+  text-shadow:
+    0 0 14px rgba(103,255,143,0.95),
+    0 0 30px rgba(103,255,143,0.55);
+}
 
-    .farmacia-label {
-      font-size: 0.84rem;
-      font-weight: 800;
-      color: rgba(255,255,255,0.88);
-      text-transform: uppercase;
-      letter-spacing: .6px;
-      margin-bottom: 6px;
-    }
+.farmacia-overlay {
+  position: relative;
+  z-index: 2;
+  padding: 24px 24px 22px;
+}
 
-    .farmacia-name {
-      font-size: 1.56rem;
-      font-weight: 800;
-      color: #ffffff;
-      line-height: 1.05;
-      margin: 0 92px 8px 0;
-      text-transform: uppercase;
-    }
+.farmacia-label {
+  font-size: 0.98rem;
+  font-weight: 900;
+  color: rgba(255,255,255,0.94);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+  text-align: center;
+}
 
-    .farmacia-horario {
-      display: inline-block;
-      background: rgba(255,255,255,0.12);
-      border: 1px solid rgba(255,255,255,0.12);
-      color: #dfffea;
-      font-size: 0.93rem;
-      font-weight: 800;
-      padding: 9px 13px;
-      border-radius: 999px;
-      margin-bottom: 14px;
-      backdrop-filter: blur(6px);
-    }
+.farmacia-horario {
+  display: block;
+  width: 100%;
+  text-align: center;
+  color: rgba(255,255,255,0.92);
+  font-size: 1.02rem;
+  font-weight: 500;
+  padding-bottom: 16px;
+  margin-bottom: 18px;
+  border-bottom: 1px solid rgba(255,255,255,0.10);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
 
-    .farmacia-info {
-      background: rgba(8, 18, 31, 0.56);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 20px;
-      padding: 14px;
-      margin-bottom: 14px;
-      backdrop-filter: blur(6px);
-    }
+.farmacia-name {
+  font-size: 2.25rem;
+  font-weight: 900;
+  color: #ffffff;
+  line-height: 1.08;
+  margin: 0 105px 10px 0;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+}
 
-    .info-line {
-      font-size: 0.98rem;
-      color: rgba(255,255,255,0.95);
-      margin-bottom: 10px;
-      font-weight: 700;
-      line-height: 1.45;
-    }
+.farmacia-info {
+  background: rgba(9, 18, 27, 0.48);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 22px;
+  padding: 16px 18px;
+  margin-bottom: 18px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+}
 
-    .info-line:last-child { margin-bottom: 0; }
+.info-line {
+  font-size: 1.02rem;
+  color: rgba(255,255,255,0.96);
+  margin-bottom: 10px;
+  font-weight: 700;
+  line-height: 1.5;
+}
 
-    .farmacia-actions {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-    }
+.info-line:last-child {
+  margin-bottom: 0;
+}
 
-    .farmacia-btn {
-      border: 0;
-      border-radius: 16px;
-      padding: 13px 10px;
-      font-size: 0.93rem;
-      font-weight: 800;
-      text-align: center;
-      box-shadow: 0 8px 18px rgba(0,0,0,0.14);
-    }
+.info-line.address::before {
+  content: "📍 ";
+  opacity: 0.95;
+}
 
-    .btn-call { background: #f1f6fb; color: #24497a; }
-    .btn-wa { background: #19ad4a; color: #fff; }
-    .btn-map { background: #19b8dd; color: #fff; }
+.info-line.phone::before {
+  content: "📞 ";
+  opacity: 0.95;
+}
 
-    .support-card {
-      margin-top: 16px;
-      background: linear-gradient(135deg, #ffffff, #f4f8fb);
-      border-radius: 26px;
-      padding: 18px;
-      box-shadow: 0 10px 24px rgba(0,0,0,0.10);
-      border: 1px solid #e2ecf3;
-      color: #14304c;
-    }
+.farmacia-actions {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
 
-    .support-title {
-      margin: 0 0 8px 0;
-      font-size: 1.12rem;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-    }
+.farmacia-btn {
+  border: 0;
+  border-radius: 16px;
+  padding: 14px 12px;
+  font-size: 0.98rem;
+  font-weight: 800;
+  text-align: center;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.16);
+  text-decoration: none;
+  transition: transform .15s ease, filter .15s ease;
+}
 
-    .support-text {
-      margin: 0 0 14px 0;
-      font-size: 0.96rem;
-      color: #4b6276;
-      line-height: 1.5;
-      font-weight: 700;
-    }
+.farmacia-btn:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.03);
+}
 
+.btn-call {
+  background: linear-gradient(135deg, #2de36f, #16c95a);
+  color: #ffffff;
+}
+
+.btn-wa {
+  background: linear-gradient(135deg, #19c15d, #109847);
+  color: #ffffff;
+}
+
+.btn-map {
+  background: linear-gradient(135deg, #c7d2dc, #96a8b8);
+  color: #ffffff;
+}
+
+.support-card {
+  margin-top: 16px;
+  background: linear-gradient(135deg, #ffffff, #f4f8fb);
+  border-radius: 26px;
+  padding: 18px;
+  box-shadow: 0 10px 24px rgba(0,0,0,0.10);
+  border: 1px solid #e2ecf3;
+  color: #14304c;
+}
+
+.support-title {
+  margin: 0 0 8px 0;
+  font-size: 1.12rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.support-text {
+  margin: 0 0 14px 0;
+  font-size: 0.96rem;
+  color: #4b6276;
+  line-height: 1.5;
+  font-weight: 700;
+}
+
+.support-btn {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #0fb8d5, #0a8ecf);
+  color: #fff;
+  border-radius: 18px;
+  padding: 15px 14px;
+  font-weight: 800;
+  font-size: 1rem;
+  box-shadow: 0 8px 18px rgba(0,0,0,0.12);
+}
     .support-btn {
       display: flex;
       width: 100%;
@@ -643,51 +710,46 @@
           <button class="btn-emergency" id="openEmergency">Emergencias</button>
         </div>
 
-<div class="farmacia-banner section-block">
-
-  <div class="pharmacy-cross-glow">
-    <span>+</span>
-  </div>
+<div class="farmacia-turno-card" id="farmaciaTurnoCard">
 
   <div class="farmacia-overlay">
 
-    <div class="farmacia-label">
-      Farmacia de turno
+    <div class="farmacia-header">
+      <div class="farmacia-title">FARMACIA DE TURNO</div>
+      <div class="farmacia-horario" id="farmaciaHorario">
+        Hasta las 08:00 hs del viernes 3
+      </div>
     </div>
 
-    <div class="farmacia-name" id="farmaciaNombre">
-      Cargando farmacia...
-    </div>
+    <div class="farmacia-body">
 
-    <div class="farmacia-horario" id="farmaciaHorario">
-      Consultando horario
-    </div>
+      <div class="farmacia-nombre" id="farmaciaNombre">
+        FARMACIA
+      </div>
 
-    <div class="farmacia-info">
-
-      <div class="info-line" id="farmaciaDireccion">
+      <div class="farmacia-direccion" id="farmaciaDireccion">
         Dirección
       </div>
 
-      <div class="info-line" id="farmaciaTelefono">
-        Teléfono
+      <div class="farmacia-telefono" id="farmaciaTelefono">
+        📞 Teléfono
       </div>
 
-    </div>
+      <div class="farmacia-botones">
 
-    <div class="farmacia-actions">
+        <a id="btnLlamarFarmacia" class="btn-farmacia llamar">
+          Llamar
+        </a>
 
-      <a class="farmacia-btn btn-call" id="btnFarmaciaLlamar" href="#">
-        Llamar
-      </a>
+        <a id="btnWhatsappFarmacia" class="btn-farmacia whatsapp">
+          WhatsApp
+        </a>
 
-      <a class="farmacia-btn btn-wa" id="btnFarmaciaWhatsapp" href="#" target="_blank">
-        WhatsApp
-      </a>
+        <a id="btnMapaFarmacia" class="btn-farmacia mapa">
+          Cómo llegar
+        </a>
 
-      <a class="farmacia-btn btn-map" id="btnFarmaciaMapa" href="#" target="_blank">
-        Cómo llegar
-      </a>
+      </div>
 
     </div>
 
