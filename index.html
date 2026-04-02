@@ -876,153 +876,172 @@
   </div>
 
   <script>
-    const intro = document.getElementById('intro');
-    const mainApp = document.getElementById('mainApp');
+  const intro = document.getElementById('intro');
+  const mainApp = document.getElementById('mainApp');
 
-    function mostrarAppSinIntro() {
-      intro.style.display = 'none';
-      mainApp.classList.add('visible');
-    }
-
-    if (sessionStorage.getItem('conecta2_intro_seen') === 'true') {
-      mostrarAppSinIntro();
-    } else {
-      window.addEventListener('load', function () {
-        setTimeout(function () {
-          intro.style.opacity = '0';
-          mainApp.classList.add('visible');
-        }, 5200);
-
-        setTimeout(function () {
-          intro.style.display = 'none';
-          sessionStorage.setItem('conecta2_intro_seen', 'true');
-        }, 5700);
-      });
-    }
-
-    const openEmergency = document.getElementById('openEmergency');
-    const closeEmergency = document.getElementById('closeEmergency');
-    const emergencyModal = document.getElementById('emergencyModal');
-
-    openEmergency.addEventListener('click', function () {
-      emergencyModal.classList.add('show');
-      document.body.style.overflow = 'hidden';
-    });
-
-    closeEmergency.addEventListener('click', function () {
-      emergencyModal.classList.remove('show');
-      document.body.style.overflow = '';
-    });
-
-    emergencyModal.addEventListener('click', function (e) {
-      if (e.target === emergencyModal) {
-        emergencyModal.classList.remove('show');
-        document.body.style.overflow = '';
-      }
-    });
-
-    const searchInput = document.getElementById('searchInput');
-    const cards = document.querySelectorAll('.category-card');
-
-    searchInput.addEventListener('input', function () {
-      const value = this.value.trim().toLowerCase();
-
-      cards.forEach(card => {
-        const name = card.getAttribute('data-name');
-        if (name.includes(value) || value === '') {
-          card.classList.remove('hidden');
-        } else {
-          card.classList.add('hidden');
-        }
-      });
-    });
-
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxUCqWb6pYziwFrHWwXgSNwDfs4dt2KmdEZS18qFxcqlrSF4ywXdrDSrRM_Efka8Iij/exec";
-
-    function registrarInstalacionApp() {
-  ...
-}
-
-function obtenerTextoCorteFarmacia(hastaHora) {
-  const ahora = new Date();
-
-  const fechaBase = new Date(ahora);
-  if (ahora.getHours() < 8) {
-    fechaBase.setDate(fechaBase.getDate() - 1);
+  function mostrarAppSinIntro() {
+    intro.style.display = 'none';
+    mainApp.classList.add('visible');
   }
 
-  const fechaCorte = new Date(fechaBase);
-  fechaCorte.setDate(fechaCorte.getDate() + 1);
+  if (sessionStorage.getItem('conecta2_intro_seen') === 'true') {
+    mostrarAppSinIntro();
+  } else {
+    window.addEventListener('load', function () {
+      setTimeout(function () {
+        intro.style.opacity = '0';
+        mainApp.classList.add('visible');
+      }, 5200);
 
-  const dias = ["domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado"];
-  const nombreDia = dias[fechaCorte.getDay()];
-  const numeroDia = fechaCorte.getDate();
+      setTimeout(function () {
+        intro.style.display = 'none';
+        sessionStorage.setItem('conecta2_intro_seen', 'true');
+      }, 5700);
+    });
+  }
 
-  return "Hasta las " + (hastaHora || "08:00") + " hs del " + nombreDia + " " + numeroDia;
-}
+  const openEmergency = document.getElementById('openEmergency');
+  const closeEmergency = document.getElementById('closeEmergency');
+  const emergencyModal = document.getElementById('emergencyModal');
 
-    function cargarFarmaciaHoy() {
-      const formData = new FormData();
-      formData.append("action", "farmaciaHoy");
+  openEmergency.addEventListener('click', function () {
+    emergencyModal.classList.add('show');
+    document.body.style.overflow = 'hidden';
+  });
 
-      fetch(SCRIPT_URL, {
-        method: "POST",
-        body: formData
-      })
-        .then(r => r.json())
-        .then(data => {
-          if (!data.ok) return;
+  closeEmergency.addEventListener('click', function () {
+    emergencyModal.classList.remove('show');
+    document.body.style.overflow = '';
+  });
 
-          const f = data.farmacia || {};
-          const t = data.turno || {};
+  emergencyModal.addEventListener('click', function (e) {
+    if (e.target === emergencyModal) {
+      emergencyModal.classList.remove('show');
+      document.body.style.overflow = '';
+    }
+  });
 
-          document.getElementById("farmaciaNombre").textContent = f.nombre || "Farmacia";
-          document.getElementById("farmaciaDireccion").textContent = f.direccion || "Dirección no disponible";
-          document.getElementById("farmaciaTelefono").textContent = f.telefono || "Teléfono no disponible";
+  const searchInput = document.getElementById('searchInput');
+  const cards = document.querySelectorAll('.category-card');
 
-          const horarioTexto = obtenerTextoCorteFarmacia(t.hasta || "08:00");
-          document.getElementById("farmaciaHorario").textContent = horarioTexto;
+  searchInput.addEventListener('input', function () {
+    const value = this.value.trim().toLowerCase();
 
-          const btnLlamar = document.getElementById("btnFarmaciaLlamar");
-          const btnWhatsapp = document.getElementById("btnFarmaciaWhatsapp");
-          const btnMapa = document.getElementById("btnFarmaciaMapa");
+    cards.forEach(card => {
+      const name = card.getAttribute('data-name') || '';
+      if (name.includes(value) || value === '') {
+        card.classList.remove('hidden');
+      } else {
+        card.classList.add('hidden');
+      }
+    });
+  });
 
-          if (f.telefono_llamada) {
-            btnLlamar.href = "tel:" + f.telefono_llamada;
-            btnLlamar.style.pointerEvents = "auto";
-            btnLlamar.style.opacity = "1";
-          } else {
-            btnLlamar.href = "#";
-            btnLlamar.style.pointerEvents = "none";
-            btnLlamar.style.opacity = "0.7";
-          }
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxUCqWb6pYziwFrHWwXgSNwDfs4dt2KmdEZS18qFxcqlrSF4ywXdrDSrRM_Efka8Iij/exec";
 
-          if (f.whatsapp) {
-            btnWhatsapp.href = "https://wa.me/" + String(f.whatsapp).replace(/\D/g, "");
-            btnWhatsapp.style.pointerEvents = "auto";
-            btnWhatsapp.style.opacity = "1";
-          } else {
-            btnWhatsapp.href = "#";
-            btnWhatsapp.style.pointerEvents = "none";
-            btnWhatsapp.style.opacity = "0.7";
-          }
+  function registrarInstalacionApp() {
+    let deviceId = localStorage.getItem("conecta2_device_id");
 
-          if (f.maps) {
-            btnMapa.href = f.maps;
-            btnMapa.style.pointerEvents = "auto";
-            btnMapa.style.opacity = "1";
-          } else {
-            btnMapa.href = "#";
-            btnMapa.style.pointerEvents = "none";
-            btnMapa.style.opacity = "0.7";
-          }
-        })
-        .catch(err => console.log("Error farmacia", err));
+    if (!deviceId) {
+      deviceId = "dev-" + Date.now() + "-" + Math.floor(Math.random() * 1000000);
+      localStorage.setItem("conecta2_device_id", deviceId);
     }
 
-    window.addEventListener("load", cargarFarmaciaHoy);
+    const formData = new FormData();
+    formData.append("action", "registrarInstalacion");
+    formData.append("device_id", deviceId);
+    formData.append("origen", "app");
+    formData.append(
+      "modo",
+      window.matchMedia("(display-mode: standalone)").matches ? "standalone" : "browser"
+    );
 
+    fetch(SCRIPT_URL, {
+      method: "POST",
+      body: formData
+    }).catch(() => {});
+  }
+
+  function obtenerTextoCorteFarmacia(hastaHora) {
+    const ahora = new Date();
+
+    const fechaBase = new Date(ahora);
+    if (ahora.getHours() < 8) {
+      fechaBase.setDate(fechaBase.getDate() - 1);
+    }
+
+    const fechaCorte = new Date(fechaBase);
+    fechaCorte.setDate(fechaCorte.getDate() + 1);
+
+    const dias = ["domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado"];
+    const nombreDia = dias[fechaCorte.getDay()];
+    const numeroDia = fechaCorte.getDate();
+
+    return "Hasta las " + (hastaHora || "08:00") + " hs del " + nombreDia + " " + numeroDia;
+  }
+
+  function cargarFarmaciaHoy() {
+    const formData = new FormData();
+    formData.append("action", "farmaciaHoy");
+
+    fetch(SCRIPT_URL, {
+      method: "POST",
+      body: formData
+    })
+      .then(r => r.json())
+      .then(data => {
+        if (!data.ok) return;
+
+        const f = data.farmacia || {};
+        const t = data.turno || {};
+
+        document.getElementById("farmaciaNombre").textContent = f.nombre || "Farmacia";
+        document.getElementById("farmaciaDireccion").textContent = f.direccion || "Dirección no disponible";
+        document.getElementById("farmaciaTelefono").textContent = f.telefono || "Teléfono no disponible";
+        document.getElementById("farmaciaHorario").textContent = obtenerTextoCorteFarmacia(t.hasta || "08:00");
+
+        const btnLlamar = document.getElementById("btnFarmaciaLlamar");
+        const btnWhatsapp = document.getElementById("btnFarmaciaWhatsapp");
+        const btnMapa = document.getElementById("btnFarmaciaMapa");
+
+        if (f.telefono_llamada) {
+          btnLlamar.href = "tel:" + f.telefono_llamada;
+          btnLlamar.style.pointerEvents = "auto";
+          btnLlamar.style.opacity = "1";
+        } else {
+          btnLlamar.href = "#";
+          btnLlamar.style.pointerEvents = "none";
+          btnLlamar.style.opacity = "0.7";
+        }
+
+        if (f.whatsapp) {
+          btnWhatsapp.href = "https://wa.me/" + String(f.whatsapp).replace(/\D/g, "");
+          btnWhatsapp.style.pointerEvents = "auto";
+          btnWhatsapp.style.opacity = "1";
+        } else {
+          btnWhatsapp.href = "#";
+          btnWhatsapp.style.pointerEvents = "none";
+          btnWhatsapp.style.opacity = "0.7";
+        }
+
+        if (f.maps) {
+          btnMapa.href = f.maps;
+          btnMapa.style.pointerEvents = "auto";
+          btnMapa.style.opacity = "1";
+        } else {
+          btnMapa.href = "#";
+          btnMapa.style.pointerEvents = "none";
+          btnMapa.style.opacity = "0.7";
+        }
+      })
+      .catch(err => console.log("Error farmacia", err));
+  }
+
+  window.addEventListener("load", function () {
+    cargarFarmaciaHoy();
     registrarInstalacionApp();
+  });
+</script>
   </script>
 </body>
 </html>
