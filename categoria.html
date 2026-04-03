@@ -284,7 +284,7 @@
   </div>
 
   <script>
-    const API_URL_BASE = "https://script.google.com/macros/s/AKfycbxUCqWb6pYziwFrHlwXg5NwDfS4dt2KmdEZS18qFxcqlrSF4ywXdrDSrRM_Efka8Iij/exec";
+    const API_URL_BASE = "const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxUCqWb6pYziwFrHWwXgSNwDfs4dt2KmdEZS18qFxcqlrSF4ywXdrDSrRM_Efka8Iij/exec";";
 
     const categoriaConfig = {
       "oficios": {
@@ -450,11 +450,20 @@
           throw new Error("Error HTTP " + response.status);
         }
 
-        const data = await response.json();
+       const data = await response.json();
+console.log("Respuesta listarCategoria:", data);
 
-        if (!Array.isArray(data)) {
-          throw new Error("La API no devolvió un array válido.");
-        }
+if (Array.isArray(data)) {
+  datosOriginales = data;
+} else if (data && Array.isArray(data.items)) {
+  datosOriginales = data.items;
+} else if (data && Array.isArray(data.resultados)) {
+  datosOriginales = data.resultados;
+} else if (data && Array.isArray(data.data)) {
+  datosOriginales = data.data;
+} else {
+  throw new Error("La API no devolvió un array válido.");
+}
 
         datosOriginales = data;
         renderSubcategorias(datosOriginales);
