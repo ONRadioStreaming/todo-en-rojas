@@ -954,8 +954,18 @@
         datosOriginales = [];
       }
 
-      renderSubcategorias(datosOriginales);
-      renderCards();
+     datosOriginales = datosOriginales.filter(function(item) {
+  const catItem = String(item.categoria_principal || "")
+    .toLowerCase()
+    .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+    .replace(/\s+/g, "-")
+    .trim();
+
+  return catItem === categoria;
+});
+
+renderSubcategorias(datosOriginales);
+renderCards();
     } catch (error) {
       console.error("Error procesando resultados:", error);
       countBadge.textContent = "Error";
@@ -970,9 +980,8 @@
   const script = document.createElement("script");
   script.id = callbackName;
   script.src = API_URL_BASE
-    + '?action=listarCategoria'
-    + '&cat=' + encodeURIComponent(categoria)
-    + '&callback=' + encodeURIComponent(callbackName);
+  + '?action=listar'
+  + '&callback=' + encodeURIComponent(callbackName);
 
   script.onerror = function() {
     try { delete window[callbackName]; } catch (e) {}
