@@ -851,7 +851,7 @@
         </div>
 
         <div class="card-block">
-          <div class="card-block-title">Medios de pago</div>
+          <div class="card-block-title">Modalidad de atención</div>
           <div class="card-list" id="cardPagosBlock"></div>
         </div>
 
@@ -995,10 +995,10 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    function obtenerMediosPagoSeleccionados() {
-      const checks = document.querySelectorAll('input[name="mediosPago"]:checked');
-      return Array.from(checks).map(c => c.value);
-    }
+    function obtenerModalidadAtencionSeleccionada() {
+  const checks = document.querySelectorAll('input[name="modalidadAtencion"]:checked');
+  return Array.from(checks).map(c => c.value);
+}
 
     function limpiarTelefono(numero) {
       return (numero || '').replace(/\D/g, '');
@@ -1396,7 +1396,7 @@
         if (valor('telefonoAlternativo') && !telefonoValido(valor('telefonoAlternativo'))) faltantes.push("Teléfono principal válido");
       }
 
-      if (obtenerMediosPagoSeleccionados().length === 0) faltantes.push("Al menos un medio de pago");
+      if (obtenerModalidadAtencionSeleccionada().length === 0) faltantes.push("Al menos una modalidad de atención");
 
       const errorHorarios = validarHorariosPorDia();
       if (errorHorarios) faltantes.push(errorHorarios);
@@ -1446,7 +1446,7 @@
       const domicilio = valor('zona');
       const whatsapp = limpiarTelefono(valor('whatsapp'));
       const telefono = limpiarTelefono(valor('telefonoAlternativo'));
-      const mediosPago = obtenerMediosPagoSeleccionados();
+      const modalidadAtencion = obtenerModalidadAtencionSeleccionada();
       const categoria = valor('categoriaPrincipal');
       const matricula = valor('matricula');
       const disponible = estaDisponibleAhora();
@@ -1483,7 +1483,7 @@
 
       const pagosBlock = document.getElementById('cardPagosBlock');
       pagosBlock.innerHTML = '';
-      mediosPago.forEach(item => {
+      modalidadAtencion.forEach(item => {
         const chip = document.createElement('div');
         chip.className = 'card-chip';
         chip.textContent = item;
@@ -1588,7 +1588,7 @@
           })),
           horariosPorDia: obtenerHorariosPorDia(),
           horario: obtenerDiasResumen().join(' | '),
-          mediosPago: obtenerMediosPagoSeleccionados().join(', '),
+          modalidadAtencion: obtenerModalidadAtencionSeleccionada().join(', '),
           matricula: valor('matricula'),
           fotoBase64: fotoBase64
         };
