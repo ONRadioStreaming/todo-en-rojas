@@ -182,37 +182,6 @@
       color: #fff;
     }
 
-    .search-box {
-      background: rgba(255,255,255,0.96);
-      border-radius: 18px;
-      padding: 13px 15px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      box-shadow: 0 8px 16px rgba(0,0,0,0.10);
-    }
-
-    .search-box span {
-      font-size: 1.1rem;
-      color: #0b5f86;
-    }
-
-    .search-box input {
-      width: 100%;
-      border: 0;
-      outline: none;
-      background: transparent;
-      color: #1b3555;
-      font-size: 1rem;
-      font-weight: 700;
-      font-family: inherit;
-    }
-
-    .search-box input::placeholder {
-      color: #6b7d8f;
-      font-weight: 600;
-    }
-
     .content {
       background: #eef4f7;
       color: #11253d;
@@ -237,7 +206,7 @@
 
     .category-card {
       border-radius: 22px;
-      min-height: 110px;
+      min-height: 118px;
       padding: 14px 12px;
       color: #fff;
       display: flex;
@@ -262,24 +231,27 @@
         inset 0 3px 6px rgba(0,0,0,0.18);
     }
 
-    .cat-1  { background: linear-gradient(145deg, #ff9f1c, #ff6f3d); }
-    .cat-2  { background: linear-gradient(145deg, #ff5f7b, #ff3b68); }
     .cat-3  { background: linear-gradient(145deg, #1dc9bf, #1799d2); }
     .cat-4  { background: linear-gradient(145deg, #9b67ff, #6b3de1); }
-    .cat-5  { background: linear-gradient(145deg, #16b7de, #0d80c6); }
-    .cat-6  { background: linear-gradient(145deg, #18cf9a, #11a56e); }
-    .cat-7  { background: linear-gradient(145deg, #5373ff, #3552d9); }
-    .cat-8  { background: linear-gradient(145deg, #f6288c, #b7189d); }
-    .cat-9  { background: linear-gradient(145deg, #ff7a18, #d95a00); }
-    .cat-10 { background: linear-gradient(145deg, #556270, #2c3e50); }
     .cat-11 { background: linear-gradient(145deg, #24c6dc, #514a9d); }
-    .cat-12 { background: linear-gradient(145deg, #43cea2, #185a9d); }
-    .cat-13 { background: linear-gradient(145deg, #ee0979, #ff6a00); }
-    .cat-14 { background: linear-gradient(145deg, #00c9ff, #92fe9d); }
     .cat-15 { background: linear-gradient(145deg, #8e2de2, #4a00e0); }
-    .cat-16 { background: linear-gradient(145deg, #667db6, #0082c8); }
 
-    .hidden { display: none !important; }
+    .category-card .card-title {
+      display: block;
+      font-size: 1rem;
+      font-weight: 800;
+      margin-bottom: 6px;
+      line-height: 1.2;
+    }
+
+    .category-card .card-subtitle {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 700;
+      line-height: 1.25;
+      opacity: 0.95;
+    }
+
     .section-block { margin-top: 18px; }
     .emergency-bottom { margin-top: 16px; }
 
@@ -324,33 +296,33 @@
     }
 
     .pharmacy-cross-glow {
-  position: absolute;
-  right: 18px;
-  top: 22px;
-  width: 74px;
-  height: 74px;
-  border-radius: 22px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(18,45,24,0.22);
-  border: 1px solid rgba(108,255,138,0.22);
-  box-shadow:
-    0 0 0 1px rgba(255,255,255,0.04),
-    0 0 20px rgba(52,255,117,0.18),
-    inset 0 0 16px rgba(255,255,255,0.03);
-  z-index: 3;
-}
+      position: absolute;
+      right: 18px;
+      top: 22px;
+      width: 74px;
+      height: 74px;
+      border-radius: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(18,45,24,0.22);
+      border: 1px solid rgba(108,255,138,0.22);
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.04),
+        0 0 20px rgba(52,255,117,0.18),
+        inset 0 0 16px rgba(255,255,255,0.03);
+      z-index: 3;
+    }
 
     .pharmacy-cross-glow span {
-  font-size: 2.7rem;
-  line-height: 1;
-  font-weight: 900;
-  color: #67ff8f;
-  text-shadow:
-    0 0 12px rgba(103,255,143,0.92),
-    0 0 24px rgba(103,255,143,0.45);
-}
+      font-size: 2.7rem;
+      line-height: 1;
+      font-weight: 900;
+      color: #67ff8f;
+      text-shadow:
+        0 0 12px rgba(103,255,143,0.92),
+        0 0 24px rgba(103,255,143,0.45);
+    }
 
     .farmacia-overlay {
       position: relative;
@@ -369,48 +341,48 @@
     }
 
     .farmacia-horario {
-  display: block;
-  width: calc(100% - 92px);
-  text-align: center;
-  color: rgba(255,255,255,0.96);
-  font-size: 1.02rem;
-  font-weight: 500;
-  padding-bottom: 16px;
-  margin-bottom: 18px;
-  border-bottom: 1px solid rgba(255,255,255,0.12);
-  text-shadow: 0 1px 2px rgba(0,0,0,0.25);
-}
+      display: block;
+      width: calc(100% - 92px);
+      text-align: center;
+      color: rgba(255,255,255,0.96);
+      font-size: 1.02rem;
+      font-weight: 500;
+      padding-bottom: 16px;
+      margin-bottom: 18px;
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+      text-shadow: 0 1px 2px rgba(0,0,0,0.25);
+    }
 
     .farmacia-name {
-  font-size: 2.28rem;
-  font-weight: 900;
-  color: #ffffff;
-  line-height: 1.06;
-  margin: 0 0 14px 0;
-  text-transform: uppercase;
-  letter-spacing: -0.02em;
-  text-align: center;
-}
+      font-size: 2.28rem;
+      font-weight: 900;
+      color: #ffffff;
+      line-height: 1.06;
+      margin: 0 0 14px 0;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      text-align: center;
+    }
 
     .farmacia-info {
-  background: rgba(9,18,27,0.38);
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 22px;
-  padding: 16px 18px;
-  margin-bottom: 18px;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
-  text-align: center;
-}
+      background: rgba(9,18,27,0.38);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 22px;
+      padding: 16px 18px;
+      margin-bottom: 18px;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+      text-align: center;
+    }
 
     .info-line {
-  font-size: 1.02rem;
-  color: rgba(255,255,255,0.97);
-  margin-bottom: 10px;
-  font-weight: 700;
-  line-height: 1.5;
-}
+      font-size: 1.02rem;
+      color: rgba(255,255,255,0.97);
+      margin-bottom: 10px;
+      font-weight: 700;
+      line-height: 1.5;
+    }
 
     .info-line:last-child {
       margin-bottom: 0;
@@ -427,26 +399,26 @@
     }
 
     .farmacia-actions {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-}
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
 
     .farmacia-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 0;
-  border-radius: 16px;
-  padding: 14px 10px;
-  font-size: 0.95rem;
-  font-weight: 800;
-  text-align: center;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.16);
-  text-decoration: none;
-  transition: transform .15s ease, filter .15s ease;
-  min-height: 58px;
-}
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 0;
+      border-radius: 16px;
+      padding: 14px 10px;
+      font-size: 0.95rem;
+      font-weight: 800;
+      text-align: center;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.16);
+      text-decoration: none;
+      transition: transform .15s ease, filter .15s ease;
+      min-height: 58px;
+    }
 
     .farmacia-btn:hover {
       transform: translateY(-1px);
@@ -640,54 +612,54 @@
     }
 
     @media (max-width: 640px) {
-  .farmacia-banner {
-    min-height: auto;
-  }
+      .farmacia-banner {
+        min-height: auto;
+      }
 
-  .pharmacy-cross-glow {
-    width: 66px;
-    height: 66px;
-    right: 14px;
-    top: 18px;
-  }
+      .pharmacy-cross-glow {
+        width: 66px;
+        height: 66px;
+        right: 14px;
+        top: 18px;
+      }
 
-  .pharmacy-cross-glow span {
-    font-size: 2.4rem;
-  }
+      .pharmacy-cross-glow span {
+        font-size: 2.4rem;
+      }
 
-  .farmacia-overlay {
-    padding: 20px 16px 18px;
-  }
+      .farmacia-overlay {
+        padding: 20px 16px 18px;
+      }
 
-  .farmacia-label {
-    font-size: 0.94rem;
-    margin-bottom: 8px;
-  }
+      .farmacia-label {
+        font-size: 0.94rem;
+        margin-bottom: 8px;
+      }
 
-  .farmacia-horario {
-    width: calc(100% - 78px);
-    font-size: 0.96rem;
-    margin-bottom: 16px;
-    padding-bottom: 14px;
-  }
+      .farmacia-horario {
+        width: calc(100% - 78px);
+        font-size: 0.96rem;
+        margin-bottom: 16px;
+        padding-bottom: 14px;
+      }
 
-  .farmacia-name {
-    font-size: 1.95rem;
-    margin-bottom: 14px;
-  }
+      .farmacia-name {
+        font-size: 1.95rem;
+        margin-bottom: 14px;
+      }
 
-  .farmacia-actions {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
-  }
+      .farmacia-actions {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+      }
 
-  .farmacia-btn {
-    font-size: 0.88rem;
-    padding: 13px 8px;
-    min-height: 54px;
-    border-radius: 14px;
-  }
-}
+      .farmacia-btn {
+        font-size: 0.88rem;
+        padding: 13px 8px;
+        min-height: 54px;
+        border-radius: 14px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -713,11 +685,7 @@
           <div class="action-stack">
             <a class="btn-main" href="registro-comercio.html">Registrá tu comercio</a>
             <a class="btn-secondary" href="registro-servicio.html">Ofrecé tus servicios</a>
-          </div>
-
-          <div class="search-box">
-            <span>🔎</span>
-            <input type="text" id="searchInput" placeholder="Buscar categoría...">
+            <a class="btn-secondary" href="registro-profesional.html">Registrate como profesional</a>
           </div>
         </div>
       </div>
@@ -726,22 +694,33 @@
         <h2 class="section-title">Categorías</h2>
 
         <div class="grid" id="categoryGrid">
-          <a class="category-card cat-1" href="categoria.html?cat=servicios-hogar" data-name="servicios para el hogar">Servicios para el hogar</a>
-          <a class="category-card cat-2" href="categoria.html?cat=construccion" data-name="construcción">Construcción</a>
-          <a class="category-card cat-3" href="categoria.html?cat=gastronomia" data-name="gastronomía">Gastronomía</a>
-          <a class="category-card cat-4" href="categoria.html?cat=salud" data-name="salud">Salud</a>
-          <a class="category-card cat-5" href="categoria.html?cat=estetica-bienestar" data-name="estética y bienestar">Estética y bienestar</a>
-          <a class="category-card cat-6" href="categoria.html?cat=educacion" data-name="educación">Educación</a>
-          <a class="category-card cat-7" href="categoria.html?cat=tecnologia" data-name="tecnología">Tecnología</a>
-          <a class="category-card cat-8" href="categoria.html?cat=profesionales" data-name="profesionales">Profesionales</a>
-          <a class="category-card cat-9" href="categoria.html?cat=oficios" data-name="oficios">Oficios</a>
-          <a class="category-card cat-10" href="categoria.html?cat=automotor" data-name="automotor">Automotor</a>
-          <a class="category-card cat-11" href="categoria.html?cat=comercios" data-name="comercios">Comercios</a>
-          <a class="category-card cat-12" href="categoria.html?cat=mascotas" data-name="mascotas">Mascotas</a>
-          <a class="category-card cat-13" href="categoria.html?cat=transporte-logistica" data-name="transporte y logística">Transporte y logística</a>
-          <a class="category-card cat-14" href="categoria.html?cat=deportes-gimnasios" data-name="deportes y gimnasios">Deportes y gimnasios</a>
-          <a class="category-card cat-15" href="categoria.html?cat=empresas-servicios" data-name="empresas y servicios">Empresas y servicios</a>
-          <a class="category-card cat-16" href="categoria.html?cat=otros-rubros" data-name="otros rubros">Otros rubros</a>
+          <a class="category-card cat-11" href="categoria.html?cat=comercios" data-name="comercios">
+            <div>
+              <span class="card-title">Comercios</span>
+              <span class="card-subtitle">Locales y negocios físicos</span>
+            </div>
+          </a>
+
+          <a class="category-card cat-3" href="categoria.html?cat=servicios" data-name="servicios">
+            <div>
+              <span class="card-title">Servicios</span>
+              <span class="card-subtitle">Personas que realizan trabajos o tareas</span>
+            </div>
+          </a>
+
+          <a class="category-card cat-15" href="categoria.html?cat=profesionales" data-name="profesionales">
+            <div>
+              <span class="card-title">Profesionales</span>
+              <span class="card-subtitle">Profesiones universitarias o técnicas</span>
+            </div>
+          </a>
+
+          <a class="category-card cat-4" href="categoria.html?cat=salud" data-name="salud">
+            <div>
+              <span class="card-title">Salud</span>
+              <span class="card-subtitle">Profesionales de la salud</span>
+            </div>
+          </a>
         </div>
 
         <div class="emergency-bottom">
@@ -889,172 +868,155 @@
   </div>
 
   <script>
-  const intro = document.getElementById('intro');
-  const mainApp = document.getElementById('mainApp');
+    const intro = document.getElementById('intro');
+    const mainApp = document.getElementById('mainApp');
 
-  function mostrarAppSinIntro() {
-    intro.style.display = 'none';
-    mainApp.classList.add('visible');
-  }
+    function mostrarAppSinIntro() {
+      intro.style.display = 'none';
+      mainApp.classList.add('visible');
+    }
 
-  if (sessionStorage.getItem('conecta2_intro_seen') === 'true') {
-    mostrarAppSinIntro();
-  } else {
-    window.addEventListener('load', function () {
-      setTimeout(function () {
-        intro.style.opacity = '0';
-        mainApp.classList.add('visible');
-      }, 5200);
+    if (sessionStorage.getItem('conecta2_intro_seen') === 'true') {
+      mostrarAppSinIntro();
+    } else {
+      window.addEventListener('load', function () {
+        setTimeout(function () {
+          intro.style.opacity = '0';
+          mainApp.classList.add('visible');
+        }, 5200);
 
-      setTimeout(function () {
-        intro.style.display = 'none';
-        sessionStorage.setItem('conecta2_intro_seen', 'true');
-      }, 5700);
+        setTimeout(function () {
+          intro.style.display = 'none';
+          sessionStorage.setItem('conecta2_intro_seen', 'true');
+        }, 5700);
+      });
+    }
+
+    const openEmergency = document.getElementById('openEmergency');
+    const closeEmergency = document.getElementById('closeEmergency');
+    const emergencyModal = document.getElementById('emergencyModal');
+
+    openEmergency.addEventListener('click', function () {
+      emergencyModal.classList.add('show');
+      document.body.style.overflow = 'hidden';
     });
-  }
 
-  const openEmergency = document.getElementById('openEmergency');
-  const closeEmergency = document.getElementById('closeEmergency');
-  const emergencyModal = document.getElementById('emergencyModal');
-
-  openEmergency.addEventListener('click', function () {
-    emergencyModal.classList.add('show');
-    document.body.style.overflow = 'hidden';
-  });
-
-  closeEmergency.addEventListener('click', function () {
-    emergencyModal.classList.remove('show');
-    document.body.style.overflow = '';
-  });
-
-  emergencyModal.addEventListener('click', function (e) {
-    if (e.target === emergencyModal) {
+    closeEmergency.addEventListener('click', function () {
       emergencyModal.classList.remove('show');
       document.body.style.overflow = '';
-    }
-  });
+    });
 
-  const searchInput = document.getElementById('searchInput');
-  const cards = document.querySelectorAll('.category-card');
-
-  searchInput.addEventListener('input', function () {
-    const value = this.value.trim().toLowerCase();
-
-    cards.forEach(card => {
-      const name = card.getAttribute('data-name') || '';
-      if (name.includes(value) || value === '') {
-        card.classList.remove('hidden');
-      } else {
-        card.classList.add('hidden');
+    emergencyModal.addEventListener('click', function (e) {
+      if (e.target === emergencyModal) {
+        emergencyModal.classList.remove('show');
+        document.body.style.overflow = '';
       }
     });
-  });
 
-  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxUCqWb6pYziwFrHWwXgSNwDfs4dt2KmdEZS18qFxcqlrSF4ywXdrDSrRM_Efka8Iij/exec";
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxUCqWb6pYziwFrHWwXgSNwDfs4dt2KmdEZS18qFxcqlrSF4ywXdrDSrRM_Efka8Iij/exec";
 
-  function registrarInstalacionApp() {
-    let deviceId = localStorage.getItem("conecta2_device_id");
+    function registrarInstalacionApp() {
+      let deviceId = localStorage.getItem("conecta2_device_id");
 
-    if (!deviceId) {
-      deviceId = "dev-" + Date.now() + "-" + Math.floor(Math.random() * 1000000);
-      localStorage.setItem("conecta2_device_id", deviceId);
+      if (!deviceId) {
+        deviceId = "dev-" + Date.now() + "-" + Math.floor(Math.random() * 1000000);
+        localStorage.setItem("conecta2_device_id", deviceId);
+      }
+
+      const formData = new FormData();
+      formData.append("action", "registrarInstalacion");
+      formData.append("device_id", deviceId);
+      formData.append("origen", "app");
+      formData.append(
+        "modo",
+        window.matchMedia("(display-mode: standalone)").matches ? "standalone" : "browser"
+      );
+
+      fetch(SCRIPT_URL, {
+        method: "POST",
+        body: formData
+      }).catch(() => {});
     }
 
-    const formData = new FormData();
-    formData.append("action", "registrarInstalacion");
-    formData.append("device_id", deviceId);
-    formData.append("origen", "app");
-    formData.append(
-      "modo",
-      window.matchMedia("(display-mode: standalone)").matches ? "standalone" : "browser"
-    );
+    function obtenerTextoCorteFarmacia(hastaHora) {
+      const ahora = new Date();
 
-    fetch(SCRIPT_URL, {
-      method: "POST",
-      body: formData
-    }).catch(() => {});
-  }
+      const fechaBase = new Date(ahora);
+      if (ahora.getHours() < 8) {
+        fechaBase.setDate(fechaBase.getDate() - 1);
+      }
 
-  function obtenerTextoCorteFarmacia(hastaHora) {
-    const ahora = new Date();
+      const fechaCorte = new Date(fechaBase);
+      fechaCorte.setDate(fechaCorte.getDate() + 1);
 
-    const fechaBase = new Date(ahora);
-    if (ahora.getHours() < 8) {
-      fechaBase.setDate(fechaBase.getDate() - 1);
+      const dias = ["domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado"];
+      const nombreDia = dias[fechaCorte.getDay()];
+      const numeroDia = fechaCorte.getDate();
+
+      return "Hasta las " + (hastaHora || "08:00") + " hs del " + nombreDia + " " + numeroDia;
     }
 
-    const fechaCorte = new Date(fechaBase);
-    fechaCorte.setDate(fechaCorte.getDate() + 1);
+    function cargarFarmaciaHoy() {
+      const formData = new FormData();
+      formData.append("action", "farmaciaHoy");
 
-    const dias = ["domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado"];
-    const nombreDia = dias[fechaCorte.getDay()];
-    const numeroDia = fechaCorte.getDate();
-
-    return "Hasta las " + (hastaHora || "08:00") + " hs del " + nombreDia + " " + numeroDia;
-  }
-
-  function cargarFarmaciaHoy() {
-    const formData = new FormData();
-    formData.append("action", "farmaciaHoy");
-
-    fetch(SCRIPT_URL, {
-      method: "POST",
-      body: formData
-    })
-      .then(r => r.json())
-      .then(data => {
-        if (!data.ok) return;
-
-        const f = data.farmacia || {};
-        const t = data.turno || {};
-
-        document.getElementById("farmaciaNombre").textContent = f.nombre || "Farmacia";
-        document.getElementById("farmaciaDireccion").textContent = f.direccion || "Dirección no disponible";
-        document.getElementById("farmaciaTelefono").textContent = f.telefono || "Teléfono no disponible";
-        document.getElementById("farmaciaHorario").textContent = obtenerTextoCorteFarmacia(t.hasta || "08:00");
-
-        const btnLlamar = document.getElementById("btnFarmaciaLlamar");
-        const btnWhatsapp = document.getElementById("btnFarmaciaWhatsapp");
-        const btnMapa = document.getElementById("btnFarmaciaMapa");
-
-        if (f.telefono_llamada) {
-          btnLlamar.href = "tel:" + f.telefono_llamada;
-          btnLlamar.style.pointerEvents = "auto";
-          btnLlamar.style.opacity = "1";
-        } else {
-          btnLlamar.href = "#";
-          btnLlamar.style.pointerEvents = "none";
-          btnLlamar.style.opacity = "0.7";
-        }
-
-        if (f.whatsapp) {
-          btnWhatsapp.href = "https://wa.me/" + String(f.whatsapp).replace(/\D/g, "");
-          btnWhatsapp.style.pointerEvents = "auto";
-          btnWhatsapp.style.opacity = "1";
-        } else {
-          btnWhatsapp.href = "#";
-          btnWhatsapp.style.pointerEvents = "none";
-          btnWhatsapp.style.opacity = "0.7";
-        }
-
-        if (f.maps) {
-          btnMapa.href = f.maps;
-          btnMapa.style.pointerEvents = "auto";
-          btnMapa.style.opacity = "1";
-        } else {
-          btnMapa.href = "#";
-          btnMapa.style.pointerEvents = "none";
-          btnMapa.style.opacity = "0.7";
-        }
+      fetch(SCRIPT_URL, {
+        method: "POST",
+        body: formData
       })
-      .catch(err => console.log("Error farmacia", err));
-  }
+        .then(r => r.json())
+        .then(data => {
+          if (!data.ok) return;
 
-  window.addEventListener("load", function () {
-    cargarFarmaciaHoy();
-    registrarInstalacionApp();
-  });
-</script>
+          const f = data.farmacia || {};
+          const t = data.turno || {};
+
+          document.getElementById("farmaciaNombre").textContent = f.nombre || "Farmacia";
+          document.getElementById("farmaciaDireccion").textContent = f.direccion || "Dirección no disponible";
+          document.getElementById("farmaciaTelefono").textContent = f.telefono || "Teléfono no disponible";
+          document.getElementById("farmaciaHorario").textContent = obtenerTextoCorteFarmacia(t.hasta || "08:00");
+
+          const btnLlamar = document.getElementById("btnFarmaciaLlamar");
+          const btnWhatsapp = document.getElementById("btnFarmaciaWhatsapp");
+          const btnMapa = document.getElementById("btnFarmaciaMapa");
+
+          if (f.telefono_llamada) {
+            btnLlamar.href = "tel:" + f.telefono_llamada;
+            btnLlamar.style.pointerEvents = "auto";
+            btnLlamar.style.opacity = "1";
+          } else {
+            btnLlamar.href = "#";
+            btnLlamar.style.pointerEvents = "none";
+            btnLlamar.style.opacity = "0.7";
+          }
+
+          if (f.whatsapp) {
+            btnWhatsapp.href = "https://wa.me/" + String(f.whatsapp).replace(/\D/g, "");
+            btnWhatsapp.style.pointerEvents = "auto";
+            btnWhatsapp.style.opacity = "1";
+          } else {
+            btnWhatsapp.href = "#";
+            btnWhatsapp.style.pointerEvents = "none";
+            btnWhatsapp.style.opacity = "0.7";
+          }
+
+          if (f.maps) {
+            btnMapa.href = f.maps;
+            btnMapa.style.pointerEvents = "auto";
+            btnMapa.style.opacity = "1";
+          } else {
+            btnMapa.href = "#";
+            btnMapa.style.pointerEvents = "none";
+            btnMapa.style.opacity = "0.7";
+          }
+        })
+        .catch(err => console.log("Error farmacia", err));
+    }
+
+    window.addEventListener("load", function () {
+      cargarFarmaciaHoy();
+      registrarInstalacionApp();
+    });
   </script>
 </body>
 </html>
