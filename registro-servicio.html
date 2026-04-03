@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ofrecé tus servicios - Conecta2</title>
+  <title>Registrá tu comercio - Conecta2</title>
   <meta name="theme-color" content="#07142b" />
 
   <style>
@@ -518,6 +518,27 @@
       font-weight: 600;
     }
 
+    .card-location {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #eef4f8;
+      border: 1px solid #dbe7ef;
+      border-radius: 16px;
+      padding: 12px 14px;
+      margin-bottom: 14px;
+      color: #24497a;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .pin-icon {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      fill: #e03131;
+    }
+
     .card-block {
       background: #f8fbfd;
       border: 1px solid #e0e9f0;
@@ -604,104 +625,95 @@
     <div class="header">
       <div class="header-row">
         <a href="index.html" class="back-btn">←</a>
-        <div class="header-title">Registro de servicios</div>
+        <div class="header-title">Registro de comercio</div>
       </div>
     </div>
 
     <div class="content">
-      <h1 class="title">Ofrecé tus servicios</h1>
+      <h1 class="title">Registrá tu comercio</h1>
       <p class="subtitle">
-        Completá tu perfil para sumarte a Conecta2. La foto y los datos principales son obligatorios para brindar confianza y facilitar el contacto.
+        Completá la información de tu comercio, negocio o empresa para sumarte a Conecta2. La imagen y los datos principales son obligatorios para transmitir confianza y facilitar el contacto.
       </p>
 
       <div class="notice">
-        Importante: elegí primero la categoría principal. Después seleccioná el rubro o especialidad. Si no aparece en la lista, usá la opción "Otro" y especificá cuál.
+        Importante: elegí primero la categoría principal. Después seleccioná el rubro. Si no aparece en la lista, usá la opción "Otro" y especificá cuál.
       </div>
 
       <div id="errorBox" class="error-box"></div>
       <div id="successBox" class="success-box"></div>
 
       <div class="form-card">
-        <form id="servicioForm">
+        <form id="comercioForm">
           <div class="field-group">
-            <label>Foto personal *</label>
+            <label>Foto o logo del comercio / negocio / empresa *</label>
 
             <div class="photo-actions">
-              <label class="photo-btn" for="fotoCamara">Tomar una foto</label>
-              <label class="photo-btn" for="fotoGaleria">Elegir de galería</label>
+              <label class="photo-btn" id="btnFotoCamara" for="fotoCamara">Tomar una foto</label>
+              <label class="photo-btn" id="btnFotoGaleria" for="fotoGaleria">Elegir de galería</label>
             </div>
 
-            <input type="file" id="fotoCamara" accept="image/*" capture="user" style="display:none;">
+            <input type="file" id="fotoCamara" accept="image/*" capture="environment" style="display:none;">
             <input type="file" id="fotoGaleria" accept="image/*" style="display:none;">
 
-            <div class="help">Podés sacarte una selfie en el momento o elegir una imagen que ya tengas guardada.</div>
+            <div class="help">Podés sacar una foto del frente del negocio o elegir una imagen que ya tengas guardada, incluido un logo.</div>
 
             <div class="preview-frame">
               <img id="previewImg" alt="Vista previa">
               <div id="previewPlaceholder" class="preview-placeholder">
-                Vista previa<br>de la foto
+                Vista previa<br>de la imagen
               </div>
             </div>
           </div>
 
-          <div class="grid-2">
-            <div class="field-group">
-              <label for="nombre">Nombre *</label>
-              <input type="text" id="nombre" required>
-            </div>
-
-            <div class="field-group">
-              <label for="apellido">Apellido *</label>
-              <input type="text" id="apellido" required>
-            </div>
+          <div class="field-group">
+            <label for="nombreComercio">Nombre del comercio / negocio / empresa *</label>
+            <input type="text" id="nombreComercio" required>
           </div>
 
           <div class="grid-2">
             <div class="field-group">
+              <label for="categoriaPrincipal">Categoría principal *</label>
               <select id="categoriaPrincipal" required>
   <option value="">Seleccionar</option>
-  <option>Automotor</option>
-  <option>Construcción</option>
-  <option>Deportes y gimnasios</option>
-  <option>Educación</option>
-  <option>Empresas y servicios</option>
-  <option>Estética y bienestar</option>
+  <option>Alimentos y bebidas</option>
   <option>Gastronomía</option>
+  <option>Salud y farmacias</option>
+  <option>Belleza y estética</option>
+  <option>Moda y ropa</option>
+  <option>Hogar y construcción</option>
+  <option>Ferretería y oficios</option>
+  <option>Tecnología y electrónica</option>
+  <option>Automotor</option>
   <option>Mascotas</option>
-  <option>Oficios</option>
-  <option>Otros rubros</option>
-  <option>Servicios para el hogar</option>
-  <option>Tecnología</option>
+  <option>Deportes y fitness</option>
+  <option>Educación y librerías</option>
+  <option>Servicios empresariales</option>
   <option>Transporte y logística</option>
+  <option>Otros rubros</option>
 </select>
             </div>
 
             <div class="field-group">
-              <label for="zona">Zona de trabajo *</label>
-              <input type="text" id="zona" placeholder="Ej: Rojas y alrededores" required>
+              <label for="direccion">Dirección *</label>
+              <input type="text" id="direccion" placeholder="Ej: Av. San Martín 450, Rojas" required>
             </div>
           </div>
 
           <div class="field-group">
-            <label for="rubroEspecialidad">Rubro / especialidad *</label>
-            <select id="rubroEspecialidad" required disabled>
+            <label for="rubroComercial">Rubro *</label>
+            <select id="rubroComercial" required disabled>
               <option value="">Primero elegí una categoría</option>
             </select>
           </div>
 
           <div class="field-group hidden" id="otroRubroGroup">
             <label for="otroRubro">Especificá cuál *</label>
-            <input type="text" id="otroRubro" placeholder="Ej: Colocación de membranas">
+            <input type="text" id="otroRubro" placeholder="Ej: Polarizado">
           </div>
 
           <div class="field-group">
             <label for="descripcion">Descripción *</label>
-            <textarea id="descripcion" placeholder="Explicá qué hacés, qué tipo de trabajos realizás y qué debería saber el cliente." required></textarea>
-          </div>
-
-          <div class="field-group">
-            <label for="matricula">Matrícula / dato profesional</label>
-            <input type="text" id="matricula" placeholder="Ej: Matrícula, especialidad o dato importante">
+            <textarea id="descripcion" placeholder="Contanos qué ofrecés, qué te diferencia y qué debería saber el cliente." required></textarea>
           </div>
 
           <div class="section-divider">Contacto</div>
@@ -713,7 +725,7 @@
           <div class="grid-2">
             <div class="field-group">
               <label for="whatsapp">WhatsApp</label>
-              <input type="tel" id="whatsapp" placeholder="WhatsApp principal">
+              <input type="tel" id="whatsapp" placeholder="WhatsApp general del comercio">
             </div>
 
             <div class="field-group">
@@ -737,7 +749,7 @@
             <div class="grid-2 alt-grid">
               <div class="field-group">
                 <label for="whatsappAlt1" class="no-wrap-label">WhatsApp alternativo 1</label>
-                <input type="tel" id="whatsappAlt1" placeholder="Ej: número alternativo 1">
+                <input type="tel" id="whatsappAlt1" placeholder="Ej: número de Guillermo">
               </div>
 
               <div class="field-group">
@@ -749,7 +761,7 @@
             <div class="grid-2 alt-grid">
               <div class="field-group">
                 <label for="whatsappAlt2" class="no-wrap-label">WhatsApp alternativo 2</label>
-                <input type="tel" id="whatsappAlt2" placeholder="Ej: número alternativo 2">
+                <input type="tel" id="whatsappAlt2" placeholder="Ej: número de Carlos">
               </div>
 
               <div class="field-group">
@@ -761,11 +773,16 @@
 
           <div class="section-divider">Días y horarios</div>
 
+          <div class="toggle-box">
+            <input type="checkbox" id="siempreAbierto">
+            <label for="siempreAbierto" style="margin:0;">Abierto siempre / 24 horas</label>
+          </div>
+
           <div id="dayScheduleContainer"></div>
 
           <div class="field-group">
             <label>¿Qué medios de pago aceptás para cobrar tus productos o servicios? *</label>
-            <div class="help">Marcá cómo pueden abonarte los clientes cuando te contratan.</div>
+            <div class="help">Marcá cómo pueden abonarte los clientes cuando compran o contratan.</div>
             <div class="checkbox-group">
               <label class="checkbox-item"><input type="checkbox" name="mediosPago" value="Efectivo"> Efectivo</label>
               <label class="checkbox-item"><input type="checkbox" name="mediosPago" value="Transferencia"> Transferencia</label>
@@ -794,24 +811,26 @@
         <h3>Así se vería tu tarjeta</h3>
 
         <div class="card-top">
-          <img id="cardAvatar" class="card-avatar" alt="Imagen del perfil">
+          <img id="cardAvatar" class="card-avatar" alt="Imagen del comercio">
           <div class="card-info">
-            <div id="cardName" class="card-name">Nombre y apellido</div>
-            <div id="cardJob" class="card-job">Especialidad</div>
+            <div id="cardName" class="card-name">Nombre del comercio</div>
+            <div id="cardJob" class="card-job">Rubro</div>
             <div id="cardStatus" class="card-status available">Disponible ahora</div>
           </div>
         </div>
 
-        <div id="cardDesc" class="card-desc">Descripción del servicio</div>
+        <div id="cardDesc" class="card-desc">Descripción del comercio</div>
+
+        <div id="cardLocation" class="card-location">
+          <svg class="pin-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 22s7-6.2 7-13a7 7 0 1 0-14 0c0 6.8 7 13 7 13Zm0-9.5A3.5 3.5 0 1 1 12 5a3.5 3.5 0 0 1 0 7.5Z"/>
+          </svg>
+          <span id="cardDireccionTexto">Dirección</span>
+        </div>
 
         <div class="card-block">
           <div class="card-block-title">Categoría</div>
           <div class="card-list" id="cardCategoriaBlock"></div>
-        </div>
-
-        <div class="card-block">
-          <div class="card-block-title">Zona de trabajo</div>
-          <div class="card-lines" id="cardZonaBlock"></div>
         </div>
 
         <div class="card-block">
@@ -829,11 +848,6 @@
           <div class="card-lines" id="cardFacturaBlock"></div>
         </div>
 
-        <div class="card-block hidden" id="cardMatriculaWrap">
-          <div class="card-block-title">Dato profesional</div>
-          <div class="card-lines" id="cardMatriculaBlock"></div>
-        </div>
-
         <div class="card-buttons">
           <button type="button" id="cardBtnWhatsapp" class="card-btn-wa">WhatsApp</button>
           <button type="button" id="cardBtnCall" class="card-btn-call">Llamar</button>
@@ -846,12 +860,13 @@
 
   <script>
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxUCqWb6pYziwFrHWwXgSNwDfs4dt2KmdEZS18qFxcqlrSF4ywXdrDSrRM_Efka8Iij/exec";
-
-    const form = document.getElementById('servicioForm');
+    const form = document.getElementById('comercioForm');
     const fotoCamara = document.getElementById('fotoCamara');
     const fotoGaleria = document.getElementById('fotoGaleria');
     const previewImg = document.getElementById('previewImg');
     const previewPlaceholder = document.getElementById('previewPlaceholder');
+    const btnFotoCamara = document.getElementById('btnFotoCamara');
+    const btnFotoGaleria = document.getElementById('btnFotoGaleria');
     const errorBox = document.getElementById('errorBox');
     const successBox = document.getElementById('successBox');
     const btnPreview = document.getElementById('btnPreview');
@@ -859,47 +874,69 @@
     const cardBtnWhatsapp = document.getElementById('cardBtnWhatsapp');
     const cardBtnCall = document.getElementById('cardBtnCall');
     const categoriaPrincipal = document.getElementById('categoriaPrincipal');
-    const rubroEspecialidad = document.getElementById('rubroEspecialidad');
+    const rubroComercial = document.getElementById('rubroComercial');
     const otroRubroGroup = document.getElementById('otroRubroGroup');
     const otroRubro = document.getElementById('otroRubro');
     const toggleAlternativos = document.getElementById('toggleAlternativos');
     const bloqueAlternativos = document.getElementById('bloqueAlternativos');
     const dayScheduleContainer = document.getElementById('dayScheduleContainer');
+    const siempreAbierto = document.getElementById('siempreAbierto');
 
     let archivoFoto = null;
 
-    const rubrosPorCategoria = {
-  "Servicios para el hogar": [
-    "Aire acondicionado",
-    "Cerrajería",
-    "Climatización",
-    "Electricidad",
-    "Gasista",
-    "Jardinería",
-    "Limpieza",
-    "Mantenimiento general",
-    "Pintura",
-    "Plomería",
-    "Tapicería",
-    "Otro"
-  ],
+    function procesarFoto(file) {
+      if (!file) return;
+      archivoFoto = file;
 
-  "Construcción": [
-    "Albañilería",
-    "Colocación de membranas",
-    "Durlock",
-    "Electricidad",
-    "Gasista",
-    "Pintura",
-    "Plomería",
-    "Techista",
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        previewImg.src = e.target.result;
+        previewImg.style.display = 'block';
+        previewPlaceholder.style.display = 'none';
+      };
+      reader.readAsDataURL(file);
+    }
+
+    fotoCamara.addEventListener('change', function () { procesarFoto(this.files[0]); });
+    fotoGaleria.addEventListener('change', function () { procesarFoto(this.files[0]); });
+
+    if (btnFotoCamara) {
+      btnFotoCamara.addEventListener('click', function(e) {
+        e.preventDefault();
+        fotoCamara.click();
+      });
+    }
+
+    if (btnFotoGaleria) {
+      btnFotoGaleria.addEventListener('click', function(e) {
+        e.preventDefault();
+        fotoGaleria.click();
+      });
+    }
+
+    const rubrosPorCategoria = {
+  "Alimentos y bebidas": [
+    "Almacén / despensa",
+    "Autoservicio",
+    "Bebidas",
+    "Carnicería",
+    "Dietética",
+    "Fiambrería",
+    "Kioscos",
+    "Panadería",
+    "Pollería",
+    "Verdulería / frutería",
+    "Vinoteca",
     "Otro"
   ],
 
   "Gastronomía": [
-    "Catering",
-    "Chef",
-    "Panadería artesanal",
+    "Cafetería",
+    "Casa de comidas",
+    "Confitería",
+    "Hamburguesería",
+    "Heladería",
+    "Parrilla",
     "Pastelería",
     "Pizzería",
     "Restaurante",
@@ -907,88 +944,122 @@
     "Otro"
   ],
 
-  "Estética y bienestar": [
-    "Cosmetología",
-    "Entrenamiento personal",
-    "Manicuría",
-    "Masajes",
-    "Peluquería a domicilio",
+  "Salud y farmacias": [
+    "Farmacia",
+    "Óptica",
+    "Ortopedia",
     "Otro"
   ],
 
-  "Educación": [
-    "Apoyo escolar",
-    "Capacitación",
-    "Idiomas",
-    "Profesor particular",
+  "Belleza y estética": [
+    "Barbería",
+    "Centro de estética",
+    "Cosmética / belleza",
+    "Manicuría / uñas",
+    "Peluquería",
+    "Perfumería",
     "Otro"
   ],
 
-  "Tecnología": [
-    "Diseño gráfico",
-    "Programación",
-    "Redes",
-    "Reparación de PC",
-    "Soporte técnico",
-    "Sublimación",
+  "Moda y ropa": [
+    "Calzado",
+    "Indumentaria",
+    "Joyería",
+    "Lencería",
+    "Marroquinería",
+    "Mercería",
+    "Relojería",
+    "Ropa deportiva",
+    "Ropa infantil",
     "Otro"
   ],
 
-  "Oficios": [
-    "Carpintería",
-    "Cerrajería",
-    "Electricidad",
-    "Gasista",
-    "Herrería",
-    "Jardinería",
-    "Pintura",
-    "Plomería",
-    "Soldadura",
-    "Tornería",
+  "Hogar y construcción": [
+    "Aberturas",
+    "Bazar",
+    "Colchonería",
+    "Corralón",
+    "Decoración",
+    "Maderera",
+    "Mueblería",
+    "Pinturería",
+    "Sanitarios",
+    "Vivero",
+    "Otro"
+  ],
+
+  "Ferretería y oficios": [
+    "Casa de electricidad",
+    "Carpintería / amoblamientos",
+    "Ferretería",
+    "Herramientas",
+    "Iluminación",
+    "Otro"
+  ],
+
+  "Tecnología y electrónica": [
+    "Audio / sonido",
+    "Celulares",
+    "Computación",
+    "Electrodomésticos",
+    "Electrónica",
+    "Tecnología",
     "Otro"
   ],
 
   "Automotor": [
-    "Electricidad automotor",
+    "Accesorios automotor",
+    "Bicicletería",
+    "Concesionaria",
     "Gomería",
-    "Lavado vehicular",
-    "Mecánica",
-    "Mecánica ligera",
-    "Polarizado",
-    "Ploteo vehicular",
+    "Lavadero de autos",
+    "Lubricentro",
+    "Motovehículos",
+    "Repuestos automotor",
+    "Repuestos motos",
     "Otro"
   ],
 
   "Mascotas": [
-    "Adiestramiento",
-    "Cuidado de mascotas",
-    "Paseador",
-    "Peluquería canina",
+    "Clínica / Veterinaria",
+    "Forrajería",
+    "Pet shop",
+    "Otro"
+  ],
+
+  "Deportes y fitness": [
+    "Artículos de camping / pesca",
+    "Casa de deportes",
+    "Gimnasio",
+    "Instrumentos musicales",
+    "Otro"
+  ],
+
+  "Educación y librerías": [
+    "Artística",
+    "Cotillón",
+    "Juguetería",
+    "Librería",
+    "Papelería",
+    "Otro"
+  ],
+
+  "Servicios empresariales": [
+    "Correo / encomiendas",
+    "Estacionamiento",
+    "Inmobiliaria",
+    "Lavandería / tintorería",
+    "Seguros / oficina comercial",
+    "Servicios funerarios / cochería",
+    "Turismo / agencia",
     "Otro"
   ],
 
   "Transporte y logística": [
-    "Cadetería",
-    "Comisiones",
-    "Fletes",
-    "Mudanzas",
-    "Mandados",
-    "Traslados",
-    "Otro"
-  ],
-
-  "Deportes y gimnasios": [
-    "Entrenador",
-    "Preparador físico",
-    "Profesor",
-    "Otro"
-  ],
-
-  "Empresas y servicios": [
-    "Asistencia administrativa",
-    "Gestión",
-    "Soporte técnico",
-    "Ventas",
+    "Cadetería / mensajería",
+    "Encomiendas",
+    "Logística",
+    "Transporte",
     "Otro"
   ],
 
@@ -997,21 +1068,7 @@
   ]
 };
 
-    const diasSemana = [
-      { key: 'lunes', label: 'Lunes', corridoDesde: '08:00', corridoHasta: '18:00', mananaDesde: '08:00', mananaHasta: '12:00', tardeDesde: '16:00', tardeHasta: '20:00' },
-      { key: 'martes', label: 'Martes', corridoDesde: '08:00', corridoHasta: '18:00', mananaDesde: '08:00', mananaHasta: '12:00', tardeDesde: '16:00', tardeHasta: '20:00' },
-      { key: 'miercoles', label: 'Miércoles', corridoDesde: '08:00', corridoHasta: '18:00', mananaDesde: '08:00', mananaHasta: '12:00', tardeDesde: '16:00', tardeHasta: '20:00' },
-      { key: 'jueves', label: 'Jueves', corridoDesde: '08:00', corridoHasta: '18:00', mananaDesde: '08:00', mananaHasta: '12:00', tardeDesde: '16:00', tardeHasta: '20:00' },
-      { key: 'viernes', label: 'Viernes', corridoDesde: '08:00', corridoHasta: '18:00', mananaDesde: '08:00', mananaHasta: '12:00', tardeDesde: '16:00', tardeHasta: '20:00' },
-      { key: 'sabado', label: 'Sábado', corridoDesde: '09:00', corridoHasta: '13:00', mananaDesde: '09:00', mananaHasta: '13:00', tardeDesde: '17:00', tardeHasta: '20:00' },
-      { key: 'domingo', label: 'Domingo', corridoDesde: '09:00', corridoHasta: '13:00', mananaDesde: '09:00', mananaHasta: '13:00', tardeDesde: '17:00', tardeHasta: '20:00' }
-    ];
-
-    function valor(id) {
-      const el = document.getElementById(id);
-      if (!el) return '';
-      return String(el.value || '').trim();
-    }
+    function valor(id) { return document.getElementById(id).value.trim(); }
 
     function limpiarMensajes() {
       errorBox.classList.remove('show');
@@ -1039,9 +1096,7 @@
       return Array.from(checks).map(c => c.value);
     }
 
-    function limpiarTelefono(numero) {
-      return (numero || '').replace(/\D/g, '');
-    }
+    function limpiarTelefono(numero) { return (numero || '').replace(/\D/g, ''); }
 
     function telefonoValido(numero) {
       const limpio = limpiarTelefono(numero);
@@ -1052,6 +1107,16 @@
       const limpio = (email || '').trim();
       return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(limpio);
     }
+
+    const diasSemana = [
+      { key: 'lunes', label: 'Lunes', corridoDesde: '08:00', corridoHasta: '18:00', mananaDesde: '08:00', mananaHasta: '12:00', tardeDesde: '16:00', tardeHasta: '20:00' },
+      { key: 'martes', label: 'Martes', corridoDesde: '08:00', corridoHasta: '18:00', mananaDesde: '08:00', mananaHasta: '12:00', tardeDesde: '16:00', tardeHasta: '20:00' },
+      { key: 'miercoles', label: 'Miércoles', corridoDesde: '08:00', corridoHasta: '18:00', mananaDesde: '08:00', mananaHasta: '12:00', tardeDesde: '16:00', tardeHasta: '20:00' },
+      { key: 'jueves', label: 'Jueves', corridoDesde: '08:00', corridoHasta: '18:00', mananaDesde: '08:00', mananaHasta: '12:00', tardeDesde: '16:00', tardeHasta: '20:00' },
+      { key: 'viernes', label: 'Viernes', corridoDesde: '08:00', corridoHasta: '18:00', mananaDesde: '08:00', mananaHasta: '12:00', tardeDesde: '16:00', tardeHasta: '20:00' },
+      { key: 'sabado', label: 'Sábado', corridoDesde: '09:00', corridoHasta: '13:00', mananaDesde: '09:00', mananaHasta: '13:00', tardeDesde: '17:00', tardeHasta: '20:00' },
+      { key: 'domingo', label: 'Domingo', corridoDesde: '09:00', corridoHasta: '13:00', mananaDesde: '09:00', mananaHasta: '13:00', tardeDesde: '17:00', tardeHasta: '20:00' }
+    ];
 
     function generarOpcionesHorarios(valorSeleccionado) {
       let html = '<option value="">Seleccionar</option>';
@@ -1079,6 +1144,10 @@
       if (minDesde === minHasta) return desde + ' a ' + hasta;
       if (minHasta < minDesde) return desde + ' a ' + hasta + ' del día siguiente';
       return desde + ' a ' + hasta;
+    }
+
+    function actualizarModoSiempreAbierto() {
+      dayScheduleContainer.classList.toggle('hidden', siempreAbierto.checked);
     }
 
     function construirHorariosPorDia() {
@@ -1246,6 +1315,8 @@
     }
 
     function validarHorariosPorDia() {
+      if (siempreAbierto.checked) return '';
+
       const horarios = obtenerHorariosPorDia();
       const abiertos = horarios.filter(item => !item.cerrado);
 
@@ -1269,36 +1340,32 @@
     }
 
     function obtenerDiasResumen() {
+      if (siempreAbierto.checked) return ['Abierto las 24 horas'];
+
       return obtenerHorariosPorDia().map(item => {
         if (item.cerrado) return item.dia + ': Cerrado';
         if (item.corrido) return item.dia + ': ' + rangoTexto(item.desde, item.hasta);
-        return item.dia + ': ' + rangoTexto(item.mananaDesde, item.mananaHasta) + ' / ' + rangoTexto(item.tardeDesde, item.tardeHasta);
+        return item.dia + ': ' + item.mananaDesde + ' a ' + item.mananaHasta + ' / ' + item.tardeDesde + ' a ' + item.tardeHasta;
       });
     }
 
-    function obtenerSegmentosDelDia(item) {
-      if (item.cerrado) return [];
-      if (item.corrido) return [{ desde: item.desde, hasta: item.hasta }];
-      return [
-        { desde: item.mananaDesde, hasta: item.mananaHasta },
-        { desde: item.tardeDesde, hasta: item.tardeHasta }
-      ];
-    }
+    function horaEnRango(inicio, fin, actual) {
+      const minInicio = minutosDesdeHora(inicio);
+      const minFin = minutosDesdeHora(fin);
+      const minActual = minutosDesdeHora(actual);
 
-    function horaDentroDeSegmento(horaActual, desde, hasta) {
-      const actual = minutosDesdeHora(horaActual);
-      const ini = minutosDesdeHora(desde);
-      const fin = minutosDesdeHora(hasta);
-      if (actual === null || ini === null || fin === null || ini === fin) return false;
-      if (fin > ini) return actual >= ini && actual <= fin;
-      return actual >= ini || actual <= fin;
+      if (minInicio === null || minFin === null || minActual === null) return false;
+      if (minInicio === minFin) return false;
+      if (minInicio < minFin) return minActual >= minInicio && minActual <= minFin;
+      return minActual >= minInicio || minActual <= minFin;
     }
 
     function estaDisponibleAhora() {
+      if (siempreAbierto.checked) return true;
+
       const ahora = new Date();
-      const hh = String(ahora.getHours()).padStart(2, '0');
-      const mm = String(ahora.getMinutes()).padStart(2, '0');
-      const horaActual = hh + ':' + mm;
+      const diaIndex = ahora.getDay();
+      const horaActual = String(ahora.getHours()).padStart(2, '0') + ':' + String(ahora.getMinutes()).padStart(2, '0');
 
       const mapaDias = {
         1: 'lunes',
@@ -1311,71 +1378,58 @@
       };
 
       const horarios = obtenerHorariosPorDia();
-      const hoyKey = mapaDias[ahora.getDay()];
-      const ayerKey = mapaDias[(ahora.getDay() + 6) % 7];
+      const hoyKey = mapaDias[diaIndex];
+      const ayerKey = mapaDias[(diaIndex + 6) % 7];
 
       const hoy = horarios.find(h => h.key === hoyKey);
       const ayer = horarios.find(h => h.key === ayerKey);
 
-      const segmentosHoy = hoy ? obtenerSegmentosDelDia(hoy) : [];
-      if (segmentosHoy.some(seg => horaDentroDeSegmento(horaActual, seg.desde, seg.hasta))) {
-        return true;
+      if (hoy && !hoy.cerrado) {
+        if (hoy.corrido && hoy.desde && hoy.hasta && horaEnRango(hoy.desde, hoy.hasta, horaActual)) return true;
+
+        if (!hoy.corrido) {
+          const enManana = hoy.mananaDesde && hoy.mananaHasta && horaEnRango(hoy.mananaDesde, hoy.mananaHasta, horaActual);
+          const enTarde = hoy.tardeDesde && hoy.tardeHasta && horaEnRango(hoy.tardeDesde, hoy.tardeHasta, horaActual);
+          if (enManana || enTarde) return true;
+        }
       }
 
-      const segmentosAyer = ayer ? obtenerSegmentosDelDia(ayer) : [];
-      for (const seg of segmentosAyer) {
-        const ini = minutosDesdeHora(seg.desde);
-        const fin = minutosDesdeHora(seg.hasta);
-        const actual = minutosDesdeHora(horaActual);
-        if (ini !== null && fin !== null && actual !== null && fin < ini && actual <= fin) {
-          return true;
-        }
+      if (ayer && !ayer.cerrado && ayer.corrido && ayer.desde && ayer.hasta && minutosDesdeHora(ayer.hasta) < minutosDesdeHora(ayer.desde)) {
+        if (minutosDesdeHora(horaActual) <= minutosDesdeHora(ayer.hasta)) return true;
       }
 
       return false;
     }
 
-    function procesarFoto(file) {
-      if (!file) return;
-      archivoFoto = file;
-
-      const reader = new FileReader();
-      reader.onload = function(e) {
-        previewImg.src = e.target.result;
-        previewImg.style.display = 'block';
-        previewPlaceholder.style.display = 'none';
-      };
-      reader.readAsDataURL(file);
+    function toggleBloque(check, bloque) {
+      bloque.classList.toggle('hidden', !check.checked);
     }
 
-    fotoCamara.addEventListener('change', function () {
-      procesarFoto(this.files[0]);
-    });
-
-    fotoGaleria.addEventListener('change', function () {
-      procesarFoto(this.files[0]);
-    });
+    function obtenerRubroFinal() {
+      if (rubroComercial.value === 'Otro') return valor('otroRubro');
+      return valor('rubroComercial');
+    }
 
     function actualizarRubros() {
       const categoria = categoriaPrincipal.value;
-      rubroEspecialidad.innerHTML = '';
+      rubroComercial.innerHTML = '';
 
       if (!categoria || !rubrosPorCategoria[categoria]) {
-        rubroEspecialidad.innerHTML = '<option value="">Primero elegí una categoría</option>';
-        rubroEspecialidad.disabled = true;
+        rubroComercial.innerHTML = '<option value="">Primero elegí una categoría</option>';
+        rubroComercial.disabled = true;
         otroRubroGroup.classList.add('hidden');
         otroRubro.value = '';
         return;
       }
 
-      rubroEspecialidad.disabled = false;
-      rubroEspecialidad.innerHTML = '<option value="">Seleccionar</option>';
+      rubroComercial.disabled = false;
+      rubroComercial.innerHTML = '<option value="">Seleccionar</option>';
 
       rubrosPorCategoria[categoria].forEach(function(rubro) {
         const option = document.createElement('option');
         option.value = rubro;
         option.textContent = rubro;
-        rubroEspecialidad.appendChild(option);
+        rubroComercial.appendChild(option);
       });
 
       otroRubroGroup.classList.add('hidden');
@@ -1383,7 +1437,7 @@
     }
 
     function actualizarOtroRubro() {
-      if (rubroEspecialidad.value === 'Otro') {
+      if (rubroComercial.value === 'Otro') {
         otroRubroGroup.classList.remove('hidden');
       } else {
         otroRubroGroup.classList.add('hidden');
@@ -1391,37 +1445,33 @@
       }
     }
 
-    function obtenerRubroFinal() {
-      if (rubroEspecialidad.value === 'Otro') return valor('otroRubro');
-      return valor('rubroEspecialidad');
-    }
-
-    function toggleBloque(check, bloque) {
-      bloque.classList.toggle('hidden', !check.checked);
-    }
-
     toggleAlternativos.addEventListener('change', function() {
       toggleBloque(toggleAlternativos, bloqueAlternativos);
     });
 
-    categoriaPrincipal.addEventListener('change', actualizarRubros);
-    rubroEspecialidad.addEventListener('change', actualizarOtroRubro);
+    siempreAbierto.addEventListener('change', function() {
+      actualizarModoSiempreAbierto();
+    });
 
-    actualizarRubros();
+    categoriaPrincipal.addEventListener('change', actualizarRubros);
+    rubroComercial.addEventListener('change', actualizarOtroRubro);
+
     construirHorariosPorDia();
+    actualizarModoSiempreAbierto();
+    actualizarRubros();
 
     function validarFormulario() {
       limpiarMensajes();
       const faltantes = [];
 
-      if (!archivoFoto) faltantes.push("Foto personal");
-      if (!valor('nombre')) faltantes.push("Nombre");
-      if (!valor('apellido')) faltantes.push("Apellido");
+      if (!archivoFoto) faltantes.push("Foto o logo del comercio");
+      if (!valor('nombreComercio')) faltantes.push("Nombre del comercio / negocio / empresa");
       if (!valor('categoriaPrincipal')) faltantes.push("Categoría principal");
-      if (!valor('rubroEspecialidad')) faltantes.push("Rubro / especialidad");
-      if (valor('rubroEspecialidad') === 'Otro' && !valor('otroRubro')) faltantes.push("Especificá cuál");
+      if (!valor('rubroComercial')) faltantes.push("Rubro");
+      if (valor('rubroComercial') === 'Otro' && !valor('otroRubro')) faltantes.push("Especificá cuál");
       if (!valor('descripcion')) faltantes.push("Descripción");
-      if (!valor('zona')) faltantes.push("Zona de trabajo");
+      if (!valor('direccion')) faltantes.push("Dirección");
+
       if (!valor('email')) faltantes.push("Correo electrónico");
       if (valor('email') && !emailValido(valor('email'))) faltantes.push("Correo electrónico válido");
 
@@ -1477,25 +1527,30 @@
       window.open('https://wa.me/' + limpio, '_blank');
     }
 
+    function abrirMaps(direccion) {
+      const url = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(direccion);
+      window.open(url, '_blank');
+    }
+
     btnPreview.addEventListener('click', function () {
       if (!validarFormulario()) return;
 
-      const nombreCompleto = (valor('nombre') + ' ' + valor('apellido')).trim();
+      const nombreComercio = valor('nombreComercio');
       const rubroFinal = obtenerRubroFinal();
       const descripcion = valor('descripcion');
-      const zona = valor('zona');
+      const direccion = valor('direccion');
       const factura = valor('factura');
       const whatsapp = limpiarTelefono(valor('whatsapp'));
       const telefono = limpiarTelefono(valor('telefonoAlternativo'));
       const mediosPago = obtenerMediosPagoSeleccionados();
       const categoria = valor('categoriaPrincipal');
-      const matricula = valor('matricula');
       const disponible = estaDisponibleAhora();
 
-      document.getElementById('cardName').textContent = nombreCompleto;
+      document.getElementById('cardName').textContent = nombreComercio;
       document.getElementById('cardJob').textContent = rubroFinal;
       document.getElementById('cardDesc').textContent = descripcion;
       document.getElementById('cardAvatar').src = previewImg.src || '';
+      document.getElementById('cardDireccionTexto').textContent = direccion;
 
       const cardStatus = document.getElementById('cardStatus');
       cardStatus.textContent = disponible ? 'Disponible ahora' : 'No disponible';
@@ -1507,12 +1562,6 @@
       categoriaChip.className = 'card-chip';
       categoriaChip.textContent = categoria;
       categoriaBlock.appendChild(categoriaChip);
-
-      const zonaBlock = document.getElementById('cardZonaBlock');
-      zonaBlock.innerHTML = '';
-      const zonaLinea = document.createElement('div');
-      zonaLinea.textContent = zona;
-      zonaBlock.appendChild(zonaLinea);
 
       const horariosBlock = document.getElementById('cardHorariosBlock');
       horariosBlock.innerHTML = '';
@@ -1537,18 +1586,6 @@
       facturaLinea.textContent = factura === 'si' ? 'Trabajan con factura' : 'No trabajan con factura';
       facturaBlock.appendChild(facturaLinea);
 
-      const cardMatriculaWrap = document.getElementById('cardMatriculaWrap');
-      const cardMatriculaBlock = document.getElementById('cardMatriculaBlock');
-      cardMatriculaBlock.innerHTML = '';
-      if (matricula) {
-        cardMatriculaWrap.classList.remove('hidden');
-        const matLinea = document.createElement('div');
-        matLinea.textContent = matricula;
-        cardMatriculaBlock.appendChild(matLinea);
-      } else {
-        cardMatriculaWrap.classList.add('hidden');
-      }
-
       cardBtnWhatsapp.onclick = function () {
         if (whatsapp) abrirWhatsapp(whatsapp);
       };
@@ -1559,6 +1596,10 @@
 
       cardBtnWhatsapp.style.display = whatsapp ? 'block' : 'none';
       cardBtnCall.style.display = telefono ? 'block' : 'none';
+
+      document.getElementById('cardLocation').onclick = function () {
+        abrirMaps(direccion);
+      };
 
       const altButtons = document.getElementById('altButtons');
       altButtons.innerHTML = '';
@@ -1604,41 +1645,33 @@
 
         const file = archivoFoto;
         const fotoBase64 = file ? await convertirImagenABase64(file) : '';
-        const nombreCompleto = (valor('nombre') + ' ' + valor('apellido')).trim();
 
         const payload = {
-          action: "registrarServicio",
-          tipo: "servicio",
-          nombre: valor('nombre'),
-          apellido: valor('apellido'),
-          nombreServicio: nombreCompleto,
+          action: "registrarComercio",
+          tipo: "comercio",
+          nombreComercio: valor('nombreComercio'),
           categoriaPrincipal: valor('categoriaPrincipal'),
-          rubroEspecialidad: valor('rubroEspecialidad'),
-          rubroComercial: valor('rubroEspecialidad'),
-          rubroServicio: valor('rubroEspecialidad'),
+          rubroComercial: valor('rubroComercial'),
           rubroFinal: obtenerRubroFinal(),
-          zona: valor('zona'),
-          direccion: valor('zona'),
           descripcion: valor('descripcion'),
+          direccion: valor('direccion'),
           email: valor('email'),
           whatsapp: limpiarTelefono(valor('whatsapp')),
           telefonoAlternativo: limpiarTelefono(valor('telefonoAlternativo')),
-          telefono: limpiarTelefono(valor('telefonoAlternativo')),
           whatsappAlt1: limpiarTelefono(valor('whatsappAlt1')),
           nombreWhatsappAlt1: valor('nombreWhatsappAlt1'),
           whatsappAlt2: limpiarTelefono(valor('whatsappAlt2')),
           nombreWhatsappAlt2: valor('nombreWhatsappAlt2'),
-          diasTrabajo: Object.fromEntries(obtenerHorariosPorDia().map(item => [item.key, !item.cerrado])),
-          horarios: Object.fromEntries(obtenerHorariosPorDia().map(item => {
+          diasTrabajo: siempreAbierto.checked ? Object.fromEntries(diasSemana.map(item => [item.key, true])) : Object.fromEntries(obtenerHorariosPorDia().map(item => [item.key, !item.cerrado])),
+          horarios: siempreAbierto.checked ? Object.fromEntries(diasSemana.map(item => [item.key, '24 horas'])) : Object.fromEntries(obtenerHorariosPorDia().map(item => {
             if (item.cerrado) return [item.key, 'Cerrado'];
             if (item.corrido) return [item.key, rangoTexto(item.desde, item.hasta)];
             return [item.key, rangoTexto(item.mananaDesde, item.mananaHasta) + ' / ' + rangoTexto(item.tardeDesde, item.tardeHasta)];
           })),
-          horariosPorDia: obtenerHorariosPorDia(),
+          horariosPorDia: siempreAbierto.checked ? diasSemana.map(item => ({ key: item.key, dia: item.label, cerrado: false, corrido: true, desde: '00:00', hasta: '23:30', mananaDesde: '', mananaHasta: '', tardeDesde: '', tardeHasta: '' })) : obtenerHorariosPorDia(),
           horario: obtenerDiasResumen().join(' | '),
           mediosPago: obtenerMediosPagoSeleccionados().join(', '),
           factura: valor('factura'),
-          matricula: valor('matricula'),
           fotoBase64: fotoBase64
         };
 
@@ -1660,10 +1693,10 @@
 
           setTimeout(() => {
             const datosMembresia = {
-              id_registro: result.id_registro || result.id || result.idServicio || '',
-              tipo_registro: 'servicio',
-              nombre_negocio: nombreCompleto,
-              titular: nombreCompleto,
+              id_registro: result.id_registro || result.id || result.idComercio || '',
+              tipo_registro: 'comercio',
+              nombre_negocio: valor('nombreComercio'),
+              titular: valor('nombreComercio'),
               telefono: limpiarTelefono(valor('whatsapp')) || limpiarTelefono(valor('telefonoAlternativo')),
               email: valor('email')
             };
