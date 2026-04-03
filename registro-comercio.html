@@ -636,7 +636,7 @@
       </p>
 
       <div class="notice">
-        Importante: elegí primero la categoría principal. Después seleccioná el rubro. Si no aparece en la lista, usá la opción "Otro" y especificá cuál. La disponibilidad se calcula según los días y horarios reales que cargues.
+        Importante: elegí primero la categoría principal. Después seleccioná el rubro. Si no aparece en la lista, usá la opción "Otro" y especificá cuál.
       </div>
 
       <div id="errorBox" class="error-box"></div>
@@ -674,24 +674,23 @@
             <div class="field-group">
               <label for="categoriaPrincipal">Categoría principal *</label>
               <select id="categoriaPrincipal" required>
-                <option value="">Seleccionar</option>
-                <option>Servicios para el hogar</option>
-                <option>Construcción</option>
-                <option>Gastronomía</option>
-                <option>Salud</option>
-                <option>Estética y bienestar</option>
-                <option>Educación</option>
-                <option>Tecnología</option>
-                <option>Profesionales</option>
-                <option>Oficios</option>
-                <option>Automotor</option>
-                <option>Comercios</option>
-                <option>Mascotas</option>
-                <option>Transporte y logística</option>
-                <option>Deportes y gimnasios</option>
-                <option>Empresas y servicios</option>
-                <option>Otros rubros</option>
-              </select>
+  <option value="">Seleccionar</option>
+  <option>Alimentos y bebidas</option>
+  <option>Gastronomía</option>
+  <option>Salud y farmacias</option>
+  <option>Belleza y estética</option>
+  <option>Moda y ropa</option>
+  <option>Hogar y construcción</option>
+  <option>Ferretería y oficios</option>
+  <option>Tecnología y electrónica</option>
+  <option>Automotor</option>
+  <option>Mascotas</option>
+  <option>Deportes y fitness</option>
+  <option>Educación y librerías</option>
+  <option>Servicios empresariales</option>
+  <option>Transporte y logística</option>
+  <option>Otros rubros</option>
+</select>
             </div>
 
             <div class="field-group">
@@ -916,23 +915,158 @@
     }
 
     const rubrosPorCategoria = {
-      "Servicios para el hogar": ["Ferretería","Mueblería","Decoración","Pinturería","Materiales para el hogar","Tapicería","Otro"],
-      "Construcción": ["Corralón","Sanitarios","Aberturas","Construcción en seco / Durlock","Materiales de obra","Otro"],
-      "Gastronomía": ["Restaurant","Rotisería","Panadería","Pastelería","Heladería","Casa de comidas","Catering","Otro"],
-      "Salud": ["Farmacia","Óptica","Ortopedia","Insumos médicos","Veterinaria","Otro"],
-      "Estética y bienestar": ["Peluquería","Centro de estética","Manicuría","Perfumería","Gimnasio","Masajes y bienestar","Otro"],
-      "Educación": ["Librería","Instituto","Academia","Capacitación","Otro"],
-      "Tecnología": ["Informática","Reparación técnica","Accesorios tecnológicos","Diseño e impresión","Sublimación","Otro"],
-      "Profesionales": ["Estudio jurídico","Estudio contable","Arquitectura","Consultoría","Otro"],
-      "Oficios": ["Taller","Herrería","Carpintería","Cerrajería","Otro"],
-      "Automotor": ["Taller mecánico","Gomería","Repuestos","Accesorios","Lavadero","Polarizado","Otro"],
-      "Comercios": ["Kiosco","Almacén","Supermercado","Autoservicio","Bazar","Indumentaria","Calzado","Regalería","Otro"],
-      "Mascotas": ["Pet shop","Veterinaria","Peluquería canina","Otro"],
-      "Transporte y logística": ["Fletes","Mudanzas","Cadetería","Logística","Otro"],
-      "Deportes y gimnasios": ["Gimnasio","Venta de artículos deportivos","Escuela deportiva","Otro"],
-      "Empresas y servicios": ["Distribuidora","Servicios empresariales","Seguros","Inmobiliaria","Logística empresarial","Otro"],
-      "Otros rubros": ["Otro"]
-    };
+  "Alimentos y bebidas": [
+    "Almacén / despensa",
+    "Autoservicio",
+    "Bebidas",
+    "Carnicería",
+    "Dietética",
+    "Fiambrería",
+    "Kioscos",
+    "Panadería",
+    "Pollería",
+    "Verdulería / frutería",
+    "Vinoteca",
+    "Otro"
+  ],
+
+  "Gastronomía": [
+    "Cafetería",
+    "Casa de comidas",
+    "Confitería",
+    "Hamburguesería",
+    "Heladería",
+    "Parrilla",
+    "Pastelería",
+    "Pizzería",
+    "Restaurante",
+    "Rotisería",
+    "Otro"
+  ],
+
+  "Salud y farmacias": [
+    "Farmacia",
+    "Óptica",
+    "Ortopedia",
+    "Otro"
+  ],
+
+  "Belleza y estética": [
+    "Barbería",
+    "Centro de estética",
+    "Cosmética / belleza",
+    "Manicuría / uñas",
+    "Peluquería",
+    "Perfumería",
+    "Otro"
+  ],
+
+  "Moda y ropa": [
+    "Calzado",
+    "Indumentaria",
+    "Joyería",
+    "Lencería",
+    "Marroquinería",
+    "Mercería",
+    "Relojería",
+    "Ropa deportiva",
+    "Ropa infantil",
+    "Otro"
+  ],
+
+  "Hogar y construcción": [
+    "Aberturas",
+    "Bazar",
+    "Colchonería",
+    "Corralón",
+    "Decoración",
+    "Maderera",
+    "Mueblería",
+    "Pinturería",
+    "Sanitarios",
+    "Vivero",
+    "Otro"
+  ],
+
+  "Ferretería y oficios": [
+    "Casa de electricidad",
+    "Carpintería / amoblamientos",
+    "Ferretería",
+    "Herramientas",
+    "Iluminación",
+    "Otro"
+  ],
+
+  "Tecnología y electrónica": [
+    "Audio / sonido",
+    "Celulares",
+    "Computación",
+    "Electrodomésticos",
+    "Electrónica",
+    "Tecnología",
+    "Otro"
+  ],
+
+  "Automotor": [
+    "Accesorios automotor",
+    "Bicicletería",
+    "Concesionaria",
+    "Gomería",
+    "Lavadero de autos",
+    "Lubricentro",
+    "Motovehículos",
+    "Repuestos automotor",
+    "Repuestos motos",
+    "Otro"
+  ],
+
+  "Mascotas": [
+    "Clínica / Veterinaria",
+    "Forrajería",
+    "Pet shop",
+    "Otro"
+  ],
+
+  "Deportes y fitness": [
+    "Artículos de camping / pesca",
+    "Casa de deportes",
+    "Gimnasio",
+    "Instrumentos musicales",
+    "Otro"
+  ],
+
+  "Educación y librerías": [
+    "Artística",
+    "Cotillón",
+    "Juguetería",
+    "Librería",
+    "Papelería",
+    "Otro"
+  ],
+
+  "Servicios empresariales": [
+    "Correo / encomiendas",
+    "Estacionamiento",
+    "Inmobiliaria",
+    "Lavandería / tintorería",
+    "Seguros / oficina comercial",
+    "Servicios funerarios / cochería",
+    "Turismo / agencia",
+    "Otro"
+  ],
+
+  "Transporte y logística": [
+    "Cadetería / mensajería",
+    "Encomiendas",
+    "Logística",
+    "Transporte",
+    "Otro"
+  ],
+
+  "Otros rubros": [
+    "Otro"
+  ]
+};
 
     function valor(id) { return document.getElementById(id).value.trim(); }
 
