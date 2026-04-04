@@ -992,7 +992,7 @@ renderCards();
   const script = document.createElement("script");
   script.id = callbackName;
   script.src = API_URL_BASE
-  + '?action=listar'
+  + '?action=listarCategoria'
   + '&callback=' + encodeURIComponent(callbackName);
 
   script.onerror = function() {
