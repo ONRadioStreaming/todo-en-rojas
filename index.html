@@ -1250,10 +1250,10 @@ const tourSteps = [
     target: "#openEmergency"
   },
   {
-    title: "Farmacia de turno",
-    text: "En este módulo podés ver qué farmacia está de turno, hasta qué hora, comunicarte o ver cómo llegar.",
-    target: "#farmaciaTurnoCard"
-  },
+  title: "Farmacia de turno",
+  text: "En este módulo podés ver qué farmacia está de turno, hasta qué hora, comunicarte o ver cómo llegar.",
+  target: "#farmaciaTurnoCard .farmacia-overlay"
+},
   {
     title: "Soporte Conecta2",
     text: "Si querés dejarnos una sugerencia, una mejora o tenés alguna duda, podés escribirnos desde este módulo.",
@@ -1302,102 +1302,50 @@ function detenerCicloTour() {
   }
 }
 
-function aplicarHighlight(selector) {
-  limpiarHighlightTour();
+if (selector === "#openEmergency") {
+  padX = 6;
+  padY = 6;
+  radius = 20;
+}
 
-  if (!selector) return;
+if (selector === "#openAppGuide") {
+  padX = 2;
+  padY = 2;
+  radius = 18;
+}
 
-  const el = document.querySelector(selector);
-  if (!el) return;
+if (selector === ".support-card") {
+  padX = 6;
+  padY = 6;
+  radius = 24;
+}
 
-  tourTargetActual = el;
+if (selector === "#farmaciaTurnoCard .farmacia-overlay") {
+  padX = 4;
+  padY = 4;
+  radius = 26;
+}
 
-  const rectInicial = el.getBoundingClientRect();
-  const cardHeight = tourCard.offsetHeight || 260;
-  const margenSuperior = 90;
-  const margenInferior = cardHeight + 36;
+if (
+  selector === "#btnRegistroComercio" ||
+  selector === "#btnRegistroServicio" ||
+  selector === "#btnRegistroProfesional" ||
+  selector === "#btnRegistroSalud"
+) {
+  padX = 4;
+  padY = 4;
+  radius = 22;
+}
 
-  const necesitaScroll =
-    rectInicial.top < margenSuperior ||
-    rectInicial.bottom > (window.innerHeight - margenInferior);
-
-  if (necesitaScroll) {
-    let destinoY = window.scrollY + rectInicial.top - 110;
-
-    if (selector === "#farmaciaTurnoCard") {
-      destinoY = window.scrollY + rectInicial.top - 40;
-    }
-
-    if (selector === "#openAppGuide") {
-      destinoY = window.scrollY + rectInicial.top - 80;
-    }
-
-    window.scrollTo({
-      top: Math.max(0, destinoY),
-      behavior: 'smooth'
-    });
-  }
-
-  setTimeout(function () {
-    const rect = el.getBoundingClientRect();
-
-    let padX = 8;
-    let padY = 8;
-    let radius = 28;
-
-    if (selector === "#openEmergency") {
-      padX = 6;
-      padY = 6;
-      radius = 20;
-    }
-
-    if (selector === "#openAppGuide") {
-      padX = 4;
-      padY = 4;
-      radius = 20;
-    }
-
-    if (selector === ".support-card") {
-      padX = 8;
-      padY = 8;
-      radius = 26;
-    }
-
-    if (selector === "#farmaciaTurnoCard") {
-      padX = 6;
-      padY = 6;
-      radius = 30;
-    }
-
-    if (
-      selector === "#btnRegistroComercio" ||
-      selector === "#btnRegistroServicio" ||
-      selector === "#btnRegistroProfesional" ||
-      selector === "#btnRegistroSalud"
-    ) {
-      padX = 6;
-      padY = 6;
-      radius = 22;
-    }
-
-    if (
-      selector === "#cardComercios" ||
-      selector === "#cardServicios" ||
-      selector === "#cardProfesionales" ||
-      selector === "#cardSalud"
-    ) {
-      padX = 6;
-      padY = 6;
-      radius = 24;
-    }
-
-    tourHole.style.top = (rect.top - padY) + 'px';
-    tourHole.style.left = (rect.left - padX) + 'px';
-    tourHole.style.width = (rect.width + padX * 2) + 'px';
-    tourHole.style.height = (rect.height + padY * 2) + 'px';
-    tourHole.style.borderRadius = radius + 'px';
-    tourHole.classList.add('show');
-  }, necesitaScroll ? 420 : 120);
+if (
+  selector === "#cardComercios" ||
+  selector === "#cardServicios" ||
+  selector === "#cardProfesionales" ||
+  selector === "#cardSalud"
+) {
+  padX = 4;
+  padY = 4;
+  radius = 24;
 }
 function iniciarCiclo(targets) {
   detenerCicloTour();
