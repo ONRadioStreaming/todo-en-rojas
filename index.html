@@ -688,8 +688,8 @@
   box-shadow:
     0 0 0 9999px rgba(4, 11, 24, 0.78),
     0 0 0 2px rgba(255,255,255,0.95),
-    0 0 0 6px rgba(255,159,28,0.35),
-    0 0 28px rgba(255,159,28,0.72),
+    0 0 0 3px rgba(255,159,28,0.92),
+    0 0 18px rgba(255,159,28,0.55),
     0 14px 30px rgba(0,0,0,0.42);
   display: none;
 }
@@ -1312,17 +1312,25 @@ function aplicarHighlight(selector) {
 
   tourTargetActual = el;
 
+  const rectInicial = el.getBoundingClientRect();
   const cardHeight = tourCard.offsetHeight || 260;
   const margenSuperior = 90;
   const margenInferior = cardHeight + 36;
 
-  const rectInicial = el.getBoundingClientRect();
   const necesitaScroll =
     rectInicial.top < margenSuperior ||
     rectInicial.bottom > (window.innerHeight - margenInferior);
 
   if (necesitaScroll) {
-    const destinoY = window.scrollY + rectInicial.top - 110;
+    let destinoY = window.scrollY + rectInicial.top - 110;
+
+    if (selector === "#farmaciaTurnoCard") {
+      destinoY = window.scrollY + rectInicial.top - 40;
+    }
+
+    if (selector === "#openAppGuide") {
+      destinoY = window.scrollY + rectInicial.top - 80;
+    }
 
     window.scrollTo({
       top: Math.max(0, destinoY),
@@ -1332,12 +1340,62 @@ function aplicarHighlight(selector) {
 
   setTimeout(function () {
     const rect = el.getBoundingClientRect();
-    const pad = 8;
 
-    tourHole.style.top = (rect.top - pad) + 'px';
-    tourHole.style.left = (rect.left - pad) + 'px';
-    tourHole.style.width = (rect.width + pad * 2) + 'px';
-    tourHole.style.height = (rect.height + pad * 2) + 'px';
+    let padX = 8;
+    let padY = 8;
+    let radius = 28;
+
+    if (selector === "#openEmergency") {
+      padX = 6;
+      padY = 6;
+      radius = 20;
+    }
+
+    if (selector === "#openAppGuide") {
+      padX = 4;
+      padY = 4;
+      radius = 20;
+    }
+
+    if (selector === ".support-card") {
+      padX = 8;
+      padY = 8;
+      radius = 26;
+    }
+
+    if (selector === "#farmaciaTurnoCard") {
+      padX = 6;
+      padY = 6;
+      radius = 30;
+    }
+
+    if (
+      selector === "#btnRegistroComercio" ||
+      selector === "#btnRegistroServicio" ||
+      selector === "#btnRegistroProfesional" ||
+      selector === "#btnRegistroSalud"
+    ) {
+      padX = 6;
+      padY = 6;
+      radius = 22;
+    }
+
+    if (
+      selector === "#cardComercios" ||
+      selector === "#cardServicios" ||
+      selector === "#cardProfesionales" ||
+      selector === "#cardSalud"
+    ) {
+      padX = 6;
+      padY = 6;
+      radius = 24;
+    }
+
+    tourHole.style.top = (rect.top - padY) + 'px';
+    tourHole.style.left = (rect.left - padX) + 'px';
+    tourHole.style.width = (rect.width + padX * 2) + 'px';
+    tourHole.style.height = (rect.height + padY * 2) + 'px';
+    tourHole.style.borderRadius = radius + 'px';
     tourHole.classList.add('show');
   }, necesitaScroll ? 420 : 120);
 }
