@@ -669,7 +669,7 @@
 .tour-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(4, 11, 24, 0.74);
+  background: rgba(4, 11, 24, 0.76);
   z-index: 15000;
   display: none;
 }
@@ -679,15 +679,15 @@
 }
 
 .tour-highlight {
-  position: relative;
+  position: relative !important;
   z-index: 15002 !important;
   box-shadow:
-    0 0 0 4px rgba(255,255,255,0.96),
-    0 0 0 10px rgba(255,159,28,0.30),
-    0 0 28px rgba(255,159,28,0.65),
-    0 18px 32px rgba(0,0,0,0.34) !important;
+    0 0 0 4px rgba(255,255,255,0.98),
+    0 0 0 10px rgba(255,159,28,0.34),
+    0 0 24px rgba(255,159,28,0.7),
+    0 12px 30px rgba(0,0,0,0.42) !important;
   border-radius: 22px !important;
-  transition: box-shadow .25s ease;
+  transition: box-shadow .22s ease;
 }
 
 .tour-card {
@@ -700,7 +700,7 @@
   color: #12263f;
   border-radius: 24px;
   padding: 18px 16px 16px;
-  box-shadow: 0 18px 36px rgba(0,0,0,0.26);
+  box-shadow: 0 18px 36px rgba(0,0,0,0.28);
   display: none;
   max-width: 448px;
   margin: 0 auto;
@@ -711,24 +711,62 @@
   display: block;
 }
 
+.tour-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 38px;
+  height: 38px;
+  border: 0;
+  border-radius: 12px;
+  background: #edf3f8;
+  color: #17314c;
+  font-size: 1rem;
+  font-weight: 900;
+  cursor: pointer;
+}
+
 .tour-title {
   font-size: 1.12rem;
   font-weight: 900;
   color: #10243d;
-  margin-bottom: 8px;
+  margin: 4px 48px 10px 0;
   line-height: 1.2;
 }
 
 .tour-text {
   font-size: 0.96rem;
-  line-height: 1.55;
+  line-height: 1.58;
   color: #4d6278;
   font-weight: 700;
+  margin-bottom: 14px;
 }
 
-.tour-close {
-  position: absolute;
-  top: 10px
+.tour-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.tour-btn {
+  border: 0;
+  border-radius: 16px;
+  padding: 14px 12px;
+  font-family: inherit;
+  font-size: 0.96rem;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.tour-btn-secondary {
+  background: #edf3f8;
+  color: #17314c;
+}
+
+.tour-btn-primary {
+  background: linear-gradient(145deg, #ff9f1c, #ff6f3d);
+  color: #fff;
+}
 
     @media (max-width: 640px) {
       .farmacia-banner {
@@ -991,12 +1029,16 @@
     </div>
   </div>
 
- <div class="tour-backdrop" id="tourBackdrop"></div>
+<div class="tour-backdrop" id="tourBackdrop"></div>
 
 <div class="tour-card" id="tourCard">
   <button class="tour-close" id="tourCloseBtn">✕</button>
   <div class="tour-title" id="tourTitle">Título</div>
   <div class="tour-text" id="tourText">Texto</div>
+  <div class="tour-actions">
+    <button class="tour-btn tour-btn-secondary" id="tourSkipBtn">Cerrar</button>
+    <button class="tour-btn tour-btn-primary" id="tourNextBtn">Siguiente</button>
+  </div>
 </div>
 
   <script>
@@ -1164,72 +1206,57 @@ const tourCard = document.getElementById('tourCard');
 const tourTitle = document.getElementById('tourTitle');
 const tourText = document.getElementById('tourText');
 const tourCloseBtn = document.getElementById('tourCloseBtn');
+const tourSkipBtn = document.getElementById('tourSkipBtn');
+const tourNextBtn = document.getElementById('tourNextBtn');
 const openAppGuide = document.getElementById('openAppGuide');
 
 let tourIndex = 0;
 let tourTargetActual = null;
-let tourTimer = null;
+let cycleTimer = null;
+let cycleIndex = 0;
 
 const tourSteps = [
   {
-    target: "#categoryGrid",
     title: "Categorías",
-    text: "Acá encontrás todo lo que buscás dentro de Conecta2 según tu necesidad."
+    text: "Entrá en la categoría que más necesites para resolver lo que buscás dentro de Conecta2.",
+    mode: "cycle",
+    targets: ["#cardComercios", "#cardServicios", "#cardProfesionales", "#cardSalud"]
   },
   {
-    target: "#cardComercios",
-    title: "Comercios",
-    text: "Ingresá acá para encontrar locales y negocios físicos con contacto, horarios y ubicación."
-  },
-  {
-    target: "#cardServicios",
-    title: "Servicios",
-    text: "En esta sección vas a encontrar personas que realizan trabajos, tareas y oficios."
-  },
-  {
-    target: "#cardProfesionales",
-    title: "Profesionales",
-    text: "Acá aparecen profesionales universitarios o técnicos para que puedas contactarlos fácilmente."
-  },
-  {
-    target: "#cardSalud",
-    title: "Salud",
-    text: "En Salud podés encontrar profesionales y especialistas para lo que necesites."
-  },
-  {
-    target: "#openEmergency",
     title: "Emergencias",
-    text: "Ante una urgencia, acá accedés rápido a números como policía, bomberos y emergencias de salud."
+    text: "Ante una urgencia, acá accedés rápido a números importantes como policía, bomberos y emergencias de salud.",
+    target: "#openEmergency"
   },
   {
-    target: "#farmaciaTurnoCard",
     title: "Farmacia de turno",
-    text: "En este módulo ves qué farmacia está de turno, hasta qué hora y cómo comunicarte o llegar."
+    text: "En este módulo podés ver qué farmacia está de turno, hasta qué hora, comunicarte o ver cómo llegar.",
+    target: "#farmaciaTurnoCard"
   },
   {
-    target: ".support-card",
     title: "Soporte Conecta2",
-    text: "Si querés dejarnos una sugerencia, una mejora o tenés alguna duda, podés escribirnos desde acá."
+    text: "Si querés dejarnos una sugerencia, una mejora o tenés alguna duda, podés escribirnos desde este módulo.",
+    target: ".support-card"
   },
   {
-    target: "#btnRegistroComercio",
-    title: "¿Tenés un comercio?",
-    text: "Si querés aparecer en la app, tocá acá y registrá tu comercio de forma simple."
+    title: "Sumate a Conecta2",
+    text: "Si tenés un comercio, ofrecés servicios o sos profesional, elegí la opción que corresponda para registrarte en la app.",
+    mode: "cycle",
+    targets: ["#btnRegistroComercio", "#btnRegistroServicio", "#btnRegistroProfesional", "#btnRegistroSalud"]
   },
   {
-    target: "#btnRegistroServicio",
-    title: "¿Ofrecés servicios?",
-    text: "También podés registrarte como servicio, profesional o profesional de salud para aparecer en Conecta2."
-  },
-  {
-    target: ".action-stack",
     title: "Membresía Conecta2",
-    text: "Plan trimestral: $16.000 cada 3 meses. Plan anual: $64.000, pero con bonificación de $10.000 pagás $54.000."
+    text: "Plan trimestral: $16.000 cada 3 meses. Plan anual: $64.000, pero con bonificación de $10.000 pagás $54.000.",
+    target: ".action-stack"
   },
   {
-    target: ".action-stack",
     title: "¿Cómo se paga?",
-    text: "Pago online: remoto. Transferencia y efectivo: solo presencial. Una vez activada la membresía, tu perfil aparece en la app."
+    text: "Pago online: remoto. Transferencia y efectivo: solo presencial. Una vez activada la membresía, tu perfil aparece dentro de la app.",
+    target: ".action-stack"
+  },
+  {
+    title: "Volvé a ver esta guía cuando quieras",
+    text: "Si querés volver a recorrer la app o te quedó alguna duda, tocá el botón naranja “Ver guía de la app” y podés verla nuevamente.",
+    target: "#openAppGuide"
   }
 ];
 
@@ -1240,19 +1267,41 @@ function limpiarHighlightTour() {
   }
 }
 
-function limpiarTimerTour() {
-  if (tourTimer) {
-    clearTimeout(tourTimer);
-    tourTimer = null;
+function detenerCicloTour() {
+  if (cycleTimer) {
+    clearInterval(cycleTimer);
+    cycleTimer = null;
   }
 }
 
-function cerrarTour() {
-  limpiarTimerTour();
+function aplicarHighlight(selector) {
   limpiarHighlightTour();
-  tourBackdrop.classList.remove('show');
-  tourCard.classList.remove('show');
-  document.body.style.overflow = '';
+
+  if (!selector) return;
+
+  const el = document.querySelector(selector);
+  if (!el) return;
+
+  tourTargetActual = el;
+  el.classList.add('tour-highlight');
+
+  setTimeout(function () {
+    el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }, 80);
+}
+
+function iniciarCiclo(targets) {
+  detenerCicloTour();
+
+  if (!targets || !targets.length) return;
+
+  cycleIndex = 0;
+  aplicarHighlight(targets[cycleIndex]);
+
+  cycleTimer = setInterval(function () {
+    cycleIndex = (cycleIndex + 1) % targets.length;
+    aplicarHighlight(targets[cycleIndex]);
+  }, 1200);
 }
 
 function mostrarPasoTour(index) {
@@ -1262,31 +1311,35 @@ function mostrarPasoTour(index) {
     return;
   }
 
+  detenerCicloTour();
   limpiarHighlightTour();
 
   tourTitle.textContent = step.title;
   tourText.textContent = step.text;
 
-  if (step.target) {
-    const el = document.querySelector(step.target);
-    if (el) {
-      tourTargetActual = el;
-      el.classList.add('tour-highlight');
-      setTimeout(function () {
-        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }, 80);
-    }
+  if (index === tourSteps.length - 1) {
+    tourNextBtn.textContent = "Finalizar";
+  } else {
+    tourNextBtn.textContent = "Siguiente";
+  }
+
+  if (step.mode === "cycle" && Array.isArray(step.targets)) {
+    iniciarCiclo(step.targets);
+  } else if (step.target) {
+    aplicarHighlight(step.target);
   }
 
   tourBackdrop.classList.add('show');
   tourCard.classList.add('show');
   document.body.style.overflow = 'hidden';
+}
 
-  limpiarTimerTour();
-  tourTimer = setTimeout(function () {
-    tourIndex += 1;
-    mostrarPasoTour(tourIndex);
-  }, 1400);
+function cerrarTour() {
+  detenerCicloTour();
+  limpiarHighlightTour();
+  tourBackdrop.classList.remove('show');
+  tourCard.classList.remove('show');
+  document.body.style.overflow = '';
 }
 
 function iniciarTour(forzado = false) {
@@ -1297,8 +1350,26 @@ function iniciarTour(forzado = false) {
   mostrarPasoTour(tourIndex);
 }
 
-tourBackdrop.addEventListener('click', cerrarTour);
-tourCloseBtn.addEventListener('click', cerrarTour);
+tourNextBtn.addEventListener('click', function() {
+  tourIndex += 1;
+  if (tourIndex >= tourSteps.length) {
+    cerrarTour();
+    return;
+  }
+  mostrarPasoTour(tourIndex);
+});
+
+tourSkipBtn.addEventListener('click', function() {
+  cerrarTour();
+});
+
+tourCloseBtn.addEventListener('click', function() {
+  cerrarTour();
+});
+
+tourBackdrop.addEventListener('click', function() {
+  cerrarTour();
+});
 
 openAppGuide.addEventListener('click', function() {
   iniciarTour(true);
