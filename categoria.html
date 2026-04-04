@@ -1000,6 +1000,7 @@ renderCards();
   script.id = callbackName;
   script.src = API_URL_BASE
   + '?action=listarCategoria'
+  + '&cat=' + encodeURIComponent(categoria)
   + '&callback=' + encodeURIComponent(callbackName);
 
   script.onerror = function() {
