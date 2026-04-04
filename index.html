@@ -680,14 +680,15 @@
 }
 
 .tour-hole {
+  transition: all 0.25s ease;
   position: fixed;
   z-index: 15001;
-  border-radius: 24px;
+  border-radius: 28px;
   pointer-events: none;
   box-shadow:
     0 0 0 9999px rgba(4, 11, 24, 0.78),
-    0 0 0 4px rgba(255,255,255,0.98),
-    0 0 0 10px rgba(255,159,28,0.34),
+    0 0 0 2px rgba(255,255,255,0.95),
+    0 0 0 6px rgba(255,159,28,0.35),
     0 0 28px rgba(255,159,28,0.72),
     0 14px 30px rgba(0,0,0,0.42);
   display: none;
@@ -1316,12 +1317,15 @@ function aplicarHighlight(selector) {
 
     setTimeout(function () {
       const rect = el.getBoundingClientRect();
-      const pad = 8;
+const pad = 8;
 
-      tourHole.style.top = (rect.top - pad) + 'px';
-      tourHole.style.left = (rect.left - pad) + 'px';
-      tourHole.style.width = (rect.width + pad * 2) + 'px';
-      tourHole.style.height = (rect.height + pad * 2) + 'px';
+const scrollY = window.scrollY || window.pageYOffset;
+const scrollX = window.scrollX || window.pageXOffset;
+
+tourHole.style.top = (rect.top + scrollY - pad) + 'px';
+tourHole.style.left = (rect.left + scrollX - pad) + 'px';
+tourHole.style.width = (rect.width + pad * 2) + 'px';
+tourHole.style.height = (rect.height + pad * 2) + 'px';
       tourHole.classList.add('show');
     }, 220);
   }, 80);
