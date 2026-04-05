@@ -858,7 +858,11 @@
 
     function renderCards() {
       const filtrados = obtenerDatosFiltrados();
-
+      
+      console.log("DATOS ORIGINALES TOTAL:", datosOriginales.length);
+      console.log("FILTRADOS TOTAL:", filtrados.length);
+      console.log("PRIMER FILTRADO:", filtrados[0] || "sin item");
+      
       countBadge.textContent = filtrados.length === 1 ? "1 resultado" : (filtrados.length + " resultados");
 
       if (!filtrados.length) {
