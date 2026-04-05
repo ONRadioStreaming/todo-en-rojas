@@ -1040,22 +1040,39 @@ async function submitOnlinePaymentDirect() {
       return !!(data && data.tipo_registro && data.nombre_negocio && data.titular && data.telefono && data.email);
     }
 
-    function resolveMemberData() {
-      const paramsData = getParamsData();
-      if (hasRequiredMemberData(paramsData)) return paramsData;
+   function resolveMemberData() {
 
-      const storageData = getStorageData();
-      if (hasRequiredMemberData(storageData)) return storageData;
+  const params = new URLSearchParams(window.location.search);
 
-      return {
-        id_registro: paramsData.id_registro || (storageData && storageData.id_registro) || '',
-        tipo_registro: paramsData.tipo_registro || (storageData && storageData.tipo_registro) || '',
-        nombre_negocio: paramsData.nombre_negocio || (storageData && storageData.nombre_negocio) || '',
-        titular: paramsData.titular || (storageData && storageData.titular) || '',
-        telefono: paramsData.telefono || (storageData && storageData.telefono) || '',
-        email: paramsData.email || (storageData && storageData.email) || ''
-      };
-    }
+  const data = {
+    id_registro: params.get("id_registro") || "",
+    tipo_registro: params.get("tipo_registro") || "",
+    nombre_negocio: params.get("nombre_negocio") || "",
+    titular: params.get("titular") || "",
+    telefono: params.get("telefono") || "",
+    email: params.get("email") || ""
+  };
+
+  if (
+    data.id_registro &&
+    data.tipo_registro &&
+    data.nombre_negocio &&
+    data.titular &&
+    data.telefono &&
+    data.email
+  ) {
+    return data;
+  }
+
+  return {
+    id_registro: "",
+    tipo_registro: "",
+    nombre_negocio: "",
+    titular: "",
+    telefono: "",
+    email: ""
+  };
+}
 
     function getRegistrationLabel(data) {
       const type = normalizeText(data?.tipo_registro).toLowerCase();
