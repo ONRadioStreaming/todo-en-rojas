@@ -835,24 +835,26 @@
     }
 
     function obtenerDatosFiltrados() {
-      return datosOriginales.filter(function(item) {
-        const subcatItem = String(item.rubro || item.subcategoria || "").trim().toLowerCase();
-        const estadoItem = String(item.estado || "activo").trim().toLowerCase();
+  return datosOriginales.filter(function(item) {
+    const subcatItem = String(item.rubro || item.subcategoria || "").trim().toLowerCase();
 
-        const textoBusqueda = (
-          String(item.nombre || "") + " " +
-          String(item.rubro || "") + " " +
-          String(item.descripcion || "") + " " +
-          String(item.direccion || "")
-        ).toLowerCase();
+    const estadoBase = String(item.estado || "activo").trim().toLowerCase();
+    const estadoItem = (estadoBase === "activo") ? "disponibles" : "no-disponibles";
 
-        const pasaSub = (filtroSubcategoria === "todos" || subcatItem === filtroSubcategoria);
-        const pasaEstado = (filtroEstado === "todos" || estadoItem === filtroEstado);
-        const pasaTexto = (!filtroTexto || textoBusqueda.includes(filtroTexto));
+    const textoBusqueda = (
+      String(item.nombre || "") + " " +
+      String(item.rubro || "") + " " +
+      String(item.descripcion || "") + " " +
+      String(item.direccion || "")
+    ).toLowerCase();
 
-        return pasaSub && pasaEstado && pasaTexto;
-      });
-    }
+    const pasaSub = (filtroSubcategoria === "todos" || subcatItem === filtroSubcategoria);
+    const pasaEstado = (filtroEstado === "todos" || estadoItem === filtroEstado);
+    const pasaTexto = (!filtroTexto || textoBusqueda.includes(filtroTexto));
+
+    return pasaSub && pasaEstado && pasaTexto;
+  });
+}
 
     function renderCards() {
       const filtrados = obtenerDatosFiltrados();
