@@ -960,6 +960,9 @@
 data[0].tipo : "sin item");
      console.log("NOMBRE PRIMER ITEM:", data && data[0] ? 
 data[0].nombre : "sin item");
+
+datosOriginales = Array.isArray(data) ? data : [];
+      
       if (Array.isArray(data)) {
         datosOriginales = data;
       } else if (data && Array.isArray(data.items)) {
