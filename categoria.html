@@ -877,7 +877,7 @@
 
         let fotoHtml = '<div class="card-photo-fallback">🏪</div>';
         if (imagen) {
-          fotoHtml = '<img src="' + imagen + '" alt="' + escaparHtml(nombre) + '" onerror="this.closest(\\'.card-photo\\').innerHTML=\\'<div class=&quot;card-photo-fallback&quot;>🏪</div>\\'">';
+          fotoHtml = '<img src="' + imagen + '" alt="' + escaparHtml(nombre) + '" onerror="this.parentNode.innerHTML=&quot;<div class=\'card-photo-fallback\'>🏪</div>&quot;">';
         }
 
         let descripcionHtml = "";
