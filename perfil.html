@@ -481,24 +481,29 @@
     }
 
     function resolverImagen(item) {
-      const posibles = [
-        item.foto,
-        item.fotobase64,
-        item.imagen,
-        item.logo
-      ];
+  const posibles = [
+    item.foto_base64,
+    item.fotobase64,
+    item.fotoBase64,
+    item.foto,
+    item.imagen,
+    item.logo
+  ];
 
-      for (let i = 0; i < posibles.length; i++) {
-        const valor = String(posibles[i] || "").trim();
-        if (!valor) continue;
+  for (let i = 0; i < posibles.length; i++) {
+    const valor = String(posibles[i] || "").trim();
+    if (!valor) continue;
 
-        if (valor.startsWith("data:image")) return valor;
-        if (valor.startsWith("http://") || valor.startsWith("https://")) return valor;
-        if (valor.length > 100) return "data:image/jpeg;base64," + valor;
-      }
+    if (valor.startsWith("data:image")) return valor;
+    if (valor.startsWith("http://") || valor.startsWith("https://")) return valor;
 
-      return "";
+    if (valor.length > 100) {
+      return "data:image/jpeg;base64," + valor;
     }
+  }
+
+  return "";
+}
 
     function obtenerHorariosObjeto(horariosRaw) {
       if (!horariosRaw) return null;
