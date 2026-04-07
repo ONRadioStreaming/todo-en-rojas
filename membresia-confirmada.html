@@ -413,8 +413,7 @@ script.src = "https://script.google.com/macros/s/AKfycbxUCqWb6pYziwFrHWwXgSNwDfs
 document.body.appendChild(script);
     } finally {
       try { delete window[callbackName]; } catch (e) {}
-      const script = document.getElementById(callbackName);
-      if (script) script.remove();
+            if (script) script.remove();
     }
   };
 
