@@ -347,9 +347,14 @@
 
   <script>
     (async function () {
-      const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxUCqWb6pYziwFrhWwXgSNwDfs4dt2KmdEZS18qFxcqlrSF4ywXdrDSrRM_Efka8Iij/exec';
+      const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxUCqWb6PYziwFrhWwXgSNwDfs4dt2KmdEZS18qFxcqlrSF4ywXdrDSrRM_Efka8Iij/exec';
       const params = new URLSearchParams(window.location.search);
-      const STORAGE_KEY = 'conecta2_ultimo_resumen_membresia';
+      const idRegistroStorage = firstOf(
+  params.get('id_registro'),
+  params.get('idRegistro'),
+  params.get('external_reference')
+);
+const STORAGE_KEY = 'conecta2_ultimo_resumen_membresia_' + (idRegistroStorage || 'general');
 
       function firstOf() {
         for (let i = 0; i < arguments.length; i++) {
@@ -581,13 +586,11 @@
           saved.idRegistro
         ),
         usuario: firstOf(
-          params.get('usuario'),
-          saved.usuario
-        ),
-        password: firstOf(
-          params.get('password'),
-          saved.password
-        ),
+  params.get('usuario')
+),
+password: firstOf(
+  params.get('password')
+),
         resultado: firstOf(
           params.get('resultado'),
           params.get('mp_result'),
