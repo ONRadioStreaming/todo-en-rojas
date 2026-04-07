@@ -404,6 +404,13 @@
         text('usuarioAcceso', 'Se envió por correo');
         text('passwordAcceso', 'Se envió por correo');
       }
+      const script = document.createElement('script');
+script.src = "https://script.google.com/macros/s/AKfycbxUCqWb6pYziwFrHWwXgSNwDfs4dt2KmdEZS18qFxcqlrSF4ywXdrDSrRM_Efka8Iij/exec" +
+  "?action=obtenerCredencialesMiembroAPI" +
+  "&id_registro=" + encodeURIComponent(idRegistro) +
+  "&callback=" + callbackName;
+
+document.body.appendChild(script);
     } finally {
       try { delete window[callbackName]; } catch (e) {}
       const script = document.getElementById(callbackName);
