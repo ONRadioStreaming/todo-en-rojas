@@ -386,8 +386,48 @@
       text('importe', normalizarImporte(importe));
       text('idMembresia', idMembresia || 'Se generó automáticamente');
       text('idRegistro', idRegistro || 'Se generó automáticamente');
-      text('usuarioAcceso', usuario || 'Se envió por correo');
-      text('passwordAcceso', password || 'Se envió por correo');
+      cargarCredenciales(idRegistro);
+  if (!idRegistro) {
+    text('usuarioAcceso', 'Se envió por correo');
+    text('passwordAcceso', 'Se envió por correo');
+    return;
+  }
+
+  const callbackName = 'credencialesCallback_' + Date.now();
+
+  window[callbackName] = function(respuesta) {
+    try {
+      if (respuesta && respuesta.ok) {
+        text('usuarioAcceso', respuesta.usuario || 'Se envió por correo');
+        text('passwordAcceso', respuesta.password || 'Se envió por correo');
+      } else {
+        text('usuarioAcceso', 'Se envió por correo');
+        text('passwordAcceso', 'Se envió por correo');
+      }
+    } finally {
+      try { delete window[callbackName]; } catch (e) {}
+      const script = document.getElementById(callbackName);
+      if (script) script.remove();
+    }
+  };
+
+  const script = document.createElement('script');
+  script.id = callbackName;
+  script.src =
+    'https://script.google.com/macros/s/AKfycbxUCqWb6pYziwFrHWwXgSNwDfs4dt2KmdEZS18qFxcqlrSF4ywXdrDSrRM_Efka8Iij/exec'
+    + '?action=obtenerCredencialesMiembro'
+    + '&id_registro=' + encodeURIComponent(idRegistro)
+    + '&callback=' + encodeURIComponent(callbackName);
+
+  script.onerror = function() {
+    text('usuarioAcceso', 'Se envió por correo');
+    text('passwordAcceso', 'Se envió por correo');
+    try { delete window[callbackName]; } catch (e) {}
+    script.remove();
+  };
+
+  document.body.appendChild(script);
+}
 
       const statusPill = document.getElementById('statusPill');
       if (resultado === 'pending') {
