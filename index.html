@@ -2092,7 +2092,7 @@
 
       const res = await loginPremium(usuario, password);
 
-      if (!res || !res.ok) {
+      if (!res || res.ok !== true) {
         loginMsg.textContent = (res && res.error) ? res.error : 'No se pudo iniciar sesión. Revisá tus datos.';
         btnLoginSubmit.disabled = false;
         btnLoginSubmit.textContent = 'Ingresar';
