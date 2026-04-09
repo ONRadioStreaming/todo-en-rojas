@@ -728,6 +728,27 @@
 </div>
 
   </div>  <script>
+    const URL_PARAMS = new URLSearchParams(window.location.search);
+const MODO_RENOVACION = URL_PARAMS.get("modo") === "renovacion";
+const ID_REGISTRO_PARAM = URL_PARAMS.get("id_registro") || "";
+
+function aplicarModoRenovacion() {
+
+  if (!MODO_RENOVACION) return;
+
+  const titulo = document.querySelector(".header-title");
+  if (titulo) titulo.textContent = "Renovar membresía";
+
+  const heroTitle = document.querySelector(".hero-title");
+  if (heroTitle) heroTitle.textContent = "Renová tu membresía";
+
+  const heroText = document.querySelector(".hero-text");
+  if (heroText) heroText.textContent =
+    "Elegí el plan para renovar tu membresía y mantener tu perfil activo en Conecta2.";
+
+  const box = document.getElementById("missingDataBox");
+  if (box) box.style.display = "none";
+}
     const CONFIG = {
       appsScriptUrl: 'https://script.google.com/macros/s/AKfycbxUCqWb6pYziwFrHWwXgSNwDfs4dt2KmdEZS18qFxcqlrSF4ywXdrDSrRM_Efka8Iij/exec',
       redirectIndex: 'index.html',
