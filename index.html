@@ -1123,6 +1123,124 @@
         grid-template-columns: 1fr;
       }
     }
+
+    .premium-btn-register {
+  background: linear-gradient(145deg, #24c6dc, #514a9d);
+  color: #fff;
+}
+
+.premium-actions.session-on {
+  grid-template-columns: 1fr 1fr;
+}
+
+.registro-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(4, 11, 24, 0.78);
+  z-index: 16000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+}
+
+.registro-modal.show {
+  display: flex;
+}
+
+.registro-box {
+  width: 100%;
+  max-width: 420px;
+  background: linear-gradient(180deg, #ffffff 0%, #eef4f7 100%);
+  color: #12263f;
+  border-radius: 28px;
+  padding: 24px 18px 18px;
+  box-shadow: 0 22px 42px rgba(0,0,0,0.28);
+  border: 1px solid rgba(255,255,255,0.7);
+  position: relative;
+  text-align: left;
+}
+
+.registro-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 38px;
+  height: 38px;
+  border: 0;
+  border-radius: 12px;
+  background: #edf3f8;
+  color: #17314c;
+  font-size: 1rem;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.registro-icon {
+  font-size: 2.7rem;
+  line-height: 1;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.registro-title {
+  margin: 0 0 10px 0;
+  font-size: 1.22rem;
+  font-weight: 900;
+  color: #10243d;
+  letter-spacing: -0.02em;
+  text-align: center;
+}
+
+.registro-text {
+  margin: 0 0 14px 0;
+  font-size: 0.97rem;
+  line-height: 1.55;
+  color: #4d6278;
+  font-weight: 700;
+  text-align: center;
+}
+
+.registro-actions {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+.registro-btn {
+  border: 0;
+  border-radius: 16px;
+  padding: 14px 12px;
+  font-family: inherit;
+  font-size: 0.98rem;
+  font-weight: 900;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.registro-btn-comercio {
+  background: linear-gradient(145deg, #24c6dc, #514a9d);
+  color: #fff;
+}
+
+.registro-btn-servicio {
+  background: linear-gradient(145deg, #ff9f1c, #ff6f3d);
+  color: #fff;
+}
+
+.registro-btn-profesional {
+  background: linear-gradient(145deg, #8e2de2, #4a00e0);
+  color: #fff;
+}
+
+.registro-btn-salud {
+  background: linear-gradient(135deg,#1fd1c2,#0aa2b5);
+  color: #fff;
+}
+    
   </style>
 </head>
 <body>
@@ -1145,20 +1263,26 @@
             <img src="banner.png" alt="Banner Conecta2">
           </div>
 
-          <div class="action-stack">
-            <a class="btn-main" id="btnRegistroComercio" href="registro-comercio.html">Registrá tu comercio</a>
-            <a class="btn-secondary" id="btnRegistroServicio" href="registro-servicio.html">Ofrecé tus servicios</a>
-            <a class="btn-profesional" id="btnRegistroProfesional" href="registro-profesional.html">Registrate como profesional</a>
-            <a class="btn-salud" id="btnRegistroSalud" href="registro-salud.html">Registrate como profesional de salud</a>
-          </div>
-
+         
           <div class="premium-card" id="premiumAccessCard">
-            <div class="premium-head">
-              <strong>Acceso premium</strong>
-              <span>
-                Si ya tenés membresía, iniciá sesión para entrar a tu panel privado, administrar tu perfil y renovar cuando lo necesites.
-              </span>
-            </div>
+  <div class="premium-head">
+    <strong>Acceso premium</strong>
+    <span>
+      Si querés sumarte, registrate ahora. Si ya tenés membresía, iniciá sesión para entrar a tu panel privado, administrar tu perfil y renovar cuando lo necesites.
+    </span>
+  </div>
+
+  <div class="premium-actions" id="premiumActions">
+    <button class="premium-btn premium-btn-register" id="btnPremiumRegister" type="button">Registrate ahora</button>
+    <button class="premium-btn premium-btn-login" id="btnPremiumLogin" type="button">Iniciar sesión</button>
+    <a class="premium-btn premium-btn-panel hidden" id="btnPremiumPanel" href="panel-miembro.html">Mi panel</a>
+    <button class="premium-btn premium-btn-logout hidden" id="btnPremiumLogout" type="button">Cerrar sesión</button>
+  </div>
+
+  <div class="premium-session" id="premiumSessionInfo">
+    Elegí una opción para continuar.
+  </div>
+</div>
 
             <div class="premium-actions" id="premiumActions">
               <button class="premium-btn premium-btn-login" id="btnPremiumLogin" type="button">Iniciar sesión</button>
@@ -1957,6 +2081,9 @@
     const btnPremiumLogout = document.getElementById('btnPremiumLogout');
     const premiumSessionInfo = document.getElementById('premiumSessionInfo');
     const premiumActions = document.getElementById('premiumActions');
+    const btnPremiumRegister = document.getElementById('btnPremiumRegister');
+    const registroModal = document.getElementById('registroModal');
+    const registroCloseBtn = document.getElementById('registroCloseBtn');
 
     const loginPremiumForm = document.getElementById('loginPremiumForm');
     const loginUsuario = document.getElementById('loginUsuario');
@@ -2023,20 +2150,49 @@
       loginModal.classList.remove('show');
       document.body.style.overflow = '';
     }
+    function openRegistroModal() {
+  registroModal.classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeRegistroModal() {
+  registroModal.classList.remove('show');
+  document.body.style.overflow = '';
+}
+    btnPremiumRegister.addEventListener('click', openRegistroModal);
+registroCloseBtn.addEventListener('click', closeRegistroModal);
+
+registroModal.addEventListener('click', function(e) {
+  if (e.target === registroModal) {
+    closeRegistroModal();
+  }
+});
 
     function applyPremiumUI() {
-      const session = getPremiumSession();
+  const session = getPremiumSession();
 
-      if (session && session.id_registro) {
-        btnPremiumLogin.classList.add('hidden');
-        btnPremiumPanel.classList.remove('hidden');
-        btnPremiumLogout.classList.remove('hidden');
-        premiumActions.classList.remove('single');
+  if (session && session.id_registro) {
+    btnPremiumRegister.classList.add('hidden');
+    btnPremiumLogin.classList.add('hidden');
+    btnPremiumPanel.classList.remove('hidden');
+    btnPremiumLogout.classList.remove('hidden');
 
-        btnPremiumPanel.href = 'panel-miembro.html?id_registro=' + encodeURIComponent(session.id_registro);
-        premiumSessionInfo.textContent = 'Sesión activa como: ' + (session.usuario || 'miembro premium') + '.';
-        return;
-      }
+    premiumActions.classList.add('session-on');
+
+    btnPremiumPanel.href = 'panel-miembro.html?id_registro=' + encodeURIComponent(session.id_registro);
+    premiumSessionInfo.textContent = 'Sesión activa como: ' + (session.usuario || 'miembro premium') + '.';
+    return;
+  }
+
+  btnPremiumRegister.classList.remove('hidden');
+  btnPremiumLogin.classList.remove('hidden');
+  btnPremiumPanel.classList.add('hidden');
+  btnPremiumLogout.classList.add('hidden');
+
+  premiumActions.classList.remove('session-on');
+
+  premiumSessionInfo.textContent = 'Elegí una opción para continuar.';
+}
 
       btnPremiumLogin.classList.remove('hidden');
       btnPremiumPanel.classList.add('hidden');
@@ -2129,6 +2285,23 @@
       cargarFarmaciaHoy();
       registrarInstalacionApp();
     });
+  <div class="registro-modal" id="registroModal">
+  <div class="registro-box">
+    <button class="registro-close" id="registroCloseBtn" type="button">✕</button>
+    <div class="registro-icon">📝</div>
+    <h3 class="registro-title">Registrate en Conecta2</h3>
+    <p class="registro-text">
+      Elegí cómo querés sumarte. Acá están las cuatro opciones de registro.
+    </p>
+
+    <div class="registro-actions">
+      <a class="registro-btn registro-btn-comercio" href="registro-comercio.html">Registrá tu comercio</a>
+      <a class="registro-btn registro-btn-servicio" href="registro-servicio.html">Ofrecé tus servicios</a>
+      <a class="registro-btn registro-btn-profesional" href="registro-profesional.html">Registrate como profesional</a>
+      <a class="registro-btn registro-btn-salud" href="registro-salud.html">Registrate como profesional de salud</a>
+    </div>
+  </div>
+</div>
   </script>
 </body>
 </html>
