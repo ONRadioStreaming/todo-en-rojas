@@ -4,37 +4,44 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Panel de miembro | Conecta2</title>
+
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&display=swap');
+
     :root{
       --bg1:#0f172a;
       --bg2:#1e293b;
       --card:rgba(255,255,255,.97);
       --text:#0f172a;
       --muted:#64748b;
-      --line:#e2e8f0;
+      --line:#dbe7ef;
       --accent:#2563eb;
       --accent2:#06b6d4;
       --ok:#16a34a;
-      --ok-soft:rgba(22,163,74,.10);
       --warn:#ca8a04;
-      --warn-soft:rgba(202,138,4,.10);
       --danger:#dc2626;
-      --danger-soft:rgba(220,38,38,.10);
       --shadow:0 20px 45px rgba(0,0,0,.28);
       --radius:22px;
     }
 
-    *{box-sizing:border-box}
+    *{
+      box-sizing:border-box;
+      -webkit-tap-highlight-color:transparent;
+    }
 
-    body{
+    html, body{
       margin:0;
+      padding:0;
       min-height:100vh;
-      font-family:Arial, Helvetica, sans-serif;
+      font-family:'Manrope', Arial, sans-serif;
       color:var(--text);
       background:
         radial-gradient(circle at top left, rgba(37,99,235,.25), transparent 30%),
         radial-gradient(circle at top right, rgba(6,182,212,.18), transparent 28%),
         linear-gradient(145deg, var(--bg1), var(--bg2));
+    }
+
+    body{
       padding:24px;
     }
 
@@ -45,7 +52,7 @@
 
     .card{
       background:var(--card);
-      border-radius:var(--radius);
+      border-radius:28px;
       box-shadow:var(--shadow);
       border:1px solid rgba(255,255,255,.35);
       padding:26px;
@@ -55,21 +62,23 @@
       display:flex;
       flex-direction:column;
       gap:18px;
-      margin-bottom:22px;
+      margin-bottom:20px;
     }
 
     h1{
       margin:0 0 8px;
       font-size:clamp(1.9rem,4vw,2.6rem);
       line-height:1.08;
+      letter-spacing:-0.02em;
     }
 
     .sub{
       margin:0;
       color:var(--muted);
-      line-height:1.5;
-      max-width:780px;
-      font-size:1.04rem;
+      line-height:1.55;
+      max-width:850px;
+      font-size:1rem;
+      font-weight:700;
     }
 
     .top-actions{
@@ -84,7 +93,7 @@
       border:none;
       text-decoration:none;
       cursor:pointer;
-      border-radius:16px;
+      border-radius:18px;
       padding:14px 18px;
       font-size:1rem;
       font-weight:800;
@@ -93,7 +102,8 @@
       align-items:center;
       justify-content:center;
       gap:8px;
-      min-height:54px;
+      min-height:56px;
+      font-family:inherit;
     }
 
     .btn:hover{ transform:translateY(-1px); }
@@ -133,7 +143,7 @@
     .hero{
       background:#f8fafc;
       border:1px solid var(--line);
-      border-radius:22px;
+      border-radius:24px;
       padding:18px;
       margin-bottom:18px;
     }
@@ -175,15 +185,97 @@
 
     .hero-title{
       margin:0 0 6px;
-      font-size:1.95rem;
-      line-height:1.1;
+      font-size:1.9rem;
+      line-height:1.08;
+      letter-spacing:-0.02em;
     }
 
     .hero-desc{
       margin:0;
       color:var(--muted);
       line-height:1.5;
-      font-size:1.02rem;
+      font-size:1rem;
+      font-weight:700;
+    }
+
+    .hero-photo-box{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:22px;
+      padding:16px;
+      margin:18px 0 18px;
+    }
+
+    .hero-photo-box h2{
+      margin:0 0 8px;
+      font-size:1.08rem;
+    }
+
+    .hero-photo-box p{
+      margin:0 0 14px;
+      color:var(--muted);
+      font-size:.92rem;
+      line-height:1.5;
+      font-weight:700;
+    }
+
+    .photo-layout{
+      display:grid;
+      grid-template-columns:220px 1fr;
+      gap:18px;
+      align-items:start;
+    }
+
+    .preview-frame{
+      width:100%;
+      max-width:220px;
+      aspect-ratio:1/1;
+      border-radius:24px;
+      background:#e3ebf2;
+      border:2px dashed #bfd0de;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+      background-position:center;
+      background-size:cover;
+      background-repeat:no-repeat;
+    }
+
+    .preview-frame.has-image{
+      border-style:solid;
+    }
+
+    .preview-placeholder{
+      color:#698095;
+      font-size:0.9rem;
+      text-align:center;
+      padding:10px;
+      line-height:1.35;
+      font-weight:800;
+    }
+
+    .photo-actions{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      margin-top:4px;
+      margin-bottom:10px;
+    }
+
+    .photo-btn{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:#eef4f8;
+      color:#24497a;
+      border:1px solid #d4e0ea;
+      border-radius:16px;
+      padding:14px 12px;
+      font-size:0.95rem;
+      font-weight:800;
+      cursor:pointer;
+      text-align:center;
     }
 
     .membership-card{
@@ -219,6 +311,7 @@
       font-size:.95rem;
       line-height:1.45;
       margin-top:12px;
+      font-weight:700;
     }
 
     .mini-grid{
@@ -243,6 +336,7 @@
       font-size:.73rem;
       color:#64748b;
       margin-bottom:8px;
+      font-weight:800;
     }
 
     .mini-item strong{
@@ -250,6 +344,7 @@
       font-size:1.02rem;
       line-height:1.35;
       word-break:break-word;
+      font-weight:800;
     }
 
     .status-value{
@@ -298,20 +393,22 @@
     .box{
       background:#f8fafc;
       border:1px solid var(--line);
-      border-radius:20px;
+      border-radius:22px;
       padding:18px;
     }
 
     .box h2{
       margin:0 0 8px;
       font-size:1.1rem;
+      letter-spacing:-0.01em;
     }
 
     .box-sub{
       margin:0 0 16px;
       color:var(--muted);
-      line-height:1.45;
-      font-size:.94rem;
+      line-height:1.5;
+      font-size:.93rem;
+      font-weight:700;
     }
 
     .field{
@@ -322,29 +419,38 @@
 
     label{
       display:block;
-      margin-bottom:6px;
-      font-size:.88rem;
-      color:#475569;
+      margin-bottom:7px;
+      color:#16304d;
+      font-size:0.92rem;
       font-weight:800;
+      line-height:1.25;
     }
 
     input, textarea, select{
       width:100%;
-      border:1px solid #cbd5e1;
-      border-radius:14px;
-      padding:12px 14px;
-      font-size:1rem;
+      border:1px solid #d4e0ea;
       outline:none;
       background:#fff;
-      color:#0f172a;
+      color:#21364f;
+      border-radius:16px;
+      padding:14px 14px;
+      font-size:0.96rem;
+      font-family:inherit;
+      font-weight:700;
     }
 
     textarea{
       min-height:115px;
       resize:vertical;
+      line-height:1.5;
     }
 
-    input[readonly], textarea[readonly]{
+    input:focus, textarea:focus, select:focus{
+      border-color:#1bcfd0;
+      background:#ffffff;
+    }
+
+    input[readonly]{
       background:#f1f5f9;
       color:#334155;
     }
@@ -355,33 +461,133 @@
       gap:12px;
     }
 
-    .row-3{
-      display:grid;
-      grid-template-columns:repeat(3, 1fr);
-      gap:12px;
+    .hidden{
+      display:none !important;
     }
 
-    .toggle-wrap{
+    .toggle-box{
       display:flex;
       align-items:center;
       gap:10px;
-      padding:12px 14px;
-      border:1px solid var(--line);
+      background:#eef7fc;
+      border:1px solid #d7eaf6;
       border-radius:14px;
-      background:#fff;
+      padding:12px 14px;
+      color:#244b68;
+      font-size:0.9rem;
+      font-weight:700;
+      margin-bottom:12px;
     }
 
-    .toggle-wrap input,
-    .choice input,
-    .payment-item input{
-      width:20px;
-      height:20px;
+    .toggle-box input[type="checkbox"]{
+      width:auto;
       margin:0;
-      flex:0 0 20px;
+      transform:scale(1.15);
+      flex:0 0 auto;
     }
 
-    .hidden{
-      display:none !important;
+    .day-card{
+      background:#fff;
+      border:1px solid #dbe7ef;
+      border-radius:18px;
+      padding:14px;
+      margin-bottom:12px;
+    }
+
+    .day-card:last-child{
+      margin-bottom:0;
+    }
+
+    .day-header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      margin-bottom:10px;
+    }
+
+    .day-title{
+      font-size:0.98rem;
+      font-weight:800;
+      color:#173a68;
+    }
+
+    .day-switches{
+      display:grid;
+      gap:10px;
+      margin-bottom:12px;
+    }
+
+    .day-switch{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      background:#eef7fc;
+      border:1px solid #d7eaf6;
+      border-radius:14px;
+      padding:12px 14px;
+      color:#244b68;
+      font-size:0.9rem;
+      font-weight:700;
+      margin:0;
+    }
+
+    .day-switch input[type="checkbox"]{
+      width:auto;
+      margin:0;
+      transform:scale(1.15);
+      flex:0 0 auto;
+    }
+
+    .grid-2{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+    }
+
+    .day-summary{
+      margin-top:6px;
+      color:#35516d;
+      font-size:0.86rem;
+      line-height:1.45;
+      font-weight:700;
+      background:#eef7fc;
+      border:1px solid #d7eaf6;
+      border-radius:14px;
+      padding:10px 12px;
+    }
+
+    .day-summary.cross{
+      background:#fff5df;
+      border-color:#f4d9a4;
+      color:#8a5a00;
+    }
+
+    .checkbox-group{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+      margin-top:8px;
+    }
+
+    .checkbox-item{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      background:#fff;
+      border:1px solid #d4e0ea;
+      border-radius:14px;
+      padding:12px;
+      color:#21364f;
+      font-size:0.92rem;
+      font-weight:700;
+    }
+
+    .checkbox-item input[type="checkbox"]{
+      width:auto;
+      margin:0;
+      transform:scale(1.15);
+      flex:0 0 auto;
     }
 
     .preview-grid{
@@ -407,7 +613,7 @@
       align-items:center;
       justify-content:center;
       color:#64748b;
-      font-weight:700;
+      font-weight:800;
       text-align:center;
       padding:12px;
       overflow:hidden;
@@ -429,8 +635,9 @@
       margin-top:18px;
       padding:14px 16px;
       border-radius:14px;
-      font-weight:700;
+      font-weight:800;
       display:none;
+      line-height:1.45;
     }
 
     .msg.ok{
@@ -449,138 +656,28 @@
 
     .muted{
       color:var(--muted);
-      font-size:.92rem;
-      line-height:1.45;
-    }
-
-    .info-card{
-      background:#fff;
-      border:1px solid var(--line);
-      border-radius:18px;
-      padding:16px;
-    }
-
-    .summary-box{
-      background:#fff;
-      border:1px solid var(--line);
-      border-radius:18px;
-      padding:16px;
-      min-height:96px;
-      white-space:pre-line;
-      line-height:1.5;
-      color:#334155;
-    }
-
-    .day-card{
-      background:#fff;
-      border:1px solid var(--line);
-      border-radius:18px;
-      padding:16px;
-      margin-bottom:14px;
-    }
-
-    .day-card:last-child{
-      margin-bottom:0;
-    }
-
-    .day-header{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-      margin-bottom:12px;
-    }
-
-    .day-title{
-      margin:0;
-      font-size:1.02rem;
-      font-weight:900;
-      text-transform:capitalize;
-    }
-
-    .day-state{
       font-size:.9rem;
-      font-weight:800;
-      color:#64748b;
-    }
-
-    .choice-group{
-      display:grid;
-      grid-template-columns:repeat(3, minmax(0,1fr));
-      gap:10px;
-      margin-bottom:12px;
-    }
-
-    .choice{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      border:1px solid var(--line);
-      border-radius:14px;
-      background:#f8fafc;
-      padding:12px;
+      line-height:1.45;
       font-weight:700;
-    }
-
-    .time-grid-2,
-    .time-grid-4{
-      display:grid;
-      gap:12px;
-    }
-
-    .time-grid-2{
-      grid-template-columns:1fr 1fr;
-    }
-
-    .time-grid-4{
-      grid-template-columns:1fr 1fr;
-    }
-
-    .payment-grid{
-      display:grid;
-      grid-template-columns:repeat(3, minmax(0,1fr));
-      gap:12px;
-    }
-
-    .payment-item{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      padding:13px 14px;
-      background:#fff;
-      border:1px solid var(--line);
-      border-radius:14px;
-      font-weight:700;
-    }
-
-    .factura-box{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      padding:13px 14px;
-      background:#fff;
-      border:1px solid var(--line);
-      border-radius:14px;
-      font-weight:800;
-      width:max-content;
-      min-width:220px;
     }
 
     @media (max-width: 980px){
       .col-4,.col-6,.col-8,.col-12{ grid-column:span 12; }
-      .payment-grid{ grid-template-columns:repeat(2, minmax(0,1fr)); }
     }
 
     @media (max-width: 760px){
       .row,
-      .row-3,
+      .grid-2,
       .mini-grid,
-      .preview-grid,
-      .choice-group,
-      .time-grid-2,
-      .time-grid-4,
-      .payment-grid{
+      .photo-layout,
+      .photo-actions,
+      .checkbox-group,
+      .preview-grid{
         grid-template-columns:1fr;
+      }
+
+      .preview-frame{
+        max-width:100%;
       }
     }
 
@@ -593,22 +690,6 @@
       .btn{
         width:100%;
       }
-      .top-actions .btn{
-        width:100%;
-        min-height:56px;
-      }
-      .top-actions{
-        grid-template-columns:1fr 1fr;
-      }
-      .hero-title{
-        font-size:1.6rem;
-      }
-      .membership-days{
-        font-size:1.8rem;
-      }
-    }
-
-    @media (max-width: 420px){
       .top-actions{
         grid-template-columns:1fr 1fr;
         gap:10px;
@@ -616,6 +697,15 @@
       .top-actions .btn{
         padding:12px 10px;
         font-size:.94rem;
+      }
+    }
+
+    @media (max-width: 420px){
+      .top-actions{
+        grid-template-columns:1fr 1fr;
+      }
+      .membership-days{
+        font-size:1.7rem;
       }
     }
   </style>
@@ -644,6 +734,31 @@
 
         <h2 class="hero-title" id="heroNombre">Cargando panel...</h2>
         <p class="hero-desc" id="heroDescripcion">Desde acá podés administrar tu perfil.</p>
+
+        <div class="hero-photo-box">
+          <h2>Foto principal</h2>
+          <p>Esta imagen aparece como foto principal del perfil. Podés cambiarla cuando quieras.</p>
+
+          <div class="photo-layout">
+            <div class="preview-frame" id="previewFotoPrincipalFrame">
+              <div class="preview-placeholder" id="previewFotoPrincipalText">Vista previa<br>de la imagen</div>
+            </div>
+
+            <div>
+              <div class="photo-actions">
+                <label class="photo-btn" for="fotoPrincipalCamara">Tomar una foto</label>
+                <label class="photo-btn" for="fotoPrincipalGaleria">Elegir de galería</label>
+              </div>
+
+              <input type="file" id="fotoPrincipalCamara" accept="image/*" capture="environment" style="display:none;">
+              <input type="file" id="fotoPrincipalGaleria" accept="image/*" style="display:none;">
+
+              <p class="muted">
+                Podés usar una foto del frente del negocio, una imagen del local o el logo.
+              </p>
+            </div>
+          </div>
+        </div>
 
         <div class="membership-card">
           <h3 class="membership-title">Membresía activa</h3>
@@ -682,19 +797,21 @@
       </div>
 
       <div class="grid">
-        <div class="col-8">
+        <div class="col-12">
           <div class="box">
             <h2>Datos principales del negocio</h2>
             <p class="box-sub">El nombre del negocio y el perfil no se editan desde acá. El resto sí lo podés actualizar cuando quieras.</p>
 
-            <div class="field">
-              <label for="nombrePerfil">Nombre del negocio / perfil</label>
-              <input type="text" id="nombrePerfil" readonly />
-            </div>
+            <div class="row">
+              <div class="field">
+                <label for="nombrePerfil">Nombre del negocio / perfil</label>
+                <input type="text" id="nombrePerfil" readonly />
+              </div>
 
-            <div class="field">
-              <label for="perfilRubro">Perfil / rubro</label>
-              <input type="text" id="perfilRubro" readonly />
+              <div class="field">
+                <label for="perfilRubro">Perfil / rubro</label>
+                <input type="text" id="perfilRubro" readonly />
+              </div>
             </div>
 
             <div class="field">
@@ -705,410 +822,62 @@
             <div class="row">
               <div class="field">
                 <label for="whatsapp">WhatsApp</label>
-                <input type="text" id="whatsapp" placeholder="Ej: 2474..." />
+                <input type="tel" id="whatsapp" placeholder="WhatsApp general del comercio" />
               </div>
+
               <div class="field">
-                <label for="telefono">Teléfono alternativo</label>
-                <input type="text" id="telefono" placeholder="Opcional" />
+                <label for="telefono">Teléfono</label>
+                <input type="tel" id="telefono" placeholder="Teléfono para llamadas" />
               </div>
             </div>
 
             <div class="row">
               <div class="field">
                 <label for="email">Correo electrónico</label>
-                <input type="email" id="email" placeholder="correo@ejemplo.com" />
+                <input type="email" id="email" placeholder="Ej: nombre@gmail.com" />
               </div>
+
               <div class="field">
-                <label for="direccion">Dirección / Zona</label>
-                <input type="text" id="direccion" placeholder="Ej: Av. 25 de Mayo 1090 o Barrio..." />
+                <label for="direccion">Dirección</label>
+                <input type="text" id="direccion" placeholder="Ej: Av. San Martín 450, Rojas" />
               </div>
             </div>
+          </div>
+        </div>
+
+        <div class="col-8">
+          <div class="box">
+            <h2>Días y horarios</h2>
+            <p class="box-sub">Acá podés manejar el mismo esquema del registro: abierto siempre, cerrado por día, horario corrido o doble franja.</p>
+
+            <div class="toggle-box">
+              <input type="checkbox" id="siempreAbierto">
+              <label for="siempreAbierto" style="margin:0;">Abierto siempre / 24 horas</label>
+            </div>
+
+            <div id="dayScheduleContainer"></div>
           </div>
         </div>
 
         <div class="col-4">
           <div class="box">
-            <h2>Resumen visible</h2>
-            <p class="box-sub">Esto ayuda a ver rápido cómo quedará la info principal del negocio.</p>
+            <h2>Vacaciones</h2>
+            <p class="box-sub">Si activás esta opción, tu perfil podrá mostrarse como cerrado por vacaciones durante el período indicado.</p>
 
-            <div class="field">
-              <label>Resumen de horarios</label>
-              <div class="summary-box" id="resumenHorarios">Sin horarios cargados.</div>
+            <div class="toggle-box">
+              <input type="checkbox" id="vacacionesActivo">
+              <label for="vacacionesActivo" style="margin:0;">Activar “cerrado por vacaciones”</label>
             </div>
 
-            <div class="field">
-              <label>Medios de pago seleccionados</label>
-              <div class="summary-box" id="resumenPagos">Sin medios de pago cargados.</div>
-            </div>
-
-            <div class="field">
-              <label>Factura</label>
-              <div class="summary-box" id="resumenFactura">No informado.</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-12">
-          <div class="box">
-            <h2>Horarios de atención</h2>
-            <p class="box-sub">Podés marcar abierto siempre, cerrado por día, horario corrido o horario cortado.</p>
-
-            <div class="field">
-              <div class="toggle-wrap">
-                <input type="checkbox" id="abiertoSiempre" />
-                <span>Abierto siempre / 24 horas</span>
-              </div>
-            </div>
-
-            <div id="horariosPorDiaWrap">
-              <div class="day-card" data-day="lunes">
-                <div class="day-header">
-                  <h3 class="day-title">Lunes</h3>
-                  <div class="day-state" id="state-lunes">Configurá el horario del día</div>
-                </div>
-
-                <div class="field">
-                  <div class="toggle-wrap">
-                    <input type="checkbox" id="lunes_cerrado" />
-                    <span>Cerrado</span>
-                  </div>
-                </div>
-
-                <div class="choice-group" id="modes-lunes">
-                  <label class="choice"><input type="radio" name="lunes_modo" value="corrido" checked /> Horario corrido</label>
-                  <label class="choice"><input type="radio" name="lunes_modo" value="cortado" /> Horario cortado</label>
-                  <label class="choice"><input type="radio" name="lunes_modo" value="24hs" /> 24 horas</label>
-                </div>
-
-                <div class="time-grid-2" id="corrido-lunes">
-                  <div class="field">
-                    <label for="lunes_desde">Desde</label>
-                    <input type="time" id="lunes_desde" />
-                  </div>
-                  <div class="field">
-                    <label for="lunes_hasta">Hasta</label>
-                    <input type="time" id="lunes_hasta" />
-                  </div>
-                </div>
-
-                <div class="time-grid-4 hidden" id="cortado-lunes">
-                  <div class="field">
-                    <label for="lunes_manana_desde">Mañana desde</label>
-                    <input type="time" id="lunes_manana_desde" />
-                  </div>
-                  <div class="field">
-                    <label for="lunes_manana_hasta">Mañana hasta</label>
-                    <input type="time" id="lunes_manana_hasta" />
-                  </div>
-                  <div class="field">
-                    <label for="lunes_tarde_desde">Tarde desde</label>
-                    <input type="time" id="lunes_tarde_desde" />
-                  </div>
-                  <div class="field">
-                    <label for="lunes_tarde_hasta">Tarde hasta</label>
-                    <input type="time" id="lunes_tarde_hasta" />
-                  </div>
-                </div>
+            <div id="vacacionesFechas" class="hidden">
+              <div class="field">
+                <label for="vacacionesDesde">Desde</label>
+                <input type="date" id="vacacionesDesde" />
               </div>
 
-              <div class="day-card" data-day="martes">
-                <div class="day-header">
-                  <h3 class="day-title">Martes</h3>
-                  <div class="day-state" id="state-martes">Configurá el horario del día</div>
-                </div>
-
-                <div class="field">
-                  <div class="toggle-wrap">
-                    <input type="checkbox" id="martes_cerrado" />
-                    <span>Cerrado</span>
-                  </div>
-                </div>
-
-                <div class="choice-group" id="modes-martes">
-                  <label class="choice"><input type="radio" name="martes_modo" value="corrido" checked /> Horario corrido</label>
-                  <label class="choice"><input type="radio" name="martes_modo" value="cortado" /> Horario cortado</label>
-                  <label class="choice"><input type="radio" name="martes_modo" value="24hs" /> 24 horas</label>
-                </div>
-
-                <div class="time-grid-2" id="corrido-martes">
-                  <div class="field">
-                    <label for="martes_desde">Desde</label>
-                    <input type="time" id="martes_desde" />
-                  </div>
-                  <div class="field">
-                    <label for="martes_hasta">Hasta</label>
-                    <input type="time" id="martes_hasta" />
-                  </div>
-                </div>
-
-                <div class="time-grid-4 hidden" id="cortado-martes">
-                  <div class="field">
-                    <label for="martes_manana_desde">Mañana desde</label>
-                    <input type="time" id="martes_manana_desde" />
-                  </div>
-                  <div class="field">
-                    <label for="martes_manana_hasta">Mañana hasta</label>
-                    <input type="time" id="martes_manana_hasta" />
-                  </div>
-                  <div class="field">
-                    <label for="martes_tarde_desde">Tarde desde</label>
-                    <input type="time" id="martes_tarde_desde" />
-                  </div>
-                  <div class="field">
-                    <label for="martes_tarde_hasta">Tarde hasta</label>
-                    <input type="time" id="martes_tarde_hasta" />
-                  </div>
-                </div>
-              </div>
-
-              <div class="day-card" data-day="miercoles">
-                <div class="day-header">
-                  <h3 class="day-title">Miércoles</h3>
-                  <div class="day-state" id="state-miercoles">Configurá el horario del día</div>
-                </div>
-
-                <div class="field">
-                  <div class="toggle-wrap">
-                    <input type="checkbox" id="miercoles_cerrado" />
-                    <span>Cerrado</span>
-                  </div>
-                </div>
-
-                <div class="choice-group" id="modes-miercoles">
-                  <label class="choice"><input type="radio" name="miercoles_modo" value="corrido" checked /> Horario corrido</label>
-                  <label class="choice"><input type="radio" name="miercoles_modo" value="cortado" /> Horario cortado</label>
-                  <label class="choice"><input type="radio" name="miercoles_modo" value="24hs" /> 24 horas</label>
-                </div>
-
-                <div class="time-grid-2" id="corrido-miercoles">
-                  <div class="field">
-                    <label for="miercoles_desde">Desde</label>
-                    <input type="time" id="miercoles_desde" />
-                  </div>
-                  <div class="field">
-                    <label for="miercoles_hasta">Hasta</label>
-                    <input type="time" id="miercoles_hasta" />
-                  </div>
-                </div>
-
-                <div class="time-grid-4 hidden" id="cortado-miercoles">
-                  <div class="field">
-                    <label for="miercoles_manana_desde">Mañana desde</label>
-                    <input type="time" id="miercoles_manana_desde" />
-                  </div>
-                  <div class="field">
-                    <label for="miercoles_manana_hasta">Mañana hasta</label>
-                    <input type="time" id="miercoles_manana_hasta" />
-                  </div>
-                  <div class="field">
-                    <label for="miercoles_tarde_desde">Tarde desde</label>
-                    <input type="time" id="miercoles_tarde_desde" />
-                  </div>
-                  <div class="field">
-                    <label for="miercoles_tarde_hasta">Tarde hasta</label>
-                    <input type="time" id="miercoles_tarde_hasta" />
-                  </div>
-                </div>
-              </div>
-
-              <div class="day-card" data-day="jueves">
-                <div class="day-header">
-                  <h3 class="day-title">Jueves</h3>
-                  <div class="day-state" id="state-jueves">Configurá el horario del día</div>
-                </div>
-
-                <div class="field">
-                  <div class="toggle-wrap">
-                    <input type="checkbox" id="jueves_cerrado" />
-                    <span>Cerrado</span>
-                  </div>
-                </div>
-
-                <div class="choice-group" id="modes-jueves">
-                  <label class="choice"><input type="radio" name="jueves_modo" value="corrido" checked /> Horario corrido</label>
-                  <label class="choice"><input type="radio" name="jueves_modo" value="cortado" /> Horario cortado</label>
-                  <label class="choice"><input type="radio" name="jueves_modo" value="24hs" /> 24 horas</label>
-                </div>
-
-                <div class="time-grid-2" id="corrido-jueves">
-                  <div class="field">
-                    <label for="jueves_desde">Desde</label>
-                    <input type="time" id="jueves_desde" />
-                  </div>
-                  <div class="field">
-                    <label for="jueves_hasta">Hasta</label>
-                    <input type="time" id="jueves_hasta" />
-                  </div>
-                </div>
-
-                <div class="time-grid-4 hidden" id="cortado-jueves">
-                  <div class="field">
-                    <label for="jueves_manana_desde">Mañana desde</label>
-                    <input type="time" id="jueves_manana_desde" />
-                  </div>
-                  <div class="field">
-                    <label for="jueves_manana_hasta">Mañana hasta</label>
-                    <input type="time" id="jueves_manana_hasta" />
-                  </div>
-                  <div class="field">
-                    <label for="jueves_tarde_desde">Tarde desde</label>
-                    <input type="time" id="jueves_tarde_desde" />
-                  </div>
-                  <div class="field">
-                    <label for="jueves_tarde_hasta">Tarde hasta</label>
-                    <input type="time" id="jueves_tarde_hasta" />
-                  </div>
-                </div>
-              </div>
-
-              <div class="day-card" data-day="viernes">
-                <div class="day-header">
-                  <h3 class="day-title">Viernes</h3>
-                  <div class="day-state" id="state-viernes">Configurá el horario del día</div>
-                </div>
-
-                <div class="field">
-                  <div class="toggle-wrap">
-                    <input type="checkbox" id="viernes_cerrado" />
-                    <span>Cerrado</span>
-                  </div>
-                </div>
-
-                <div class="choice-group" id="modes-viernes">
-                  <label class="choice"><input type="radio" name="viernes_modo" value="corrido" checked /> Horario corrido</label>
-                  <label class="choice"><input type="radio" name="viernes_modo" value="cortado" /> Horario cortado</label>
-                  <label class="choice"><input type="radio" name="viernes_modo" value="24hs" /> 24 horas</label>
-                </div>
-
-                <div class="time-grid-2" id="corrido-viernes">
-                  <div class="field">
-                    <label for="viernes_desde">Desde</label>
-                    <input type="time" id="viernes_desde" />
-                  </div>
-                  <div class="field">
-                    <label for="viernes_hasta">Hasta</label>
-                    <input type="time" id="viernes_hasta" />
-                  </div>
-                </div>
-
-                <div class="time-grid-4 hidden" id="cortado-viernes">
-                  <div class="field">
-                    <label for="viernes_manana_desde">Mañana desde</label>
-                    <input type="time" id="viernes_manana_desde" />
-                  </div>
-                  <div class="field">
-                    <label for="viernes_manana_hasta">Mañana hasta</label>
-                    <input type="time" id="viernes_manana_hasta" />
-                  </div>
-                  <div class="field">
-                    <label for="viernes_tarde_desde">Tarde desde</label>
-                    <input type="time" id="viernes_tarde_desde" />
-                  </div>
-                  <div class="field">
-                    <label for="viernes_tarde_hasta">Tarde hasta</label>
-                    <input type="time" id="viernes_tarde_hasta" />
-                  </div>
-                </div>
-              </div>
-
-              <div class="day-card" data-day="sabado">
-                <div class="day-header">
-                  <h3 class="day-title">Sábado</h3>
-                  <div class="day-state" id="state-sabado">Configurá el horario del día</div>
-                </div>
-
-                <div class="field">
-                  <div class="toggle-wrap">
-                    <input type="checkbox" id="sabado_cerrado" />
-                    <span>Cerrado</span>
-                  </div>
-                </div>
-
-                <div class="choice-group" id="modes-sabado">
-                  <label class="choice"><input type="radio" name="sabado_modo" value="corrido" checked /> Horario corrido</label>
-                  <label class="choice"><input type="radio" name="sabado_modo" value="cortado" /> Horario cortado</label>
-                  <label class="choice"><input type="radio" name="sabado_modo" value="24hs" /> 24 horas</label>
-                </div>
-
-                <div class="time-grid-2" id="corrido-sabado">
-                  <div class="field">
-                    <label for="sabado_desde">Desde</label>
-                    <input type="time" id="sabado_desde" />
-                  </div>
-                  <div class="field">
-                    <label for="sabado_hasta">Hasta</label>
-                    <input type="time" id="sabado_hasta" />
-                  </div>
-                </div>
-
-                <div class="time-grid-4 hidden" id="cortado-sabado">
-                  <div class="field">
-                    <label for="sabado_manana_desde">Mañana desde</label>
-                    <input type="time" id="sabado_manana_desde" />
-                  </div>
-                  <div class="field">
-                    <label for="sabado_manana_hasta">Mañana hasta</label>
-                    <input type="time" id="sabado_manana_hasta" />
-                  </div>
-                  <div class="field">
-                    <label for="sabado_tarde_desde">Tarde desde</label>
-                    <input type="time" id="sabado_tarde_desde" />
-                  </div>
-                  <div class="field">
-                    <label for="sabado_tarde_hasta">Tarde hasta</label>
-                    <input type="time" id="sabado_tarde_hasta" />
-                  </div>
-                </div>
-              </div>
-
-              <div class="day-card" data-day="domingo">
-                <div class="day-header">
-                  <h3 class="day-title">Domingo</h3>
-                  <div class="day-state" id="state-domingo">Configurá el horario del día</div>
-                </div>
-
-                <div class="field">
-                  <div class="toggle-wrap">
-                    <input type="checkbox" id="domingo_cerrado" />
-                    <span>Cerrado</span>
-                  </div>
-                </div>
-
-                <div class="choice-group" id="modes-domingo">
-                  <label class="choice"><input type="radio" name="domingo_modo" value="corrido" checked /> Horario corrido</label>
-                  <label class="choice"><input type="radio" name="domingo_modo" value="cortado" /> Horario cortado</label>
-                  <label class="choice"><input type="radio" name="domingo_modo" value="24hs" /> 24 horas</label>
-                </div>
-
-                <div class="time-grid-2" id="corrido-domingo">
-                  <div class="field">
-                    <label for="domingo_desde">Desde</label>
-                    <input type="time" id="domingo_desde" />
-                  </div>
-                  <div class="field">
-                    <label for="domingo_hasta">Hasta</label>
-                    <input type="time" id="domingo_hasta" />
-                  </div>
-                </div>
-
-                <div class="time-grid-4 hidden" id="cortado-domingo">
-                  <div class="field">
-                    <label for="domingo_manana_desde">Mañana desde</label>
-                    <input type="time" id="domingo_manana_desde" />
-                  </div>
-                  <div class="field">
-                    <label for="domingo_manana_hasta">Mañana hasta</label>
-                    <input type="time" id="domingo_manana_hasta" />
-                  </div>
-                  <div class="field">
-                    <label for="domingo_tarde_desde">Tarde desde</label>
-                    <input type="time" id="domingo_tarde_desde" />
-                  </div>
-                  <div class="field">
-                    <label for="domingo_tarde_hasta">Tarde hasta</label>
-                    <input type="time" id="domingo_tarde_hasta" />
-                  </div>
-                </div>
+              <div class="field">
+                <label for="vacacionesHasta">Hasta</label>
+                <input type="date" id="vacacionesHasta" />
               </div>
             </div>
           </div>
@@ -1117,92 +886,41 @@
         <div class="col-6">
           <div class="box">
             <h2>Medios de pago</h2>
-            <p class="box-sub">Marcá todos los medios de pago que aceptás. Después se reflejan en tu tarjeta del perfil.</p>
+            <p class="box-sub">Marcá cómo pueden abonarte los clientes cuando compran o contratan.</p>
 
-            <div class="payment-grid">
-              <label class="payment-item"><input type="checkbox" id="pago_efectivo" /> Efectivo</label>
-              <label class="payment-item"><input type="checkbox" id="pago_transferencia" /> Transferencia</label>
-              <label class="payment-item"><input type="checkbox" id="pago_mercadopago" /> Mercado Pago</label>
-              <label class="payment-item"><input type="checkbox" id="pago_debito" /> Débito</label>
-              <label class="payment-item"><input type="checkbox" id="pago_credito" /> Crédito</label>
-              <label class="payment-item"><input type="checkbox" id="pago_otros" /> Otros</label>
-            </div>
-
-            <div class="field" style="margin-top:14px;">
-              <label for="mediosPagoOtroTexto">Si marcaste “Otros”, especificá cuál</label>
-              <input type="text" id="mediosPagoOtroTexto" placeholder="Ej: Cuenta DNI, billetera virtual, cheque..." />
+            <div class="checkbox-group">
+              <label class="checkbox-item"><input type="checkbox" id="pago_efectivo"> Efectivo</label>
+              <label class="checkbox-item"><input type="checkbox" id="pago_transferencia"> Transferencia</label>
+              <label class="checkbox-item"><input type="checkbox" id="pago_debito"> Débito</label>
+              <label class="checkbox-item"><input type="checkbox" id="pago_credito"> Tarjeta de crédito</label>
             </div>
           </div>
         </div>
 
         <div class="col-6">
           <div class="box">
-            <h2>Factura</h2>
-            <p class="box-sub">Si hoy no facturás y mañana sí, lo podés cambiar sin drama. La app no se ofende.</p>
-
-            <label class="factura-box">
-              <input type="checkbox" id="facturaActiva" />
-              <span>Emitís factura</span>
-            </label>
-          </div>
-        </div>
-
-        <div class="col-6">
-          <div class="box">
-            <h2>Vacaciones</h2>
+            <h2>Facturación</h2>
+            <p class="box-sub">Esto sigue el mismo formato del registro.</p>
 
             <div class="field">
-              <div class="toggle-wrap">
-                <input type="checkbox" id="vacacionesActivo" />
-                <span>Activar “cerrado por vacaciones”</span>
-              </div>
+              <label for="factura">¿Trabajan con factura?</label>
+              <select id="factura">
+                <option value="">Seleccionar</option>
+                <option value="si">Sí</option>
+                <option value="no">No</option>
+              </select>
             </div>
-
-            <div id="vacacionesFechas" class="row hidden">
-              <div class="field">
-                <label for="vacacionesDesde">Desde</label>
-                <input type="date" id="vacacionesDesde" />
-              </div>
-              <div class="field">
-                <label for="vacacionesHasta">Hasta</label>
-                <input type="date" id="vacacionesHasta" />
-              </div>
-            </div>
-
-            <p class="muted">
-              Mientras esté activo, tu perfil podrá mostrarse como <strong>cerrado por vacaciones</strong> durante el período que indiques.
-            </p>
-          </div>
-        </div>
-
-        <div class="col-6">
-          <div class="box">
-            <h2>Foto principal</h2>
-
-            <div class="field">
-              <label for="fotoPrincipal">Cambiar foto principal / frente del local</label>
-              <input type="file" id="fotoPrincipal" accept="image/*" />
-            </div>
-
-            <div class="img-box">
-              <div class="img-preview" id="previewFotoPrincipal">Sin imagen</div>
-            </div>
-
-            <p class="muted" style="margin-top:12px;">
-              Esta foto puede ser el frente del local, el logo del negocio o una imagen representativa actual.
-            </p>
           </div>
         </div>
 
         <div class="col-12">
           <div class="box">
             <h2>Galería del perfil (hasta 4 imágenes)</h2>
+            <p class="box-sub">Podés mostrar trabajos realizados, promociones, productos o imágenes del local.</p>
 
-            <div class="field">
-              <div class="toggle-wrap">
-                <input type="checkbox" id="galeriaActiva" />
-                <span>Activar galería visible en el perfil</span>
-              </div>
+            <div class="toggle-box">
+              <input type="checkbox" id="galeriaActiva">
+              <label for="galeriaActiva" style="margin:0;">Activar galería visible en el perfil</label>
             </div>
 
             <div id="galeriaWrap" class="preview-grid hidden">
@@ -1230,10 +948,6 @@
                 <div class="img-preview" id="previewImg4" style="margin-top:10px;">Sin imagen</div>
               </div>
             </div>
-
-            <p class="muted" style="margin-top:12px;">
-              Podés mostrar trabajos realizados, promociones, productos o imágenes del local.
-            </p>
           </div>
         </div>
       </div>
@@ -1248,12 +962,20 @@
   </div>
 
   <script>
-    (async function () {
+    (function () {
       const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxUCqWb6pYziwFrHWwXgSNwDfs4dt2KmdEZS18qFxcqlrSF4ywXdrDSrRM_Efka8Iij/exec';
       const params = new URLSearchParams(window.location.search);
       const idRegistro = (params.get('id_registro') || '').trim();
 
-      const DIAS = ['lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabado', 'domingo'];
+      const diasSemana = [
+        { key: 'lunes', label: 'Lunes', corridoDesde: '08:00', corridoHasta: '18:00', mananaDesde: '08:00', mananaHasta: '12:00', tardeDesde: '16:00', tardeHasta: '20:00' },
+        { key: 'martes', label: 'Martes', corridoDesde: '08:00', corridoHasta: '18:00', mananaDesde: '08:00', mananaHasta: '12:00', tardeDesde: '16:00', tardeHasta: '20:00' },
+        { key: 'miercoles', label: 'Miércoles', corridoDesde: '08:00', corridoHasta: '18:00', mananaDesde: '08:00', mananaHasta: '12:00', tardeDesde: '16:00', tardeHasta: '20:00' },
+        { key: 'jueves', label: 'Jueves', corridoDesde: '08:00', corridoHasta: '18:00', mananaDesde: '08:00', mananaHasta: '12:00', tardeDesde: '16:00', tardeHasta: '20:00' },
+        { key: 'viernes', label: 'Viernes', corridoDesde: '08:00', corridoHasta: '18:00', mananaDesde: '08:00', mananaHasta: '12:00', tardeDesde: '16:00', tardeHasta: '20:00' },
+        { key: 'sabado', label: 'Sábado', corridoDesde: '09:00', corridoHasta: '13:00', mananaDesde: '09:00', mananaHasta: '13:00', tardeDesde: '17:00', tardeHasta: '20:00' },
+        { key: 'domingo', label: 'Domingo', corridoDesde: '09:00', corridoHasta: '13:00', mananaDesde: '09:00', mananaHasta: '13:00', tardeDesde: '17:00', tardeHasta: '20:00' }
+      ];
 
       const estadoBox = document.getElementById('estadoBox');
       const mensaje = document.getElementById('mensaje');
@@ -1269,9 +991,14 @@
       const galeriaActiva = document.getElementById('galeriaActiva');
       const galeriaWrap = document.getElementById('galeriaWrap');
 
-      const abiertoSiempre = document.getElementById('abiertoSiempre');
+      const dayScheduleContainer = document.getElementById('dayScheduleContainer');
+      const siempreAbierto = document.getElementById('siempreAbierto');
 
-      const fotoPrincipalInput = document.getElementById('fotoPrincipal');
+      const fotoPrincipalCamara = document.getElementById('fotoPrincipalCamara');
+      const fotoPrincipalGaleria = document.getElementById('fotoPrincipalGaleria');
+      const previewFotoPrincipalFrame = document.getElementById('previewFotoPrincipalFrame');
+      const previewFotoPrincipalText = document.getElementById('previewFotoPrincipalText');
+
       const img1Input = document.getElementById('img1');
       const img2Input = document.getElementById('img2');
       const img3Input = document.getElementById('img3');
@@ -1282,6 +1009,28 @@
       let img2Base64 = '';
       let img3Base64 = '';
       let img4Base64 = '';
+
+      function valor(id, fallback) {
+        const el = document.getElementById(id);
+        return el ? (el.value || fallback || '').trim() : '';
+      }
+
+      function setValor(id, value) {
+        const el = document.getElementById(id);
+        if (el) el.value = value || '';
+      }
+
+      function setChecked(id, value) {
+        const el = document.getElementById(id);
+        if (el) el.checked = !!value;
+      }
+
+      function setText(id, value, fallback) {
+        const el = document.getElementById(id);
+        if (el) {
+          el.textContent = (value !== undefined && value !== null && String(value).trim() !== '') ? String(value).trim() : (fallback || '-');
+        }
+      }
 
       function setMsg(texto, tipo) {
         mensaje.className = 'msg ' + tipo;
@@ -1298,28 +1047,6 @@
         estadoBox.textContent = texto;
       }
 
-      function valor(id, fallback) {
-        const el = document.getElementById(id);
-        return el ? (el.value || fallback || '').trim() : '';
-      }
-
-      function setValor(id, value) {
-        const el = document.getElementById(id);
-        if (el) el.value = value || '';
-      }
-
-      function setText(id, value, fallback) {
-        const el = document.getElementById(id);
-        if (el) {
-          el.textContent = (value !== undefined && value !== null && String(value).trim() !== '') ? String(value).trim() : (fallback || '-');
-        }
-      }
-
-      function setChecked(id, value) {
-        const el = document.getElementById(id);
-        if (el) el.checked = !!value;
-      }
-
       function mostrarFechasVacaciones() {
         vacacionesFechas.classList.toggle('hidden', !vacacionesActivo.checked);
       }
@@ -1334,18 +1061,39 @@
       function nombrePerfilDesdeItem(item) {
         if (!item) return '';
         if (item.nombre_comercio) return String(item.nombre_comercio).trim();
+        if (item.nombreComercio) return String(item.nombreComercio).trim();
+        if (item.nombre_negocio) return String(item.nombre_negocio).trim();
         return [String(item.nombre || '').trim(), String(item.apellido || '').trim()].filter(Boolean).join(' ').trim();
       }
 
       function obtenerRubro(item) {
         return String(
-          item.perfil ||
+          item.rubroFinal ||
+          item.rubro_comercial ||
+          item.rubroComercial ||
           item.rubro ||
+          item.perfil ||
           item.categoria ||
           item.tipo_perfil ||
           item.tipo ||
           ''
         ).trim();
+      }
+
+      function normalizarEstadoPerfil(valorEstado) {
+        const v = String(valorEstado || '').trim().toLowerCase();
+        return ['activo', 'activa', 'ok', 'habilitado', 'habilitada', 'si', 'sí', 'true'].includes(v) ? 'activo' : 'inactivo';
+      }
+
+      function renderEstadoPerfil(valorEstado) {
+        const estado = normalizarEstadoPerfil(valorEstado);
+        const el = document.getElementById('estadoPerfil');
+
+        if (estado === 'activo') {
+          el.innerHTML = '<span class="status-value ok"><span class="status-icon">✓</span><span>Activo</span></span>';
+        } else {
+          el.innerHTML = '<span class="status-value danger"><span class="status-icon">✕</span><span>Inactivo</span></span>';
+        }
       }
 
       function setPreview(previewId, base64) {
@@ -1363,6 +1111,18 @@
         }
       }
 
+      function setPreviewFotoPrincipal(base64) {
+        if (base64) {
+          previewFotoPrincipalFrame.style.backgroundImage = 'url("' + base64 + '")';
+          previewFotoPrincipalFrame.classList.add('has-image');
+          previewFotoPrincipalText.style.display = 'none';
+        } else {
+          previewFotoPrincipalFrame.style.backgroundImage = 'none';
+          previewFotoPrincipalFrame.classList.remove('has-image');
+          previewFotoPrincipalText.style.display = 'block';
+        }
+      }
+
       function fileToBase64(file) {
         return new Promise((resolve, reject) => {
           const reader = new FileReader();
@@ -1371,6 +1131,24 @@
           reader.readAsDataURL(file);
         });
       }
+
+      async function procesarFotoPrincipal(file) {
+        if (!file) return;
+        try {
+          fotoPrincipalBase64 = await fileToBase64(file);
+          setPreviewFotoPrincipal(fotoPrincipalBase64);
+        } catch (error) {
+          setMsg('No se pudo leer la foto principal.', 'error');
+        }
+      }
+
+      fotoPrincipalCamara.addEventListener('change', function () {
+        procesarFotoPrincipal(this.files && this.files[0]);
+      });
+
+      fotoPrincipalGaleria.addEventListener('change', function () {
+        procesarFotoPrincipal(this.files && this.files[0]);
+      });
 
       function bindImageInput(input, callback) {
         input.addEventListener('change', async function () {
@@ -1384,11 +1162,6 @@
           }
         });
       }
-
-      bindImageInput(fotoPrincipalInput, function(base64) {
-        fotoPrincipalBase64 = base64;
-        setPreview('previewFotoPrincipal', fotoPrincipalBase64);
-      });
 
       bindImageInput(img1Input, function(base64) {
         img1Base64 = base64;
@@ -1409,15 +1182,6 @@
         img4Base64 = base64;
         setPreview('previewImg4', img4Base64);
       });
-
-      if (!idRegistro) {
-        setEstado('Falta ID de registro', 'danger');
-        setMsg('No se encontró el ID de registro para abrir el panel del miembro.', 'error');
-        btnGuardar.disabled = true;
-        btnRenovar.disabled = true;
-        btnRenovar.classList.add('disabled');
-        return;
-      }
 
       function actualizarBloqueMembresia(saved) {
         const diasRaw = saved ? (saved.diasRestantes ?? saved.dias_restantes ?? saved.dias ?? '') : '';
@@ -1480,370 +1244,367 @@
         document.body.appendChild(script);
       }
 
-      function escapeHtml(str) {
-        return String(str || '')
-          .replace(/&/g, '&amp;')
-          .replace(/</g, '&lt;')
-          .replace(/>/g, '&gt;')
-          .replace(/"/g, '&quot;')
-          .replace(/'/g, '&#039;');
-      }
-
-      function normalizarEstadoPerfil(valorEstado) {
-        const v = String(valorEstado || '').trim().toLowerCase();
-        return ['activo', 'activa', 'ok', 'habilitado', 'habilitada', 'si', 'sí', 'true'].includes(v) ? 'activo' : 'inactivo';
-      }
-
-      function renderEstadoPerfil(valorEstado) {
-        const estado = normalizarEstadoPerfil(valorEstado);
-        const el = document.getElementById('estadoPerfil');
-
-        if (estado === 'activo') {
-          el.innerHTML = '<span class="status-value ok"><span class="status-icon">✓</span><span>Activo</span></span>';
-        } else {
-          el.innerHTML = '<span class="status-value danger"><span class="status-icon">✕</span><span>Inactivo</span></span>';
+      function generarOpcionesHorarios(valorSeleccionado) {
+        let html = '<option value="">Seleccionar</option>';
+        for (let h = 0; h < 24; h++) {
+          for (let m = 0; m < 60; m += 30) {
+            const hh = String(h).padStart(2, '0');
+            const mm = String(m).padStart(2, '0');
+            const valorHora = hh + ':' + mm;
+            html += '<option value="' + valorHora + '"' + (valorHora === valorSeleccionado ? ' selected' : '') + '>' + valorHora + '</option>';
+          }
         }
+        return html;
       }
 
-      function getSelectedRadioValue(name) {
-        const selected = document.querySelector('input[name="' + name + '"]:checked');
-        return selected ? selected.value : 'corrido';
+      function minutosDesdeHora(hora) {
+        if (!hora || !hora.includes(':')) return null;
+        const partes = hora.split(':');
+        return parseInt(partes[0], 10) * 60 + parseInt(partes[1], 10);
       }
 
-      function setSelectedRadioValue(name, value) {
-        const target = document.querySelector('input[name="' + name + '"][value="' + value + '"]');
-        if (target) target.checked = true;
+      function rangoTexto(desde, hasta) {
+        const minDesde = minutosDesdeHora(desde);
+        const minHasta = minutosDesdeHora(hasta);
+        if (minDesde === null || minHasta === null) return '';
+        if (minDesde === minHasta) return desde + ' a ' + hasta;
+        if (minHasta < minDesde) return desde + ' a ' + hasta + ' del día siguiente';
+        return desde + ' a ' + hasta;
       }
 
-      function bloquearInputsContenedor(containerId, bloquear) {
-        const wrap = document.getElementById(containerId);
-        if (!wrap) return;
-        wrap.querySelectorAll('input, select, textarea, button').forEach(function(el){
-          el.disabled = !!bloquear;
-        });
+      function actualizarModoSiempreAbierto() {
+        dayScheduleContainer.classList.toggle('hidden', siempreAbierto.checked);
       }
 
-      function actualizarUIHorarioDia(dia) {
-        const cerrado = document.getElementById(dia + '_cerrado').checked;
-        const modo = getSelectedRadioValue(dia + '_modo');
+      function construirHorariosPorDia() {
+        dayScheduleContainer.innerHTML = diasSemana.map(dia => `
+          <div class="day-card" data-day="${dia.key}">
+            <div class="day-header">
+              <div class="day-title">${dia.label}</div>
+            </div>
 
-        const modesWrap = document.getElementById('modes-' + dia);
-        const corridoWrap = document.getElementById('corrido-' + dia);
-        const cortadoWrap = document.getElementById('cortado-' + dia);
-        const state = document.getElementById('state-' + dia);
+            <div class="day-switches">
+              <label class="day-switch">
+                <input type="checkbox" id="${dia.key}Cerrado">
+                Cerrado
+              </label>
 
-        if (abiertoSiempre.checked) {
-          document.getElementById(dia + '_cerrado').disabled = true;
-          modesWrap.querySelectorAll('input').forEach(function(i){ i.disabled = true; });
-          corridoWrap.querySelectorAll('input').forEach(function(i){ i.disabled = true; });
-          cortadoWrap.querySelectorAll('input').forEach(function(i){ i.disabled = true; });
-          corridoWrap.classList.add('hidden');
-          cortadoWrap.classList.add('hidden');
-          state.textContent = 'Abierto siempre / 24 horas';
-          return;
-        }
+              <label class="day-switch">
+                <input type="checkbox" id="${dia.key}HorarioCorrido" checked>
+                Horario corrido
+              </label>
+            </div>
 
-        document.getElementById(dia + '_cerrado').disabled = false;
-        modesWrap.querySelectorAll('input').forEach(function(i){ i.disabled = cerrado; });
+            <div id="${dia.key}CorridoWrap">
+              <div class="grid-2">
+                <div class="field">
+                  <label for="${dia.key}Desde">Horario desde</label>
+                  <select id="${dia.key}Desde">${generarOpcionesHorarios(dia.corridoDesde)}</select>
+                </div>
 
-        if (cerrado) {
-          corridoWrap.classList.add('hidden');
-          cortadoWrap.classList.add('hidden');
-          corridoWrap.querySelectorAll('input').forEach(function(i){ i.disabled = true; });
-          cortadoWrap.querySelectorAll('input').forEach(function(i){ i.disabled = true; });
-          state.textContent = 'Cerrado';
-          return;
-        }
+                <div class="field">
+                  <label for="${dia.key}Hasta">Horario hasta</label>
+                  <select id="${dia.key}Hasta">${generarOpcionesHorarios(dia.corridoHasta)}</select>
+                </div>
+              </div>
+            </div>
 
-        if (modo === '24hs') {
-          corridoWrap.classList.add('hidden');
-          cortadoWrap.classList.add('hidden');
-          corridoWrap.querySelectorAll('input').forEach(function(i){ i.disabled = true; });
-          cortadoWrap.querySelectorAll('input').forEach(function(i){ i.disabled = true; });
-          state.textContent = '24 horas';
-          return;
-        }
+            <div id="${dia.key}DobleWrap" class="hidden">
+              <div class="grid-2">
+                <div class="field">
+                  <label for="${dia.key}MananaDesde">Mañana desde</label>
+                  <select id="${dia.key}MananaDesde">${generarOpcionesHorarios(dia.mananaDesde)}</select>
+                </div>
 
-        if (modo === 'cortado') {
-          corridoWrap.classList.add('hidden');
-          cortadoWrap.classList.remove('hidden');
-          corridoWrap.querySelectorAll('input').forEach(function(i){ i.disabled = true; });
-          cortadoWrap.querySelectorAll('input').forEach(function(i){ i.disabled = false; });
-          state.textContent = 'Horario cortado';
-          return;
-        }
+                <div class="field">
+                  <label for="${dia.key}MananaHasta">Mañana hasta</label>
+                  <select id="${dia.key}MananaHasta">${generarOpcionesHorarios(dia.mananaHasta)}</select>
+                </div>
+              </div>
 
-        corridoWrap.classList.remove('hidden');
-        cortadoWrap.classList.add('hidden');
-        corridoWrap.querySelectorAll('input').forEach(function(i){ i.disabled = false; });
-        cortadoWrap.querySelectorAll('input').forEach(function(i){ i.disabled = true; });
-        state.textContent = 'Horario corrido';
-      }
+              <div class="grid-2">
+                <div class="field">
+                  <label for="${dia.key}TardeDesde">Tarde desde</label>
+                  <select id="${dia.key}TardeDesde">${generarOpcionesHorarios(dia.tardeDesde)}</select>
+                </div>
 
-      function vincularHorarios() {
-        DIAS.forEach(function(dia){
-          document.getElementById(dia + '_cerrado').addEventListener('change', function(){
-            actualizarUIHorarioDia(dia);
-            actualizarResumenHorarios();
-          });
+                <div class="field">
+                  <label for="${dia.key}TardeHasta">Tarde hasta</label>
+                  <select id="${dia.key}TardeHasta">${generarOpcionesHorarios(dia.tardeHasta)}</select>
+                </div>
+              </div>
+            </div>
 
-          document.querySelectorAll('input[name="' + dia + '_modo"]').forEach(function(radio){
-            radio.addEventListener('change', function(){
-              actualizarUIHorarioDia(dia);
-              actualizarResumenHorarios();
-            });
-          });
+            <div class="day-summary" id="${dia.key}Resumen"></div>
+          </div>
+        `).join('');
 
-          [
-            dia + '_desde',
-            dia + '_hasta',
-            dia + '_manana_desde',
-            dia + '_manana_hasta',
-            dia + '_tarde_desde',
-            dia + '_tarde_hasta'
-          ].forEach(function(id){
-            const el = document.getElementById(id);
+        diasSemana.forEach(dia => {
+          ['Cerrado','HorarioCorrido','Desde','Hasta','MananaDesde','MananaHasta','TardeDesde','TardeHasta'].forEach(sufijo => {
+            const el = document.getElementById(dia.key + sufijo);
             if (el) {
-              el.addEventListener('input', actualizarResumenHorarios);
-              el.addEventListener('change', actualizarResumenHorarios);
+              el.addEventListener('change', function() {
+                actualizarEstadoDia(dia.key);
+              });
             }
           });
-        });
-
-        abiertoSiempre.addEventListener('change', function(){
-          DIAS.forEach(actualizarUIHorarioDia);
-          actualizarResumenHorarios();
+          actualizarEstadoDia(dia.key);
         });
       }
 
-      function obtenerHorariosDetalle() {
-        const result = {
-          abiertoSiempre: !!abiertoSiempre.checked,
-          dias: {}
-        };
+      function actualizarEstadoDia(dayKey) {
+        const cerrado = document.getElementById(dayKey + 'Cerrado').checked;
+        const corrido = document.getElementById(dayKey + 'HorarioCorrido').checked;
+        const corridoWrap = document.getElementById(dayKey + 'CorridoWrap');
+        const dobleWrap = document.getElementById(dayKey + 'DobleWrap');
 
-        DIAS.forEach(function(dia){
-          result.dias[dia] = {
-            cerrado: !!document.getElementById(dia + '_cerrado').checked,
-            modo: getSelectedRadioValue(dia + '_modo'),
-            desde: valor(dia + '_desde'),
-            hasta: valor(dia + '_hasta'),
-            manana_desde: valor(dia + '_manana_desde'),
-            manana_hasta: valor(dia + '_manana_hasta'),
-            tarde_desde: valor(dia + '_tarde_desde'),
-            tarde_hasta: valor(dia + '_tarde_hasta')
-          };
-        });
+        corridoWrap.classList.toggle('hidden', cerrado || !corrido);
+        dobleWrap.classList.toggle('hidden', cerrado || corrido);
 
-        return result;
+        actualizarResumenDia(dayKey);
       }
 
-      function capitalizar(txt) {
-        const s = String(txt || '');
-        return s ? s.charAt(0).toUpperCase() + s.slice(1) : '';
-      }
+      function actualizarResumenDia(dayKey) {
+        const dia = diasSemana.find(d => d.key === dayKey);
+        const resumen = document.getElementById(dayKey + 'Resumen');
+        const cerrado = document.getElementById(dayKey + 'Cerrado').checked;
+        const corrido = document.getElementById(dayKey + 'HorarioCorrido').checked;
 
-      function construirResumenHorarios(data) {
-        if (!data) return 'Sin horarios cargados.';
-        if (data.abiertoSiempre) return 'Abierto siempre / 24 horas';
+        resumen.classList.remove('cross');
 
-        const lineas = [];
-
-        DIAS.forEach(function(dia){
-          const d = data.dias && data.dias[dia] ? data.dias[dia] : null;
-          if (!d) return;
-
-          const nombre = capitalizar(dia);
-
-          if (d.cerrado) {
-            lineas.push(nombre + ': cerrado');
-            return;
-          }
-
-          if (d.modo === '24hs') {
-            lineas.push(nombre + ': 24 horas');
-            return;
-          }
-
-          if (d.modo === 'cortado') {
-            const md = d.manana_desde || '--:--';
-            const mh = d.manana_hasta || '--:--';
-            const td = d.tarde_desde || '--:--';
-            const th = d.tarde_hasta || '--:--';
-            lineas.push(nombre + ': ' + md + ' a ' + mh + ' / ' + td + ' a ' + th);
-            return;
-          }
-
-          const desde = d.desde || '--:--';
-          const hasta = d.hasta || '--:--';
-          lineas.push(nombre + ': ' + desde + ' a ' + hasta);
-        });
-
-        return lineas.length ? lineas.join('\n') : 'Sin horarios cargados.';
-      }
-
-      function actualizarResumenHorarios() {
-        const detalle = obtenerHorariosDetalle();
-        document.getElementById('resumenHorarios').textContent = construirResumenHorarios(detalle);
-      }
-
-      function obtenerMediosPagoDetalle() {
-        const items = [];
-        if (document.getElementById('pago_efectivo').checked) items.push('Efectivo');
-        if (document.getElementById('pago_transferencia').checked) items.push('Transferencia');
-        if (document.getElementById('pago_mercadopago').checked) items.push('Mercado Pago');
-        if (document.getElementById('pago_debito').checked) items.push('Débito');
-        if (document.getElementById('pago_credito').checked) items.push('Crédito');
-        if (document.getElementById('pago_otros').checked) {
-          const otro = valor('mediosPagoOtroTexto');
-          items.push(otro ? 'Otros: ' + otro : 'Otros');
-        }
-        return items;
-      }
-
-      function actualizarResumenPagos() {
-        const pagos = obtenerMediosPagoDetalle();
-        document.getElementById('resumenPagos').textContent = pagos.length ? pagos.join(', ') : 'Sin medios de pago cargados.';
-      }
-
-      function actualizarResumenFactura() {
-        document.getElementById('resumenFactura').textContent = document.getElementById('facturaActiva').checked ? 'Sí, emite factura.' : 'No emite factura.';
-      }
-
-      function vincularPagosYFactura() {
-        [
-          'pago_efectivo',
-          'pago_transferencia',
-          'pago_mercadopago',
-          'pago_debito',
-          'pago_credito',
-          'pago_otros',
-          'facturaActiva'
-        ].forEach(function(id){
-          const el = document.getElementById(id);
-          if (!el) return;
-          el.addEventListener('change', function(){
-            actualizarResumenPagos();
-            actualizarResumenFactura();
-          });
-        });
-
-        document.getElementById('mediosPagoOtroTexto').addEventListener('input', actualizarResumenPagos);
-      }
-
-      function parsearHorariosGuardados(item) {
-        const posibles = [
-          item && item.horarios_json,
-          item && item.horarios_detalle,
-          item && item.horarios,
-          item && item.horario_json
-        ];
-
-        for (let i = 0; i < posibles.length; i++) {
-          const actual = posibles[i];
-          if (!actual) continue;
-
-          if (typeof actual === 'object') {
-            return actual;
-          }
-
-          if (typeof actual === 'string') {
-            const txt = actual.trim();
-            if (!txt) continue;
-
-            try {
-              const parsed = JSON.parse(txt);
-              if (parsed && typeof parsed === 'object') return parsed;
-            } catch (e) {}
-          }
-        }
-
-        return null;
-      }
-
-      function aplicarHorariosDefault() {
-        abiertoSiempre.checked = false;
-        DIAS.forEach(function(dia){
-          setChecked(dia + '_cerrado', false);
-          setSelectedRadioValue(dia + '_modo', 'corrido');
-          setValor(dia + '_desde', '');
-          setValor(dia + '_hasta', '');
-          setValor(dia + '_manana_desde', '');
-          setValor(dia + '_manana_hasta', '');
-          setValor(dia + '_tarde_desde', '');
-          setValor(dia + '_tarde_hasta', '');
-          actualizarUIHorarioDia(dia);
-        });
-        actualizarResumenHorarios();
-      }
-
-      function hidratarHorarios(data) {
-        if (!data || typeof data !== 'object') {
-          aplicarHorariosDefault();
+        if (cerrado) {
+          resumen.textContent = dia.label + ': cerrado.';
           return;
         }
 
-        abiertoSiempre.checked = !!data.abiertoSiempre;
+        if (corrido) {
+          const desde = valor(dayKey + 'Desde');
+          const hasta = valor(dayKey + 'Hasta');
 
-        DIAS.forEach(function(dia){
-          const d = data.dias && data.dias[dia] ? data.dias[dia] : {};
-          setChecked(dia + '_cerrado', !!d.cerrado);
-          setSelectedRadioValue(dia + '_modo', d.modo || 'corrido');
-          setValor(dia + '_desde', d.desde || '');
-          setValor(dia + '_hasta', d.hasta || '');
-          setValor(dia + '_manana_desde', d.manana_desde || '');
-          setValor(dia + '_manana_hasta', d.manana_hasta || '');
-          setValor(dia + '_tarde_desde', d.tarde_desde || '');
-          setValor(dia + '_tarde_hasta', d.tarde_hasta || '');
-          actualizarUIHorarioDia(dia);
+          if (!desde || !hasta) {
+            resumen.textContent = dia.label + ': completá horario desde y hasta.';
+            return;
+          }
+
+          if (desde === hasta) {
+            resumen.textContent = dia.label + ': la apertura y el cierre no pueden ser iguales.';
+            return;
+          }
+
+          if (minutosDesdeHora(hasta) < minutosDesdeHora(desde)) {
+            resumen.classList.add('cross');
+          }
+
+          resumen.textContent = dia.label + ': ' + rangoTexto(desde, hasta) + '.';
+          return;
+        }
+
+        const mananaDesde = valor(dayKey + 'MananaDesde');
+        const mananaHasta = valor(dayKey + 'MananaHasta');
+        const tardeDesde = valor(dayKey + 'TardeDesde');
+        const tardeHasta = valor(dayKey + 'TardeHasta');
+
+        if (!mananaDesde || !mananaHasta || !tardeDesde || !tardeHasta) {
+          resumen.textContent = dia.label + ': completá mañana y tarde.';
+          return;
+        }
+
+        if (mananaDesde === mananaHasta || tardeDesde === tardeHasta) {
+          resumen.textContent = dia.label + ': en cada franja la apertura y el cierre deben ser distintos.';
+          return;
+        }
+
+        const cruza = minutosDesdeHora(mananaHasta) < minutosDesdeHora(mananaDesde) || minutosDesdeHora(tardeHasta) < minutosDesdeHora(tardeDesde);
+        if (cruza) resumen.classList.add('cross');
+
+        resumen.textContent = dia.label + ': mañana ' + rangoTexto(mananaDesde, mananaHasta) + ' / tarde ' + rangoTexto(tardeDesde, tardeHasta) + '.';
+      }
+
+      function obtenerHorariosPorDia() {
+        return diasSemana.map(dia => {
+          const cerrado = document.getElementById(dia.key + 'Cerrado').checked;
+          const corrido = document.getElementById(dia.key + 'HorarioCorrido').checked;
+
+          return {
+            key: dia.key,
+            dia: dia.label,
+            cerrado: cerrado,
+            corrido: corrido,
+            desde: valor(dia.key + 'Desde'),
+            hasta: valor(dia.key + 'Hasta'),
+            mananaDesde: valor(dia.key + 'MananaDesde'),
+            mananaHasta: valor(dia.key + 'MananaHasta'),
+            tardeDesde: valor(dia.key + 'TardeDesde'),
+            tardeHasta: valor(dia.key + 'TardeHasta')
+          };
         });
+      }
 
-        actualizarResumenHorarios();
+      function obtenerDiasResumen() {
+        if (siempreAbierto.checked) return ['Abierto las 24 horas'];
+
+        return obtenerHorariosPorDia().map(item => {
+          if (item.cerrado) return item.dia + ': Cerrado';
+          if (item.corrido) return item.dia + ': ' + rangoTexto(item.desde, item.hasta);
+          return item.dia + ': ' + item.mananaDesde + ' a ' + item.mananaHasta + ' / ' + item.tardeDesde + ' a ' + item.tardeHasta;
+        });
+      }
+
+      function limpiarTelefono(numero) {
+        return (numero || '').replace(/\D/g, '');
+      }
+
+      function obtenerMediosPagoSeleccionados() {
+        const medios = [];
+        if (document.getElementById('pago_efectivo').checked) medios.push('Efectivo');
+        if (document.getElementById('pago_transferencia').checked) medios.push('Transferencia');
+        if (document.getElementById('pago_debito').checked) medios.push('Débito');
+        if (document.getElementById('pago_credito').checked) medios.push('Tarjeta de crédito');
+        return medios;
       }
 
       function cargarMediosPago(item) {
-        const detalle = item && item.medios_pago_detalle ? item.medios_pago_detalle : null;
-        const raw = String(item.medios_pago || '').toLowerCase();
+        const raw = String(
+          item.mediosPago ||
+          item.medios_pago ||
+          ''
+        ).toLowerCase();
 
-        const activarPorTexto = function(checkId, patrones) {
-          const ok = patrones.some(function(p){ return raw.includes(p); });
-          setChecked(checkId, ok);
-        };
-
-        if (detalle && typeof detalle === 'object') {
-          setChecked('pago_efectivo', !!detalle.efectivo);
-          setChecked('pago_transferencia', !!detalle.transferencia);
-          setChecked('pago_mercadopago', !!detalle.mercadopago);
-          setChecked('pago_debito', !!detalle.debito);
-          setChecked('pago_credito', !!detalle.credito);
-          setChecked('pago_otros', !!detalle.otros);
-          setValor('mediosPagoOtroTexto', detalle.otros_texto || '');
-        } else {
-          activarPorTexto('pago_efectivo', ['efectivo']);
-          activarPorTexto('pago_transferencia', ['transferencia']);
-          activarPorTexto('pago_mercadopago', ['mercado pago', 'mercadopago']);
-          activarPorTexto('pago_debito', ['debito', 'débito']);
-          activarPorTexto('pago_credito', ['credito', 'crédito']);
-          const tieneOtros = raw && ![
-            'efectivo','transferencia','mercado pago','mercadopago','debito','débito','credito','crédito'
-          ].every(function(x){ return !raw.includes(x); });
-          if (!tieneOtros && raw.trim()) {
-            setChecked('pago_otros', true);
-            setValor('mediosPagoOtroTexto', item.medios_pago || '');
-          } else {
-            setChecked('pago_otros', false);
-            setValor('mediosPagoOtroTexto', '');
-          }
-        }
-
-        actualizarResumenPagos();
+        setChecked('pago_efectivo', raw.includes('efectivo'));
+        setChecked('pago_transferencia', raw.includes('transferencia'));
+        setChecked('pago_debito', raw.includes('debito') || raw.includes('débito'));
+        setChecked('pago_credito', raw.includes('tarjeta de crédito') || raw.includes('tarjeta de credito') || raw.includes('credito') || raw.includes('crédito'));
       }
 
       function cargarFactura(item) {
-        const raw = String(item.factura ?? item.emite_factura ?? item.facturacion ?? '').trim().toLowerCase();
-        const activa = ['si', 'sí', 'true', '1', 'activo', 'activa'].includes(raw);
-        setChecked('facturaActiva', activa);
-        actualizarResumenFactura();
+        const raw = String(item.factura ?? item.facturacion ?? item.emite_factura ?? '').trim().toLowerCase();
+        if (raw === 'si' || raw === 'sí') {
+          setValor('factura', 'si');
+        } else if (raw === 'no') {
+          setValor('factura', 'no');
+        } else {
+          setValor('factura', '');
+        }
+      }
+
+      function hidratarHorarios(item) {
+        let horariosPorDia = item.horariosPorDia || item.horarios_por_dia || null;
+        let horarios = item.horarios || null;
+
+        if (typeof horariosPorDia === 'string') {
+          try { horariosPorDia = JSON.parse(horariosPorDia); } catch (e) {}
+        }
+
+        if (typeof horarios === 'string') {
+          try { horarios = JSON.parse(horarios); } catch (e) {}
+        }
+
+        const horarioTexto = String(item.horario || '').toLowerCase();
+        const abiertoSiempreDetectado =
+          horarioTexto.includes('abierto las 24 horas') ||
+          horarioTexto.includes('24 horas') ||
+          String(item.siempreAbierto || item.siempre_abierto || '').toLowerCase() === 'true';
+
+        setChecked('siempreAbierto', !!abiertoSiempreDetectado);
+        actualizarModoSiempreAbierto();
+
+        if (Array.isArray(horariosPorDia) && horariosPorDia.length) {
+          horariosPorDia.forEach(function(h) {
+            if (!h || !h.key) return;
+            const dayKey = h.key;
+            const cerrado = !!h.cerrado;
+            const corrido = !!h.corrido;
+
+            setChecked(dayKey + 'Cerrado', cerrado);
+            setChecked(dayKey + 'HorarioCorrido', corrido);
+
+            setValor(dayKey + 'Desde', h.desde || '');
+            setValor(dayKey + 'Hasta', h.hasta || '');
+            setValor(dayKey + 'MananaDesde', h.mananaDesde || '');
+            setValor(dayKey + 'MananaHasta', h.mananaHasta || '');
+            setValor(dayKey + 'TardeDesde', h.tardeDesde || '');
+            setValor(dayKey + 'TardeHasta', h.tardeHasta || '');
+
+            actualizarEstadoDia(dayKey);
+          });
+          return;
+        }
+
+        if (horarios && typeof horarios === 'object' && !Array.isArray(horarios)) {
+          diasSemana.forEach(function(dia) {
+            const texto = String(horarios[dia.key] || '').trim();
+            if (!texto) {
+              actualizarEstadoDia(dia.key);
+              return;
+            }
+
+            const lower = texto.toLowerCase();
+
+            if (lower === 'cerrado') {
+              setChecked(dia.key + 'Cerrado', true);
+              setChecked(dia.key + 'HorarioCorrido', true);
+              actualizarEstadoDia(dia.key);
+              return;
+            }
+
+            if (lower === '24 horas') {
+              setChecked('siempreAbierto', true);
+              actualizarModoSiempreAbierto();
+              return;
+            }
+
+            if (texto.includes('/')) {
+              const partes = texto.split('/');
+              const manana = (partes[0] || '').replace(/mañana/i, '').trim();
+              const tarde = (partes[1] || '').replace(/tarde/i, '').trim();
+
+              const mPartes = manana.split(' a ');
+              const tPartes = tarde.split(' a ');
+
+              setChecked(dia.key + 'Cerrado', false);
+              setChecked(dia.key + 'HorarioCorrido', false);
+
+              setValor(dia.key + 'MananaDesde', (mPartes[0] || '').trim());
+              setValor(dia.key + 'MananaHasta', (mPartes[1] || '').replace(' del día siguiente','').trim());
+              setValor(dia.key + 'TardeDesde', (tPartes[0] || '').trim());
+              setValor(dia.key + 'TardeHasta', (tPartes[1] || '').replace(' del día siguiente','').trim());
+              actualizarEstadoDia(dia.key);
+              return;
+            }
+
+            if (texto.includes(' a ')) {
+              const partes = texto.split(' a ');
+              setChecked(dia.key + 'Cerrado', false);
+              setChecked(dia.key + 'HorarioCorrido', true);
+              setValor(dia.key + 'Desde', (partes[0] || '').trim());
+              setValor(dia.key + 'Hasta', (partes[1] || '').replace(' del día siguiente','').trim());
+              actualizarEstadoDia(dia.key);
+              return;
+            }
+
+            actualizarEstadoDia(dia.key);
+          });
+          return;
+        }
+
+        diasSemana.forEach(function(dia) {
+          actualizarEstadoDia(dia.key);
+        });
+      }
+
+      function cargarCredenciales() {
+        jsonp(
+          SCRIPT_URL + '?action=obtenerCredencialesMiembroAPI&id_registro=' + encodeURIComponent(idRegistro),
+          function(data) {
+            if (data && data.ok) {
+              setText('usuarioAcceso', data.usuario || '-', '-');
+              setText('passwordAcceso', data.password || '-', '-');
+            } else {
+              setText('usuarioAcceso', 'No disponible', '-');
+              setText('passwordAcceso', 'No disponible', '-');
+            }
+          }
+        );
       }
 
       function cargarPerfil() {
@@ -1869,7 +1630,6 @@
             setText('heroNombre', nombrePerfil, 'Panel de miembro');
             setText('heroDescripcion', item.descripcion || 'Desde acá podés administrar tu perfil.');
             setText('idRegistro', idRegistro, '-');
-
             renderEstadoPerfil(item.estado || 'activo');
 
             setText('usuarioAcceso', 'Cargando...', '-');
@@ -1879,41 +1639,33 @@
             setValor('perfilRubro', rubro || 'No informado');
             setValor('descripcion', item.descripcion || '');
             setValor('whatsapp', item.whatsapp || '');
-            setValor('telefono', item.telefono || item.telefono_alternativo || '');
+            setValor('telefono', item.telefono || item.telefonoAlternativo || item.telefono_alternativo || '');
             setValor('email', item.email || '');
             setValor('direccion', item.direccion || item.zona || '');
 
-            const vacacionesOn =
-              String(item.cerrado_por_vacaciones || item.vacaciones_activo || '')
-                .trim()
-                .toLowerCase() === 'si';
-
+            const vacacionesOn = String(item.cerrado_por_vacaciones || item.vacaciones_activo || '').trim().toLowerCase() === 'si' || item.vacaciones === true;
             setChecked('vacacionesActivo', vacacionesOn);
-            setValor('vacacionesDesde', item.vacaciones_desde || '');
-            setValor('vacacionesHasta', item.vacaciones_hasta || '');
+            setValor('vacacionesDesde', item.vacaciones_desde || (item.vacaciones && item.vacaciones.desde) || '');
+            setValor('vacacionesHasta', item.vacaciones_hasta || (item.vacaciones && item.vacaciones.hasta) || '');
             mostrarFechasVacaciones();
 
-            const galeriaOn =
-              String(item.galeria_activa || '')
-                .trim()
-                .toLowerCase() === 'si';
-
+            const galeriaOn = String(item.galeria_activa || '').trim().toLowerCase() === 'si' || item.galeria_activa === true;
             setChecked('galeriaActiva', galeriaOn);
             mostrarGaleria();
 
-            fotoPrincipalBase64 = item.foto_base64 || '';
+            fotoPrincipalBase64 = item.foto_base64 || item.fotoBase64 || '';
             img1Base64 = item.imagen_1 || '';
             img2Base64 = item.imagen_2 || '';
             img3Base64 = item.imagen_3 || '';
             img4Base64 = item.imagen_4 || '';
 
-            setPreview('previewFotoPrincipal', fotoPrincipalBase64);
+            setPreviewFotoPrincipal(fotoPrincipalBase64);
             setPreview('previewImg1', img1Base64);
             setPreview('previewImg2', img2Base64);
             setPreview('previewImg3', img3Base64);
             setPreview('previewImg4', img4Base64);
 
-            hidratarHorarios(parsearHorariosGuardados(item));
+            hidratarHorarios(item);
             cargarMediosPago(item);
             cargarFactura(item);
 
@@ -1922,61 +1674,79 @@
         );
       }
 
-      function cargarCredenciales() {
-        jsonp(
-          SCRIPT_URL + '?action=obtenerCredencialesMiembroAPI&id_registro=' + encodeURIComponent(idRegistro),
-          function(data) {
-            if (data && data.ok) {
-              setText('usuarioAcceso', data.usuario || '-', '-');
-              setText('passwordAcceso', data.password || '-', '-');
-            } else {
-              setText('usuarioAcceso', 'No disponible', '-');
-              setText('passwordAcceso', 'No disponible', '-');
-            }
-          }
-        );
-      }
-
-     async function guardarPanel() {
+      async function guardarPanel() {
         try {
           limpiarMsg();
           setEstado('Guardando cambios...', 'warn');
           btnGuardar.disabled = true;
 
-          const horariosDetalle = obtenerHorariosDetalle();
-          const horariosResumen = construirResumenHorarios(horariosDetalle);
-          const mediosPagoDetalle = {
-            efectivo: document.getElementById('pago_efectivo').checked,
-            transferencia: document.getElementById('pago_transferencia').checked,
-            mercadopago: document.getElementById('pago_mercadopago').checked,
-            debito: document.getElementById('pago_debito').checked,
-            credito: document.getElementById('pago_credito').checked,
-            otros: document.getElementById('pago_otros').checked,
-            otros_texto: valor('mediosPagoOtroTexto')
-          };
-          const mediosPagoLista = obtenerMediosPagoDetalle();
+          const horariosPorDia = siempreAbierto.checked
+            ? diasSemana.map(item => ({
+                key: item.key,
+                dia: item.label,
+                cerrado: false,
+                corrido: true,
+                desde: '00:00',
+                hasta: '23:30',
+                mananaDesde: '',
+                mananaHasta: '',
+                tardeDesde: '',
+                tardeHasta: ''
+              }))
+            : obtenerHorariosPorDia();
+
+          const horariosObjeto = siempreAbierto.checked
+            ? Object.fromEntries(diasSemana.map(item => [item.key, '24 horas']))
+            : Object.fromEntries(horariosPorDia.map(item => {
+                if (item.cerrado) return [item.key, 'Cerrado'];
+                if (item.corrido) return [item.key, rangoTexto(item.desde, item.hasta)];
+                return [item.key, rangoTexto(item.mananaDesde, item.mananaHasta) + ' / ' + rangoTexto(item.tardeDesde, item.tardeHasta)];
+              }));
+
+          const horarioTexto = obtenerDiasResumen().join(' | ');
+          const mediosPagoLista = obtenerMediosPagoSeleccionados();
 
           const payload = {
             action: 'guardarPanelMiembro',
             id_registro: idRegistro,
+
             descripcion: valor('descripcion'),
-            whatsapp: valor('whatsapp'),
-            telefono: valor('telefono'),
+            whatsapp: limpiarTelefono(valor('whatsapp')),
+            telefono: limpiarTelefono(valor('telefono')),
+            telefonoAlternativo: limpiarTelefono(valor('telefono')),
+            telefono_alternativo: limpiarTelefono(valor('telefono')),
             email: valor('email'),
             direccion: valor('direccion'),
-            horario: horariosResumen,
-            horarios: JSON.stringify(horariosDetalle),
-            horarios_json: JSON.stringify(horariosDetalle),
-            horarios_detalle: horariosDetalle,
+
+            siempreAbierto: siempreAbierto.checked,
+            siempre_abierto: siempreAbierto.checked,
+
+            diasTrabajo: siempreAbierto.checked
+              ? Object.fromEntries(diasSemana.map(item => [item.key, true]))
+              : Object.fromEntries(horariosPorDia.map(item => [item.key, !item.cerrado])),
+
+            horarios: horariosObjeto,
+            horariosPorDia: horariosPorDia,
+            horarios_por_dia: horariosPorDia,
+            horario: horarioTexto,
+
+            mediosPago: mediosPagoLista.join(', '),
             medios_pago: mediosPagoLista.join(', '),
-            medios_pago_detalle: mediosPagoDetalle,
-            factura: document.getElementById('facturaActiva').checked ? 'si' : 'no',
+
+            factura: valor('factura'),
+
             vacaciones: {
               activo: vacacionesActivo.checked,
               desde: vacacionesActivo.checked ? valor('vacacionesDesde') : '',
               hasta: vacacionesActivo.checked ? valor('vacacionesHasta') : ''
             },
+            vacaciones_activo: vacacionesActivo.checked ? 'si' : 'no',
+            vacaciones_desde: vacacionesActivo.checked ? valor('vacacionesDesde') : '',
+            vacaciones_hasta: vacacionesActivo.checked ? valor('vacacionesHasta') : '',
+
             foto_base64: fotoPrincipalBase64,
+            fotoBase64: fotoPrincipalBase64,
+
             galeria_activa: galeriaActiva.checked,
             imagen_1: img1Base64,
             imagen_2: img2Base64,
@@ -2011,6 +1781,15 @@
         }
       }
 
+      if (!idRegistro) {
+        setEstado('Falta ID de registro', 'danger');
+        setMsg('No se encontró el ID de registro para abrir el panel del miembro.', 'error');
+        btnGuardar.disabled = true;
+        btnRenovar.disabled = true;
+        btnRenovar.classList.add('disabled');
+        return;
+      }
+
       btnGuardar.addEventListener('click', guardarPanel);
 
       btnRecargar.addEventListener('click', function () {
@@ -2019,18 +1798,17 @@
 
       btnRenovar.addEventListener('click', function () {
         if (btnRenovar.disabled) return;
-
-        window.location.href =
-          'activar-membresia.html?id_registro=' + encodeURIComponent(idRegistro) + '&modo=renovacion';
+        window.location.href = 'activar-membresia.html?id_registro=' + encodeURIComponent(idRegistro) + '&modo=renovacion';
       });
 
-      vincularHorarios();
-      vincularPagosYFactura();
+      siempreAbierto.addEventListener('change', function() {
+        actualizarModoSiempreAbierto();
+      });
+
+      construirHorariosPorDia();
+      actualizarModoSiempreAbierto();
       mostrarFechasVacaciones();
       mostrarGaleria();
-      aplicarHorariosDefault();
-      actualizarResumenPagos();
-      actualizarResumenFactura();
 
       cargarPerfil();
       cargarCredenciales();
