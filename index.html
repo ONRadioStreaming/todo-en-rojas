@@ -11,7 +11,7 @@
   <meta name="theme-color" content="#07142b" />
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <link rel="manifest" href="manifest.json">
+  <link rel="manifest" href="manifest.json?v=2">
 
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&display=swap');
@@ -1578,7 +1578,7 @@
 
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', function () {
-        navigator.serviceWorker.register('./service-worker.js').catch(function(err) {
+        navigator.serviceWorker.register('./service-worker.js?v=2').catch(function(err) {
           console.log('Error registrando service worker:', err);
         });
       });
