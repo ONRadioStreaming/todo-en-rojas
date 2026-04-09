@@ -50,11 +50,9 @@
 
     .topbar{
       display:flex;
-      flex-wrap:wrap;
-      gap:12px;
-      justify-content:space-between;
-      align-items:flex-start;
-      margin-bottom:24px;
+      flex-direction:column;
+      gap:14px;
+      margin-bottom:22px;
     }
 
     h1{
@@ -104,15 +102,17 @@
       color:#0f172a;
     }
 
-    .btn-danger{
-      background:#fee2e2;
-      color:#991b1b;
-      border:1px solid #fecaca;
+    .btn-renew{
+      color:#fff;
+      background:var(--danger);
+      box-shadow:0 12px 24px rgba(220,38,38,.22);
     }
 
-    .btn[disabled],
-    .btn.disabled{
-      opacity:.5;
+    .btn-renew[disabled],
+    .btn-renew.disabled{
+      background:#fca5a5;
+      color:#fff;
+      opacity:.65;
       cursor:not-allowed;
       transform:none !important;
       box-shadow:none;
@@ -120,18 +120,11 @@
     }
 
     .hero{
-      display:grid;
-      grid-template-columns:1.2fr .8fr;
-      gap:18px;
-      margin-bottom:18px;
-    }
-
-    .hero-left,
-    .hero-right{
       background:#f8fafc;
       border:1px solid var(--line);
       border-radius:18px;
       padding:18px;
+      margin-bottom:18px;
     }
 
     .pill{
@@ -173,10 +166,59 @@
       line-height:1.5;
     }
 
+    .membership-inline{
+      margin:18px 0 16px;
+      padding:16px;
+      border-radius:16px;
+      border:1px solid var(--line);
+      background:#fff;
+    }
+
+    .membership-inline-head{
+      display:flex;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+    }
+
+    .membership-inline small{
+      display:block;
+      color:#64748b;
+      text-transform:uppercase;
+      letter-spacing:.04em;
+      font-size:.75rem;
+      margin-bottom:4px;
+    }
+
+    .membership-label{
+      font-size:.94rem;
+      font-weight:700;
+      color:#334155;
+      margin-bottom:6px;
+    }
+
+    .days-value{
+      font-size:1.25rem;
+      font-weight:800;
+    }
+
+    .days-value.ok{ color:#166534; }
+    .days-value.warn{ color:#854d0e; }
+    .days-value.danger{ color:#b91c1c; }
+
+    .renew-note{
+      color:#64748b;
+      font-size:.9rem;
+      line-height:1.4;
+      margin-top:10px;
+    }
+
     .mini-grid{
       display:grid;
       grid-template-columns:1fr 1fr;
       gap:12px;
+      margin-top:16px;
     }
 
     .mini-item{
@@ -209,8 +251,6 @@
       gap:18px;
     }
 
-    .col-7{ grid-column:span 7; }
-    .col-5{ grid-column:span 5; }
     .col-6{ grid-column:span 6; }
     .col-12{ grid-column:span 12; }
 
@@ -240,7 +280,7 @@
       font-weight:700;
     }
 
-    input, textarea, select{
+    input, textarea{
       width:100%;
       border:1px solid #cbd5e1;
       border-radius:14px;
@@ -285,48 +325,6 @@
 
     .hidden{
       display:none !important;
-    }
-
-    .membership-status{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      padding:14px;
-      border-radius:16px;
-      border:1px solid var(--line);
-      background:#fff;
-      margin-bottom:14px;
-      flex-wrap:wrap;
-    }
-
-    .days-box{
-      display:flex;
-      flex-direction:column;
-      gap:4px;
-    }
-
-    .days-box small{
-      color:#64748b;
-      text-transform:uppercase;
-      letter-spacing:.04em;
-      font-size:.75rem;
-    }
-
-    .days-value{
-      font-size:1.2rem;
-      font-weight:800;
-    }
-
-    .days-value.ok{ color:#166534; }
-    .days-value.warn{ color:#854d0e; }
-    .days-value.danger{ color:#b91c1c; }
-
-    .renew-note{
-      color:#64748b;
-      font-size:.9rem;
-      line-height:1.4;
-      margin-top:8px;
     }
 
     .preview-grid{
@@ -399,8 +397,7 @@
     }
 
     @media (max-width: 980px){
-      .hero{ grid-template-columns:1fr; }
-      .col-7,.col-5,.col-6,.col-12{ grid-column:span 12; }
+      .col-6,.col-12{ grid-column:span 12; }
     }
 
     @media (max-width: 700px){
@@ -421,6 +418,9 @@
       .btn{
         width:100%;
       }
+      .membership-inline-head{
+        align-items:flex-start;
+      }
     }
   </style>
 </head>
@@ -429,9 +429,9 @@
     <section class="card">
       <div class="topbar">
         <div>
-          <h1>Panel de miembro premium</h1>
+          <h1>Panel de miembro</h1>
           <p class="sub">
-            Desde acá podés administrar tu perfil, cambiar horarios, dirección, vacaciones, foto principal y galería. También vas a ver cuánto tiempo te queda de membresía y cuándo podés renovarla.
+            Desde acá podés administrar tu perfil, cambiar tus datos, actualizar imágenes y controlar tu membresía.
           </p>
         </div>
 
@@ -442,78 +442,53 @@
       </div>
 
       <div class="hero">
-        <div class="hero-left">
-          <div class="pill ok" id="estadoBox">Cargando perfil...</div>
-          <h2 class="hero-title" id="heroNombre">Cargando panel...</h2>
-          <p class="hero-desc" id="heroDescripcion">Estamos cargando tu información para que puedas administrarla desde Conecta2.</p>
+        <div class="pill ok" id="estadoBox">Cargando perfil...</div>
+        <div class="membership-label">Perfil cargado</div>
+
+        <div class="membership-inline">
+          <div class="membership-inline-head">
+            <div>
+              <small>Membresía activa</small>
+              <div class="days-value ok" id="diasRestantes">-</div>
+            </div>
+
+            <button class="btn btn-renew disabled" id="btnRenovar" type="button" disabled>
+              Renovar membresía
+            </button>
+          </div>
+
+          <div class="renew-note" id="renewNote">
+            Este botón se activa cuando faltan 5 días o menos para el vencimiento.
+          </div>
         </div>
 
-        <div class="hero-right">
-          <div class="mini-grid">
-            <div class="mini-item">
-              <small>ID de registro</small>
-              <strong id="idRegistro">-</strong>
-            </div>
-            <div class="mini-item">
-              <small>ID de membresía</small>
-              <strong id="idMembresia">-</strong>
-            </div>
-            <div class="mini-item">
-              <small>Usuario</small>
-              <strong id="usuarioAcceso">-</strong>
-            </div>
-            <div class="mini-item">
-              <small>Contraseña</small>
-              <strong id="passwordAcceso">-</strong>
-            </div>
+        <h2 class="hero-title" id="heroNombre">Cargando panel...</h2>
+        <p class="hero-desc" id="heroDescripcion">Desde acá podés administrar tu perfil.</p>
+
+        <div class="mini-grid">
+          <div class="mini-item">
+            <small>ID de registro</small>
+            <strong id="idRegistro">-</strong>
+          </div>
+          <div class="mini-item">
+            <small>Estado del perfil</small>
+            <strong id="estadoPerfil">-</strong>
+          </div>
+          <div class="mini-item">
+            <small>Usuario</small>
+            <strong id="usuarioAcceso">-</strong>
+          </div>
+          <div class="mini-item">
+            <small>Contraseña</small>
+            <strong id="passwordAcceso">-</strong>
           </div>
         </div>
       </div>
 
       <div class="grid">
-        <div class="col-5">
+        <div class="col-12">
           <div class="box">
-            <h2>Membresía</h2>
-
-            <div class="membership-status">
-              <div class="days-box">
-                <small>Días restantes</small>
-                <div class="days-value ok" id="diasRestantes">-</div>
-              </div>
-
-              <button class="btn btn-primary disabled" id="btnRenovar" type="button" disabled>
-                Renovar membresía
-              </button>
-            </div>
-
-            <div class="mini-grid">
-              <div class="mini-item">
-                <small>Plan</small>
-                <strong id="plan">-</strong>
-              </div>
-              <div class="mini-item">
-                <small>Importe</small>
-                <strong id="importe">-</strong>
-              </div>
-              <div class="mini-item">
-                <small>Resultado</small>
-                <strong id="resultadoPago">-</strong>
-              </div>
-              <div class="mini-item">
-                <small>Estado del perfil</small>
-                <strong id="estadoPerfil">-</strong>
-              </div>
-            </div>
-
-            <div class="renew-note" id="renewNote">
-              El botón de renovación se activa automáticamente cuando faltan 5 días o menos para el vencimiento.
-            </div>
-          </div>
-        </div>
-
-        <div class="col-7">
-          <div class="box">
-            <h2>Datos principales del perfil</h2>
+            <h2>Datos principales del negocio</h2>
 
             <div class="field">
               <label for="nombrePerfil">Nombre del negocio / perfil</label>
@@ -671,17 +646,6 @@
       const btnRecargar = document.getElementById('btnRecargar');
       const btnVerPerfil = document.getElementById('btnVerPerfil');
       const btnRenovar = document.getElementById('btnRenovar');
-      btnRenovar.addEventListener("click", function () {
-
-  if (!idRegistro) {
-    alert("No se encontró el ID del registro.");
-    return;
-  }
-
-  window.location.href =
-    "activar-membresia.html?id_registro=" + idRegistro + "&modo=renovacion";
-
-});
       const renewNote = document.getElementById('renewNote');
 
       const vacacionesActivo = document.getElementById('vacacionesActivo');
@@ -754,22 +718,6 @@
         return [String(item.nombre || '').trim(), String(item.apellido || '').trim()].filter(Boolean).join(' ').trim();
       }
 
-      function normalizarPlan(plan) {
-        const p = String(plan || '').trim().toLowerCase();
-        if (!p) return '-';
-        if (p === '4_meses') return 'Plan cuatrimestral';
-        if (p === 'anual_promo') return 'Plan anual promo';
-        if (p === 'trimestral') return 'Plan trimestral';
-        return String(plan).replaceAll('_', ' ');
-      }
-
-      function normalizarImporte(valor) {
-        const limpio = String(valor || '').replace(/[^\d.,-]/g, '').replace(/\./g, '').replace(',', '.');
-        const n = Number(limpio);
-        if (!n) return '-';
-        return '$' + n.toLocaleString('es-AR');
-      }
-
       function setPreview(previewId, base64) {
         const box = document.getElementById(previewId);
         if (!box) return;
@@ -794,7 +742,7 @@
         });
       }
 
-      async function bindImageInput(input, callback) {
+      function bindImageInput(input, callback) {
         input.addEventListener('change', async function () {
           const file = input.files && input.files[0];
           if (!file) return;
@@ -841,154 +789,153 @@
         return;
       }
 
-      function getSavedMembership() {
-        try {
-          const key = 'conecta2_ultimo_resumen_membresia_' + idRegistro;
-          return JSON.parse(localStorage.getItem(key) || '{}');
-        } catch (e) {
-          return {};
-        }
-      }
-
       function actualizarBloqueMembresia(saved) {
-        const plan = saved.plan || '';
-        const importe = saved.importe || '';
-        const idMembresia = saved.idMembresia || saved.id_membresia || '';
-        const resultado = saved.resultado || saved.mp_result || saved.collection_status || 'approved';
-        const dias = Number(saved.diasRestantes || saved.dias_restantes || saved.dias || 0);
-
-        setText('plan', normalizarPlan(plan));
-        setText('importe', normalizarImporte(importe));
-        setText('idMembresia', idMembresia, '-');
-        setText('resultadoPago', resultado, '-');
+        const diasRaw = saved ? (saved.diasRestantes ?? saved.dias_restantes ?? saved.dias ?? '') : '';
+        const tieneDias = diasRaw !== '' && diasRaw !== null && diasRaw !== undefined && !Number.isNaN(Number(diasRaw));
+        const dias = Number(diasRaw || 0);
 
         const diasBox = document.getElementById('diasRestantes');
         diasBox.className = 'days-value ok';
 
-        if (!saved || (!saved.diasRestantes && !saved.dias_restantes && !saved.dias)) {
+        btnRenovar.disabled = true;
+        btnRenovar.classList.add('disabled');
+
+        if (!tieneDias) {
           diasBox.textContent = '-';
-          btnRenovar.disabled = true;
-          btnRenovar.classList.add('disabled');
-          renewNote.textContent = 'El botón de renovación se activa automáticamente cuando faltan 5 días o menos para el vencimiento.';
+          renewNote.textContent = 'Este botón se activa cuando faltan 5 días o menos para el vencimiento.';
+          return;
+        }
+
+        if (dias <= 0) {
+          diasBox.className = 'days-value danger';
+          diasBox.textContent = 'Vencida';
+          btnRenovar.disabled = false;
+          btnRenovar.classList.remove('disabled');
+          renewNote.textContent = 'Tu membresía está vencida. Renovala para seguir visible en Conecta2.';
           return;
         }
 
         if (dias <= 5) {
           diasBox.className = 'days-value danger';
-          diasBox.textContent = dias <= 0 ? 'Vencida' : (dias + ' día' + (dias === 1 ? '' : 's'));
+          diasBox.textContent = dias + ' día' + (dias === 1 ? '' : 's');
           btnRenovar.disabled = false;
           btnRenovar.classList.remove('disabled');
-          renewNote.textContent = dias <= 0
-            ? 'Tu membresía está vencida. Renovala para seguir visible en Conecta2.'
-            : 'Tu membresía está en zona crítica. Ya podés renovarla desde este panel.';
+          renewNote.textContent = 'Tu membresía está en zona crítica. Ya podés renovarla desde este panel.';
+          return;
+        }
+
+        if (dias <= 7) {
+          diasBox.className = 'days-value warn';
+          diasBox.textContent = dias + ' día' + (dias === 1 ? '' : 's');
+          renewNote.textContent = 'Este botón se activa cuando faltan 5 días o menos para el vencimiento.';
           return;
         }
 
         diasBox.className = 'days-value ok';
         diasBox.textContent = dias + ' días';
-        btnRenovar.disabled = true;
-        btnRenovar.classList.add('disabled');
-        renewNote.textContent = 'El botón de renovación se activa automáticamente cuando faltan 5 días o menos para el vencimiento.';
+        renewNote.textContent = 'Este botón se activa cuando faltan 5 días o menos para el vencimiento.';
       }
 
-       function jsonp(url, callback) {
-  const script = document.createElement("script");
-  const callbackName = "jsonp_cb_" + Math.floor(Math.random()*1000000);
+      function jsonp(url, callback) {
+        const script = document.createElement('script');
+        const callbackName = 'jsonp_cb_' + Math.floor(Math.random() * 1000000);
 
-  window[callbackName] = function(data) {
-    delete window[callbackName];
-    document.body.removeChild(script);
-    callback(data);
-  };
+        window[callbackName] = function(data) {
+          try { delete window[callbackName]; } catch (e) {}
+          if (script.parentNode) script.parentNode.removeChild(script);
+          callback(data);
+        };
 
-  script.src = url + "&callback=" + callbackName;
-  document.body.appendChild(script);
-}
+        script.src = url + '&callback=' + callbackName;
+        document.body.appendChild(script);
+      }
 
       function cargarPerfil() {
-          setEstado('Cargando perfil...', 'warn');
-          limpiarMsg();
+        setEstado('Cargando perfil...', 'warn');
+        limpiarMsg();
 
-          jsonp(
-  SCRIPT_URL + '?action=obtenerPerfil&id=' + encodeURIComponent(idRegistro),
-  function(data) {
+        jsonp(
+          SCRIPT_URL + '?action=obtenerPerfil&id=' + encodeURIComponent(idRegistro),
+          function(data) {
+            if (!data || !data.ok || !data.item) {
+              setEstado('No se pudo cargar', 'danger');
+              setMsg('No se pudo obtener el perfil del miembro.', 'error');
+              return;
+            }
 
-          if (!data || !data.ok || !data.item) {
-            setEstado('No se pudo cargar', 'danger');
-            setMsg('No se pudo obtener el perfil del miembro.', 'error');
-            return;
+            const item = data.item;
+            actualizarBloqueMembresia(item);
+            const nombrePerfil = nombrePerfilDesdeItem(item);
+
+            setEstado('Perfil cargado', 'ok');
+            setText('heroNombre', nombrePerfil, 'Panel de miembro');
+            setText('heroDescripcion', item.descripcion || 'Desde acá podés administrar tu perfil.');
+            setText('idRegistro', idRegistro, '-');
+            setText('estadoPerfil', item.estado || 'activo', '-');
+            setText('usuarioAcceso', 'Cargando...', '-');
+            setText('passwordAcceso', 'Cargando...', '-');
+
+            setValor('nombrePerfil', nombrePerfil);
+            setValor('descripcion', item.descripcion || '');
+            setValor('whatsapp', item.whatsapp || '');
+            setValor('telefono', item.telefono || item.telefono_alternativo || '');
+            setValor('email', item.email || '');
+            setValor('direccion', item.direccion || item.zona || '');
+            setValor('horario', item.horario || item.horarios || '');
+            setValor('mediosPago', item.medios_pago || '');
+
+            const vacacionesOn =
+              String(item.cerrado_por_vacaciones || item.vacaciones_activo || '')
+                .trim()
+                .toLowerCase() === 'si';
+
+            setChecked('vacacionesActivo', vacacionesOn);
+            setValor('vacacionesDesde', item.vacaciones_desde || '');
+            setValor('vacacionesHasta', item.vacaciones_hasta || '');
+            mostrarFechasVacaciones();
+
+            const galeriaOn =
+              String(item.galeria_activa || '')
+                .trim()
+                .toLowerCase() === 'si';
+
+            setChecked('galeriaActiva', galeriaOn);
+            mostrarGaleria();
+
+            fotoPrincipalBase64 = item.foto_base64 || '';
+            img1Base64 = item.imagen_1 || '';
+            img2Base64 = item.imagen_2 || '';
+            img3Base64 = item.imagen_3 || '';
+            img4Base64 = item.imagen_4 || '';
+
+            setPreview('previewFotoPrincipal', fotoPrincipalBase64);
+            setPreview('previewImg1', img1Base64);
+            setPreview('previewImg2', img2Base64);
+            setPreview('previewImg3', img3Base64);
+            setPreview('previewImg4', img4Base64);
+
+            btnVerPerfil.href = 'perfil.html?id=' + encodeURIComponent(idRegistro);
           }
-
-          const item = data.item;
-          actualizarBloqueMembresia(item);
-          const nombrePerfil = nombrePerfilDesdeItem(item);
-
-          setEstado('Perfil cargado', 'ok');
-          setText('heroNombre', nombrePerfil, 'Panel de miembro premium');
-          setText('heroDescripcion', item.descripcion || 'Administrá tu perfil premium desde Conecta2.');
-          setText('idRegistro', idRegistro, '-');
-          setText('estadoPerfil', item.estado || 'activo', '-');
-          setText('usuarioAcceso', 'Cargando...', '-');
-          setText('passwordAcceso', 'Cargando...', '-');
-
-          setValor('nombrePerfil', nombrePerfil);
-          setValor('descripcion', item.descripcion || '');
-          setValor('whatsapp', item.whatsapp || '');
-          setValor('telefono', item.telefono || item.telefono_alternativo || '');
-          setValor('email', item.email || '');
-          setValor('direccion', item.direccion || item.zona || '');
-          setValor('horario', item.horario || item.horarios || '');
-          setValor('mediosPago', item.medios_pago || '');
-
-          const vacacionesOn =
-            String(item.cerrado_por_vacaciones || item.vacaciones_activo || '')
-              .trim()
-              .toLowerCase() === 'si';
-
-          setChecked('vacacionesActivo', vacacionesOn);
-          setValor('vacacionesDesde', item.vacaciones_desde || '');
-          setValor('vacacionesHasta', item.vacaciones_hasta || '');
-          mostrarFechasVacaciones();
-
-          const galeriaOn =
-            String(item.galeria_activa || '')
-              .trim()
-              .toLowerCase() === 'si';
-
-          setChecked('galeriaActiva', galeriaOn);
-          mostrarGaleria();
-
-          fotoPrincipalBase64 = item.foto_base64 || '';
-          img1Base64 = item.imagen_1 || '';
-          img2Base64 = item.imagen_2 || '';
-          img3Base64 = item.imagen_3 || '';
-          img4Base64 = item.imagen_4 || '';
-
-          setPreview('previewFotoPrincipal', fotoPrincipalBase64);
-          setPreview('previewImg1', img1Base64);
-          setPreview('previewImg2', img2Base64);
-          setPreview('previewImg3', img3Base64);
-          setPreview('previewImg4', img4Base64);
-
-          btnVerPerfil.href = 'perfil.html?id=' + encodeURIComponent(idRegistro);
-       }
-  );
-}
+        );
+      }
 
       function cargarCredenciales() {
-  jsonp(
-    SCRIPT_URL + '?action=obtenerCredencialesMiembroAPI&id_registro=' + encodeURIComponent(idRegistro),
-    function(data) {
-      if (data && data.ok) {
-        setText('usuarioAcceso', data.usuario || '-', '-');
-        setText('passwordAcceso', data.password || '-', '-');
+        jsonp(
+          SCRIPT_URL + '?action=obtenerCredencialesMiembroAPI&id_registro=' + encodeURIComponent(idRegistro),
+          function(data) {
+            if (data && data.ok) {
+              setText('usuarioAcceso', data.usuario || '-', '-');
+              setText('passwordAcceso', data.password || '-', '-');
+            } else {
+              setText('usuarioAcceso', '-', '-');
+              setText('passwordAcceso', '-', '-');
+            }
+          }
+        );
       }
-    }
-  );
-}
 
-         async function guardarPanel() {
-             try {
+      async function guardarPanel() {
+        try {
           limpiarMsg();
           setEstado('Guardando cambios...', 'warn');
           btnGuardar.disabled = true;
@@ -1045,20 +992,16 @@
 
       btnGuardar.addEventListener('click', guardarPanel);
 
-      document.getElementById('btnRecargar').addEventListener('click', function () {
+      btnRecargar.addEventListener('click', function () {
         location.reload();
       });
 
       btnRenovar.addEventListener('click', function () {
         if (btnRenovar.disabled) return;
 
-        const destino = 'activar-membresia.html?id_registro=' + encodeURIComponent(idRegistro) + '&modo=renovar';
         window.location.href =
-        "activar-membresia.html?id_registro=" + perfil.id_registro + "&modo=renovacion";
+          'activar-membresia.html?id_registro=' + encodeURIComponent(idRegistro) + '&modo=renovacion';
       });
-
-      const savedMembership = getSavedMembership();
-      actualizarBloqueMembresia(savedMembership);
 
       cargarPerfil();
       cargarCredenciales();
