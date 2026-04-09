@@ -671,6 +671,17 @@
       const btnRecargar = document.getElementById('btnRecargar');
       const btnVerPerfil = document.getElementById('btnVerPerfil');
       const btnRenovar = document.getElementById('btnRenovar');
+      btnRenovar.addEventListener("click", function () {
+
+  if (!idRegistro) {
+    alert("No se encontró el ID del registro.");
+    return;
+  }
+
+  window.location.href =
+    "activar-membresia.html?id_registro=" + idRegistro + "&modo=renovacion";
+
+});
       const renewNote = document.getElementById('renewNote');
 
       const vacacionesActivo = document.getElementById('vacacionesActivo');
