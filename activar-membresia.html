@@ -1118,15 +1118,7 @@
       .map(mapPlanFromBackend);
 
     try {
-      var response = await fetch(CONFIG.appsScriptUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'text/plain;charset=utf-8'
-        },
-        body: JSON.stringify({
-          action: 'listarPlanesMembresiaActivos'
-        })
-      });
+      var response = await fetch(CONFIG.appsScriptUrl + '?action=listarPlanesMembresiaActivos');
 
       var text = await response.text();
       var result = null;
