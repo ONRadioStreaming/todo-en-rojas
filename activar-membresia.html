@@ -1112,8 +1112,8 @@
       <p class="plan-desc">${plan.description || ''}</p>
       ${plan.oldAmountText || plan.discountText ? `
         <div class="price-row">
-          ${plan.oldAmountText ? <div class="price-old">${plan.oldAmountText}</div> : ''}
-          ${plan.discountText ? <div class="discount">${plan.discountText}</div> : ''}
+          ${plan.oldAmountText ? '<div class="price-old">' + plan.oldAmountText + '</div>' : ''}
+          ${plan.discountText ? '<div class="discount">' + plan.discountText + '</div>' : ''}
         </div>
       ` : ''}
       <div class="price-big">${plan.amountText}</div>
