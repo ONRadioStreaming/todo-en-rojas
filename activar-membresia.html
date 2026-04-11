@@ -1460,7 +1460,7 @@
 
       STATE.membershipSaved = true;
       persistLastMembership(payload);
-      showNotice('success', Solicitud registrada correctamente para ${STATE.memberData.nombre_negocio || 'tu perfil'}.);
+      showNotice('success', 'Solicitud registrada correctamente para ' + (STATE.memberData.nombre_negocio || 'tu perfil'));
 
       if (STATE.currentSelection.methodKey === 'mercado_pago') {
         STATE.paymentUrl = normalizeText(result.redirect_url || result.payment_url || result.url_pago || '');
