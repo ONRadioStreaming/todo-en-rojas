@@ -1262,7 +1262,7 @@
             'Después de confirmar el cobro, la membresía podrá activarse.'
           ];
 
-    return items.map((item) => <li>${item}</li>).join('');
+    return items.map((item) => '<li>' + item + '</li>').join('');
   }
 
   function openModal() {
