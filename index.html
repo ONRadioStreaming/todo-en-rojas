@@ -508,26 +508,55 @@
     }
 
     .guide-btn-wrap {
-      margin-top: 16px;
-    }
+  display: none;
+}
 
-    .btn-guide {
-      display: flex;
-      width: 100%;
-      justify-content: center;
-      align-items: center;
-      background: linear-gradient(145deg, #ff9f1c, #ff6f3d);
-      color: #fff;
-      border-radius: 20px;
-      padding: 16px 14px;
-      font-weight: 900;
-      font-size: 1rem;
-      letter-spacing: -0.02em;
-      box-shadow: 0 10px 22px rgba(0,0,0,0.16);
-      border: 0;
-      cursor: pointer;
-      font-family: inherit;
-    }
+.btn-guide {
+  display: none;
+}
+
+.btn-laboral {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: linear-gradient(145deg, #0f172a, #1e3a8a);
+  color: #fff;
+  border-radius: 22px;
+  padding: 16px 14px;
+  font-weight: 900;
+  font-size: 1rem;
+  letter-spacing: -0.02em;
+  box-shadow: 0 10px 22px rgba(0,0,0,0.16);
+  border: 0;
+  cursor: pointer;
+  font-family: inherit;
+  line-height: 1.35;
+}
+
+.perfil-laboral-label {
+  margin-bottom: 10px;
+  font-size: 1rem;
+  line-height: 1.4;
+  color: #14304c;
+  font-weight: 800;
+  text-align: center;
+}
+
+.emergency-note {
+  margin-top: 14px;
+  margin-bottom: 10px;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: #5b6f82;
+  font-weight: 700;
+  text-align: center;
+  background: #ffffff;
+  border: 1px solid #dde7ef;
+  border-radius: 18px;
+  padding: 12px 13px;
+}
 
     .support-card {
       margin-top: 16px;
@@ -719,18 +748,24 @@
       display: flex;
     }
 
+#updateModal .install-box {
+  border: 1px solid rgba(36, 198, 220, 0.22);
+  box-shadow: 0 22px 42px rgba(0,0,0,0.28), 0 0 0 1px rgba(36, 198, 220, 0.08);
+}
+
     .install-box,
-    .login-box,
-    .registro-box {
-      width: 100%;
-      max-width: 420px;
-      background: linear-gradient(180deg, #ffffff 0%, #eef4f7 100%);
-      color: #12263f;
-      border-radius: 28px;
-      padding: 24px 18px 18px;
-      box-shadow: 0 22px 42px rgba(0,0,0,0.28);
-      border: 1px solid rgba(255,255,255,0.7);
-    }
+.login-box,
+.registro-box {
+  width: 100%;
+  max-width: 420px;
+  background: linear-gradient(180deg, #ffffff 0%, #eef4f7 100%);
+  color: #12263f;
+  border-radius: 28px;
+  padding: 24px 18px 18px;
+  box-shadow: 0 22px 42px rgba(0,0,0,0.28);
+  border: 1px solid rgba(255,255,255,0.7);
+  position: relative;
+}
 
     .install-icon,
     .login-icon,
@@ -850,6 +885,21 @@
       font-weight: 900;
       cursor: pointer;
     }
+
+.install-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 38px;
+  height: 38px;
+  border: 0;
+  border-radius: 12px;
+  background: #edf3f8;
+  color: #17314c;
+  font-size: 1rem;
+  font-weight: 900;
+  cursor: pointer;
+}
 
     .login-box,
     .registro-box {
@@ -1180,81 +1230,90 @@ body.onboarding-active #mainApp {
       </div>
 
       <section class="content" id="categorias">
-        <h2 class="section-title">Categorías</h2>
+  <h2 class="section-title">Categorías</h2>
 
-        <div class="grid" id="categoryGrid">
-          <a class="category-card cat-11" id="cardComercios" href="categoria.html?cat=comercios" data-name="comercios">
-            <div>
-              <span class="card-title">Comercios</span>
-              <span class="card-subtitle">Locales y negocios físicos</span>
-            </div>
-          </a>
+  <div class="grid" id="categoryGrid">
+    <a class="category-card cat-11" id="cardComercios" href="categoria.html?cat=comercios" data-name="comercios">
+      <div>
+        <span class="card-title">Comercios</span>
+        <span class="card-subtitle">Locales y negocios físicos</span>
+      </div>
+    </a>
 
-          <a class="category-card cat-3" id="cardServicios" href="categoria.html?cat=servicios" data-name="servicios">
-            <div>
-              <span class="card-title">Servicios</span>
-              <span class="card-subtitle">Personas que realizan trabajos o tareas</span>
-            </div>
-          </a>
+    <a class="category-card cat-3" id="cardServicios" href="categoria.html?cat=servicios" data-name="servicios">
+      <div>
+        <span class="card-title">Servicios</span>
+        <span class="card-subtitle">Personas que realizan trabajos o tareas</span>
+      </div>
+    </a>
 
-          <a class="category-card cat-15" id="cardProfesionales" href="categoria.html?cat=profesionales" data-name="profesionales">
-            <div>
-              <span class="card-title">Profesionales</span>
-              <span class="card-subtitle">Profesiones universitarias o técnicas</span>
-            </div>
-          </a>
+    <a class="category-card cat-15" id="cardProfesionales" href="categoria.html?cat=profesionales" data-name="profesionales">
+      <div>
+        <span class="card-title">Profesionales</span>
+        <span class="card-subtitle">Profesiones universitarias o técnicas</span>
+      </div>
+    </a>
 
-          <a class="category-card cat-4" id="cardSalud" href="categoria.html?cat=salud" data-name="salud">
-            <div>
-              <span class="card-title">Salud</span>
-              <span class="card-subtitle">Profesionales de la salud</span>
-            </div>
-          </a>
-        </div>
+    <a class="category-card cat-4" id="cardSalud" href="categoria.html?cat=salud" data-name="salud">
+      <div>
+        <span class="card-title">Salud</span>
+        <span class="card-subtitle">Profesionales de la salud</span>
+      </div>
+    </a>
+  </div>
 
-        <div class="emergency-bottom">
-          <button class="btn-emergency" id="btnEmergencias" type="button">Emergencias</button>
-        </div>
+  <div class="section-block" id="perfilLaboralWrap">
+  <div class="perfil-laboral-label" id="perfilLaboralLabel">Buscás trabajo?</div>
+  <a class="btn-laboral" id="btnPerfilLaboral" href="perfil-laboral.html">
+    Cargá tu perfil laboral
+  </a>
+</div>
 
-        <div class="farmacia-banner" id="farmaciaTurno">
-          <div class="pharmacy-cross-glow">
-            <span>+</span>
-          </div>
+<div class="section-block" id="emergenciasWrap">
+  <div class="emergency-note">
+    Accedé rápido a números útiles ante una emergencia.
+  </div>
+</div>
 
-          <div class="farmacia-overlay">
-            <div class="farmacia-label">FARMACIA DE TURNO</div>
+<div class="emergency-bottom">
+  <button class="btn-emergency" id="btnEmergencias" type="button">Emergencias</button>
+</div>
 
-            <div class="farmacia-horario" id="farmaciaHorario">
-              Hasta las 08:00 hs
-            </div>
+  <div class="farmacia-banner" id="farmaciaTurno">
+    <div class="pharmacy-cross-glow">
+      <span>+</span>
+    </div>
 
-            <div class="farmacia-name" id="farmaciaNombre">
-              FARMACIA
-            </div>
+    <div class="farmacia-overlay">
+      <div class="farmacia-label">FARMACIA DE TURNO</div>
 
-            <div class="farmacia-info">
-              <div class="info-line address" id="farmaciaDireccion">Dirección</div>
-              <div class="info-line phone" id="farmaciaTelefono">Teléfono</div>
-            </div>
+      <div class="farmacia-horario" id="farmaciaHorario">
+        Hasta las 08:00 hs
+      </div>
 
-            <div class="farmacia-actions">
-              <a class="farmacia-btn btn-call" id="btnFarmaciaLlamar" href="#" target="_blank" rel="noopener">Llamar</a>
-              <a class="farmacia-btn btn-wa" id="btnFarmaciaWhatsapp" href="#" target="_blank" rel="noopener">WhatsApp</a>
-              <a class="farmacia-btn btn-map" id="btnFarmaciaMapa" href="#" target="_blank" rel="noopener">Cómo llegar</a>
-            </div>
-          </div>
-        </div>
+      <div class="farmacia-name" id="farmaciaNombre">
+        FARMACIA
+      </div>
 
-        <div class="guide-btn-wrap">
-          <button class="btn-guide" id="openAppGuide" type="button">🧭 Ver guía de la app</button>
-        </div>
+      <div class="farmacia-info">
+        <div class="info-line address" id="farmaciaDireccion">Dirección</div>
+        <div class="info-line phone" id="farmaciaTelefono">Teléfono</div>
+      </div>
 
-        <div class="support-card section-block" id="soporteConecta2">
-          <h3 class="support-title">Soporte Conecta2</h3>
-          <p class="support-text">¿Tenés dudas o querés hacernos una sugerencia? Escribinos.</p>
-          <a class="support-btn" href="https://wa.me/542474445664?text=Hola%2C%20estoy%20navegando%20en%20Conecta2%20y%20quiero%20hacer%20una%20consulta%20o%20enviar%20una%20sugerencia." target="_blank">Escribinos</a>
-        </div>
-      </section>
+      <div class="farmacia-actions">
+        <a class="farmacia-btn btn-call" id="btnFarmaciaLlamar" href="#" target="_blank" rel="noopener">Llamar</a>
+        <a class="farmacia-btn btn-wa" id="btnFarmaciaWhatsapp" href="#" target="_blank" rel="noopener">WhatsApp</a>
+        <a class="farmacia-btn btn-map" id="btnFarmaciaMapa" href="#" target="_blank" rel="noopener">Cómo llegar</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="support-card section-block" id="soporteConecta2">
+    <h3 class="support-title">Soporte Conecta2</h3>
+    <p class="support-text">¿Tenés dudas o querés hacernos una sugerencia? Escribinos.</p>
+    <a class="support-btn" href="https://wa.me/542474445664?text=Hola%2C%20estoy%20navegando%20en%20Conecta2%20y%20quiero%20hacer%20una%20consulta%20o%20enviar%20una%20sugerencia." target="_blank">Escribinos</a>
+  </div>
+</section>
 
       <div class="footer">
         <div class="footer-logo">
@@ -1359,22 +1418,37 @@ body.onboarding-active #mainApp {
 
  
   <div class="install-modal" id="installModal">
-    <div class="install-box">
-      <div class="install-icon">📲</div>
-      <h3 class="install-title">Instalá Conecta2</h3>
-      <p class="install-text">
-        La app para encontrar comercios, servicios y profesionales de tu localidad en segundos.
-      </p>
+  <div class="install-box">
+    <button class="install-close" id="installCloseBtn" type="button">✕</button>
+    <div class="install-icon">📲</div>
+    <h3 class="install-title">Instalá Conecta2</h3>
+    <p class="install-text">
+      La app para encontrar comercios, servicios y profesionales de tu localidad en segundos.
+    </p>
 
-      <div class="install-note install-hidden" id="iosInstallNote">
-        En iPhone o iPad, tocá el botón de compartir de Safari y después elegí <strong>“Agregar a pantalla de inicio”</strong>.
-      </div>
+    <div class="install-note install-hidden" id="iosInstallNote">
+      En iPhone o iPad, tocá el botón de compartir de Safari y después elegí <strong>Agregar a pantalla de inicio</strong>.
+    </div>
 
-      <div class="install-actions">
-        <button class="install-btn install-btn-primary" id="installConfirmBtn" type="button">Instalar</button>
-      </div>
+    <div class="install-actions">
+      <button class="install-btn install-btn-primary" id="installConfirmBtn" type="button">Instalar</button>
     </div>
   </div>
+</div>
+
+<div class="install-modal" id="updateModal">
+  <div class="install-box">
+    <div class="install-icon">🚀</div>
+    <h3 class="install-title">Hay una nueva versión disponible</h3>
+    <p class="install-text" id="updateModalText">
+      Detectamos una actualización de Conecta2. Tocá el botón de abajo para cargar la versión más reciente.
+    </p>
+
+    <div class="install-actions">
+      <button class="install-btn install-btn-primary" id="updateNowBtn" type="button">Actualizar ahora</button>
+    </div>
+  </div>
+</div>
 
   <div class="login-modal" id="loginModal">
     <div class="login-box">
@@ -1438,25 +1512,27 @@ body.onboarding-active #mainApp {
   const LS_PREMIUM_REMEMBER = "conecta2_premium_remember";
   const LS_PREMIUM_USER = "conecta2_premium_user";
   const LS_PREMIUM_PASS = "conecta2_premium_pass";
+  const LS_APP_VERSION = "conecta2_app_version";
+  const APP_VERSION = "4";
 
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', function () {
-      navigator.serviceWorker.register('./service-worker.js?v=3').catch(function(err) {
-        console.log('Error registrando service worker:', err);
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", function () {
+      navigator.serviceWorker.register("./service-worker.js?v=3").catch(function(err) {
+        console.log("Error registrando service worker:", err);
       });
     });
   }
 
-  const intro = document.getElementById('intro');
-  const mainApp = document.getElementById('mainApp');
+  const intro = document.getElementById("intro");
+  const mainApp = document.getElementById("mainApp");
 
   function mostrarAppSinIntro() {
-    intro.style.display = 'none';
-    mainApp.classList.add('visible');
+    intro.style.display = "none";
+    mainApp.classList.add("visible");
   }
 
   function intentarMostrarTourInicial() {
-    const yaVioTour = localStorage.getItem('conecta2_tour_visto') === 'true';
+    const yaVioTour = localStorage.getItem("conecta2_tour_visto") === "true";
     if (!yaVioTour) {
       setTimeout(function() {
         abrirGuia();
@@ -1464,54 +1540,57 @@ body.onboarding-active #mainApp {
     } else {
       setTimeout(function() {
         intentarMostrarInstaladorDespuesDelTour();
+        verificarNuevaVersion();
       }, 450);
     }
   }
 
-  if (sessionStorage.getItem('conecta2_intro_seen') === 'true') {
+  if (sessionStorage.getItem("conecta2_intro_seen") === "true") {
     mostrarAppSinIntro();
-    window.addEventListener('load', function () {
+    window.addEventListener("load", function () {
       setTimeout(intentarMostrarTourInicial, 300);
     });
   } else {
-    window.addEventListener('load', function () {
+    window.addEventListener("load", function () {
       setTimeout(function () {
-        intro.style.opacity = '0';
-        mainApp.classList.add('visible');
+        intro.style.opacity = "0";
+        mainApp.classList.add("visible");
       }, 5200);
 
       setTimeout(function () {
-        intro.style.display = 'none';
-        sessionStorage.setItem('conecta2_intro_seen', 'true');
+        intro.style.display = "none";
+        sessionStorage.setItem("conecta2_intro_seen", "true");
         intentarMostrarTourInicial();
       }, 5700);
     });
   }
 
-  const btnEmergencias = document.getElementById('btnEmergencias');
-  const closeEmergency = document.getElementById('closeEmergency');
-  const emergencyModal = document.getElementById('emergencyModal');
+  const btnEmergencias = document.getElementById("btnEmergencias");
+  const closeEmergency = document.getElementById("closeEmergency");
+  const emergencyModal = document.getElementById("emergencyModal");
 
-  btnEmergencias.addEventListener('click', function () {
-    emergencyModal.classList.add('show');
-    document.body.style.overflow = 'hidden';
-  });
+  if (btnEmergencias && closeEmergency && emergencyModal) {
+    btnEmergencias.addEventListener("click", function () {
+      emergencyModal.classList.add("show");
+      document.body.style.overflow = "hidden";
+    });
 
-  closeEmergency.addEventListener('click', function () {
-    emergencyModal.classList.remove('show');
-    document.body.style.overflow = '';
-  });
+    closeEmergency.addEventListener("click", function () {
+      emergencyModal.classList.remove("show");
+      document.body.style.overflow = "";
+    });
 
-  emergencyModal.addEventListener('click', function (e) {
-    if (e.target === emergencyModal) {
-      emergencyModal.classList.remove('show');
-      document.body.style.overflow = '';
-    }
-  });
+    emergencyModal.addEventListener("click", function (e) {
+      if (e.target === emergencyModal) {
+        emergencyModal.classList.remove("show");
+        document.body.style.overflow = "";
+      }
+    });
+  }
 
   function jsonp(url, callback, onError) {
-    const script = document.createElement('script');
-    const callbackName = 'cb_' + Date.now() + '_' + Math.floor(Math.random() * 100000);
+    const script = document.createElement("script");
+    const callbackName = "cb_" + Date.now() + "_" + Math.floor(Math.random() * 100000);
     let finished = false;
 
     window[callbackName] = function(data) {
@@ -1530,7 +1609,7 @@ body.onboarding-active #mainApp {
       if (onError) onError();
     };
 
-    script.src = url + (url.indexOf('?') >= 0 ? '&' : '?') + 'callback=' + encodeURIComponent(callbackName);
+    script.src = url + (url.indexOf("?") >= 0 ? "&" : "?") + "callback=" + encodeURIComponent(callbackName);
     document.body.appendChild(script);
 
     setTimeout(function() {
@@ -1562,7 +1641,7 @@ body.onboarding-active #mainApp {
     fetch(SCRIPT_URL, {
       method: "POST",
       body: formData
-    }).catch(() => {});
+    }).catch(function() {});
   }
 
   function obtenerTextoCorteFarmacia(hastaHora) {
@@ -1591,8 +1670,8 @@ body.onboarding-active #mainApp {
       method: "POST",
       body: formData
     })
-      .then(r => r.json())
-      .then(data => {
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
         if (!data.ok) return;
 
         const f = data.farmacia || {};
@@ -1637,17 +1716,22 @@ body.onboarding-active #mainApp {
           btnMapa.style.opacity = "0.7";
         }
       })
-      .catch(err => console.log("Error farmacia", err));
+      .catch(function(err) {
+        console.log("Error farmacia", err);
+      });
   }
 
-  const installModal = document.getElementById('installModal');
-  const installConfirmBtn = document.getElementById('installConfirmBtn');
-  const iosInstallNote = document.getElementById('iosInstallNote');
+  const installModal = document.getElementById("installModal");
+  const installConfirmBtn = document.getElementById("installConfirmBtn");
+  const installCloseBtn = document.getElementById("installCloseBtn");
+  const iosInstallNote = document.getElementById("iosInstallNote");
+  const updateModal = document.getElementById("updateModal");
+  const updateNowBtn = document.getElementById("updateNowBtn");
 
   let deferredPrompt = null;
 
   function esStandalone() {
-    return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+    return window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone === true;
   }
 
   function esIOS() {
@@ -1655,21 +1739,23 @@ body.onboarding-active #mainApp {
   }
 
   function mostrarInstalador() {
+    if (!installModal) return;
     if (esStandalone()) return;
 
     if (esIOS()) {
-      iosInstallNote.classList.remove('install-hidden');
+      iosInstallNote.classList.remove("install-hidden");
     } else {
-      iosInstallNote.classList.add('install-hidden');
+      iosInstallNote.classList.add("install-hidden");
     }
 
-    installModal.classList.add('show');
-    document.body.style.overflow = 'hidden';
+    installModal.classList.add("show");
+    document.body.style.overflow = "hidden";
   }
 
   function cerrarInstalador() {
-    installModal.classList.remove('show');
-    document.body.style.overflow = '';
+    if (!installModal) return;
+    installModal.classList.remove("show");
+    document.body.style.overflow = "";
   }
 
   function intentarMostrarInstaladorDespuesDelTour() {
@@ -1677,47 +1763,124 @@ body.onboarding-active #mainApp {
     mostrarInstalador();
   }
 
-  installConfirmBtn.addEventListener('click', async function() {
-    if (esIOS()) return;
-    if (!deferredPrompt) return;
+  if (installConfirmBtn) {
+    installConfirmBtn.addEventListener("click", async function() {
+      if (esIOS()) {
+        return;
+      }
 
-    deferredPrompt.prompt();
-    await deferredPrompt.userChoice;
-    deferredPrompt = null;
-  });
+      if (!deferredPrompt) {
+        return;
+      }
 
-  window.addEventListener('beforeinstallprompt', function(e) {
+      deferredPrompt.prompt();
+      await deferredPrompt.userChoice;
+      deferredPrompt = null;
+    });
+  }
+
+  if (installCloseBtn) {
+    installCloseBtn.addEventListener("click", function() {
+      cerrarInstalador();
+    });
+  }
+
+  if (installModal) {
+    installModal.addEventListener("click", function(e) {
+      if (e.target === installModal) {
+        cerrarInstalador();
+      }
+    });
+  }
+
+  window.addEventListener("beforeinstallprompt", function(e) {
     e.preventDefault();
     deferredPrompt = e;
   });
 
-  window.addEventListener('appinstalled', function() {
+  window.addEventListener("appinstalled", function() {
     deferredPrompt = null;
     cerrarInstalador();
   });
 
-  const loginModal = document.getElementById('loginModal');
-  const loginCloseBtn = document.getElementById('loginCloseBtn');
-  const btnPremiumLogin = document.getElementById('btnPremiumLogin');
-  const btnPremiumPanel = document.getElementById('btnPremiumPanel');
-  const btnPremiumLogout = document.getElementById('btnPremiumLogout');
-  const premiumSessionInfo = document.getElementById('premiumSessionInfo');
-  const premiumActions = document.getElementById('premiumActions');
-  const btnPremiumRegister = document.getElementById('btnPremiumRegister');
-  const registroModal = document.getElementById('registroModal');
-  const registroCloseBtn = document.getElementById('registroCloseBtn');
+  function mostrarModalActualizacion() {
+    if (!updateModal) return;
+    updateModal.classList.add("show");
+    document.body.style.overflow = "hidden";
+  }
 
-  const loginPremiumForm = document.getElementById('loginPremiumForm');
-  const loginUsuario = document.getElementById('loginUsuario');
-  const loginPassword = document.getElementById('loginPassword');
-  const rememberPremium = document.getElementById('rememberPremium');
-  const togglePassBtn = document.getElementById('togglePassBtn');
-  const loginMsg = document.getElementById('loginMsg');
-  const btnLoginSubmit = document.getElementById('btnLoginSubmit');
+  function cerrarModalActualizacion() {
+    if (!updateModal) return;
+    updateModal.classList.remove("show");
+    document.body.style.overflow = "";
+  }
+
+  function verificarNuevaVersion() {
+    const versionGuardada = localStorage.getItem(LS_APP_VERSION);
+
+    if (!versionGuardada) {
+      localStorage.setItem(LS_APP_VERSION, APP_VERSION);
+      return;
+    }
+
+    if (versionGuardada !== APP_VERSION) {
+      mostrarModalActualizacion();
+    }
+  }
+
+  if (updateNowBtn) {
+    updateNowBtn.addEventListener("click", function() {
+      localStorage.setItem(LS_APP_VERSION, APP_VERSION);
+
+      if ("caches" in window) {
+        caches.keys().then(function(names) {
+          return Promise.all(
+            names.map(function(name) {
+              return caches.delete(name);
+            })
+          );
+        }).finally(function() {
+          window.location.reload(true);
+        });
+      } else {
+        window.location.reload(true);
+      }
+    });
+  }
+
+  if (updateModal) {
+    updateModal.addEventListener("click", function(e) {
+      if (e.target === updateModal) {
+        cerrarModalActualizacion();
+      }
+    });
+  }
+
+  const loginModal = document.getElementById("loginModal");
+  const loginCloseBtn = document.getElementById("loginCloseBtn");
+  const btnPremiumLogin = document.getElementById("btnPremiumLogin");
+  const btnPremiumPanel = document.getElementById("btnPremiumPanel");
+  const btnPremiumLogout = document.getElementById("btnPremiumLogout");
+  const premiumSessionInfo = document.getElementById("premiumSessionInfo");
+  const premiumActions = document.getElementById("premiumActions");
+  const btnPremiumRegister = document.getElementById("btnPremiumRegister");
+  const registroModal = document.getElementById("registroModal");
+  const registroCloseBtn = document.getElementById("registroCloseBtn");
+
+  const loginPremiumForm = document.getElementById("loginPremiumForm");
+  const loginUsuario = document.getElementById("loginUsuario");
+  const loginPassword = document.getElementById("loginPassword");
+  const rememberPremium = document.getElementById("rememberPremium");
+  const togglePassBtn = document.getElementById("togglePassBtn");
+  const loginMsg = document.getElementById("loginMsg");
+  const btnLoginSubmit = document.getElementById("btnLoginSubmit");
+
+  const btnPerfilLaboral = document.getElementById("btnPerfilLaboral");
+  const perfilLaboralLabel = document.getElementById("perfilLaboralLabel");
 
   function getPremiumSession() {
     try {
-      return JSON.parse(localStorage.getItem(LS_PREMIUM_SESSION) || 'null');
+      return JSON.parse(localStorage.getItem(LS_PREMIUM_SESSION) || "null");
     } catch (e) {
       return null;
     }
@@ -1732,13 +1895,13 @@ body.onboarding-active #mainApp {
   }
 
   function getRememberFlag() {
-    return localStorage.getItem(LS_PREMIUM_REMEMBER) === 'true';
+    return localStorage.getItem(LS_PREMIUM_REMEMBER) === "true";
   }
 
   function saveRememberedCredentials(usuario, password) {
-    localStorage.setItem(LS_PREMIUM_REMEMBER, 'true');
-    localStorage.setItem(LS_PREMIUM_USER, usuario || '');
-    localStorage.setItem(LS_PREMIUM_PASS, password || '');
+    localStorage.setItem(LS_PREMIUM_REMEMBER, "true");
+    localStorage.setItem(LS_PREMIUM_USER, usuario || "");
+    localStorage.setItem(LS_PREMIUM_PASS, password || "");
   }
 
   function clearRememberedCredentials() {
@@ -1750,15 +1913,15 @@ body.onboarding-active #mainApp {
   function fillRememberedCredentials() {
     const remember = getRememberFlag();
     rememberPremium.checked = remember;
-    loginUsuario.value = remember ? (localStorage.getItem(LS_PREMIUM_USER) || '') : '';
-    loginPassword.value = remember ? (localStorage.getItem(LS_PREMIUM_PASS) || '') : '';
+    loginUsuario.value = remember ? (localStorage.getItem(LS_PREMIUM_USER) || "") : "";
+    loginPassword.value = remember ? (localStorage.getItem(LS_PREMIUM_PASS) || "") : "";
   }
 
   function openLoginModal() {
     fillRememberedCredentials();
-    loginMsg.textContent = '';
-    loginModal.classList.add('show');
-    document.body.style.overflow = 'hidden';
+    loginMsg.textContent = "";
+    loginModal.classList.add("show");
+    document.body.style.overflow = "hidden";
     setTimeout(function() {
       if (loginUsuario.value) {
         loginPassword.focus();
@@ -1769,50 +1932,67 @@ body.onboarding-active #mainApp {
   }
 
   function closeLoginModal() {
-    loginModal.classList.remove('show');
-    document.body.style.overflow = '';
+    loginModal.classList.remove("show");
+    document.body.style.overflow = "";
   }
 
   function openRegistroModal() {
-    registroModal.classList.add('show');
-    document.body.style.overflow = 'hidden';
+    registroModal.classList.add("show");
+    document.body.style.overflow = "hidden";
   }
 
   function closeRegistroModal() {
-    registroModal.classList.remove('show');
-    document.body.style.overflow = '';
+    registroModal.classList.remove("show");
+    document.body.style.overflow = "";
   }
+
+  function applyPerfilLaboralUI(session) {
+  if (!btnPerfilLaboral || !perfilLaboralLabel) return;
+
+  if (session && session.id_registro) {
+    perfilLaboralLabel.textContent = "Buscás personal?";
+    btnPerfilLaboral.textContent = "Ver perfiles laborales";
+    btnPerfilLaboral.href = "perfiles-laborales.html";
+    return;
+  }
+
+  perfilLaboralLabel.textContent = "Buscás trabajo?";
+  btnPerfilLaboral.textContent = "Cargá tu perfil laboral";
+  btnPerfilLaboral.href = "perfil-laboral.html";
+}
 
   function applyPremiumUI() {
     const session = getPremiumSession();
 
     if (session && session.id_registro) {
-      btnPremiumRegister.classList.add('hidden');
-      btnPremiumLogin.classList.add('hidden');
-      btnPremiumPanel.classList.remove('hidden');
-      btnPremiumLogout.classList.remove('hidden');
+      btnPremiumRegister.classList.add("hidden");
+      btnPremiumLogin.classList.add("hidden");
+      btnPremiumPanel.classList.remove("hidden");
+      btnPremiumLogout.classList.remove("hidden");
 
-      premiumActions.classList.add('session-on');
-      btnPremiumPanel.href = 'panel-miembro.html?id_registro=' + encodeURIComponent(session.id_registro);
-      premiumSessionInfo.textContent = 'Sesión activa como: ' + (session.usuario || 'miembro premium') + '.';
+      premiumActions.classList.add("session-on");
+      btnPremiumPanel.href = "panel-miembro.html?id_registro=" + encodeURIComponent(session.id_registro);
+      premiumSessionInfo.textContent = "Sesión activa como: " + (session.usuario || "miembro premium") + ".";
+      applyPerfilLaboralUI(session);
       return;
     }
 
-    btnPremiumRegister.classList.remove('hidden');
-    btnPremiumLogin.classList.remove('hidden');
-    btnPremiumPanel.classList.add('hidden');
-    btnPremiumLogout.classList.add('hidden');
+    btnPremiumRegister.classList.remove("hidden");
+    btnPremiumLogin.classList.remove("hidden");
+    btnPremiumPanel.classList.add("hidden");
+    btnPremiumLogout.classList.add("hidden");
 
-    premiumActions.classList.remove('session-on');
-    premiumSessionInfo.textContent = 'Elegí una opción para continuar.';
+    premiumActions.classList.remove("session-on");
+    premiumSessionInfo.textContent = "Elegí una opción para continuar.";
+    applyPerfilLaboralUI(null);
   }
 
   function loginPremium(usuario, password) {
     return new Promise(function(resolve) {
       const url = SCRIPT_URL
-        + '?action=loginMiembroPremium'
-        + '&usuario=' + encodeURIComponent(usuario)
-        + '&password=' + encodeURIComponent(password);
+        + "?action=loginMiembroPremium"
+        + "&usuario=" + encodeURIComponent(usuario)
+        + "&password=" + encodeURIComponent(password);
 
       jsonp(url, function(data) {
         resolve(data || null);
@@ -1822,139 +2002,163 @@ body.onboarding-active #mainApp {
     });
   }
 
-  btnPremiumRegister.addEventListener('click', openRegistroModal);
-  registroCloseBtn.addEventListener('click', closeRegistroModal);
+  if (btnPremiumRegister) {
+    btnPremiumRegister.addEventListener("click", openRegistroModal);
+  }
 
-  registroModal.addEventListener('click', function(e) {
-    if (e.target === registroModal) {
-      closeRegistroModal();
-    }
-  });
+  if (registroCloseBtn) {
+    registroCloseBtn.addEventListener("click", closeRegistroModal);
+  }
 
-  btnPremiumLogin.addEventListener('click', openLoginModal);
-  loginCloseBtn.addEventListener('click', closeLoginModal);
-
-  loginModal.addEventListener('click', function(e) {
-    if (e.target === loginModal) {
-      closeLoginModal();
-    }
-  });
-
-  togglePassBtn.addEventListener('click', function() {
-    const isPassword = loginPassword.getAttribute('type') === 'password';
-    loginPassword.setAttribute('type', isPassword ? 'text' : 'password');
-    togglePassBtn.textContent = isPassword ? '🙈' : '👁';
-  });
-
-  btnPremiumLogout.addEventListener('click', function() {
-    clearPremiumSession();
-    applyPremiumUI();
-  });
-
-  loginPremiumForm.addEventListener('submit', async function(e) {
-    e.preventDefault();
-
-    const usuario = String(loginUsuario.value || '').trim();
-    const password = String(loginPassword.value || '').trim();
-
-    if (!usuario || !password) {
-      loginMsg.textContent = 'Completá usuario y contraseña.';
-      return;
-    }
-
-    loginMsg.textContent = '';
-    btnLoginSubmit.disabled = true;
-    btnLoginSubmit.textContent = 'Ingresando...';
-
-    const res = await loginPremium(usuario, password);
-
-    if (!res || res.ok !== true) {
-      loginMsg.textContent = (res && res.error) ? res.error : 'No se pudo iniciar sesión. Revisá tus datos.';
-      btnLoginSubmit.disabled = false;
-      btnLoginSubmit.textContent = 'Ingresar';
-      return;
-    }
-
-    if (rememberPremium.checked) {
-      saveRememberedCredentials(usuario, password);
-    } else {
-      clearRememberedCredentials();
-    }
-
-    setPremiumSession({
-      usuario: usuario,
-      id_registro: res.miembro.id || '',
-      tipo: res.miembro.tipo || '',
-      estado: 'activo'
+  if (registroModal) {
+    registroModal.addEventListener("click", function(e) {
+      if (e.target === registroModal) {
+        closeRegistroModal();
+      }
     });
+  }
 
-    applyPremiumUI();
-    btnLoginSubmit.disabled = false;
-    btnLoginSubmit.textContent = 'Ingresar';
-    closeLoginModal();
-  });
+  if (btnPremiumLogin) {
+    btnPremiumLogin.addEventListener("click", openLoginModal);
+  }
 
-  const openAppGuide = document.getElementById('openAppGuide');
+  if (loginCloseBtn) {
+    loginCloseBtn.addEventListener("click", closeLoginModal);
+  }
+
+  if (loginModal) {
+    loginModal.addEventListener("click", function(e) {
+      if (e.target === loginModal) {
+        closeLoginModal();
+      }
+    });
+  }
+
+  if (togglePassBtn) {
+    togglePassBtn.addEventListener("click", function() {
+      const isPassword = loginPassword.getAttribute("type") === "password";
+      loginPassword.setAttribute("type", isPassword ? "text" : "password");
+      togglePassBtn.textContent = isPassword ? "🙈" : "👁";
+    });
+  }
+
+  if (btnPremiumLogout) {
+    btnPremiumLogout.addEventListener("click", function() {
+      clearPremiumSession();
+      applyPremiumUI();
+    });
+  }
+
+  if (loginPremiumForm) {
+    loginPremiumForm.addEventListener("submit", async function(e) {
+      e.preventDefault();
+
+      const usuario = String(loginUsuario.value || "").trim();
+      const password = String(loginPassword.value || "").trim();
+
+      if (!usuario || !password) {
+        loginMsg.textContent = "Completá usuario y contraseña.";
+        return;
+      }
+
+      loginMsg.textContent = "";
+      btnLoginSubmit.disabled = true;
+      btnLoginSubmit.textContent = "Ingresando...";
+
+      const res = await loginPremium(usuario, password);
+
+      if (!res || res.ok !== true) {
+        loginMsg.textContent = (res && res.error) ? res.error : "No se pudo iniciar sesión. Revisá tus datos.";
+        btnLoginSubmit.disabled = false;
+        btnLoginSubmit.textContent = "Ingresar";
+        return;
+      }
+
+      if (rememberPremium.checked) {
+        saveRememberedCredentials(usuario, password);
+      } else {
+        clearRememberedCredentials();
+      }
+
+      setPremiumSession({
+        usuario: usuario,
+        id_registro: res.miembro.id || "",
+        tipo: res.miembro.tipo || "",
+        estado: "activo"
+      });
+
+      applyPremiumUI();
+      btnLoginSubmit.disabled = false;
+      btnLoginSubmit.textContent = "Ingresar";
+      closeLoginModal();
+    });
+  }
 
   const onboardingSteps = [
     {
-      selector: '#categorias',
-      title: 'Categorías',
-      text: 'Entrá en la categoría que necesites para encontrar lo que buscás.'
+      selector: "#categorias",
+      title: "Categorías",
+      text: "Entrá en la categoría que necesites para encontrar lo que buscás."
     },
     {
-      selector: '#btnEmergencias',
-      title: 'Emergencias',
-      text: 'Ante una urgencia, desde acá accedés rápido a números importantes.'
+      selector: "#btnPerfilLaboral",
+      title: "Perfiles laborales",
+      text: "Desde acá podés cargar tu perfil laboral o, si sos premium, acceder a perfiles para tu actividad."
     },
     {
-      selector: '#farmaciaTurno',
-      title: 'Farmacia de turno',
-      text: 'Acá podés ver qué farmacia está de turno, hasta qué hora y cómo comunicarte.'
+      selector: "#btnEmergencias",
+      title: "Emergencias",
+      text: "Ante una urgencia, desde acá accedés rápido a números importantes."
     },
     {
-      selector: '#accesoPremium',
-      title: 'Acceso premium',
-      text: 'Desde acá podés registrarte en Conecta2 o iniciar sesión si ya tenés membresía premium.'
+      selector: "#farmaciaTurno",
+      title: "Farmacia de turno",
+      text: "Acá podés ver qué farmacia está de turno, hasta qué hora y cómo comunicarte."
     },
     {
-      selector: '#soporteConecta2',
-      title: 'Soporte Conecta2',
-      text: 'Si tenés dudas o querés enviarnos una sugerencia, podés escribirnos desde acá.'
+      selector: "#accesoPremium",
+      title: "Acceso premium",
+      text: "Desde acá podés registrarte en Conecta2 o iniciar sesión si ya tenés membresía premium."
+    },
+    {
+      selector: "#soporteConecta2",
+      title: "Soporte Conecta2",
+      text: "Si tenés dudas o querés enviarnos una sugerencia, podés escribirnos desde acá."
     }
   ];
 
   let onboardingIndex = 0;
 
   function ensureOnboardingCard() {
-    let card = document.getElementById('onboardingCard');
+    let card = document.getElementById("onboardingCard");
 
     if (!card) {
-      card = document.createElement('div');
-      card.id = 'onboardingCard';
-      card.className = 'onboarding-card';
-      card.innerHTML = `
-        <button class="onboarding-close" id="onboardingCloseBtn" type="button">✕</button>
-        <div class="onboarding-title" id="onboardingTitle"></div>
-        <div class="onboarding-text" id="onboardingText"></div>
-        <div class="onboarding-actions">
-          <button class="onboarding-btn onboarding-btn-secondary" id="onboardingSkipBtn" type="button">Cerrar</button>
-          <button class="onboarding-btn onboarding-btn-primary" id="onboardingNextBtn" type="button">Siguiente</button>
-        </div>
-      `;
+      card = document.createElement("div");
+      card.id = "onboardingCard";
+      card.className = "onboarding-card";
+
+      card.innerHTML =
+        "<button class=\"onboarding-close\" id=\"onboardingCloseBtn\" type=\"button\">✕</button>" +
+        "<div class=\"onboarding-title\" id=\"onboardingTitle\"></div>" +
+        "<div class=\"onboarding-text\" id=\"onboardingText\"></div>" +
+        "<div class=\"onboarding-actions\">" +
+        "<button class=\"onboarding-btn onboarding-btn-secondary\" id=\"onboardingSkipBtn\" type=\"button\">Cerrar</button>" +
+        "<button class=\"onboarding-btn onboarding-btn-secondary\" id=\"onboardingNextBtn\" type=\"button\">Siguiente</button>" +
+        "</div>";
+
       document.body.appendChild(card);
 
-      document.getElementById('onboardingCloseBtn').addEventListener('click', cerrarGuia);
-      document.getElementById('onboardingSkipBtn').addEventListener('click', cerrarGuia);
-      document.getElementById('onboardingNextBtn').addEventListener('click', siguientePasoGuia);
+      document.getElementById("onboardingCloseBtn").addEventListener("click", cerrarGuia);
+      document.getElementById("onboardingSkipBtn").addEventListener("click", cerrarGuia);
+      document.getElementById("onboardingNextBtn").addEventListener("click", siguientePasoGuia);
     }
 
     return card;
   }
 
   function limpiarOnboardingFocus() {
-    document.querySelectorAll('.onboarding-focus').forEach(function(el) {
-      el.classList.remove('onboarding-focus');
+    document.querySelectorAll(".onboarding-focus").forEach(function(el) {
+      el.classList.remove("onboarding-focus");
     });
   }
 
@@ -1973,24 +2177,24 @@ body.onboarding-active #mainApp {
       return;
     }
 
-    el.classList.add('onboarding-focus');
+    el.classList.add("onboarding-focus");
 
     el.scrollIntoView({
-      behavior: 'smooth',
-      block: 'center'
+      behavior: "smooth",
+      block: "center"
     });
 
     const card = ensureOnboardingCard();
-    document.getElementById('onboardingTitle').textContent = step.title;
-    document.getElementById('onboardingText').textContent = step.text;
-    document.getElementById('onboardingNextBtn').textContent = index === onboardingSteps.length - 1 ? 'Finalizar' : 'Siguiente';
+    document.getElementById("onboardingTitle").textContent = step.title;
+    document.getElementById("onboardingText").textContent = step.text;
+    document.getElementById("onboardingNextBtn").textContent = index === onboardingSteps.length - 1 ? "Finalizar" : "Siguiente";
 
-    card.classList.add('show');
-    document.body.classList.add('onboarding-active');
+    card.classList.add("show");
+    document.body.classList.add("onboarding-active");
   }
 
   function abrirGuia() {
-    localStorage.setItem('conecta2_tour_visto', 'true');
+    localStorage.setItem("conecta2_tour_visto", "true");
     onboardingIndex = 0;
     mostrarPasoGuia(onboardingIndex);
   }
@@ -2006,19 +2210,17 @@ body.onboarding-active #mainApp {
 
   function cerrarGuia() {
     limpiarOnboardingFocus();
-    const card = document.getElementById('onboardingCard');
+    const card = document.getElementById("onboardingCard");
     if (card) {
-      card.classList.remove('show');
+      card.classList.remove("show");
     }
-    document.body.classList.remove('onboarding-active');
+    document.body.classList.remove("onboarding-active");
+
     setTimeout(function() {
       intentarMostrarInstaladorDespuesDelTour();
+      verificarNuevaVersion();
     }, 250);
   }
-
-  openAppGuide.addEventListener('click', function() {
-    abrirGuia();
-  });
 
   fillRememberedCredentials();
   applyPremiumUI();
